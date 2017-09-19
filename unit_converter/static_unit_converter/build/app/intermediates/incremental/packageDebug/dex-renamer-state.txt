@@ -1,4 +1,0 @@
-#Mon Sep 18 14:08:26 PDT 2017
-base.0=/usr/local/google/home/maryxia/udacity-course/unit_converter/build/app/intermediates/transforms/dex/debug/folders/1000/1f/main
-renamed.0=classes.dex
-file.0=/usr/local/google/home/maryxia/udacity-course/unit_converter/build/app/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
