@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/usr/local/google/home/maryxia/udacity-course/unit_converter/android/app/src/main/assets"/><source path="/usr/local/google/home/maryxia/udacity-course/unit_converter/build/app/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/usr/local/google/home/maryxia/udacity-course/unit_converter/android/app/src/debug/assets"/></dataSet></merger>
