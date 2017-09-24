@@ -1,5 +1,11 @@
 {
-  "length": [
+  "Length": [
+    {
+      "name": "Meter",
+      "conversion": 1.0,
+      "description": "The length of the path traveled by the light in vacuum during a time interval of 1/299,792,458 of a second.",
+      "base_unit": true
+    },
     {
       "name": "Hand",
       "conversion": 0.1016,
@@ -12,12 +18,12 @@
     },
     {
       "name": "Manhattan block",
-      "conversion": 80,
+      "conversion": 80.0,
       "description": "The length of a north-south block in downtown Manhattan."
     },
     {
       "name": "Eiffel Tower",
-      "conversion": 324,
+      "conversion": 324.0,
       "description": "An iconic tower in Paris."
     },
     {
@@ -27,21 +33,22 @@
     },
     {
       "name": "Sheppey",
-      "conversion": 1400,
+      "conversion": 1400.0,
       "description": "The closest distance at which sheep remain picturesque."
     },
     {
       "name": "Potrzebie",
       "conversion": 0.002633,
       "description": "The thickness of issue 26 of Mad magazine. This unit was created by Donald Knuth."
-    },
-    {
-      "name": "Meter",
-      "conversion": 1,
-      "description": "The length of the path traveled by the light in vacuum during a time interval of 1/299,792,458 of a second."
     }
   ],
-  "area": [
+  "Area": [
+    {
+      "name": "Meter squared",
+      "conversion": 1.0,
+      "description": "1 meter length and 1 meter width.",
+      "base_unit": true
+    },
     {
       "name": "Bourbon biscuit",
       "conversion": 0.00183,
@@ -49,26 +56,27 @@
     },
     {
       "name": "American football field",
-      "conversion": 5350,
+      "conversion": 5350.0,
       "description": "The area of an American football field, including the endzones."
     },
     {
       "name": "Canadian football field",
-      "conversion": 8152,
+      "conversion": 8152.0,
       "description": "The area of a Canadian football field, including the endzones."
     },
     {
       "name": "Morgen",
-      "conversion": 10000,
+      "conversion": 10000.0,
       "description": "The amount of land that can be tilled by one person behind an ox in the morning hours of the day. This is quite vague, especially if you are chatting with the ox instead of working."
-    },
-    {
-      "name": "Meter squared",
-      "conversion": 0.00236,
-      "description": "1 meter length and 1 meter width."
     }
   ],
-  "volume": [
+  "Volume": [
+    {
+      "name": "Cubic meter",
+      "conversion": 1.0,
+      "description": "A cube with each edge being one meter in length.",
+      "base_unit": true
+    },
     {
       "name": "Super foot",
       "conversion": 0.00236,
@@ -81,26 +89,22 @@
     },
     {
       "name": "Olympic-sized swimming pool",
-      "conversion": 2500,
+      "conversion": 2500.0,
       "description": "A large pool!"
     },
     {
       "name": "Avocado",
       "conversion": 0.0002,
       "description": "The volume of an average avocado, cursed seed included."
-    },
-    {
-      "name": "Avocado",
-      "conversion": 0.0002,
-      "description": "The volume of an average avocado, cursed seed included."
-    },
-    {
-      "name": "Cubic meter",
-      "conversion": 1,
-      "description": "A cube with each edge being one meter in length."
     }
   ],
-  "mass": [
+  "Mass": [
+    {
+      "name": "Kilogram",
+      "conversion": 1.0,
+      "description": "The mass of a giant block of metal named the International Prototype of the Kilogram.",
+      "base_unit": true
+    },
     {
       "name": "Smaller Mission burrito",
       "conversion": 0.488,
@@ -125,14 +129,15 @@
       "name": "Long hundredweight",
       "conversion": 50.802,
       "description": "This unit is deprecated as of 1985."
-    },
-    {
-      "name": "Kilogram",
-      "conversion": 1,
-      "description": "The mass of a giant block of metal named the International Prototype of the Kilogram."
     }
   ],
-  "time": [
+  "Time": [
+    {
+      "name": "Second",
+      "conversion": 1.0,
+      "description": "Give me a second while I look this up...",
+      "base_unit": true
+    },
     {
       "name": "Microcentury",
       "conversion": 3156.69,
@@ -150,50 +155,46 @@
     },
     {
       "name": "Dirty toasts",
-      "conversion": 5,
+      "conversion": 5.0,
       "description": "The number of toasts that would be contaminated assuming that a new piece of toast is consecutively dropped and not picked up within five seconds, thus violating the five-second rule."
     },
     {
       "name": "New York minute",
-      "conversion": 1,
+      "conversion": 1.0,
       "description": "The amount of time between the traffic light turning green and the car behind you honking."
-    },
-    {
-      "name": "Second",
-      "conversion": 1,
-      "description": "Give me a second while I look this up..."
     }
   ],
-  "digital_data": [
+  "Digital Data": [
+    {
+      "name": "Megabyte",
+      "conversion": 1.0,
+      "description": "This was considered a lot of space back in the day.",
+      "base_unit": true
+    },
     {
       "name": "CD-ROM",
-      "conversion": 650,
+      "conversion": 650.0,
       "description": "Wow, two copies of the Encyclopedia Britannica can fit in this much space! Why you would want two copies remains to be ascertained."
     },
     {
       "name": "Library of Congress",
-      "conversion": 10000000,
+      "conversion": 10000000.0,
       "description": "All the text from the Library of Congress takes up ten terabytes. You could carry it all in your pockets!"
     },
     {
       "name": "Nibble",
-      "conversion": 2000000,
+      "conversion": 2000000.0,
       "description": "Half of a byte. Please laugh."
     },
     {
       "name": "Byte",
-      "conversion": 1000000,
+      "conversion": 1000000.0,
       "description": "A byte consists of eight bits."
-    },
-    {
-      "name": "Megabyte",
-      "conversion": 1,
-      "description": "This was considered a lot of space back in the day."
     },
     {
       "name": "Bentobox",
       "conversion": 83333.333,
-      "description": "A bentobox is worth 96 bits. In other contexts, it is worth one lunch, but we're talking data storage, not food storage."
+      "description": "A bentobox is worth 96 bits. In other contexts, it is worth one lunch, but we're talking data storage, not stomach storage."
     }
   ]
 }
