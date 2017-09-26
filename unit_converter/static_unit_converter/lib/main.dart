@@ -25,7 +25,7 @@ class UnitList extends StatelessWidget {
 
   Widget _buildCategory(String category, Map<String, dynamic> baseUnit) {
     return new Container(
-      height: 120.0,
+      height: 150.0,
       margin: const EdgeInsets.all(4.0),
       color: Colors.lightGreen,
       child: new Column(
@@ -100,21 +100,45 @@ class UnitList extends StatelessWidget {
                 final JsonDecoder decoder = const JsonDecoder();
                 Map<String, List<Map<String, dynamic>>> data =
                     decoder.convert(snapshot.data);
-                List<Widget> unitList = [];
-                for (String key in data.keys) {
-                  List<Widget> units = [];
-                  for (int i = 0; i < data[key].length; i++) {
-                    if (data[key][i]['base_unit'] != null) {
-                      unitList.add(_buildCategory(key, data[key][i]));
+                return new LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  List<Widget> unitList = [];
+                  Widget header = null;
+                  for (String key in data.keys) {
+                    List<Widget> units = [];
+                    for (int i = 0; i < data[key].length; i++) {
+                      if (data[key][i]['base_unit'] != null) {
+                        header = _buildCategory(key, data[key][i]);
+                      } else {
+                        units.add(_buildUnit(data[key][i]));
+                      }
+                    }
+                    if (constraints.maxHeight > constraints.maxWidth) {
+                      unitList.add(header);
+                      unitList.add(new Column(
+                        children: units,
+                      ));
                     } else {
-                      units.add(_buildUnit(data[key][i]));
+                      unitList.add(new Row(
+                        children: <Widget>[
+                          new Expanded(
+                            flex: 1,
+                            child: header,
+                          ),
+                          new Expanded(
+                            flex: 2,
+                            child: new Column(
+                              children: units,
+                            ),
+                          ),
+                        ],
+                      ));
                     }
                   }
-                  unitList.add(new Column(
-                    children: units,
-                  ));
-                }
-                return new ListView(children: unitList);
+                  return new ListView(
+                    children: unitList,
+                  );
+                });
               }
               return new Text('Loading');
             }),
