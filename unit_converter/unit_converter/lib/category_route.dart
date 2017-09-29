@@ -18,12 +18,11 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage> {
   List<Category> categories = [];
 
-  void _navigateToConverter() {
+  void _navigateToConverter(Category category) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
-        print(context);
         return new Scaffold(
-          body: new ConverterPage(),
+          body: new ConverterPage(category: category),
         );
       },
     ));
@@ -52,8 +51,8 @@ class _CategoryPageState extends State<CategoryPage> {
                 units.add(new Unit(data[key][i]['name'],
                     data[key][i]['conversion'], data[key][i]['description']));
               }
-              Category category =
-                  new Category(key, units, _navigateToConverter);
+              Category category = new Category(key, units);
+              category.onPressed = () => _navigateToConverter(category);
               categories.add(category);
               categoryList.add(category);
             }
