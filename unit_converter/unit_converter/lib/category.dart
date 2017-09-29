@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'unit.dart';
 
 class Category extends StatelessWidget {
-  String name;
-  List<Unit> units;
+  final String name;
+  final List<Unit> units;
   VoidCallback onPressed;
 
-  Category(this.name, this.units, this.onPressed);
+  Category(this.name, this.units);
 
   // Builds a tile that shows unit category information
   @override
