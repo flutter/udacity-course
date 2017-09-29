@@ -1,12 +1,17 @@
-import 'dart:core';
+// You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-/// This is the first function that is called. It calls the UnitConverter class.
+// We can also import files from relative paths
+import 'category.dart';
+import 'unit.dart';
+
+/// This is the first function that is called. It creates a UnitConverter class
 void main() {
   runApp(new UnitConverter());
 }
 
+/// This widget is the root of the application
 class UnitConverter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,7 +64,7 @@ class UnitList extends StatelessWidget {
         List<Widget> units = [];
         for (int i = 0; i < data[key].length; i++) {
           if (data[key][i]['base_unit'] != null) {
-            header = UnitCategory.buildFromData(key, data[key][i]);
+            header = Category.buildFromData(key, data[key][i]);
           } else {
             units.add(Unit.buildFromData(data[key][i]));
           }
@@ -99,88 +104,5 @@ class UnitList extends StatelessWidget {
             }),
       ),
     );
-  }
-}
-
-class Unit extends StatelessWidget {
-  /// Builds a row that shows unit information
-  static Widget buildFromData(Map<String, dynamic> unit) {
-    double conversion = unit['conversion'];
-    double ratio = 1.0 / conversion;
-    return new Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      color: Colors.green,
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          new Container(
-            child: new Text(
-              ratio.floor() == ratio
-                  ? ratio.toInt().toString()
-                  : ratio.toStringAsFixed(7),
-              style: new TextStyle(
-                color: Colors.white,
-                fontSize: 40.0,
-              ),
-            ),
-          ),
-          new Text(
-            unit['name'],
-            style: new TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-            ),
-          ),
-          new Text(
-            unit['description'],
-            style: new TextStyle(
-              color: Colors.white,
-              fontSize: 16.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return null;
-  }
-}
-
-class UnitCategory extends StatelessWidget {
-  /// Builds a row that shows unit category information
-  static Widget buildFromData(String category, Map<String, dynamic> baseUnit) {
-    return new Container(
-      height: 150.0,
-      margin: const EdgeInsets.all(4.0),
-      color: Colors.lightGreen,
-      child: new Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new Text(
-            category,
-            style: new TextStyle(
-              color: Colors.white,
-              fontSize: 50.0,
-            ),
-          ),
-          new Text(
-            '1 ${baseUnit['name']} is equal to:',
-            style: new TextStyle(
-              color: Colors.white,
-              fontSize: 20.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return null;
   }
 }
