@@ -62,7 +62,16 @@ class _ConverterPageState extends State<ConverterPage> {
     Widget convertTo = new Container(
       color: Colors.lightGreen,
       child: new Row(
-        children: [],
+        children: <Widget>[
+          new Expanded(
+            flex: 1,
+            child: new Text('32'),
+          ),
+          new Expanded(
+            flex: 2,
+            child: dropdown,
+          ),
+        ],
       ),
     );
 
