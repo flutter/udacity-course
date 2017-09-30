@@ -178,17 +178,17 @@
     },
     {
       "name": "Library of Congress",
-      "conversion": 10000000.0,
+      "conversion": 0.00000001,
       "description": "All the text from the Library of Congress takes up ten terabytes. You could carry it all in your pockets!"
     },
     {
       "name": "Nibble",
-      "conversion": 0.0000005,
+      "conversion": 2000000.0,
       "description": "Half of a byte. Please laugh."
     },
     {
       "name": "Byte",
-      "conversion": 0.000001,
+      "conversion": 1000000.0,
       "description": "A byte consists of eight bits."
     },
     {
