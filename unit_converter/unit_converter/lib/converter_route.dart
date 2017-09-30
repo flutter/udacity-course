@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'category.dart';
 import 'unit.dart';
 
+const _textMargin = const EdgeInsets.all(20.0);
+
 class ConverterPage extends StatefulWidget {
   final Category category;
 
@@ -14,8 +16,48 @@ class ConverterPage extends StatefulWidget {
 }
 
 class _ConverterPageState extends State<ConverterPage> {
-  void updateConversion(dynamic data) {
-    print('TODO');
+  Unit _fromValue;
+  Unit _toValue;
+  String _inputValue;
+  String _convertedValue = '';
+
+  String _updateConversion() {
+    if (_inputValue != null) {
+      double outputNum = double.parse(_inputValue) *
+          (_toValue.conversion / _fromValue.conversion);
+      return outputNum.toString();
+    }
+    return '';
+  }
+
+  void _updateInputValue(String input) {
+    setState(() {
+      _inputValue = input;
+      _convertedValue = _updateConversion();
+    });
+  }
+
+  Unit _getUnit(String unitName) {
+    for (Unit unit in widget.category.units) {
+      if (unit.name == unitName) {
+        return unit;
+      }
+    }
+    return null;
+  }
+
+  void _updateFromConversion(dynamic unitName) {
+    setState(() {
+      _fromValue = _getUnit(unitName);
+      _convertedValue = _updateConversion();
+    });
+  }
+
+  void _updateToConversion(dynamic unitName) {
+    setState(() {
+      _toValue = _getUnit(unitName);
+      _convertedValue = _updateConversion();
+    });
   }
 
   @override
@@ -27,21 +69,48 @@ class _ConverterPageState extends State<ConverterPage> {
         child: new Text(unit.name),
       ));
     }
+    if (_fromValue == null) {
+      setState(() {
+        _fromValue = widget.category.units[0];
+      });
+    }
+    if (_toValue == null) {
+      setState(() {
+        _toValue = widget.category.units[0];
+      });
+    }
 
     // This is the widget that accepts text input. In this case, it accepts
-    // numbers. You can read more about it here: https://flutter.io/text-input
+    // numbers and calls the onChanged property on update.
+    // You can read more about it here: https://flutter.io/text-input
     Widget input = new Container(
-      width: 300.0,
+      color: Colors.greenAccent,
+      margin: _textMargin,
       child: new TextField(
+        style: new TextStyle(
+          fontSize: 30.0,
+        ),
+        // This removes the underline under the input
+        decoration: null,
+        // Since we only want numerical input, we use a number keyboard. There
+        // are also other keyboards for dates, emails, phone numbers, etc.
         keyboardType: TextInputType.number,
-        onChanged: null,
+        onChanged: _updateInputValue,
       ),
     );
 
     // This is the dropdown from where you can select unit types
-    Widget dropdown = new DropdownButton(
+    Widget fromDropdown = new DropdownButton(
+      value: _fromValue.name,
       items: units,
-      onChanged: updateConversion,
+      onChanged: _updateFromConversion,
+    );
+
+    // This is the dropdown from where you can select unit types
+    Widget toDropdown = new DropdownButton(
+      value: _toValue.name,
+      items: units,
+      onChanged: _updateToConversion,
     );
 
     Widget convertFrom = new Container(
@@ -53,8 +122,8 @@ class _ConverterPageState extends State<ConverterPage> {
             child: input,
           ),
           new Expanded(
-            flex: 2,
-            child: dropdown,
+            flex: 1,
+            child: fromDropdown,
           ),
         ],
       ),
@@ -65,11 +134,20 @@ class _ConverterPageState extends State<ConverterPage> {
         children: <Widget>[
           new Expanded(
             flex: 1,
-            child: new Text('32'),
+            child: new Container(
+              margin: _textMargin,
+              child: new Text(
+                _convertedValue,
+                style: new TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.deepPurple,
+                ),
+              ),
+            ),
           ),
           new Expanded(
-            flex: 2,
-            child: dropdown,
+            flex: 1,
+            child: toDropdown,
           ),
         ],
       ),
