@@ -6,12 +6,12 @@ import 'dart:convert';
 import 'category.dart';
 import 'unit.dart';
 
-/// This is the first function that is called. It creates a UnitConverter class
+// This is the first function that is called. It creates a UnitConverter class
 void main() {
   runApp(new UnitConverter());
 }
 
-/// This widget is the root of the application
+// This widget is the root of the application
 class UnitConverter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class UnitConverter extends StatelessWidget {
 class UnitList extends StatelessWidget {
   UnitList({Key key}) : super(key: key);
 
-  /// Builds a list of Widgets for a portrait screen
+  // Builds a list of Widgets for a portrait screen
   void _buildPortraitListView(
       List<Widget> unitList, Widget header, List<Widget> units) {
     unitList.add(header);
@@ -34,7 +34,7 @@ class UnitList extends StatelessWidget {
     ));
   }
 
-  /// Builds a list of Widgets for a landscape screen
+  // Builds a list of Widgets for a landscape screen
   void _buildLandscapeListView(
       List<Widget> unitList, Widget header, List<Widget> units) {
     unitList.add(new Row(
@@ -53,7 +53,7 @@ class UnitList extends StatelessWidget {
     ));
   }
 
-  /// Builds a responsive [ListView] that changes based on screen orientation
+  // Builds a responsive [ListView] that changes based on screen orientation
   Widget _buildResponsiveListView(
       Map<String, List<Map<String, dynamic>>> data) {
     return new LayoutBuilder(
@@ -86,7 +86,7 @@ class UnitList extends StatelessWidget {
 
   @override
 
-  /// Loads in JSON asset and builds a static [ListView]
+  // Loads in JSON asset and builds a static [ListView]
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Center(

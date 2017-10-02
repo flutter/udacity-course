@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Unit {
-  /// Builds a row that shows unit information
+  // Builds a row that shows unit information
   static Widget buildFromData(Map<String, dynamic> unit) {
     double conversion = unit['conversion'];
     double ratio = 1.0 / conversion;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Category {
-  /// Builds a row that shows unit category information
+  // Builds a row that shows unit category information
   static Widget buildFromData(String category, Map<String, dynamic> baseUnit) {
     return new Container(
       height: 150.0,
