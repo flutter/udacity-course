@@ -82,7 +82,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // This is the widget that accepts text input. In this case, it accepts
     // numbers and calls the onChanged property on update.
     // You can read more about it here: https://flutter.io/text-input
-    Widget input = new Container(
+    var input = new Container(
       color: Colors.greenAccent,
       margin: _textMargin,
       child: new TextField(
@@ -99,20 +99,20 @@ class _ConverterRouteState extends State<ConverterRoute> {
     );
 
     // This is the dropdown from where you can select unit types
-    Widget fromDropdown = new DropdownButton(
+    var fromDropdown = new DropdownButton(
       value: _fromValue.name,
       items: units,
       onChanged: _updateFromConversion,
     );
 
     // This is the dropdown from where you can select unit types
-    Widget toDropdown = new DropdownButton(
+    var toDropdown = new DropdownButton(
       value: _toValue.name,
       items: units,
       onChanged: _updateToConversion,
     );
 
-    Widget convertFrom = new Container(
+    var convertFrom = new Container(
       color: Colors.green,
       child: new Row(
         children: <Widget>[
@@ -127,7 +127,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ],
       ),
     );
-    Widget convertTo = new Container(
+    var convertTo = new Container(
       color: Colors.lightGreen,
       child: new Row(
         children: <Widget>[
@@ -152,7 +152,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    Widget description = new Container(
+    var description = new Container(
       color: Colors.lightGreenAccent,
     );
 
