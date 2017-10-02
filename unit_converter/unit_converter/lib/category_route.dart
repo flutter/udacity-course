@@ -2,31 +2,20 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
-import 'converter_route.dart';
 import 'category.dart';
 import 'unit.dart';
 
-class CategoryPage extends StatefulWidget {
+class CategoryRoute extends StatefulWidget {
   // This is the "home" page of the unit converter. It shows a grid of
   // unit categories.
-  CategoryPage({Key key}) : super(key: key);
+  CategoryRoute({Key key}) : super(key: key);
 
   @override
-  _CategoryPageState createState() => new _CategoryPageState();
+  _CategoryRouteState createState() => new _CategoryRouteState();
 }
 
-class _CategoryPageState extends State<CategoryPage> {
+class _CategoryRouteState extends State<CategoryRoute> {
   List<Category> categories = [];
-
-  void _navigateToConverter(Category category) {
-    Navigator.of(context).push(new MaterialPageRoute<Null>(
-      builder: (BuildContext context) {
-        return new Scaffold(
-          body: new ConverterPage(category: category),
-        );
-      },
-    ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +41,6 @@ class _CategoryPageState extends State<CategoryPage> {
                     data[key][i]['conversion'], data[key][i]['description']));
               }
               Category category = new Category(key, units);
-              category.onPressed = () => _navigateToConverter(category);
               categories.add(category);
               categoryList.add(category);
             }
