@@ -2,13 +2,23 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 import 'unit.dart';
+import 'converter_route.dart';
 
 class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
-  VoidCallback onPressed;
 
   Category(this.name, this.units);
+
+  void _navigateToConverter(BuildContext context) {
+    Navigator.of(context).push(new MaterialPageRoute<Null>(
+      builder: (BuildContext context) {
+        return new Scaffold(
+          body: new ConverterRoute(units: units),
+        );
+      },
+    ));
+  }
 
   // Builds a tile that shows unit category information
   @override
@@ -19,7 +29,7 @@ class Category extends StatelessWidget {
       child: new Material(
         child: new RaisedButton(
           color: Colors.lightGreen,
-          onPressed: onPressed,
+          onPressed: () => _navigateToConverter(context),
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,

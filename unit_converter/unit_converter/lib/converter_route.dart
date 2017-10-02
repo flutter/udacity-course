@@ -1,21 +1,20 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
 
-import 'category.dart';
 import 'unit.dart';
 
 const _textMargin = const EdgeInsets.all(20.0);
 
-class ConverterPage extends StatefulWidget {
-  final Category category;
+class ConverterRoute extends StatefulWidget {
+  final List<Unit> units;
 
-  ConverterPage({Key key, this.category}) : super(key: key);
+  ConverterRoute({Key key, this.units}) : super(key: key);
 
   @override
-  _ConverterPageState createState() => new _ConverterPageState();
+  _ConverterRouteState createState() => new _ConverterRouteState();
 }
 
-class _ConverterPageState extends State<ConverterPage> {
+class _ConverterRouteState extends State<ConverterRoute> {
   Unit _fromValue;
   Unit _toValue;
   String _inputValue;
@@ -38,7 +37,7 @@ class _ConverterPageState extends State<ConverterPage> {
   }
 
   Unit _getUnit(String unitName) {
-    for (Unit unit in widget.category.units) {
+    for (Unit unit in widget.units) {
       if (unit.name == unitName) {
         return unit;
       }
@@ -63,7 +62,7 @@ class _ConverterPageState extends State<ConverterPage> {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem> units = [];
-    for (Unit unit in widget.category.units) {
+    for (Unit unit in widget.units) {
       units.add(new DropdownMenuItem(
         value: unit.name,
         child: new Text(unit.name),
@@ -71,12 +70,12 @@ class _ConverterPageState extends State<ConverterPage> {
     }
     if (_fromValue == null) {
       setState(() {
-        _fromValue = widget.category.units[0];
+        _fromValue = widget.units[0];
       });
     }
     if (_toValue == null) {
       setState(() {
-        _toValue = widget.category.units[0];
+        _toValue = widget.units[0];
       });
     }
 
