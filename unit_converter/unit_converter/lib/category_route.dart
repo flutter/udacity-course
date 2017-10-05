@@ -8,7 +8,9 @@ import 'unit.dart';
 class CategoryRoute extends StatefulWidget {
   // This is the "home" page of the unit converter. It shows a grid of
   // unit categories.
-  CategoryRoute({Key key}) : super(key: key);
+  final bool footer;
+
+  CategoryRoute({Key key, this.footer}) : super(key: key);
 
   @override
   _CategoryRouteState createState() => new _CategoryRouteState();
@@ -17,14 +19,30 @@ class CategoryRoute extends StatefulWidget {
 class _CategoryRouteState extends State<CategoryRoute> {
   List<Category> categories = [];
 
+  Widget _layOutCategories() {
+    if (widget.footer) {
+      Widget categoryChooser = new Container(
+        color: Colors.pink,
+        height: 140.0,
+        child: new SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: new Row(
+            children: categories,
+          ),
+        ),
+      );
+      return categoryChooser;
+    }
+    return new GridView.count(
+      children: categories,
+      crossAxisCount: 2,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (categories.isNotEmpty) {
-      // TODO responsive
-      return new GridView.count(
-        children: categories,
-        crossAxisCount: 2,
-      );
+      return _layOutCategories();
     }
     return new FutureBuilder(
         future: DefaultAssetBundle.of(context).loadString('assets/units.json'),
@@ -39,14 +57,9 @@ class _CategoryRouteState extends State<CategoryRoute> {
                 units.add(new Unit(data[key][i]['name'],
                     data[key][i]['conversion'], data[key][i]['description']));
               }
-              var category = new Category(key, units);
-              categories.add(category);
+              categories.add(new Category(key, units));
             }
-            // TODO responsive
-            return new GridView.count(
-              children: categories,
-              crossAxisCount: 2,
-            );
+            return _layOutCategories();
           }
           return new Text('Loading');
         });

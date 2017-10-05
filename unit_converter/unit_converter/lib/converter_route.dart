@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 import 'unit.dart';
+import 'category_route.dart';
 
 const _textMargin = const EdgeInsets.all(20.0);
 
@@ -154,23 +155,39 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     var description = new Container(
       color: Colors.lightGreenAccent,
+      child: new Text(_toValue.description),
+    );
+
+    Widget conversionPage = new Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        new Expanded(
+          flex: 1,
+          child: convertFrom,
+        ),
+        new Expanded(
+          flex: 1,
+          child: convertTo,
+        ),
+        new Expanded(
+          flex: 1,
+          child: description,
+        ),
+      ],
     );
 
     return new Container(
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      child: new Stack(
         children: <Widget>[
-          new Expanded(
-            flex: 1,
-            child: convertFrom,
-          ),
-          new Expanded(
-            flex: 1,
-            child: convertTo,
-          ),
-          new Expanded(
-            flex: 1,
-            child: description,
+          conversionPage,
+          new Positioned(
+            child: new Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: new Offstage(
+                offstage: false,
+                child: new CategoryRoute(footer: true),
+              ),
+            ),
           ),
         ],
       ),
