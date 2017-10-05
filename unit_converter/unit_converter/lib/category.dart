@@ -25,6 +25,7 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: 120.0,
+      width: 120.0,
       margin: const EdgeInsets.all(4.0),
       child: new Material(
         child: new RaisedButton(
@@ -38,7 +39,7 @@ class Category extends StatelessWidget {
                 name,
                 style: new TextStyle(
                   color: Colors.white,
-                  fontSize: 30.0,
+                  fontSize: 20.0,
                 ),
               ),
             ],
