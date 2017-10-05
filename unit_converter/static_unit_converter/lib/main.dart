@@ -59,10 +59,12 @@ class UnitList extends StatelessWidget {
     return new LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       List<Widget> unitList = [];
-      Widget header = null;
+      Widget header;
       for (String key in data.keys) {
         List<Widget> units = [];
-        for (int i = 0; i < data[key].length; i++) {
+        // Consider omitting the types for local variables. For more details, see
+        // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+        for (var i = 0; i < data[key].length; i++) {
           if (data[key][i]['base_unit'] != null) {
             header = Category.buildFromData(key, data[key][i]);
           } else {
@@ -85,7 +87,6 @@ class UnitList extends StatelessWidget {
   }
 
   @override
-
   // Loads in JSON asset and builds a static [ListView]
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -95,7 +96,7 @@ class UnitList extends StatelessWidget {
                 DefaultAssetBundle.of(context).loadString('assets/units.json'),
             builder: (context, snapshot) {
               if (snapshot != null && snapshot.data != null) {
-                final JsonDecoder decoder = const JsonDecoder();
+                final decoder = const JsonDecoder();
                 Map<String, List<Map<String, dynamic>>> data =
                     decoder.convert(snapshot.data);
                 return _buildResponsiveListView(data);
