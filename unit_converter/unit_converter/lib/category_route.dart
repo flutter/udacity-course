@@ -21,7 +21,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   Widget _layOutCategories() {
     if (widget.footer) {
-      Widget categoryChooser = new Container(
+      return new Container(
         color: Colors.pink,
         height: 140.0,
         child: new SingleChildScrollView(
@@ -31,7 +31,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
           ),
         ),
       );
-      return categoryChooser;
     }
     return new GridView.count(
       children: categories,
@@ -51,9 +50,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
             final decoder = const JsonDecoder();
             Map<String, List<Map<String, dynamic>>> data =
                 decoder.convert(snapshot.data);
-            for (String key in data.keys) {
+
+            // Consider omitting the types for local variables. For more details, see
+            // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+            for (var key in data.keys) {
               List<Unit> units = [];
-              for (int i = 0; i < data[key].length; i++) {
+              for (var i = 0; i < data[key].length; i++) {
                 units.add(new Unit(data[key][i]['name'],
                     data[key][i]['conversion'], data[key][i]['description']));
               }
