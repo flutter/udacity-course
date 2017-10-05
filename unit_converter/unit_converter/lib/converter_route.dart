@@ -23,9 +23,11 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   String _updateConversion() {
     if (_inputValue != null) {
-      double outputNum = double.parse(_inputValue) *
+      // Consider omitting the types for local variables. For more details, see
+      // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+      var outputDouble = double.parse(_inputValue) *
           (_toValue.conversion / _fromValue.conversion);
-      return outputNum.toString();
+      return outputDouble.toString();
     }
     return '';
   }
@@ -38,7 +40,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   Unit _getUnit(String unitName) {
-    for (Unit unit in widget.units) {
+    for (var unit in widget.units) {
       if (unit.name == unitName) {
         return unit;
       }
@@ -63,7 +65,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   @override
   Widget build(BuildContext context) {
     List<DropdownMenuItem> units = [];
-    for (Unit unit in widget.units) {
+    for (var unit in widget.units) {
       units.add(new DropdownMenuItem(
         value: unit.name,
         child: new Text(unit.name),
@@ -128,6 +130,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ],
       ),
     );
+
     var convertTo = new Container(
       color: Colors.lightGreen,
       child: new Row(
@@ -158,7 +161,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       child: new Text(_toValue.description),
     );
 
-    Widget conversionPage = new Column(
+    var conversionPage = new Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         new Expanded(
