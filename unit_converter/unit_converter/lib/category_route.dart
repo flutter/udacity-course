@@ -48,7 +48,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         future: DefaultAssetBundle.of(context).loadString('assets/units.json'),
         builder: (context, snapshot) {
           if (snapshot != null && snapshot.data != null) {
-            final JsonDecoder decoder = const JsonDecoder();
+            final decoder = const JsonDecoder();
             Map<String, List<Map<String, dynamic>>> data =
                 decoder.convert(snapshot.data);
             for (String key in data.keys) {
