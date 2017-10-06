@@ -23,8 +23,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   String _updateConversion() {
     if (_inputValue != null) {
-      // Consider omitting the types for local variables. For more details, see
-      // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
       var outputDouble = double.parse(_inputValue) *
           (_toValue.conversion / _fromValue.conversion);
       return outputDouble.toString();

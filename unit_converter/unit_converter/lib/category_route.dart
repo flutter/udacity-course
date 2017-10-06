@@ -17,8 +17,8 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  // Consider omitting the types for local variables. For more details, see
-  // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+  // Consider omitting the types for local variables. For more details on Effective
+  // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var categories = <Category>[];
 
   Widget _layOutCategories() {
