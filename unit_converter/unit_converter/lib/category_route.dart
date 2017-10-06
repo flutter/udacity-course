@@ -17,7 +17,9 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  List<Category> categories = [];
+  // Consider omitting the types for local variables. For more details, see
+  // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+  var categories = <Category>[];
 
   Widget _layOutCategories() {
     if (widget.footer) {
@@ -50,9 +52,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
             final decoder = const JsonDecoder();
             Map<String, List<Map<String, dynamic>>> data =
                 decoder.convert(snapshot.data);
-
-            // Consider omitting the types for local variables. For more details, see
-            // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
             for (var key in data.keys) {
               List<Unit> units = [];
               for (var i = 0; i < data[key].length; i++) {

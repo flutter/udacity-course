@@ -64,7 +64,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem> units = [];
+    var units = <DropdownMenuItem>[];
     for (var unit in widget.units) {
       units.add(new DropdownMenuItem(
         value: unit.name,
