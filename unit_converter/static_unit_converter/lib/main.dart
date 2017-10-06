@@ -58,10 +58,10 @@ class UnitList extends StatelessWidget {
       Map<String, List<Map<String, dynamic>>> data) {
     return new LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      List<Widget> unitList = [];
+      var unitList = <Widget>[];
       Widget header;
       for (String key in data.keys) {
-        List<Widget> units = [];
+        var units = <Widget>[];
         // Consider omitting the types for local variables. For more details, see
         // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
         for (var i = 0; i < data[key].length; i++) {
