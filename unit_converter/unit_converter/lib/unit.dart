@@ -3,9 +3,9 @@
 // found in the LICENSE file.
 
 class Unit {
-  String name;
-  double conversion;
-  String description;
+  final String name;
+  final double conversion;
+  final String description;
 
   Unit(this.name, this.conversion, this.description);
 }
