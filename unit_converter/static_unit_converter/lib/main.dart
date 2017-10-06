@@ -1,10 +1,10 @@
+// Copyright 2017 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 import 'dart:convert';
-
-// We can also import files from relative paths
-import 'category.dart';
-import 'unit.dart';
 
 // This is the first function that is called. It creates a UnitConverter class
 void main() {
@@ -58,17 +58,18 @@ class UnitList extends StatelessWidget {
       Map<String, List<Map<String, dynamic>>> data) {
     return new LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
+
       var unitList = <Widget>[];
       Widget header;
       for (String key in data.keys) {
         var units = <Widget>[];
-        // Consider omitting the types for local variables. For more details, see
-        // https://www.dartlang.org/guides/language/effective-dart/usage#consider-omitting-the-types-for-local-variables
+        // Consider omitting the types for local variables. For more details on Effective
+        // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
         for (var i = 0; i < data[key].length; i++) {
           if (data[key][i]['base_unit'] != null) {
-            header = Category.buildFromData(key, data[key][i]);
+            header = buildCategory(key, data[key][i]);
           } else {
-            units.add(Unit.buildFromData(data[key][i]));
+            units.add(buildUnit(data[key][i]));
           }
         }
         if (constraints.maxHeight > constraints.maxWidth) {
@@ -78,7 +79,8 @@ class UnitList extends StatelessWidget {
         }
       }
 
-      // We are using ListView.builder instead of ListView, as it creates children on demand, so it is more efficient
+      // We are using ListView.builder instead of ListView, as it creates
+      // children on demand, so it is more efficient
       return new ListView.builder(
         itemBuilder: (BuildContext context, int index) => unitList[index],
         itemCount: unitList.length,
@@ -106,4 +108,73 @@ class UnitList extends StatelessWidget {
       ),
     );
   }
+}
+
+// Dart allows top level functions
+// Builds a row that shows unit category information
+Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
+  return new Container(
+    height: 150.0,
+    margin: const EdgeInsets.all(4.0),
+    color: Colors.lightGreen,
+    child: new Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        new Text(
+          category,
+          style: new TextStyle(
+            color: Colors.white,
+            fontSize: 50.0,
+          ),
+        ),
+        new Text(
+          '1 ${baseUnit['name']} is equal to:',
+          style: new TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// Builds a row that shows unit information
+Widget buildUnit(Map<String, dynamic> unit) {
+  double conversion = unit['conversion'];
+  return new Container(
+    margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+    color: Colors.green,
+    child: new Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        new Container(
+          child: new Text(
+            conversion.floor() == conversion
+                ? conversion.toInt().toString()
+                : conversion.toString(),
+            style: new TextStyle(
+              color: Colors.white,
+              fontSize: 40.0,
+            ),
+          ),
+        ),
+        new Text(
+          unit['name'],
+          style: new TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+          ),
+        ),
+        new Text(
+          unit['description'],
+          style: new TextStyle(
+            color: Colors.white,
+            fontSize: 16.0,
+          ),
+        ),
+      ],
+    ),
+  );
 }

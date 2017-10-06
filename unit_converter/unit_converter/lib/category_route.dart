@@ -1,3 +1,7 @@
+// Copyright 2017 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -24,7 +28,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   Widget _layOutCategories() {
     if (widget.footer) {
       return new Container(
-        color: Colors.pink,
+        color: Colors.green,
         height: 140.0,
         child: new SingleChildScrollView(
           scrollDirection: Axis.horizontal,
