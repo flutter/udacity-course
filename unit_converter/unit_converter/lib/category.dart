@@ -11,14 +11,22 @@ import 'converter_route.dart';
 class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
+  final ColorSwatch color;
 
-  Category(this.name, this.units);
+  Category(this.name, this.units, this.color);
 
   void _navigateToConverter(BuildContext context) {
+    if (Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
+    }
     Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         return new Scaffold(
-          body: new ConverterRoute(units: units),
+          body: new ConverterRoute(units: units, color: color, name: name),
+          // This prevents the onscreen keyboard from affecting the size of the
+          // screen, and the space given to widgets.
+          // See https://docs.flutter.io/flutter/material/Scaffold/resizeToAvoidBottomPadding.html
+          resizeToAvoidBottomPadding: false,
         );
       },
     ));
@@ -29,24 +37,23 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Container(
       height: 120.0,
-      width: 120.0,
+      //width: 120.0,
       margin: const EdgeInsets.all(4.0),
       child: new Material(
         child: new RaisedButton(
-          color: Colors.lightGreen,
+          color: color[50],
           onPressed: () => _navigateToConverter(context),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Text(
-                name,
-                style: new TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
+          child: new Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: new Text(
+              name,
+              style: new TextStyle(
+                color: Colors.brown,
+                fontSize: 30.0,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Roboto Slab',
               ),
-            ],
+            ),
           ),
         ),
       ),

@@ -38,6 +38,7 @@ class UnitList extends StatelessWidget {
   void _buildLandscapeListView(
       List<Widget> unitList, Widget header, List<Widget> units) {
     unitList.add(new Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         new Expanded(
           flex: 1,
@@ -58,7 +59,6 @@ class UnitList extends StatelessWidget {
       Map<String, List<Map<String, dynamic>>> data) {
     return new LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-
       var unitList = <Widget>[];
       Widget header;
       for (String key in data.keys) {
@@ -92,6 +92,7 @@ class UnitList extends StatelessWidget {
   // Loads in JSON asset and builds a static [ListView]
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Colors.brown[100],
       body: new Center(
         child: new FutureBuilder(
             future:
@@ -113,10 +114,10 @@ class UnitList extends StatelessWidget {
 // Dart allows top level functions
 // Builds a row that shows unit category information
 Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
-  return new Container(
-    height: 150.0,
-    margin: const EdgeInsets.all(4.0),
-    color: Colors.lightGreen,
+  Widget text = new Container(
+    margin: const EdgeInsets.only(bottom: 4.0),
+    padding: const EdgeInsets.all(10.0),
+    color: Colors.transparent,
     child: new Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,18 +125,33 @@ Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
         new Text(
           category,
           style: new TextStyle(
-            color: Colors.white,
+            color: Colors.pink[800],
             fontSize: 50.0,
+            fontFamily: 'Roboto Slab',
           ),
         ),
         new Text(
           '1 ${baseUnit['name']} is equal to:',
           style: new TextStyle(
-            color: Colors.white,
+            color: Colors.pink[800],
             fontSize: 20.0,
+            fontFamily: 'Roboto Slab',
           ),
         ),
       ],
+    ),
+  );
+
+  return new ConstrainedBox(
+    constraints: new BoxConstraints(minHeight: 130.0),
+    child: new DecoratedBox(
+      decoration: new BoxDecoration(
+        gradient: new LinearGradient(colors: <Color>[
+          Colors.pink[50],
+          Colors.brown[100],
+        ]),
+      ),
+      child: text,
     ),
   );
 }
@@ -144,8 +160,9 @@ Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
 Widget buildUnit(Map<String, dynamic> unit) {
   double conversion = unit['conversion'];
   return new Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-    color: Colors.green,
+    margin: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
+    padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+    color: Colors.amber[50],
     child: new Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -155,23 +172,27 @@ Widget buildUnit(Map<String, dynamic> unit) {
                 ? conversion.toInt().toString()
                 : conversion.toString(),
             style: new TextStyle(
-              color: Colors.white,
+              color: Colors.pink[300],
               fontSize: 40.0,
+              fontFamily: 'Roboto Slab',
             ),
           ),
         ),
         new Text(
           unit['name'],
           style: new TextStyle(
-            color: Colors.white,
+            color: Colors.brown[600],
             fontSize: 20.0,
+            fontWeight: FontWeight.w600,
+            fontFamily: 'Roboto Slab',
           ),
         ),
         new Text(
           unit['description'],
           style: new TextStyle(
-            color: Colors.white,
+            color: Colors.brown[600],
             fontSize: 16.0,
+            fontFamily: 'Roboto Slab',
           ),
         ),
       ],

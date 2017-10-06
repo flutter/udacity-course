@@ -193,7 +193,7 @@
     },
     {
       "name": "Bentobox",
-      "conversion": 0.000012,
+      "conversion": 83333.33,
       "description": "A bentobox is worth 96 bits. In other contexts, it is worth one lunch, but we're talking data storage, not stomach storage."
     }
   ]
