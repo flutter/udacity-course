@@ -117,8 +117,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     Widget _createDropdown(String name, ValueChanged<dynamic> onChanged) {
       return new Theme(
+        // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-              canvasColor: widget.color[50],
+              canvasColor: widget.color[100],
             ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
@@ -126,7 +127,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
             items: units,
             onChanged: onChanged,
             style: new TextStyle(
-              color: widget.color[600], // 600
+              color: widget.color[600],
               fontSize: 20.0,
               fontFamily: 'Roboto Slab',
             ),
@@ -135,38 +136,43 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    var fromDropdown = _createDropdown(_fromValue.name, _updateFromConversion);
-
-    var toDropdown = _createDropdown(_toValue.name, _updateToConversion);
-
     var chooser = new Container(
+      color: widget.color[50],
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           new Container(
-            color: widget.color[50], //200
+            // You set the color of the dropdown here, not in _createDropdown()
+            color: widget.color[100],
             padding: const EdgeInsets.symmetric(
               horizontal: 8.0,
               vertical: 8.0,
             ),
             margin: const EdgeInsets.only(top: 30.0),
-            child: fromDropdown,
+            child: _createDropdown(_fromValue.name, _updateFromConversion),
           ),
-          new Text(
-            'to',
-            style: new TextStyle(
-              color: widget.color[200], // 400
-              fontFamily: 'Roboto Slab',
+          new Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+              right: 8.0,
+              top: 38.0,
+            ),
+            child: new Text(
+              'to',
+              style: new TextStyle(
+                color: widget.color[400],
+                fontFamily: 'Roboto Slab',
+              ),
             ),
           ),
           new Container(
-            color: widget.color[50], //200
+            color: widget.color[100],
             padding: const EdgeInsets.symmetric(
               horizontal: 8.0,
               vertical: 8.0,
             ),
             margin: const EdgeInsets.only(top: 30.0),
-            child: toDropdown,
+            child: _createDropdown(_toValue.name, _updateToConversion),
           ),
         ],
       ),
@@ -181,11 +187,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _textMargin,
       child: new TextField(
         style: new TextStyle(
-          color: widget.color[600], // 400
+          color: widget.color[400],
           fontSize: 50.0,
           fontFamily: 'Roboto Slab',
         ),
-        // This removes the underline under the input
         decoration: new InputDecoration(
           hintText: 'Enter a number',
           hideDivider: true,
@@ -210,23 +215,26 @@ class _ConverterRouteState extends State<ConverterRoute> {
         _convertedValue,
         style: new TextStyle(
           fontSize: 50.0,
-          color: widget.color[50], // 300
+          color: widget.color[600],
           fontFamily: 'Roboto Slab',
         ),
       ),
     );
 
     var description = new Container(
-      color: widget.color[50],
+      color: widget.color[900],
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Text(
-            'What is this unit?',
-            style: new TextStyle(
-              fontSize: 24.0,
-              color: widget.color[100], // 300
-              fontFamily: 'Roboto Slab',
+          new Padding(
+            padding: _textMargin,
+            child: new Text(
+              'What is this unit?',
+              style: new TextStyle(
+                fontSize: 24.0,
+                color: widget.color[50],
+                fontFamily: 'Roboto Slab',
+              ),
             ),
           ),
           new Container(
@@ -235,7 +243,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
               child: new Text(
                 _toValue.description,
                 style: new TextStyle(
-                  color: widget.color[100], // 300
+                  color: widget.color[50],
                   fontSize: 20.0,
                   fontFamily: 'Roboto Slab',
                 ),

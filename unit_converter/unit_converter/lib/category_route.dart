@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:core';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 
@@ -28,29 +27,14 @@ class _CategoryRouteState extends State<CategoryRoute> {
   var _categories = <Category>[];
 
   List<ColorSwatch> _baseColors = [
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.blueGrey[50], Colors.blueGrey[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.amber[50], Colors.amber[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.brown[50], Colors.brown[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.pink[50], Colors.pink[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.orange[50], Colors.orange[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.deepPurple[50], Colors.deepPurple[100]])),
-    new ColorSwatch(500,
-        new Map.fromIterables([50, 100], [Colors.green[50], Colors.green[100]])),
-  ];
-  List<Color> _colors = [
-    Colors.blueGrey[50],
-    Colors.amber[50],
-    Colors.brown[100],
-    Colors.pink[50],
-    Colors.orange[100],
-    Colors.deepPurple[50],
-    Colors.green[50],
+    Colors.blueGrey,
+    Colors.amber,
+    Colors.brown,
+    Colors.pink,
+    Colors.orange,
+    Colors.deepPurple,
+    Colors.green,
+    Colors.red,
   ];
 
   Widget _layOutCategories() {
@@ -101,8 +85,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
                 units.add(new Unit(data[key][i]['name'],
                     data[key][i]['conversion'], data[key][i]['description']));
               }
-              _categories
-                  .add(new Category(key, units, _baseColors[ci % _baseColors.length]));
+              _categories.add(new Category(
+                  key, units, _baseColors[ci % _baseColors.length]));
               ci += 1;
             }
             return _layOutCategories();
