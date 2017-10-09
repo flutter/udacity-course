@@ -12,8 +12,9 @@ class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
   final ColorSwatch color;
+  final IconData icon;
 
-  Category(this.name, this.units, this.color);
+  Category(this.name, this.units, this.color, this.icon);
 
   void _navigateToConverter(BuildContext context) {
     if (Navigator.of(context).canPop()) {
@@ -42,17 +43,24 @@ class Category extends StatelessWidget {
         child: new RaisedButton(
           color: color[50],
           onPressed: () => _navigateToConverter(context),
-          child: new Align(
-            alignment: FractionalOffset.bottomCenter,
-            child: new Text(
-              name,
-              style: new TextStyle(
-                color: Colors.brown,
-                fontSize: 30.0,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Roboto Slab',
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Icon(
+                icon,
+                size: 70.0,
               ),
-            ),
+              new Text(
+                name,
+                textAlign: TextAlign.center,
+                style: new TextStyle(
+                  color: Colors.brown,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Roboto Slab',
+                ),
+              ),
+            ],
           ),
         ),
       ),

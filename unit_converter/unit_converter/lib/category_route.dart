@@ -37,6 +37,17 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.red,
   ];
 
+  List<IconData> _icons = [
+    Icons.short_text,
+    Icons.crop_square,
+    Icons.threed_rotation,
+    Icons.weekend,
+    Icons.access_time,
+    Icons.sd_storage,
+    Icons.battery_charging_full,
+    Icons.attach_money,
+  ];
+
   Widget _layOutCategories() {
     if (widget.footer) {
       // Reorganize the list so that the one we selected is first and highlighted
@@ -86,7 +97,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
                     data[key][i]['conversion'], data[key][i]['description']));
               }
               _categories.add(new Category(
-                  key, units, _baseColors[ci % _baseColors.length]));
+                  key,
+                  units,
+                  _baseColors[ci % _baseColors.length],
+                  _icons[ci % _icons.length]));
               ci += 1;
             }
             return _layOutCategories();
