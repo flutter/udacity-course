@@ -25,16 +25,15 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Consider omitting the types for local variables. For more details on Effective
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var _categories = <Category>[];
-
   List<ColorSwatch> _baseColors = [
     Colors.blueGrey,
-    Colors.amber,
-    Colors.brown,
-    Colors.pink,
-    Colors.orange,
-    Colors.deepPurple,
+    Colors.indigo,
+    Colors.lightBlue,
+    Colors.cyan,
+    Colors.teal,
     Colors.green,
-    Colors.red,
+    Colors.lightGreen,
+    Colors.lime,
   ];
 
   List<IconData> _icons = [

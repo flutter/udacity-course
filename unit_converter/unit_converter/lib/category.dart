@@ -48,7 +48,7 @@ class Category extends StatelessWidget {
             children: <Widget>[
               new Icon(
                 icon,
-                size: 70.0,
+                size: 50.0,
               ),
               new Text(
                 name,
@@ -57,7 +57,7 @@ class Category extends StatelessWidget {
                   color: Colors.brown,
                   fontSize: 30.0,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Roboto Slab',
+                  fontFamily: 'Noto Sans',
                 ),
               ),
             ],

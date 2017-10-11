@@ -37,9 +37,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-   - family: Roboto Slab
+   - family: Noto Sans
      fonts:
-      - asset: fonts/RobotoSlab-Regular.ttf
+      - asset: fonts/NotoSans-Regular.ttf
 
   # For details regarding fonts from package dependencies, 
   # see https://flutter.io/custom-fonts/#from-packages

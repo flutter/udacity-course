@@ -119,7 +119,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return new Theme(
         // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-              canvasColor: widget.color[100],
+              canvasColor: widget.color[300],
             ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
@@ -127,9 +127,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
             items: units,
             onChanged: onChanged,
             style: new TextStyle(
-              color: widget.color[600],
+              color: Colors.grey,
               fontSize: 20.0,
-              fontFamily: 'Roboto Slab',
+              fontFamily: 'Noto Sans',
             ),
           ),
         ),
@@ -137,41 +137,40 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
 
     var chooser = new Container(
-      color: widget.color[50],
+      color: widget.color[300],
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           new Container(
             // You set the color of the dropdown here, not in _createDropdown()
-            color: widget.color[100],
+            color: widget.color[300],
             padding: const EdgeInsets.symmetric(
               horizontal: 8.0,
               vertical: 8.0,
             ),
-            margin: const EdgeInsets.only(top: 30.0),
             child: _createDropdown(_fromValue.name, _updateFromConversion),
           ),
-          new Padding(
+          new Container(
+            color: widget.color[300],
             padding: const EdgeInsets.only(
               left: 8.0,
               right: 8.0,
-              top: 38.0,
+              top: 8.0,
             ),
             child: new Text(
               'to',
               style: new TextStyle(
-                color: widget.color[400],
-                fontFamily: 'Roboto Slab',
+                color: Colors.grey,
+                fontFamily: 'Noto Sans',
               ),
             ),
           ),
           new Container(
-            color: widget.color[100],
+            color: widget.color[300],
             padding: const EdgeInsets.symmetric(
               horizontal: 8.0,
               vertical: 8.0,
             ),
-            margin: const EdgeInsets.only(top: 30.0),
             child: _createDropdown(_toValue.name, _updateToConversion),
           ),
         ],
@@ -182,22 +181,24 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // numbers and calls the onChanged property on update.
     // You can read more about it here: https://flutter.io/text-input
     var convertFrom = new Container(
-      color: widget.color[50],
+      color: widget.color[100],
+      //widget.color[50],
       alignment: FractionalOffset.topLeft,
+      margin: _textMargin,
       padding: _textMargin,
       child: new TextField(
         style: new TextStyle(
-          color: widget.color[400],
+          color: Colors.grey,
           fontSize: 50.0,
-          fontFamily: 'Roboto Slab',
+          fontFamily: 'Noto Sans',
         ),
         decoration: new InputDecoration(
           hintText: 'Enter a number',
           hideDivider: true,
           hintStyle: new TextStyle(
-            color: widget.color[100],
+            color: Colors.grey,
             fontSize: 30.0, // Throws an error if you don't specify
-            fontFamily: 'Roboto Slab',
+            fontFamily: 'Noto Sans',
           ),
         ),
         // Since we only want numerical input, we use a number keyboard. There
@@ -209,44 +210,44 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     var convertTo = new Container(
       color: widget.color[100],
+      margin: _textMargin,
       alignment: FractionalOffset.topLeft,
       padding: _textMargin,
       child: new Text(
         _convertedValue,
         style: new TextStyle(
           fontSize: 50.0,
-          color: widget.color[600],
-          fontFamily: 'Roboto Slab',
+          color: Colors.grey,
+          fontFamily: 'Noto Sans',
         ),
       ),
     );
 
     var description = new Container(
-      color: widget.color[900],
+      color: Colors.white,
+      margin: _textMargin,
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Padding(
+          new Container(
             padding: _textMargin,
             child: new Text(
-              'What is this unit?',
+              _toValue.name,
               style: new TextStyle(
                 fontSize: 24.0,
-                color: widget.color[50],
-                fontFamily: 'Roboto Slab',
+                color: Colors.grey[500],
+                fontFamily: 'Noto Sans',
               ),
             ),
           ),
           new Container(
-            child: new Container(
-              padding: _textMargin,
-              child: new Text(
-                _toValue.description,
-                style: new TextStyle(
-                  color: widget.color[50],
-                  fontSize: 20.0,
-                  fontFamily: 'Roboto Slab',
-                ),
+            padding: _textMargin,
+            child: new Text(
+              _toValue.description,
+              style: new TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey[500],
+                fontFamily: 'Noto Sans',
               ),
             ),
           ),
@@ -257,7 +258,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
     var conversionPage = new Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        chooser,
+        new Container(
+          margin: const EdgeInsets.only(top: 24.0),
+          child: chooser,
+        ),
         new Expanded(
           flex: 2,
           child: convertFrom,
@@ -276,6 +280,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     return new GestureDetector(
       onTap: _toggleCategories,
       child: new Container(
+        color: Colors.grey[50],
         child: new Stack(
           children: <Widget>[
             conversionPage,

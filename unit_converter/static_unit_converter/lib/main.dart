@@ -127,7 +127,7 @@ Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
           style: new TextStyle(
             color: Colors.pink[800],
             fontSize: 50.0,
-            fontFamily: 'Roboto Slab',
+            fontFamily: 'Noto Sans',
           ),
         ),
         new Text(
@@ -135,7 +135,7 @@ Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
           style: new TextStyle(
             color: Colors.pink[800],
             fontSize: 20.0,
-            fontFamily: 'Roboto Slab',
+            fontFamily: 'Noto Sans',
           ),
         ),
       ],
@@ -174,7 +174,7 @@ Widget buildUnit(Map<String, dynamic> unit) {
             style: new TextStyle(
               color: Colors.pink[300],
               fontSize: 40.0,
-              fontFamily: 'Roboto Slab',
+              fontFamily: 'Noto Sans',
             ),
           ),
         ),
@@ -184,7 +184,7 @@ Widget buildUnit(Map<String, dynamic> unit) {
             color: Colors.brown[600],
             fontSize: 20.0,
             fontWeight: FontWeight.w600,
-            fontFamily: 'Roboto Slab',
+            fontFamily: 'Noto Sans',
           ),
         ),
         new Text(
@@ -192,7 +192,7 @@ Widget buildUnit(Map<String, dynamic> unit) {
           style: new TextStyle(
             color: Colors.brown[600],
             fontSize: 16.0,
-            fontFamily: 'Roboto Slab',
+            fontFamily: 'Noto Sans',
           ),
         ),
       ],
