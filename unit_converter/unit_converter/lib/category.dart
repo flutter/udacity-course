@@ -54,7 +54,7 @@ class Category extends StatelessWidget {
                 name,
                 textAlign: TextAlign.center,
                 style: new TextStyle(
-                  color: Colors.brown,
+                  color: Colors.black,
                   fontSize: 30.0,
                   fontWeight: FontWeight.w700,
                   fontFamily: 'Noto Sans',

@@ -96,7 +96,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       units.add(new DropdownMenuItem(
         value: unit.name,
         child: new Container(
-          width: 150.0,
+          width: 130.0,
           child: new Text(
             unit.name,
             softWrap: true,
@@ -127,7 +127,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
             items: units,
             onChanged: onChanged,
             style: new TextStyle(
-              color: Colors.grey,
+              color: Colors.black,
               fontSize: 20.0,
               fontFamily: 'Noto Sans',
             ),
@@ -155,14 +155,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
             padding: const EdgeInsets.only(
               left: 8.0,
               right: 8.0,
-              top: 8.0,
             ),
-            child: new Text(
-              'to',
-              style: new TextStyle(
-                color: Colors.grey,
-                fontFamily: 'Noto Sans',
-              ),
+            child: new Icon(
+              Icons.arrow_forward,
+              color: Colors.black,
             ),
           ),
           new Container(
@@ -188,7 +184,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _textMargin,
       child: new TextField(
         style: new TextStyle(
-          color: Colors.grey,
+          color: Colors.black,
           fontSize: 50.0,
           fontFamily: 'Noto Sans',
         ),
@@ -196,7 +192,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           hintText: 'Enter a number',
           hideDivider: true,
           hintStyle: new TextStyle(
-            color: Colors.grey,
+            color: Colors.grey[500],
             fontSize: 30.0, // Throws an error if you don't specify
             fontFamily: 'Noto Sans',
           ),
@@ -217,41 +213,43 @@ class _ConverterRouteState extends State<ConverterRoute> {
         _convertedValue,
         style: new TextStyle(
           fontSize: 50.0,
-          color: Colors.grey,
+          color: Colors.black,
           fontFamily: 'Noto Sans',
         ),
       ),
     );
 
     var description = new Container(
-      color: Colors.white,
-      margin: _textMargin,
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          new Container(
-            padding: _textMargin,
-            child: new Text(
-              _toValue.name,
-              style: new TextStyle(
-                fontSize: 24.0,
-                color: Colors.grey[500],
-                fontFamily: 'Noto Sans',
+        color: Colors.white,
+        margin: _textMargin,
+        child: new Card(
+          child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new Container(
+              padding: _textMargin,
+              child: new Text(
+                _toValue.name,
+                style: new TextStyle(
+                  fontSize: 24.0,
+                  color: Colors.grey[900],
+                  fontFamily: 'Noto Sans',
+                ),
               ),
             ),
-          ),
-          new Container(
-            padding: _textMargin,
-            child: new Text(
-              _toValue.description,
-              style: new TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[500],
-                fontFamily: 'Noto Sans',
+            new Container(
+              padding: _textMargin,
+              child: new Text(
+                _toValue.description,
+                style: new TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.grey[900],
+                  fontFamily: 'Noto Sans',
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 

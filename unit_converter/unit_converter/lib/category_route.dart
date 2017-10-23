@@ -59,7 +59,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         }
       }
       return new Container(
-        color: Colors.brown[600],
+        color: Colors.grey[600],
         height: 140.0,
         child: new SingleChildScrollView(
           scrollDirection: Axis.horizontal,
