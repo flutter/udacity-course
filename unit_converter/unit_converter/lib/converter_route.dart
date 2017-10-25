@@ -179,7 +179,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     var convertFrom = new Container(
       color: widget.color[100],
       //widget.color[50],
-      alignment: FractionalOffset.topLeft,
+      alignment: FractionalOffset.centerLeft,
       margin: _textMargin,
       padding: _textMargin,
       child: new TextField(
@@ -207,7 +207,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     var convertTo = new Container(
       color: widget.color[100],
       margin: _textMargin,
-      alignment: FractionalOffset.topLeft,
+      alignment: FractionalOffset.centerLeft,
       padding: _textMargin,
       child: new Text(
         _convertedValue,
@@ -220,10 +220,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
     );
 
     var description = new Container(
-        color: Colors.white,
-        margin: _textMargin,
-        child: new Card(
-          child: new Column(
+      color: Colors.white,
+      margin: _textMargin,
+      child: new Card(
+        child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             new Container(
@@ -239,12 +239,14 @@ class _ConverterRouteState extends State<ConverterRoute> {
             ),
             new Container(
               padding: _textMargin,
-              child: new Text(
-                _toValue.description,
-                style: new TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.grey[900],
-                  fontFamily: 'Noto Sans',
+              child: new SingleChildScrollView(
+                child: new Text(
+                  _toValue.description,
+                  style: new TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.grey[900],
+                    fontFamily: 'Noto Sans',
+                  ),
                 ),
               ),
             ),

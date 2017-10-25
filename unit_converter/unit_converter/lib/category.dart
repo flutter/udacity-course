@@ -48,7 +48,7 @@ class Category extends StatelessWidget {
             children: <Widget>[
               new Icon(
                 icon,
-                size: 50.0,
+                size: 70.0,
               ),
               new Text(
                 name,
