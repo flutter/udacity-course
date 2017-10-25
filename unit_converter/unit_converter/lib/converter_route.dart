@@ -178,7 +178,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // You can read more about it here: https://flutter.io/text-input
     var convertFrom = new Container(
       color: widget.color[100],
-      //widget.color[50],
       alignment: FractionalOffset.centerLeft,
       margin: _textMargin,
       padding: _textMargin,
@@ -223,23 +222,23 @@ class _ConverterRouteState extends State<ConverterRoute> {
       color: Colors.white,
       margin: _textMargin,
       child: new Card(
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Container(
-              padding: _textMargin,
-              child: new Text(
-                _toValue.name,
-                style: new TextStyle(
-                  fontSize: 24.0,
-                  color: Colors.grey[900],
-                  fontFamily: 'Noto Sans',
+        child: new SingleChildScrollView(
+          child: new Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                padding: _textMargin,
+                child: new Text(
+                  _toValue.name,
+                  style: new TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.grey[900],
+                    fontFamily: 'Noto Sans',
+                  ),
                 ),
               ),
-            ),
-            new Container(
-              padding: _textMargin,
-              child: new SingleChildScrollView(
+              new Container(
+                padding: _textMargin,
                 child: new Text(
                   _toValue.description,
                   style: new TextStyle(
@@ -249,8 +248,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
