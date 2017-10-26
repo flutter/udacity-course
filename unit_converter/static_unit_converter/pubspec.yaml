@@ -4,6 +4,7 @@ description: Unit converter
 dependencies:
   flutter:
     sdk: flutter
+  material_icons_font: ^0.1.1
 
 dev_dependencies:
   flutter_test:
@@ -15,12 +16,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the Icons class.
-  uses-material-design: false
-
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/units.json
@@ -30,7 +25,7 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.io/assets-and-images/#from-packages
-  
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
