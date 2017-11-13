@@ -39,7 +39,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
       200: const Color(0xFFcfe1fc),
       300: const Color(0xFFb6cdef),
     }),
-    Colors.cyan,
+    new ColorSwatch(300, {
+      50: const Color(0xFFd2efee),
+      100: const Color(0xFFbcf2eb),
+      200: const Color(0xFF9de0d7),
+      300: const Color(0xFF84d8cd),
+    }),
     Colors.teal,
     Colors.green,
     Colors.lightGreen,
