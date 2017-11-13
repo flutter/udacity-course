@@ -19,7 +19,12 @@ class ConverterRoute extends StatefulWidget {
   final List<Unit> units;
   final ColorSwatch color;
 
-  ConverterRoute({Key key, this.units, this.color, this.name})
+  ConverterRoute({
+    Key key,
+    this.units,
+    this.color,
+    this.name,
+  })
       : super(key: key);
 
   @override
@@ -34,19 +39,20 @@ class _ConverterRouteState extends State<ConverterRoute> {
   bool _showCategories = false;
 
   String _updateConversion() {
-    if (_inputValue != null && _inputValue != '') {
+    if (_inputValue != null && _inputValue.isNotEmpty) {
       var outputNum = (double.parse(_inputValue) *
               (_toValue.conversion / _fromValue.conversion))
-          .toStringAsPrecision(7)
-          .toString();
-      // Trim trailing zeros, e.g. 5.500, 100.0
+          .toStringAsPrecision(7);
+      // Trim trailing zeros, e.g. 5.500 -> 5.5, 100.0 -> 100
       if (outputNum.contains('.') && outputNum.endsWith('0')) {
-        while (outputNum.endsWith('0')) {
-          outputNum = outputNum.substring(0, outputNum.length - 1);
+        var i = outputNum.length - 1;
+        while (outputNum[i] == '0') {
+          i -= 1;
         }
+        outputNum = outputNum.substring(0, i + 1);
       }
       if (outputNum.endsWith('.')) {
-        outputNum = outputNum.substring(0, outputNum.length - 1);
+        return outputNum.substring(0, outputNum.length - 1);
       }
       return outputNum;
     }
@@ -119,8 +125,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return new Theme(
         // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-              canvasColor: widget.color[300],
-            ),
+          canvasColor: widget.color[300],
+        ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
             value: name,
@@ -193,8 +199,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
           hideDivider: true,
           hintStyle: new TextStyle(
             color: Colors.grey[500],
-            fontSize: 30.0, // Throws an error if you don't specify
-            fontFamily: 'Noto Sans',
+            // See https://github.com/flutter/flutter/issues/11948,
+            // Throws an error if you don't specify
+            fontSize: 30.0,
           ),
         ),
         // Since we only want numerical input, we use a number keyboard. There
@@ -214,7 +221,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
         style: new TextStyle(
           fontSize: 50.0,
           color: Colors.black,
-          fontFamily: 'Noto Sans',
         ),
       ),
     );
@@ -233,7 +239,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
                 style: new TextStyle(
                   fontSize: 24.0,
                   color: Colors.grey[900],
-                  fontFamily: 'Noto Sans',
                 ),
               ),
             ),
@@ -245,7 +250,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
                   style: new TextStyle(
                     fontSize: 20.0,
                     color: Colors.grey[900],
-                    fontFamily: 'Noto Sans',
                   ),
                 ),
               ),

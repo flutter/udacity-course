@@ -14,7 +14,12 @@ class Category extends StatelessWidget {
   final ColorSwatch color;
   final IconData icon;
 
-  Category(this.name, this.units, this.color, this.icon);
+  Category({
+    this.name,
+    this.units,
+    this.color,
+    this.icon,
+  });
 
   void _navigateToConverter(BuildContext context) {
     if (Navigator.of(context).canPop()) {

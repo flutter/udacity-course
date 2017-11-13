@@ -15,7 +15,12 @@ class CategoryRoute extends StatefulWidget {
   final bool footer;
   final String currentCategory;
 
-  CategoryRoute({Key key, this.footer, this.currentCategory}) : super(key: key);
+  CategoryRoute({
+    Key key,
+    this.footer,
+    this.currentCategory,
+  })
+      : super(key: key);
 
   @override
   _CategoryRouteState createState() => new _CategoryRouteState();
@@ -25,7 +30,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Consider omitting the types for local variables. For more details on Effective
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var _categories = <Category>[];
-  List<ColorSwatch> _baseColors = [
+  final _baseColors = <ColorSwatch>[
     Colors.grey,
     Colors.blueGrey,
     new ColorSwatch(300, {
@@ -41,7 +46,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.lime,
   ];
 
-  List<IconData> _icons = [
+  final _icons = <IconData>[
     Icons.short_text,
     Icons.crop_square,
     Icons.threed_rotation,
@@ -97,14 +102,18 @@ class _CategoryRouteState extends State<CategoryRoute> {
             for (var key in data.keys) {
               List<Unit> units = [];
               for (var i = 0; i < data[key].length; i++) {
-                units.add(new Unit(data[key][i]['name'],
-                    data[key][i]['conversion'], data[key][i]['description']));
+                units.add(new Unit(
+                  name: data[key][i]['name'],
+                  conversion: data[key][i]['conversion'],
+                  description: data[key][i]['description'],
+                ));
               }
               _categories.add(new Category(
-                  key,
-                  units,
-                  _baseColors[ci % _baseColors.length],
-                  _icons[ci % _icons.length]));
+                name: key,
+                units: units,
+                color: _baseColors[ci % _baseColors.length],
+                icon: _icons[ci % _icons.length],
+              ));
               ci += 1;
             }
             return _layOutCategories();

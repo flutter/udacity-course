@@ -7,5 +7,9 @@ class Unit {
   final double conversion;
   final String description;
 
-  Unit(this.name, this.conversion, this.description);
+  Unit({
+    this.name,
+    this.conversion,
+    this.description,
+  });
 }

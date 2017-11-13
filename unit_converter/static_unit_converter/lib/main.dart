@@ -114,7 +114,7 @@ class UnitList extends StatelessWidget {
 // Dart allows top level functions
 // Builds a row that shows unit category information
 Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
-  Widget text = new Container(
+  var text = new Container(
     margin: const EdgeInsets.only(bottom: 4.0),
     padding: const EdgeInsets.all(10.0),
     color: Colors.transparent,
@@ -146,7 +146,7 @@ Widget buildCategory(String category, Map<String, dynamic> baseUnit) {
     constraints: new BoxConstraints(minHeight: 130.0),
     child: new DecoratedBox(
       decoration: new BoxDecoration(
-        gradient: new LinearGradient(colors: <Color>[
+        gradient: new LinearGradient(colors: [
           Colors.pink[50],
           Colors.brown[100],
         ]),
