@@ -30,16 +30,16 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Consider omitting the types for local variables. For more details on Effective
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var _categories = <Category>[];
-  final _baseColors = <ColorSwatch>[
+  static const _baseColors = const <ColorSwatch>[
     Colors.grey,
     Colors.blueGrey,
-    new ColorSwatch(300, {
+    const ColorSwatch(300, const {
       50: const Color(0xFFF2F7FF),
       100: const Color(0xFFe0eaf9),
       200: const Color(0xFFcfe1fc),
       300: const Color(0xFFb6cdef),
     }),
-    new ColorSwatch(300, {
+    const ColorSwatch(300, const {
       50: const Color(0xFFd2efee),
       100: const Color(0xFFbcf2eb),
       200: const Color(0xFF9de0d7),
@@ -51,7 +51,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.lime,
   ];
 
-  final _icons = <IconData>[
+  static const _icons = const <IconData>[
     Icons.short_text,
     Icons.crop_square,
     Icons.threed_rotation,

@@ -132,10 +132,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
             value: name,
             items: units,
             onChanged: onChanged,
-            style: new TextStyle(
-              color: Colors.black,
+            style: Theme.of(context).textTheme.subhead.copyWith(
               fontSize: 20.0,
-              fontFamily: 'Noto Sans',
             ),
           ),
         ),
@@ -188,10 +186,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       margin: _textMargin,
       padding: _textMargin,
       child: new TextField(
-        style: new TextStyle(
-          color: Colors.black,
+        style: Theme.of(context).textTheme.subhead.copyWith(
           fontSize: 50.0,
-          fontFamily: 'Noto Sans',
         ),
         decoration: new InputDecoration(
           hintText: 'Enter a number',
@@ -219,7 +215,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
         _convertedValue,
         style: new TextStyle(
           fontSize: 50.0,
-          color: Colors.black,
         ),
       ),
     );
@@ -239,7 +234,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
                   style: new TextStyle(
                     fontSize: 24.0,
                     color: Colors.grey[900],
-                    fontFamily: 'Noto Sans',
                   ),
                 ),
               ),
