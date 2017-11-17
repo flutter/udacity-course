@@ -219,28 +219,5 @@
       "conversion": 0.737562,
       "description": "The energy needed to raise one pound a distance of one foot. Useful to know when fishing up freshly-baked pound cakes from the windowsill below yours."
     }
-  ],
-  "Currency": [
-    {
-      "name": "Dollar",
-      "conversion": 1.0,
-      "description": "This is the US dollar.",
-      "base_unit": true
-    },
-    {
-      "name": "Euro",
-      "conversion": 1.3,
-      "description": "The currency used in Europe."
-    },
-    {
-      "name": "Galleon",
-      "conversion": 50.0,
-      "description": "In the Magical Wizarding World, they carry around giant bags of Galleons, which doesn't seem practical but sure is idyllic."
-    },
-    {
-      "name": "Standard bar of gold",
-      "conversion": 600.0,
-      "description": "Gold has been used as currency for a really long time."
-    }
   ]
 }

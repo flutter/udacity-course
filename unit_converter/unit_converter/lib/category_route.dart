@@ -8,6 +8,7 @@ import 'dart:convert';
 
 import 'category.dart';
 import 'unit.dart';
+import 'api.dart';
 
 class CategoryRoute extends StatefulWidget {
   // This is the "home" page of the unit converter. It shows a grid of
@@ -96,9 +97,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
     if (_categories.isNotEmpty) {
       return _layOutCategories();
     }
+    // We have static unit conversions located in our assets/units.json
+    // and we want to also grab up-to-date Currency conversions from the web
     return new FutureBuilder(
         future: DefaultAssetBundle.of(context).loadString('assets/units.json'),
         builder: (context, snapshot) {
+          // Get static units
           if (snapshot != null && snapshot.data != null) {
             final decoder = const JsonDecoder();
             Map<String, List<Map<String, dynamic>>> data =
@@ -121,6 +125,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
               ));
               ci += 1;
             }
+
+            // Get units from API
+            var api = new Api();
+            api.get();
+
             return _layOutCategories();
           }
           return new Text('Loading');
