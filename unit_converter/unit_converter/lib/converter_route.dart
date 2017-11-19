@@ -6,8 +6,9 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-import 'unit.dart';
+import 'api.dart';
 import 'category_route.dart';
+import 'unit.dart';
 
 const _textMargin = const EdgeInsets.symmetric(
   horizontal: 30.0,
@@ -38,32 +39,51 @@ class _ConverterRouteState extends State<ConverterRoute> {
   String _convertedValue = '';
   bool _showCategories = false;
 
-  String _updateConversion() {
+  void _updateConversion() {
     if (_inputValue != null && _inputValue.isNotEmpty) {
-      var outputNum = (double.parse(_inputValue) *
-              (_toValue.conversion / _fromValue.conversion))
-          .toStringAsPrecision(7);
-      // Trim trailing zeros, e.g. 5.500 -> 5.5, 100.0 -> 100
-      if (outputNum.contains('.') && outputNum.endsWith('0')) {
-        var i = outputNum.length - 1;
-        while (outputNum[i] == '0') {
-          i -= 1;
-        }
-        outputNum = outputNum.substring(0, i + 1);
+      // Our API has a handy convert function, so we can use that for
+      // the Currency category
+      if (widget.name == apiCategory['name']) {
+        var api = new Api();
+        api
+            .convert(apiCategory['route'], _inputValue,
+                _fromValue.name, _toValue.name)
+            .then((conversion) {
+          setState(() {
+            _convertedValue = _format(conversion);
+          });
+        });
+      } else {
+        // For the static units, we do the conversion ourselves
+        setState(() {
+          _convertedValue = _format((double.parse(_inputValue) *
+              (_toValue.conversion / _fromValue.conversion)));
+        });
       }
-      if (outputNum.endsWith('.')) {
-        return outputNum.substring(0, outputNum.length - 1);
-      }
-      return outputNum;
     }
-    return '';
+  }
+
+  String _format(double conversion) {
+    // Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
+    var outputNum = conversion.toStringAsPrecision(7);
+    if (outputNum.contains('.') && outputNum.endsWith('0')) {
+      var i = outputNum.length - 1;
+      while (outputNum[i] == '0') {
+        i -= 1;
+      }
+      outputNum = outputNum.substring(0, i + 1);
+    }
+    if (outputNum.endsWith('.')) {
+      return outputNum.substring(0, outputNum.length - 1);
+    }
+    return outputNum;
   }
 
   void _updateInputValue(String input) {
     setState(() {
       _inputValue = input;
-      _convertedValue = _updateConversion();
     });
+    _updateConversion();
   }
 
   Unit _getUnit(String unitName) {
@@ -78,15 +98,15 @@ class _ConverterRouteState extends State<ConverterRoute> {
   void _updateFromConversion(dynamic unitName) {
     setState(() {
       _fromValue = _getUnit(unitName);
-      _convertedValue = _updateConversion();
     });
+    _updateConversion();
   }
 
   void _updateToConversion(dynamic unitName) {
     setState(() {
       _toValue = _getUnit(unitName);
-      _convertedValue = _updateConversion();
     });
+    _updateConversion();
   }
 
   void _toggleCategories() {
@@ -125,16 +145,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return new Theme(
         // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-          canvasColor: widget.color[300],
-        ),
+              canvasColor: widget.color[300],
+            ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
             value: name,
             items: units,
             onChanged: onChanged,
             style: Theme.of(context).textTheme.subhead.copyWith(
-              fontSize: 20.0,
-            ),
+                  fontSize: 20.0,
+                ),
           ),
         ),
       );
@@ -187,8 +207,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _textMargin,
       child: new TextField(
         style: Theme.of(context).textTheme.subhead.copyWith(
-          fontSize: 50.0,
-        ),
+              fontSize: 50.0,
+            ),
         decoration: new InputDecoration(
           hintText: 'Enter a number',
           hideDivider: true,

@@ -28,7 +28,11 @@ class Category extends StatelessWidget {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         return new Scaffold(
-          body: new ConverterRoute(units: units, color: color, name: name),
+          body: new ConverterRoute(
+            name: name,
+            units: units,
+            color: color,
+          ),
           // This prevents the onscreen keyboard from affecting the size of the
           // screen, and the space given to widgets.
           // See https://docs.flutter.io/flutter/material/Scaffold/resizeToAvoidBottomPadding.html
@@ -62,7 +66,6 @@ class Category extends StatelessWidget {
                   color: Colors.black,
                   fontSize: 30.0,
                   fontWeight: FontWeight.w700,
-                  fontFamily: 'Noto Sans',
                 ),
               ),
             ],
