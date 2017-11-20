@@ -161,7 +161,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
           ci += 1;
         }
 
-
         // Also retrieve Currency category from the API
         _retrieveApiCategory();
 

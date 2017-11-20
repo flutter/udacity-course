@@ -145,16 +145,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return new Theme(
         // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-              canvasColor: widget.color[300],
-            ),
+          canvasColor: widget.color[300],
+        ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
             value: name,
             items: units,
             onChanged: onChanged,
             style: Theme.of(context).textTheme.subhead.copyWith(
-                  fontSize: 20.0,
-                ),
+              fontSize: 20.0,
+            ),
           ),
         ),
       );
@@ -207,8 +207,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _textMargin,
       child: new TextField(
         style: Theme.of(context).textTheme.subhead.copyWith(
-              fontSize: 50.0,
-            ),
+          fontSize: 50.0,
+        ),
         decoration: new InputDecoration(
           hintText: 'Enter a number',
           hideDivider: true,
