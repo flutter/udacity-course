@@ -50,21 +50,21 @@ const server = http.createServer((req, res) => {
         const units = parsedUrl.query;
         let message = [];
         if (units.amount == null) {
-            message.push('Missing `amount` query param.');
+            message.push('Missing `amount` query parameter.');
         }
         if (units.from == null) {
-            message.push('Missing `from` query param.');
+            message.push('Missing `from` query parameter.');
         }
         if (units.to == null) {
-            message.push('Missing `to` query param.');
+            message.push('Missing `to` query parameter.');
         }
         const from = _getConversion(data, units.from);
         const to = _getConversion(data, units.to);
         if (from == null) {
-            message.push('Invalid `from` query param.');
+            message.push('Invalid `from` query parameter.');
         }
         if (to == null) {
-            message.push('Invalid `to` query param.');
+            message.push('Invalid `to` query parameter.');
         }
         if (message.length !== 0) {
             res.statusCode = '400';
