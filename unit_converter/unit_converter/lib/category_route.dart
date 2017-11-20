@@ -160,12 +160,14 @@ class _CategoryRouteState extends State<CategoryRoute> {
           ));
           ci += 1;
         }
+
+
+        // Also retrieve Currency category from the API
+        _retrieveApiCategory();
+
         return _drawCategories();
       },
     );
-
-    // Also retrieve Currency category from the API
-    _retrieveApiCategory();
 
     return categories;
   }
