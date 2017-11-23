@@ -2,9 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:core';
-import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 
 import 'category.dart';
 import 'unit.dart';
@@ -70,19 +71,60 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Icons.attach_money,
   ];
 
-  // Get Currency units from API. This returns a Future object
-  // so we put the logic in the .then() section
-  void _retrieveApiCategory() {
-    var api = new Api();
-    api.getUnits(apiCategory['route']).then((jsonUnits) {
+  // We have static unit conversions located in our assets/units.json
+  // and we want to also grab up-to-date Currency conversions from the web
+  @override
+   Future<Null> didChangeDependencies() async {
+    super.didChangeDependencies();
+    // We only want to load our data in once
+    if (_categories.isEmpty) {
+        await _retrieveLocalCategories();
+       await _retrieveApiCategory();
+    }
+  }
+
+  Future<Null> _retrieveLocalCategories() async {
+    var json = DefaultAssetBundle.of(context).loadString('assets/units.json');
+    if (json == null) {
+      // TODO error UI
+      print('Error finding file');
+    }
+    final decoder = const JsonDecoder();
+    Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
+    var ci = 0;
+    for (var key in data.keys) {
       var units = <Unit>[];
-      for (var unit in jsonUnits) {
+      for (var i = 0; i < data[key].length; i++) {
         units.add(new Unit(
-          name: unit['name'],
-          conversion: unit['conversion'].toDouble(),
-          description: unit['description'],
+          name: data[key][i]['name'],
+          conversion: data[key][i]['conversion'],
+          description: data[key][i]['description'],
         ));
       }
+      setState(() {
+        _categories.add(new Category(
+          name: key,
+          units: units,
+          color: _baseColors[ci % _baseColors.length],
+          icon: _icons[ci % _icons.length],
+        ));
+      });
+      ci += 1;
+    }
+  }
+
+  Future<Null> _retrieveApiCategory() async {
+    var api = new Api();
+    var jsonUnits = await api.getUnits(apiCategory['route']);
+    var units = <Unit>[];
+    for (var unit in jsonUnits) {
+      units.add(new Unit(
+        name: unit['name'],
+        conversion: unit['conversion'].toDouble(),
+        description: unit['description'],
+      ));
+    }
+    setState(() {
       _categories.add(new Category(
         name: apiCategory['name'],
         units: units,
@@ -90,9 +132,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
         color: _baseColors[_baseColors.length - 1],
         icon: _icons[_icons.length - 1],
       ));
-
-      // This updates the screen after API call has returned
-      setState(() {});
     });
   }
 
@@ -130,44 +169,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     if (_categories.isNotEmpty) {
       return _drawCategories();
     }
-
-    // We have static unit conversions located in our assets/units.json
-    // and we want to also grab up-to-date Currency conversions from the web
-    var categories = new FutureBuilder(
-      future: DefaultAssetBundle.of(context).loadString('assets/units.json'),
-      builder: (context, snapshot) {
-        if (snapshot == null || snapshot.data == null) {
-          return new Text('Loading');
-        }
-        final decoder = const JsonDecoder();
-        Map<String, List<Map<String, dynamic>>> data =
-            decoder.convert(snapshot.data);
-        var ci = 0;
-        for (var key in data.keys) {
-          var units = <Unit>[];
-          for (var i = 0; i < data[key].length; i++) {
-            units.add(new Unit(
-              name: data[key][i]['name'],
-              conversion: data[key][i]['conversion'],
-              description: data[key][i]['description'],
-            ));
-          }
-          _categories.add(new Category(
-            name: key,
-            units: units,
-            color: _baseColors[ci % _baseColors.length],
-            icon: _icons[ci % _icons.length],
-          ));
-          ci += 1;
-        }
-
-        // Also retrieve Currency category from the API
-        _retrieveApiCategory();
-
-        return _drawCategories();
-      },
-    );
-
-    return categories;
+    // TODO loading text
+    return new Text('Loading');
   }
 }

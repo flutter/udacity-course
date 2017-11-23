@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -39,19 +40,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
   String _convertedValue = '';
   bool _showCategories = false;
 
-  void _updateConversion() {
+  Future<Null> _updateConversion() async {
     if (_inputValue != null && _inputValue.isNotEmpty) {
       // Our API has a handy convert function, so we can use that for
       // the Currency category
       if (widget.name == apiCategory['name']) {
         var api = new Api();
-        api
-            .convert(apiCategory['route'], _inputValue,
-                _fromValue.name, _toValue.name)
-            .then((conversion) {
-          setState(() {
-            _convertedValue = _format(conversion);
-          });
+        var conversion = await api.convert(
+            apiCategory['route'], _inputValue, _fromValue.name, _toValue.name);
+        setState(() {
+          _convertedValue = _format(conversion);
         });
       } else {
         // For the static units, we do the conversion ourselves
@@ -82,6 +80,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
   void _updateInputValue(String input) {
     setState(() {
       _inputValue = input;
+      if (_inputValue == null || _inputValue.isEmpty) {
+        _convertedValue = '';
+      }
     });
     _updateConversion();
   }
@@ -145,16 +146,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return new Theme(
         // This only sets the color of the dropdown menu item, not the dropdown itself
         data: Theme.of(context).copyWith(
-          canvasColor: widget.color[300],
-        ),
+              canvasColor: widget.color[300],
+            ),
         child: new DropdownButtonHideUnderline(
           child: new DropdownButton(
             value: name,
             items: units,
             onChanged: onChanged,
             style: Theme.of(context).textTheme.subhead.copyWith(
-              fontSize: 20.0,
-            ),
+                  fontSize: 20.0,
+                ),
           ),
         ),
       );
@@ -207,8 +208,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _textMargin,
       child: new TextField(
         style: Theme.of(context).textTheme.subhead.copyWith(
-          fontSize: 50.0,
-        ),
+              fontSize: 50.0,
+            ),
         decoration: new InputDecoration(
           hintText: 'Enter a number',
           hideDivider: true,
