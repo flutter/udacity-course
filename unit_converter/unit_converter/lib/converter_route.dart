@@ -16,11 +16,14 @@ const _textMargin = const EdgeInsets.symmetric(
   vertical: 10.0,
 );
 
+
+/// Converter Route (page) where users can input amounts to convert
 class ConverterRoute extends StatefulWidget {
   final String name;
   final List<Unit> units;
   final ColorSwatch color;
 
+  /// Constructor
   ConverterRoute({
     Key key,
     this.units,
@@ -61,8 +64,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
   }
 
+  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
   String _format(double conversion) {
-    // Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
     var outputNum = conversion.toStringAsPrecision(7);
     if (outputNum.contains('.') && outputNum.endsWith('0')) {
       var i = outputNum.length - 1;

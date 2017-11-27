@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'unit.dart';
 import 'converter_route.dart';
 
+/// A Category for a list of units.
 class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
   final ColorSwatch color;
   final IconData icon;
 
+  /// Constructor
   Category({
     this.name,
     this.units,
@@ -21,6 +23,7 @@ class Category extends StatelessWidget {
     this.icon,
   });
 
+  /// Navigates to the unit converter page
   void _navigateToConverter(BuildContext context) {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
@@ -42,7 +45,7 @@ class Category extends StatelessWidget {
     ));
   }
 
-  // Builds a tile that shows unit category information
+  /// Builds a tile that shows unit [Category] information
   @override
   Widget build(BuildContext context) {
     return new Container(

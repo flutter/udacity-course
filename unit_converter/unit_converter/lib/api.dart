@@ -7,25 +7,27 @@ import 'dart:convert' show JSON;
 
 import 'package:flutter/services.dart';
 
-/// The REST API retrieves unit conversions for Categories that change.
+/// The REST API retrieves unit conversions for [Categories] that change.
+///
 /// For example, the currency exchange rate, stock prices, the height of the
 /// tides change often.
 /// We have set up a API that retrieves a list of currencies and their current
 /// exchange rate.
 ///   GET /currency: get a list of currencies and their description
-///   GET /currency/convert: get a conversion from one currency amount to another
-// TODO: Do I have to close the http client?
+///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
   // We use the `http` package. More details: https://flutter.io/networking/
   var httpClient = createHttpClient();
 
-  // Here is the API endpoint we want to hit. This API doesn't have a key but
-  // often, APIs do require authentication
+  /// The API endpoint we want to hit. This API doesn't have a key but
+  /// often, APIs do require authentication
   var url = 'flutter.udacity.com';
 
-  // Gets all the categories and conversion rates for the currency Category
+  /// Gets all the units and conversion rates for a given category.
+  ///
+  /// [category] is the category from which to retrieve units.
+  /// Returns a list. Prints exception silently.
   Future<List> getUnits(String category) async {
-
     // You can directly call httpClient.get() with a String as input,
     // but to make things cleaner, we can pass in a Uri.
     var uri = new Uri.https(url, '/$category');
@@ -43,10 +45,13 @@ class Api {
     }
   }
 
-  // Given two units, converts them.
-  // The fromUnit and toUnit are sent in as the body param
+  /// Given two units, converts from one to another.
+  ///
+  /// Returns a double, which is the converted amount.
   Future<double> convert(
       String category, String amount, String fromUnit, String toUnit) async {
+    // You can directly call httpClient.get() with a String as input,
+    // but to make things cleaner, we can pass in a Uri.
     var uri = new Uri.https(url, '/$category/convert', {
       'amount': amount,
       'from': fromUnit,

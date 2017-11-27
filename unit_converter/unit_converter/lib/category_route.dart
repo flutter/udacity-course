@@ -11,16 +11,18 @@ import 'category.dart';
 import 'unit.dart';
 import 'api.dart';
 
-// For this app, the only category (endpoint) we retrieve from an API is Currency.
-// If we had more, we could keep a List of categories here.
+/// For this app, the only category (endpoint) we retrieve from an API is Currency.
+/// If we had more, we could keep a List of categories here.
 const apiCategory = const {
   'name': 'Currency',
   'route': 'currency',
 };
 
+/// Category Route (page)
+///
+/// This is the "home" page of the Unit Converter. It shows a grid of
+/// [Categories].
 class CategoryRoute extends StatefulWidget {
-  // This is the "home" page of the unit converter. It shows a grid of
-  // unit categories.
   final bool footer;
   final String currentCategory;
 
@@ -71,23 +73,24 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Icons.attach_money,
   ];
 
-  // We have static unit conversions located in our assets/units.json
-  // and we want to also grab up-to-date Currency conversions from the web
+
   @override
-   Future<Null> didChangeDependencies() async {
+  Future<Null> didChangeDependencies() async {
     super.didChangeDependencies();
+    // We have static unit conversions located in our assets/units.json
+    // and we want to also grab up-to-date Currency conversions from the web
     // We only want to load our data in once
     if (_categories.isEmpty) {
-        await _retrieveLocalCategories();
-       await _retrieveApiCategory();
+      await _retrieveLocalCategories();
+      await _retrieveApiCategory();
     }
   }
 
+  /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
     var json = DefaultAssetBundle.of(context).loadString('assets/units.json');
     if (json == null) {
       // TODO error UI
-      print('Error finding file');
     }
     final decoder = const JsonDecoder();
     Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
@@ -113,6 +116,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
+  /// Retrieves a [Category] and its [Unit]s from an API on the web
   Future<Null> _retrieveApiCategory() async {
     var api = new Api();
     var jsonUnits = await api.getUnits(apiCategory['route']);
@@ -129,13 +133,18 @@ class _CategoryRouteState extends State<CategoryRoute> {
         name: apiCategory['name'],
         units: units,
         // TODO add these to the API
-        color: _baseColors[_baseColors.length - 1],
-        icon: _icons[_icons.length - 1],
+        color: Colors.red,
+        icon: Icons.attach_money,
       ));
     });
   }
 
-  Widget _drawCategories() {
+  @override
+  Widget build(BuildContext context) {
+    if (_categories.isEmpty) {
+      // TODO loading text
+      return new Text('Loading');
+    }
     if (widget.footer) {
       // Reorganize the list so that the one we selected is first and highlighted
       for (var i = 0; i < _categories.length; i++) {
@@ -162,14 +171,5 @@ class _CategoryRouteState extends State<CategoryRoute> {
       children: _categories,
       crossAxisCount: 2,
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_categories.isNotEmpty) {
-      return _drawCategories();
-    }
-    // TODO loading text
-    return new Text('Loading');
   }
 }
