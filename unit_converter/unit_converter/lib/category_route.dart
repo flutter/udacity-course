@@ -167,8 +167,14 @@ class _CategoryRouteState extends State<CategoryRoute> {
       );
     }
     // TODO responsive
+    // Why do we pass in `_categories.toList()` instead of just `_categories`?
+    // Widgets are supposed to be deeply immutable objects. We're passing in
+    // _categories to this GridView, which changes as we load in each
+    // [Category]. So, each time _categories changes, we need to pass in a new
+    // list. The .toList() function does this.
+    // For more details, see https://github.com/dart-lang/sdk/issues/27755
     return new GridView.count(
-      children: _categories,
+      children: _categories.toList(),
       crossAxisCount: 2,
     );
   }
