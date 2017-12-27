@@ -31,6 +31,12 @@ class Category extends StatelessWidget {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         return new Scaffold(
+          appBar: new AppBar(
+            elevation: 1.0,
+            title: new Text(name),
+            centerTitle: true,
+            backgroundColor: color,
+          ),
           body: new ConverterRoute(
             name: name,
             units: units,
@@ -48,27 +54,36 @@ class Category extends StatelessWidget {
   /// Builds a tile that shows unit [Category] information
   @override
   Widget build(BuildContext context) {
+    var deviceSize = MediaQuery.of(context).size;
     return new Container(
-      height: 120.0,
-      margin: const EdgeInsets.all(4.0),
+      height: (deviceSize.height / 4) - (8.0 * 5),
+      width: (deviceSize.width / 2) - (8.0 * 3),
       child: new Material(
-        child: new RaisedButton(
-          color: color[50],
+        child: new FlatButton(
+          color: color[200],
           onPressed: () => _navigateToConverter(context),
           child: new Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              new Icon(
-                icon,
-                size: 70.0,
+              new Expanded(
+                child: new Icon(
+                  icon,
+                  size: 40.0,
+                ),
               ),
-              new Text(
-                name,
-                textAlign: TextAlign.center,
-                style: new TextStyle(
-                  color: Colors.black,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w700,
+              new Container(
+                height: 30.0,
+                color: Colors.grey[200],
+                child: new Center(
+                  child: new Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: new TextStyle(
+                      color: Colors.black,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
               ),
             ],

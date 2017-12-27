@@ -20,8 +20,8 @@ const apiCategory = const {
 
 /// Category Route (page)
 ///
-/// This is the "home" page of the Unit Converter. It shows a grid of
-/// [Categories].
+/// This is the "home" page of the Unit Converter. It shows a header bar and
+/// a grid of [Categories].
 class CategoryRoute extends StatefulWidget {
   final bool footer;
   final String currentCategory;
@@ -42,7 +42,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var _categories = <Category>[];
   static const _baseColors = const <ColorSwatch>[
-    Colors.grey,
+    Colors.red,
     Colors.blueGrey,
     const ColorSwatch(300, const {
       50: const Color(0xFFF2F7FF),
@@ -59,7 +59,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.teal,
     Colors.green,
     Colors.lightGreen,
-    Colors.lime,
+    Colors.orange,
   ];
 
   static const _icons = const <IconData>[
@@ -72,7 +72,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Icons.battery_charging_full,
     Icons.attach_money,
   ];
-
 
   @override
   Future<Null> didChangeDependencies() async {
@@ -132,9 +131,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
       _categories.add(new Category(
         name: apiCategory['name'],
         units: units,
-        // TODO add these to the API
-        color: Colors.red,
-        icon: Icons.attach_money,
+        color: _baseColors[_baseColors.length - 1],
+        icon: _icons[_icons.length - 1],
       ));
     });
   }
@@ -173,9 +171,25 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // [Category]. So, each time _categories changes, we need to pass in a new
     // list. The .toList() function does this.
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
-    return new GridView.count(
-      children: _categories.toList(),
-      crossAxisCount: 2,
+    var gridView = new Container(
+      padding: const EdgeInsets.all(16.0),
+      child: new Wrap(
+        children: _categories.toList(),
+        spacing: 16.0,
+        runSpacing: 16.0,
+      ),
+    );
+    var headerBar = new AppBar(
+      elevation: 1.0,
+      title: new Text(
+        'Unit Converter'.toUpperCase(),
+      ),
+      centerTitle: true,
+      backgroundColor: const Color(0xFF013487),
+    );
+    return new Scaffold(
+      appBar: headerBar,
+      body: gridView,
     );
   }
 }

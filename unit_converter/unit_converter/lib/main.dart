@@ -21,9 +21,11 @@ class UnitConverter extends StatelessWidget {
     return new MaterialApp(
       title: 'Unit Converter',
       theme: new ThemeData(
-        fontFamily: 'Noto Sans',
+        fontFamily: 'Source Sans Pro',
       ),
-      home: new CategoryRoute(footer: false),
+      home: new CategoryRoute(
+        footer: false,
+      ),
     );
   }
 }
