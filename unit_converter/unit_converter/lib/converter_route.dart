@@ -21,8 +21,6 @@ const _bottomMargin = const EdgeInsets.only(
   bottom: 16.0,
 );
 
-const _fontSize = 40.0;
-
 /// Converter Route (page) where users can input amounts to convert
 class ConverterRoute extends StatefulWidget {
   final String name;
@@ -90,7 +88,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     setState(() {
       _inputValue = input;
       if (_inputValue == null || _inputValue.isEmpty) {
-        _convertedValue = '';
+        _convertedValue = 'Output';
       }
     });
     _updateConversion();
@@ -162,9 +160,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
             value: name,
             items: units,
             onChanged: onChanged,
-            style: Theme.of(context).textTheme.subhead.copyWith(
-                  fontSize: 20.0,
-                ),
+            style: Theme.of(context).textTheme.title,
           ),
         ),
       );
@@ -182,17 +178,14 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
           new TextField(
-            style: Theme.of(context).textTheme.subhead.copyWith(
-                  fontSize: _fontSize,
+            style: Theme.of(context).textTheme.display1.copyWith(
+                  color: Colors.black,
                 ),
             decoration: new InputDecoration(
               hintText: 'Enter value',
-              hintStyle: new TextStyle(
-                color: Colors.grey[500],
-                // See https://github.com/flutter/flutter/issues/11948,
-                // Throws an error if you don't specify
-                fontSize: _fontSize,
-              ),
+              hintStyle: Theme.of(context).textTheme.display1.copyWith(
+                    color: Colors.grey[500],
+                  ),
             ),
             // Since we only want numerical input, we use a number keyboard. There
             // are also other keyboards for dates, emails, phone numbers, etc.
@@ -238,10 +231,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
       margin: _bottomMargin,
       child: new Text(
         _convertedValue,
-        style: new TextStyle(
-          fontSize: _fontSize,
-          color: _convertedValue == 'Output' ? Colors.grey[500] : Colors.black,
-        ),
+        style: Theme.of(context).textTheme.display1.copyWith(
+              color:
+                  _convertedValue == 'Output' ? Colors.grey[500] : Colors.black,
+            ),
       ),
     );
 
@@ -251,9 +244,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
       child: new Text(
         'Did you know...',
-        style: Theme.of(context).textTheme.subhead.copyWith(
+        style: Theme.of(context).textTheme.title.copyWith(
               color: Colors.white,
-              fontSize: 20.0,
             ),
       ),
     );
@@ -261,82 +253,124 @@ class _ConverterRouteState extends State<ConverterRoute> {
     var description = new Container(
       padding: _padding,
       color: widget.color[100],
+      margin: _bottomMargin,
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           new Container(
             child: new Text(
               _fromValue.name,
-              style: new TextStyle(
-                fontSize: 24.0,
-                color: Colors.grey[900],
-              ),
+              style: Theme.of(context).textTheme.headline,
             ),
           ),
           new Container(
             child: new Text(
               _fromValue.description,
-              style: new TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[900],
-              ),
+              style: Theme.of(context).textTheme.title,
             ),
             margin: _bottomMargin,
           ),
           new Container(
             child: new Text(
               _toValue.name,
-              style: new TextStyle(
-                fontSize: 24.0,
-                color: Colors.grey[900],
-              ),
+              style: Theme.of(context).textTheme.headline,
             ),
           ),
           new Container(
             child: new Text(
               _toValue.description,
-              style: new TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey[900],
-              ),
+              style: Theme.of(context).textTheme.title,
             ),
+            margin: _bottomMargin,
           ),
         ],
       ),
     );
 
-    var conversionPage = new Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          input,
-          output,
-          didYouKnow,
-          description,
-        ],
+    var conversionScreen = new SingleChildScrollView(
+      child: new Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            input,
+            output,
+            didYouKnow,
+            description,
+          ],
+        ),
       ),
     );
 
-    return new GestureDetector(
+
+    var selectCategories = new GestureDetector(
       onTap: _toggleCategories,
       child: new Container(
-        color: widget.color[300],
-        child: new Stack(
-          children: <Widget>[
-            new SingleChildScrollView(
-            child: conversionPage,
+        alignment: FractionalOffset.bottomLeft,
+        padding: const EdgeInsets.symmetric(
+          vertical: 16.0,
+          horizontal: 32.0,
         ),
-            new Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: new Offstage(
-                offstage: !_showCategories,
-                child: new CategoryRoute(
-                    footer: true, currentCategory: widget.name),
-              ),
+        child: new Text(
+          'Select category',
+          style: Theme.of(context).textTheme.subhead.copyWith(
+            fontWeight: FontWeight.w600,
+            color: Colors.grey[700],
+          ),
+        ),
+        decoration: new BoxDecoration(
+          borderRadius: new BorderRadius.only(
+            topLeft: new Radius.circular(32.0),
+            topRight: new Radius.circular(32.0),
+          ),
+          color: Colors.white,
+        ),
+      ),
+    );
+
+    var selectCategoryScreen = new Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        new GestureDetector(
+          onTap: _toggleCategories,
+          child: new Container(
+            alignment: FractionalOffset.bottomLeft,
+            padding: const EdgeInsets.symmetric(
+              vertical: 16.0,
+              horizontal: 32.0,
             ),
-          ],
+            child: new Text(
+              'Select category',
+              style: Theme.of(context).textTheme.subhead.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[700],
+                  ),
+            ),
+            decoration: new BoxDecoration(
+              borderRadius: new BorderRadius.only(
+                topLeft: new Radius.circular(32.0),
+                topRight: new Radius.circular(32.0),
+              ),
+              color: Colors.white,
+            ),
+          ),
         ),
+        _showCategories ? new Expanded(child: new Offstage(
+          offstage: !_showCategories,
+          child: new CategoryRoute(
+            footer: true,
+          ),
+        ),) : new Container(),
+      ],
+    );
+
+    return new Container(
+      color: widget.color[300],
+      child: new Stack(
+        children: <Widget>[
+          conversionScreen,
+          selectCategoryScreen,
+        ],
       ),
     );
   }

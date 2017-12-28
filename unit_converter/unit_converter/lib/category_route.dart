@@ -24,12 +24,10 @@ const apiCategory = const {
 /// a grid of [Categories].
 class CategoryRoute extends StatefulWidget {
   final bool footer;
-  final String currentCategory;
 
   CategoryRoute({
     Key key,
     this.footer,
-    this.currentCategory,
   })
       : super(key: key);
 
@@ -143,53 +141,44 @@ class _CategoryRouteState extends State<CategoryRoute> {
       // TODO loading text
       return new Text('Loading');
     }
-    if (widget.footer) {
-      // Reorganize the list so that the one we selected is first and highlighted
-      for (var i = 0; i < _categories.length; i++) {
-        if (_categories[i].name == widget.currentCategory) {
-          var firstHalf = _categories.sublist(0, i);
-          _categories = _categories.sublist(i, _categories.length);
-          _categories.addAll(firstHalf);
-          break;
-        }
-      }
-      return new Container(
-        color: Colors.grey[600],
-        height: 140.0,
-        child: new SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: new Row(
-            children: _categories,
-          ),
-        ),
-      );
-    }
-    // TODO responsive
+
     // Why do we pass in `_categories.toList()` instead of just `_categories`?
     // Widgets are supposed to be deeply immutable objects. We're passing in
     // _categories to this GridView, which changes as we load in each
     // [Category]. So, each time _categories changes, we need to pass in a new
     // list. The .toList() function does this.
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
-    var gridView = new Container(
-      padding: const EdgeInsets.all(16.0),
+    var grid = new Container(
+      color: Colors.white,
+      padding: widget.footer
+          ? const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0)
+          : const EdgeInsets.all(16.0),
       child: new Wrap(
         children: _categories.toList(),
         spacing: 16.0,
         runSpacing: 16.0,
       ),
     );
+
+    if (widget.footer) {
+      return new SingleChildScrollView(child: grid);
+    }
+
     var headerBar = new AppBar(
       elevation: 1.0,
       title: new Text(
         'Unit Converter'.toUpperCase(),
+        style: Theme.of(context).textTheme.display1.copyWith(
+              color: Colors.white,
+            ),
       ),
       centerTitle: true,
       backgroundColor: const Color(0xFF013487),
     );
+
     return new Scaffold(
       appBar: headerBar,
-      body: gridView,
+      body: grid,
     );
   }
 }
