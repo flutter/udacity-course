@@ -40,24 +40,46 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   var _categories = <Category>[];
   static const _baseColors = const <ColorSwatch>[
-    Colors.red,
-    Colors.blueGrey,
-    const ColorSwatch(300, const {
-      50: const Color(0xFFF2F7FF),
-      100: const Color(0xFFe0eaf9),
-      200: const Color(0xFFcfe1fc),
-      300: const Color(0xFFb6cdef),
+    const ColorSwatch(200, const {
+      50: const Color(0xFF579186),
+      100: const Color(0xFF0abc9b),
+      200: const Color(0xFF1f685a),
     }),
-    const ColorSwatch(300, const {
-      50: const Color(0xFFd2efee),
-      100: const Color(0xFFbcf2eb),
-      200: const Color(0xFF9de0d7),
-      300: const Color(0xFF84d8cd),
+    const ColorSwatch(200, const {
+      50: const Color(0xFFffd28e),
+      100: const Color(0xFFffa41c),
+      200: const Color(0xFFbc6e0b),
     }),
-    Colors.teal,
-    Colors.green,
-    Colors.lightGreen,
-    Colors.orange,
+    const ColorSwatch(200, const {
+      50: const Color(0xFFffb7de),
+      100: const Color(0xFFf94cbf),
+      200: const Color(0xFF822a63),
+    }),
+    const ColorSwatch(200, const {
+      50: const Color(0xFF8899a8),
+      100: const Color(0xFFa9cae8),
+      200: const Color(0xFF395f82),
+    }),
+    const ColorSwatch(200, const {
+      50: const Color(0xFFead37e),
+      100: const Color(0xFFffe070),
+      200: const Color(0xFFd6ad1b),
+    }),
+    const ColorSwatch(200, const {
+      50: const Color(0xFF81a56f),
+      100: const Color(0xFF7cc159),
+      200: const Color(0xFF345125),
+    }),
+    const ColorSwatch(200, const {
+      50: const Color(0xFFd7c0e2),
+      100: const Color(0xFFca90e5),
+      200: const Color(0xFF6e3f84),
+    }),
+    const ColorSwatch(200, const {
+      50: const Color(0xFFce9a9a),
+      100: const Color(0xFFf94d56),
+      200: const Color(0xFF912d2d),
+    }),
   ];
 
   static const _icons = const <IconData>[
@@ -86,9 +108,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
     var json = DefaultAssetBundle.of(context).loadString('assets/units.json');
-    if (json == null) {
-      // TODO error UI
-    }
     final decoder = const JsonDecoder();
     Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
     var ci = 0;
@@ -115,31 +134,50 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Retrieves a [Category] and its [Unit]s from an API on the web
   Future<Null> _retrieveApiCategory() async {
-    var api = new Api();
-    var jsonUnits = await api.getUnits(apiCategory['route']);
-    var units = <Unit>[];
-    for (var unit in jsonUnits) {
-      units.add(new Unit(
-        name: unit['name'],
-        conversion: unit['conversion'].toDouble(),
-        description: unit['description'],
-      ));
-    }
+    // Add a placeholder while we fetch the Currency category using the API
     setState(() {
       _categories.add(new Category(
         name: apiCategory['name'],
-        units: units,
+        units: null,
         color: _baseColors[_baseColors.length - 1],
-        icon: _icons[_icons.length - 1],
+        icon: null,
       ));
     });
+    var api = new Api();
+    var jsonUnits = await api.getUnits(apiCategory['route']);
+    // If the API errors out or we have no internet connection, this category
+    // remains in placeholder mode (disabled)
+    if (jsonUnits != null) {
+      var units = <Unit>[];
+      for (var unit in jsonUnits) {
+        units.add(new Unit(
+          name: unit['name'],
+          conversion: unit['conversion'].toDouble(),
+          description: unit['description'],
+        ));
+      }
+      setState(() {
+        _categories.removeLast();
+        _categories.add(new Category(
+          name: apiCategory['name'],
+          units: units,
+          color: _baseColors[_baseColors.length - 1],
+          icon: _icons[_icons.length - 1],
+        ));
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (_categories.isEmpty) {
-      // TODO loading text
-      return new Text('Loading');
+      return new Center(
+        child: new Container(
+          height: 180.0,
+          width: 180.0,
+          child: new CircularProgressIndicator(),
+        ),
+      );
     }
 
     // Why do we pass in `_categories.toList()` instead of just `_categories`?

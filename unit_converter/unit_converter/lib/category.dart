@@ -38,7 +38,7 @@ class Category extends StatelessWidget {
               style: Theme.of(context).textTheme.display1,
             ),
             centerTitle: true,
-            backgroundColor: color,
+            backgroundColor: color[100],
           ),
           body: new ConverterRoute(
             name: name,
@@ -74,7 +74,7 @@ class Category extends StatelessWidget {
       width: width,
       child: new Material(
         child: new FlatButton(
-          color: color[200],
+          color: color[100],
           onPressed: () => _navigateToConverter(context),
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

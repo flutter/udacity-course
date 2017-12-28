@@ -46,6 +46,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   String _inputValue;
   String _convertedValue = 'Output';
   bool _showCategories = false;
+  bool _showErrorUI = false;
 
   Future<Null> _updateConversion() async {
     if (_inputValue != null && _inputValue.isNotEmpty) {
@@ -55,6 +56,13 @@ class _ConverterRouteState extends State<ConverterRoute> {
         var api = new Api();
         var conversion = await api.convert(
             apiCategory['route'], _inputValue, _fromValue.name, _toValue.name);
+        // API error or not connected to the internet
+        if (conversion == null) {
+          setState(() {
+            _showErrorUI = true;
+          });
+          return;
+        }
         setState(() {
           _convertedValue = _format(conversion);
         });
@@ -125,6 +133,28 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.units == null || _showErrorUI) {
+      return new Container(
+        color: widget.color[200],
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            new Icon(
+              Icons.error_outline,
+              size: 180.0,
+              color: Colors.white,
+            ),
+            new Text("Oh no! We can't connect right now!",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline.copyWith(
+                    color: Colors.white,
+                  ),
+            ),
+          ],
+        ),
+      );
+    }
     var units = <DropdownMenuItem>[];
     for (var unit in widget.units) {
       units.add(new DropdownMenuItem(
@@ -252,7 +282,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     var description = new Container(
       padding: _padding,
-      color: widget.color[100],
+      color: widget.color[50],
       margin: _bottomMargin,
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -302,32 +332,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-
-    var selectCategories = new GestureDetector(
-      onTap: _toggleCategories,
-      child: new Container(
-        alignment: FractionalOffset.bottomLeft,
-        padding: const EdgeInsets.symmetric(
-          vertical: 16.0,
-          horizontal: 32.0,
-        ),
-        child: new Text(
-          'Select category',
-          style: Theme.of(context).textTheme.subhead.copyWith(
-            fontWeight: FontWeight.w600,
-            color: Colors.grey[700],
-          ),
-        ),
-        decoration: new BoxDecoration(
-          borderRadius: new BorderRadius.only(
-            topLeft: new Radius.circular(32.0),
-            topRight: new Radius.circular(32.0),
-          ),
-          color: Colors.white,
-        ),
-      ),
-    );
-
     var selectCategoryScreen = new Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
@@ -355,17 +359,21 @@ class _ConverterRouteState extends State<ConverterRoute> {
             ),
           ),
         ),
-        _showCategories ? new Expanded(child: new Offstage(
-          offstage: !_showCategories,
-          child: new CategoryRoute(
-            footer: true,
-          ),
-        ),) : new Container(),
+        _showCategories
+            ? new Expanded(
+                child: new Offstage(
+                  offstage: !_showCategories,
+                  child: new CategoryRoute(
+                    footer: true,
+                  ),
+                ),
+              )
+            : new Container(),
       ],
     );
 
     return new Container(
-      color: widget.color[300],
+      color: widget.color[200],
       child: new Stack(
         children: <Widget>[
           conversionScreen,
