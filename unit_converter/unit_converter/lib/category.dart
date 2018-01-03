@@ -57,40 +57,45 @@ class Category extends StatelessWidget {
   /// Builds a tile that shows unit [Category] information
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: new Material(
-        child: new FlatButton(
-          color: color[100],
-          onPressed: () => _navigateToConverter(context),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new Expanded(
+    return new Stack(
+      children: <Widget>[
+        new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            new Expanded(
+              child: new Container(
+                color: color[100],
                 child: new Icon(
                   icon,
                   size: 40.0,
                 ),
               ),
-              new Container(
-                height: 30.0,
-                width: 500.0,
-                color: Colors.grey[200],
-                child: new Center(
-                  child: new Text(
-                    name,
-                    textAlign: TextAlign.center,
-                    style: new TextStyle(
-                      color: Colors.black,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w700,
-                    ),
+            ),
+            new Container(
+              height: 30.0,
+              color: Colors.grey[200],
+              child: new Center(
+                child: new Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: new TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
+        // Adds inkwell animation when tapped
+        new Material(
+          child: new InkWell(
+            onTap: () => _navigateToConverter(context),
+          ),
+          color: Colors.transparent,
+        ),
+      ],
     );
   }
 }
