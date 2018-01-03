@@ -57,21 +57,7 @@ class Category extends StatelessWidget {
   /// Builds a tile that shows unit [Category] information
   @override
   Widget build(BuildContext context) {
-    // Based on the device size, figure out how to best lay out the list of
-    // tiles
-    var deviceSize = MediaQuery.of(context).size;
-    var appBarSpace = 84.0;
-    var height = ((deviceSize.height - appBarSpace) / 4) - (16.0 * 1.25);
-    var width = (deviceSize.width / 2) - (16.0 * 1.5);
-
-    if (deviceSize.width > deviceSize.height) {
-      height = ((deviceSize.height - appBarSpace) / 2) - (16.0 * 1.5);
-      width = (deviceSize.width / 4) - (16.0 * 1.25);
-    }
-
     return new Container(
-      height: height,
-      width: width,
       child: new Material(
         child: new FlatButton(
           color: color[100],

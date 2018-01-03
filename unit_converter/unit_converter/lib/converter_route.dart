@@ -145,7 +145,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
               size: 180.0,
               color: Colors.white,
             ),
-            new Text("Oh no! We can't connect right now!",
+            new Text(
+              "Oh no! We can't connect right now!",
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline.copyWith(
                     color: Colors.white,
@@ -360,13 +361,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
           ),
         ),
         _showCategories
-            ? new Expanded(
-                child: new Offstage(
-                  offstage: !_showCategories,
-                  child: new CategoryRoute(
-                    footer: true,
-                  ),
-                ),
+            ? new CategoryRoute(
+                footer: true,
               )
             : new Container(),
       ],

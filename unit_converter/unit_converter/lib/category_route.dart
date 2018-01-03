@@ -18,6 +18,11 @@ const apiCategory = const {
   'route': 'currency',
 };
 
+const _rightPadding =
+    const Padding(padding: const EdgeInsets.only(right: 16.0));
+const _bottomPadding =
+    const Padding(padding: const EdgeInsets.only(bottom: 16.0));
+
 /// Category Route (page)
 ///
 /// This is the "home" page of the Unit Converter. It shows a header bar and
@@ -138,9 +143,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     setState(() {
       _categories.add(new Category(
         name: apiCategory['name'],
-        units: null,
         color: _baseColors[_baseColors.length - 1],
-        icon: null,
       ));
     });
     var api = new Api();
@@ -168,6 +171,60 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
+  /// Makes the correct number of rows for the Grid View, based on whether the
+  /// device is portrait or landscape.
+  /// For portrait, we will make a column of four rows, each with two items
+  /// For landscape, we will make a column of two rows, each with four items
+  List<Widget> _makeGridRows(bool portrait) {
+    // Why do we pass in `_categories.toList()` instead of just `_categories`?
+    // Widgets are supposed to be deeply immutable objects. We're passing in
+    // _categories to this GridView, which changes as we load in each
+    // [Category]. So, each time _categories changes, we need to pass in a new
+    // list. The .toList() function does this.
+    // For more details, see https://github.com/dart-lang/sdk/issues/27755
+    var rows = <Widget>[];
+    if (portrait) {
+      for (var i = 0; i < _categories.length; i += 2) {
+        rows.add(new Expanded(
+          child: new Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Expanded(child: _categories[i]),
+              _rightPadding,
+              new Expanded(child: _categories[i + 1]),
+            ],
+          ),
+        ));
+        if (i + 2 < _categories.length) {
+          rows.add(_bottomPadding);
+        }
+      }
+    } else {
+      for (var i = 0; i < _categories.length; i += 4) {
+        rows.add(new Expanded(
+          child: new Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Expanded(child: _categories[i]),
+              _rightPadding,
+              new Expanded(child: _categories[i + 1]),
+              _rightPadding,
+              new Expanded(child: _categories[i + 2]),
+              _rightPadding,
+              new Expanded(child: _categories[i + 3]),
+            ],
+          ),
+        ));
+        if (i + 4 < _categories.length) {
+          rows.add(_bottomPadding);
+        }
+      }
+    }
+    return rows;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_categories.isEmpty) {
@@ -180,26 +237,24 @@ class _CategoryRouteState extends State<CategoryRoute> {
       );
     }
 
-    // Why do we pass in `_categories.toList()` instead of just `_categories`?
-    // Widgets are supposed to be deeply immutable objects. We're passing in
-    // _categories to this GridView, which changes as we load in each
-    // [Category]. So, each time _categories changes, we need to pass in a new
-    // list. The .toList() function does this.
-    // For more details, see https://github.com/dart-lang/sdk/issues/27755
+    // Based on the device size, figure out how to best lay out the list of
+    // tiles into a 2x4 or 4x2 grid.
+    var deviceSize = MediaQuery.of(context).size;
     var grid = new Container(
       color: Colors.white,
       padding: widget.footer
           ? const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0)
           : const EdgeInsets.all(16.0),
-      child: new Wrap(
-        children: _categories.toList(),
-        spacing: 16.0,
-        runSpacing: 16.0,
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: _makeGridRows(deviceSize.height > deviceSize.width),
       ),
     );
 
     if (widget.footer) {
-      return new SingleChildScrollView(child: grid);
+      return new Container(
+          height: deviceSize.height - 200.0, color: Colors.red, child: grid);
     }
 
     var headerBar = new AppBar(
