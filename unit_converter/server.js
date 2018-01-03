@@ -70,7 +70,7 @@ const server = http.createServer((req, res) => {
             res.statusCode = '400';
             res.end(JSON.stringify({'status': 'error', 'message': message}));
         }
-        res.end(JSON.stringify({'status': 'ok', 'conversion': units.amount * from/to}));
+        res.end(JSON.stringify({'status': 'ok', 'conversion': units.amount * to/from}));
     } else {
         res.end('Welcome to the API for the Unit Converter!');
     }

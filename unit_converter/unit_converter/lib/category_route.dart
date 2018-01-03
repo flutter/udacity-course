@@ -243,7 +243,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
     var grid = new Container(
       color: Colors.white,
       padding: widget.footer
-          ? const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0)
+          ? const EdgeInsets.only(
+              bottom: 16.0,
+              left: 16.0,
+              right: 16.0,
+              top: 4.0,
+            )
           : const EdgeInsets.all(16.0),
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -254,7 +259,9 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
     if (widget.footer) {
       return new Container(
-          height: deviceSize.height - 200.0, color: Colors.red, child: grid);
+        height: 500.0,
+        child: grid,
+      );
     }
 
     var headerBar = new AppBar(

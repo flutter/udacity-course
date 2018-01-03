@@ -45,7 +45,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
   Unit _toValue;
   String _inputValue;
   String _convertedValue = 'Output';
-  bool _showCategories = false;
   bool _showErrorUI = false;
 
   Future<Null> _updateConversion() async {
@@ -123,12 +122,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       _toValue = _getUnit(unitName);
     });
     _updateConversion();
-  }
-
-  void _toggleCategories() {
-    setState(() {
-      _showCategories = !_showCategories;
-    });
   }
 
   @override
@@ -312,7 +305,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
               _toValue.description,
               style: Theme.of(context).textTheme.title,
             ),
-            margin: _bottomMargin,
+            margin: _bottomMargin * 1.5,
           ),
         ],
       ),
@@ -333,38 +326,53 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    var selectCategoryHeader = new Container(
+      alignment: FractionalOffset.bottomLeft,
+      padding: const EdgeInsets.symmetric(
+        vertical: 16.0,
+        horizontal: 32.0,
+      ),
+      child: new Text(
+        'Select category',
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[700],
+            ),
+      ),
+      decoration: new BoxDecoration(
+        borderRadius: new BorderRadius.only(
+          topLeft: new Radius.circular(32.0),
+          topRight: new Radius.circular(32.0),
+        ),
+        color: Colors.white,
+      ),
+    );
+
     var selectCategoryScreen = new Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
-          onTap: _toggleCategories,
-          child: new Container(
-            alignment: FractionalOffset.bottomLeft,
-            padding: const EdgeInsets.symmetric(
-              vertical: 16.0,
-              horizontal: 32.0,
-            ),
-            child: new Text(
-              'Select category',
-              style: Theme.of(context).textTheme.subhead.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[700],
-                  ),
-            ),
-            decoration: new BoxDecoration(
-              borderRadius: new BorderRadius.only(
-                topLeft: new Radius.circular(32.0),
-                topRight: new Radius.circular(32.0),
-              ),
-              color: Colors.white,
-            ),
-          ),
+          onTap: () {
+            showModalBottomSheet<Null>(
+                context: context,
+                builder: (BuildContext context) {
+                  return new Container(
+                    child: new SingleChildScrollView(
+                      child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          selectCategoryHeader,
+                          new CategoryRoute(
+                            footer: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                });
+          },
+          child: selectCategoryHeader,
         ),
-        _showCategories
-            ? new CategoryRoute(
-                footer: true,
-              )
-            : new Container(),
       ],
     );
 

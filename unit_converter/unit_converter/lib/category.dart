@@ -73,6 +73,7 @@ class Category extends StatelessWidget {
               ),
               new Container(
                 height: 30.0,
+                width: 500.0,
                 color: Colors.grey[200],
                 child: new Center(
                   child: new Text(
