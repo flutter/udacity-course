@@ -56,23 +56,20 @@ class Api {
       String category, String amount, String fromUnit, String toUnit) async {
     // You can directly call httpClient.get() with a String as input,
     // but to make things cleaner, we can pass in a Uri.
-    var uri = new Uri.https(url, '/$category/convert', {
-      'amount': amount,
-      'from': fromUnit,
-      'to': toUnit
-    });
+    var uri = new Uri.https(url, '/$category/convert',
+        {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
       var response = await httpClient.get(uri);
-    if (response.statusCode != 200) {
-      return null;
-    }
-    var jsonResponse = JSON.decode(response.body);
-    try {
-      return jsonResponse['conversion'].toDouble();
-    } on Exception catch (e) {
-      print('Error: $e $jsonResponse["message"]');
-      return null;
-    }
+      if (response.statusCode != 200) {
+        return null;
+      }
+      var jsonResponse = JSON.decode(response.body);
+      try {
+        return jsonResponse['conversion'].toDouble();
+      } on Exception catch (e) {
+        print('Error: $e $jsonResponse["message"]');
+        return null;
+      }
     } on Exception catch (e) {
       print('Error: $e');
       return null;
