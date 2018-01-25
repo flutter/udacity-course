@@ -13,14 +13,14 @@ class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
   final ColorSwatch color;
-  final IconData icon;
+  final String iconLocation;
 
   /// Constructor
   Category({
     this.name,
     this.units,
     this.color,
-    this.icon,
+    this.iconLocation,
   });
 
   /// Navigates to the unit converter page
@@ -65,10 +65,8 @@ class Category extends StatelessWidget {
             new Expanded(
               child: new Container(
                 color: color[100],
-                child: new Icon(
-                  icon,
-                  size: 40.0,
-                ),
+                child:
+                    iconLocation != null ? new Image.asset(iconLocation) : null,
               ),
             ),
             new Container(
