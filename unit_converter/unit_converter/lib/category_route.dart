@@ -111,7 +111,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
-  Future<Null> _retrieveLocalCategories()   async {
+  Future<Null> _retrieveLocalCategories() async {
     var json = DefaultAssetBundle.of(context).loadString('assets/units.json');
     final decoder = const JsonDecoder();
     Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
@@ -129,8 +129,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
         _categories.add(new Category(
           name: key,
           units: units,
-          color: _baseColors[ci % _baseColors.length],
-          iconLocation: _icons[ci % _icons.length],
+          color: _baseColors[ci],
+          iconLocation: _icons[ci],
         ));
       });
       ci += 1;
@@ -143,7 +143,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     setState(() {
       _categories.add(new Category(
         name: apiCategory['name'],
-        color: _baseColors[_baseColors.length - 1],
+        color: _baseColors.last,
       ));
     });
     var api = new Api();
@@ -164,8 +164,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
         _categories.add(new Category(
           name: apiCategory['name'],
           units: units,
-          color: _baseColors[_baseColors.length - 1],
-          iconLocation: _icons[_icons.length - 1],
+          color: _baseColors.last,
+          iconLocation: _icons.last,
         ));
       });
     }
