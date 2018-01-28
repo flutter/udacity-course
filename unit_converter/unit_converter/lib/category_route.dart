@@ -187,8 +187,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       for (var i = 0; i < _categories.length; i += 2) {
         rows.add(new Expanded(
           child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               new Expanded(child: _categories[i]),
               _rightPadding,
@@ -204,8 +202,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       for (var i = 0; i < _categories.length; i += 4) {
         rows.add(new Expanded(
           child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               new Expanded(child: _categories[i]),
               _rightPadding,
@@ -259,7 +255,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
     if (widget.footer) {
       return new Container(
-        height: 500.0,
+        height: deviceSize.height - 100.0,
         child: grid,
       );
     }

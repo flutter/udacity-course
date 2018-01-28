@@ -100,7 +100,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       // for non-numerical input such as '5..0' or '6 -3'
       try {
         var inputDouble = double.parse(input);
-        setState(() { // TODO ask question about this
+        setState(() {
+          // TODO ask question about this
           _showValidationError = false;
           _inputValue = inputDouble;
         });
@@ -217,7 +218,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           new TextField(
             style: Theme.of(context).textTheme.display1.copyWith(
                   color: _showValidationError ? Colors.red[500] : Colors.black,
-            ),
+                ),
             decoration: new InputDecoration(
               hintText: 'Enter value',
               hintStyle: Theme.of(context).textTheme.display1.copyWith(
@@ -324,6 +325,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    // Based on the device size, figure out how to best lay out our
+    // conversion screen
+    var deviceSize = MediaQuery.of(context).size;
     var conversionScreen = new SingleChildScrollView(
       child: new Padding(
         padding: const EdgeInsets.all(16.0),
@@ -338,6 +342,47 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       ),
     );
+    if (deviceSize.height < deviceSize.width) {
+      conversionScreen = new SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: new Padding(
+          padding: const EdgeInsets.only(
+            left: 16.0,
+            right: 16.0,
+            top: 16.0,
+            bottom: 60.0,
+          ),
+          child: new Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Expanded(
+                flex: 7,
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    input,
+                    output,
+                  ],
+                ),
+              ),
+              new Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+              ),
+              new Expanded(
+                flex: 5,
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    didYouKnow,
+                    description,
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
 
     var selectCategoryHeader = new Container(
       alignment: FractionalOffset.bottomLeft,

@@ -17,4 +17,3 @@ local.properties
 gradle-wrapper.properties
 gradlew
 gradlew.bat
-*.iml
