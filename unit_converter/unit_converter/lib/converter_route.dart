@@ -43,35 +43,34 @@ class ConverterRoute extends StatefulWidget {
 class _ConverterRouteState extends State<ConverterRoute> {
   Unit _fromValue;
   Unit _toValue;
-  String _inputValue;
+  double _inputValue;
   String _convertedValue = 'Output';
   bool _showErrorUI = false;
+  bool _showValidationError = false;
 
   Future<Null> _updateConversion() async {
-    if (_inputValue != null && _inputValue.isNotEmpty) {
-      // Our API has a handy convert function, so we can use that for
-      // the Currency category
-      if (widget.name == apiCategory['name']) {
-        var api = new Api();
-        var conversion = await api.convert(
-            apiCategory['route'], _inputValue, _fromValue.name, _toValue.name);
-        // API error or not connected to the internet
-        if (conversion == null) {
-          setState(() {
-            _showErrorUI = true;
-          });
-          return;
-        }
+    // Our API has a handy convert function, so we can use that for
+    // the Currency category
+    if (widget.name == apiCategory['name']) {
+      var api = new Api();
+      var conversion = await api.convert(apiCategory['route'],
+          _inputValue.toString(), _fromValue.name, _toValue.name);
+      // API error or not connected to the internet
+      if (conversion == null) {
         setState(() {
-          _convertedValue = _format(conversion);
+          _showErrorUI = true;
         });
-      } else {
-        // For the static units, we do the conversion ourselves
-        setState(() {
-          _convertedValue = _format((double.parse(_inputValue) *
-              (_toValue.conversion / _fromValue.conversion)));
-        });
+        return;
       }
+      setState(() {
+        _convertedValue = _format(conversion);
+      });
+    } else {
+      // For the static units, we do the conversion ourselves
+      setState(() {
+        _convertedValue = _format(
+            _inputValue * (_toValue.conversion / _fromValue.conversion));
+      });
     }
   }
 
@@ -92,13 +91,27 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   void _updateInputValue(String input) {
-    setState(() {
-      _inputValue = input;
-      if (_inputValue == null || _inputValue.isEmpty) {
+    if (input == null || input.isEmpty) {
+      setState(() {
         _convertedValue = 'Output';
+      });
+    } else {
+      // Even though we are using the numerical keyboard, we still have to check
+      // for non-numerical input such as '5..0' or '6 -3'
+      try {
+        var inputDouble = double.parse(input);
+        setState(() { // TODO ask question about this
+          _showValidationError = false;
+          _inputValue = inputDouble;
+        });
+        _updateConversion();
+      } on Exception catch (e) {
+        print('Error: $e');
+        setState(() {
+          _showValidationError = true;
+        });
       }
-    });
-    _updateConversion();
+    }
   }
 
   Unit _getUnit(String unitName) {
@@ -203,8 +216,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // You can read more about it here: https://flutter.io/text-input
           new TextField(
             style: Theme.of(context).textTheme.display1.copyWith(
-                  color: Colors.black,
-                ),
+                  color: _showValidationError ? Colors.red[500] : Colors.black,
+            ),
             decoration: new InputDecoration(
               hintText: 'Enter value',
               hintStyle: Theme.of(context).textTheme.display1.copyWith(

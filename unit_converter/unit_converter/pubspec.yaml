@@ -26,14 +26,12 @@ flutter:
    - assets/units.json
    - assets/icons/area.png
    - assets/icons/currency.png
-   - assets/digital_storage.png
-   - assets/length.png
-   - assets/mass.png
-   - assets/power.png
-   - assets/time.png
-   - assets/volume.png
-   - assets/currency.png
-
+   - assets/icons/digital_storage.png
+   - assets/icons/length.png
+   - assets/icons/mass.png
+   - assets/icons/power.png
+   - assets/icons/time.png
+   - assets/icons/volume.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
