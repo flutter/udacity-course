@@ -215,20 +215,34 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // This is the widget that accepts text input. In this case, it
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
-          new TextField(
-            style: Theme.of(context).textTheme.display1.copyWith(
-                  color: _showValidationError ? Colors.red[500] : Colors.black,
-                ),
-            decoration: new InputDecoration(
-              hintText: 'Enter value',
-              hintStyle: Theme.of(context).textTheme.display1.copyWith(
-                    color: Colors.grey[500],
+          new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new TextField(
+                  style: Theme.of(context).textTheme.display1.copyWith(
+                        color: _showValidationError
+                            ? Colors.red[500]
+                            : Colors.black,
+                      ),
+                  decoration: new InputDecoration(
+                    hintText: 'Enter value',
+                    hintStyle: Theme.of(context).textTheme.display1.copyWith(
+                          color: Colors.grey[500],
+                        ),
                   ),
-            ),
-            // Since we only want numerical input, we use a number keyboard. There
-            // are also other keyboards for dates, emails, phone numbers, etc.
-            keyboardType: TextInputType.number,
-            onChanged: _updateInputValue,
+                  // Since we only want numerical input, we use a number keyboard. There
+                  // are also other keyboards for dates, emails, phone numbers, etc.
+                  keyboardType: TextInputType.number,
+                  onChanged: _updateInputValue,
+                ),
+              ),
+              _showValidationError
+                  ? new Icon(
+                      Icons.error,
+                      color: Colors.red[500],
+                    )
+                  : new Container(),
+            ],
           ),
           new Container(
             // You set the color of the dropdown here, not in _createDropdown()
