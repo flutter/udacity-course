@@ -56,6 +56,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       var conversion = await api.convert(apiCategory['route'],
           _inputValue.toString(), _fromValue.name, _toValue.name);
       // API error or not connected to the internet
+
       if (conversion == null) {
         setState(() {
           _showErrorUI = true;
@@ -91,28 +92,23 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   void _updateInputValue(String input) {
-    if (input == null || input.isEmpty) {
-      setState(() {
+    setState(() {
+      if (input == null || input.isEmpty) {
         _convertedValue = 'Output';
-      });
-    } else {
-      // Even though we are using the numerical keyboard, we still have to check
-      // for non-numerical input such as '5..0' or '6 -3'
-      try {
-        var inputDouble = double.parse(input);
-        setState(() {
-          // TODO ask question about this
+      } else {
+        // Even though we are using the numerical keyboard, we still have to check
+        // for non-numerical input such as '5..0' or '6 -3'
+        try {
+          var inputDouble = double.parse(input);
           _showValidationError = false;
           _inputValue = inputDouble;
-        });
-        _updateConversion();
-      } on Exception catch (e) {
-        print('Error: $e');
-        setState(() {
+          _updateConversion();
+        } on Exception catch (e) {
+          print('Error: $e');
           _showValidationError = true;
-        });
+        }
       }
-    }
+    });
   }
 
   Unit _getUnit(String unitName) {
