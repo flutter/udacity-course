@@ -334,64 +334,68 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // Based on the device size, figure out how to best lay out our
-    // conversion screen
-    var deviceSize = MediaQuery.of(context).size;
-    var conversionScreen = new SingleChildScrollView(
-      child: new Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            input,
-            output,
-            didYouKnow,
-            description,
-          ],
-        ),
-      ),
+    // Based on the box constraints of our device, figure out how to best
+    // lay out our conversion screen
+    var conversionScreen = new LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxHeight > constraints.maxWidth) {
+          return new SingleChildScrollView(
+            child: new Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  input,
+                  output,
+                  didYouKnow,
+                  description,
+                ],
+              ),
+            ),
+          );
+        } else {
+          return new SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: new Padding(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                top: 16.0,
+                bottom: 60.0,
+              ),
+              child: new Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Expanded(
+                    flex: 7,
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        input,
+                        output,
+                      ],
+                    ),
+                  ),
+                  new Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                  ),
+                  new Expanded(
+                    flex: 5,
+                    child: new Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        didYouKnow,
+                        description,
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
-    if (deviceSize.height < deviceSize.width) {
-      conversionScreen = new SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: new Padding(
-          padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
-            top: 16.0,
-            bottom: 60.0,
-          ),
-          child: new Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              new Expanded(
-                flex: 7,
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    input,
-                    output,
-                  ],
-                ),
-              ),
-              new Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-              ),
-              new Expanded(
-                flex: 5,
-                child: new Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    didYouKnow,
-                    description,
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
 
     var selectCategoryHeader = new Container(
       alignment: FractionalOffset.bottomLeft,
