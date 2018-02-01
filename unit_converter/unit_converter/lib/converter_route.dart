@@ -56,7 +56,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       var conversion = await api.convert(apiCategory['route'],
           _inputValue.toString(), _fromValue.name, _toValue.name);
       // API error or not connected to the internet
-
       if (conversion == null) {
         setState(() {
           _showErrorUI = true;
