@@ -10,3 +10,5 @@ Features:
  - Text is center-aligned
  - 16.0 padding is added around the Container and Text widgets.
 
+## Screenshots
+<img src='./screenshots/01_hello_rectangle.png' width='350'><img src='./screenshots/01_hello_rectangle_2.png' width='350'>
