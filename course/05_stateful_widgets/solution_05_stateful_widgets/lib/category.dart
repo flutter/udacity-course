@@ -5,16 +5,19 @@
 import 'package:flutter/material.dart';
 
 import 'converter_route.dart';
+import 'unit.dart';
 
-/// A Category widget for a list of units.
+/// A Category widget for a list of [Units].
 class Category extends StatelessWidget {
   final String name;
+  final List<Unit> units;
   final ColorSwatch color;
   final IconData iconLocation;
 
   /// Constructor
   Category({
     this.name,
+    this.units,
     this.color,
     this.iconLocation,
   });
@@ -35,6 +38,7 @@ class Category extends StatelessWidget {
           ),
           body: new ConverterRoute(
             name: name,
+            units: units,
             color: color,
           ),
         );

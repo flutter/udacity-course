@@ -2,9 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'category.dart';
+import 'unit.dart';
 
 const _rightPadding =
     const Padding(padding: const EdgeInsets.only(right: 16.0));
@@ -51,6 +55,19 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
+  /// Returns a list of mock [Unit]s
+  List<Unit> _retrieveUnitList(String categoryName) {
+    var units = <Unit>[];
+    for (var i = 0; i < 10; i++) {
+      units.add(new Unit(
+        name: 'Test $categoryName Unit $i',
+        conversion: i.toDouble(),
+        description: 'This is a sorry test unit for $categoryName',
+      ));
+    }
+    return units;
+  }
+
   /// Makes the correct number of rows for the Grid View
   List<Widget> _makeGridRows(List<Category> categories) {
     // Why do we pass in `_categories.toList()` instead of just `_categories`?
@@ -88,6 +105,7 @@ class CategoryRoute extends StatelessWidget {
     for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(new Category(
         name: _categoryNames[i],
+        units: _retrieveUnitList(_categoryNames[i]),
         color: _baseColors[i],
         iconLocation: Icons.cake,
       ));
