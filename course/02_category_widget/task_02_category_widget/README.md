@@ -15,4 +15,5 @@ Specs:
 
 
 You should end up with something like this:
-    <img src='../../screenshots/02_category_widget.png' width='350'>
+
+<img src='../../screenshots/02_category_widget.png' width='350'>
