@@ -2,7 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'dart:core';
 import 'package:flutter/material.dart';
 
 import 'unit.dart';
@@ -54,7 +53,9 @@ class Category extends StatelessWidget {
     ));
   }
 
-  /// Builds a tile that shows unit [Category] information
+
+  /// Builds a custom widget that shows unit [Category] information.
+  /// This information includes the icon, name, and color for the [Category].
   @override
   Widget build(BuildContext context) {
     return new Stack(
