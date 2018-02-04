@@ -1,8 +1,15 @@
 # task_03_category_route
 
-A new Flutter project.
+Code the AppBar
+Specs:
+    - Color should be _appBarColor
+    - Title should say 'Unit Converter' in uppercase
 
-## Getting Started
+Code the Category Route
+Specs:
+    - A route that display 8 Category widgets, which fit on the screen without scrolling
+    - Use the predefined list of Category names (Length, Mass, etc.) and colors
 
-For help getting started with Flutter, view our online
-[documentation](http://flutter.io/).
+It should look like this:
+
+<img src='../../screenshots/03_category_route.png' width='350'>
