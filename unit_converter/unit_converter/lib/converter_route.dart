@@ -23,15 +23,15 @@ const _bottomMargin = const EdgeInsets.only(
 /// Converter Route (page) where users can input amounts to convert
 class ConverterRoute extends StatefulWidget {
   final String name;
-  final List<Unit> units;
   final ColorSwatch color;
+  final List<Unit> units;
 
   /// Constructor
   ConverterRoute({
     Key key,
-    this.units,
-    this.color,
     this.name,
+    this.color,
+    this.units,
   })
       : super(key: key);
 
