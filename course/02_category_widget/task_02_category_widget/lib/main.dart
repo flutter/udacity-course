@@ -17,8 +17,8 @@ void main() {
   runApp(new UnitConverter());
 }
 
-/// This widget is the root of your application. The first route (page) we see
-/// is a grid of unit categories.
+/// This widget is the root of your application.
+/// Currently, we just show one widget in our app.
 class UnitConverter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
