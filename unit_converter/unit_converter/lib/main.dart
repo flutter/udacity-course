@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 // You can read about packages here: https://flutter.io/using-packages/
-import 'dart:core';
 import 'package:flutter/material.dart';
 
 // We can also import files from relative paths
@@ -13,7 +12,7 @@ void main() {
   runApp(new UnitConverter());
 }
 
-/// This widget is the root of your application. The first page we see
+/// This widget is the root of your application. The first route (page) we see
 /// is a grid of unit categories.
 class UnitConverter extends StatelessWidget {
   @override

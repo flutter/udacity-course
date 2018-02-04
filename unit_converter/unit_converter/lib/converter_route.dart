@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
