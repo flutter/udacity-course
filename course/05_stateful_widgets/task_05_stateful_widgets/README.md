@@ -1,8 +1,3 @@
 # task_05_stateful_widgets
 
-A new Flutter project.
-
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](http://flutter.io/).
+Make CategoryRoute and ConverterRoute StatefulWidgets. You won't notice any visual changes.

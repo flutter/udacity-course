@@ -1,0 +1,30 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+import 'package:flutter/material.dart';
+
+/// Converter route (page) where users can input amounts to convert
+class ConverterRoute extends StatefulWidget {
+  final String name;
+  final Color color;
+
+  /// Constructor
+  ConverterRoute({
+    Key key,
+    this.name,
+    this.color,
+  })
+      : super(key: key);
+
+  @override
+  _ConverterRouteState createState() => new _ConverterRouteState();
+}
+
+class _ConverterRouteState extends State<ConverterRoute> {
+  @override
+  Widget build(BuildContext context) {
+    // We'll build the contents of the Converter Route later.
+    return new Container();
+  }
+}
