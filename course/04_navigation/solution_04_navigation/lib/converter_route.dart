@@ -10,7 +10,7 @@ class ConverterRoute extends StatelessWidget {
   final Color color;
 
   /// Constructor
-  ConverterRoute({
+  const ConverterRoute({
     Key key,
     this.name,
     this.color,

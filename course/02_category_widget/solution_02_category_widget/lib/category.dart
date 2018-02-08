@@ -11,11 +11,13 @@ class Category extends StatelessWidget {
   final IconData iconLocation;
 
   /// Constructor
-  Category({
+  const Category({
+    Key key,
     this.name,
     this.color,
     this.iconLocation,
-  });
+  })
+      : super(key: key);
 
   /// Builds a custom widget that shows unit [Category] information.
   /// This information includes the icon, name, and color for the [Category].

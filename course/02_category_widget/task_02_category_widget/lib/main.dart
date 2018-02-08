@@ -5,8 +5,7 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// We can also import files from relative paths
-import 'category.dart';
+import 'package:task_02_category_widget/category.dart';
 
 // TODO: Pass this information into your custom Category widget
 const _categoryName = 'Cake';
@@ -30,7 +29,7 @@ class UnitConverter extends StatelessWidget {
             height: 200.0,
             width: 200.0,
             // TODO: Determine what properties we'll need to pass into our widget
-            child: new Category(),
+            child: const Category(),
           ),
         ),
       ),

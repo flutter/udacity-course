@@ -10,7 +10,7 @@ class ConverterRoute extends StatelessWidget {
   /// Constructor
   // TODO: pass in the Category's name and color
   // We'll be using them later
-  ConverterRoute({
+  const ConverterRoute({
     Key key,
   })
       : super(key: key);

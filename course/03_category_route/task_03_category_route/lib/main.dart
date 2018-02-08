@@ -5,7 +5,6 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// We can also import files from relative paths
 // TODO: import the CategoryRoute widget
 
 void main() {

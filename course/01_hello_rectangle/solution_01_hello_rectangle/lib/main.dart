@@ -11,7 +11,7 @@ void main() {
     title: 'Hello Rectangle App Title',
     home: new Scaffold(
       appBar: new AppBar(
-        title: new Text('Hello Rectangle App Bar Title'),
+        title: const Text('Hello Rectangle App Bar Title'),
       ),
       body: new Rectangle(),
     ),
@@ -33,7 +33,7 @@ class Rectangle extends StatelessWidget {
           child: new Center(
             child: new Padding(
               padding: _padding,
-              child: new Text(
+              child: const Text(
                 'Hello0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0overflow :)',
                 textAlign: TextAlign.center,
               ),

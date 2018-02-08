@@ -5,8 +5,7 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// We can also import files from relative paths
-import 'category.dart';
+import 'package:solution_02_category_widget/category.dart';
 
 
 const _categoryName = 'Cake';
@@ -29,7 +28,7 @@ class UnitConverter extends StatelessWidget {
           child: new Container(
             height: 200.0,
             width: 200.0,
-            child: new Category(
+            child: const Category(
               name: _categoryName,
               color: _categoryColor,
               iconLocation: _categoryIcon,

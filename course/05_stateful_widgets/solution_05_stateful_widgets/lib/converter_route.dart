@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'unit.dart';
+import 'package:solution_05_stateful_widgets/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert
 class ConverterRoute extends StatefulWidget {
@@ -29,7 +29,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   @override
   Widget build(BuildContext context) {
     // Here is just a placeholder for a list of mock units
-    var unitWidgets = widget.units.map((Unit unit) {
+    final unitWidgets = widget.units.map((Unit unit) {
       return new Container(
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(16.0),

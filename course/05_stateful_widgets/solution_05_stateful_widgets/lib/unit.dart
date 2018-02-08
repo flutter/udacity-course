@@ -10,7 +10,7 @@ class Unit {
   final double conversion;
   final String description;
 
-  Unit({
+  const Unit({
     @required this.name,
     this.conversion,
     @required this.description,

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class Category extends StatelessWidget {
   /// Constructor
   // TODO: You'll need the name, color, and iconLocation from main.dart
-  Category();
+  const Category();
 
   /// Builds a custom widget that shows unit [Category] information.
   /// This information includes the icon, name, and color for the [Category].

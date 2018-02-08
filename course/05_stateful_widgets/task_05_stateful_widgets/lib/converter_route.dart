@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'unit.dart';
+import 'package:task_05_stateful_widgets/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert
 // TODO: Make ConverterRoute a StatefulWidget
@@ -14,7 +14,7 @@ class ConverterRoute extends StatelessWidget {
   final List<Unit> units;
 
   /// Constructor
-  ConverterRoute({
+  const ConverterRoute({
     Key key,
     this.name,
     this.color,
@@ -27,7 +27,7 @@ class ConverterRoute extends StatelessWidget {
     // Here is just a placeholder for a list of mock units
     // TODO: Once the build() function is inside the State object,
     // you'll have to reference this using `widget.units`
-    var unitWidgets = units.map((Unit unit) {
+    final unitWidgets = units.map((Unit unit) {
       return new Container(
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(16.0),

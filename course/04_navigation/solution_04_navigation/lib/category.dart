@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'converter_route.dart';
+import 'package:solution_04_navigation/converter_route.dart';
 
 /// A Category widget for a list of units.
 class Category extends StatelessWidget {
@@ -13,7 +13,7 @@ class Category extends StatelessWidget {
   final IconData iconLocation;
 
   /// Constructor
-  Category({
+  const Category({
     this.name,
     this.color,
     this.iconLocation,

@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 /// a grid of [Categories].
 class CategoryRoute extends StatelessWidget {
   /// Constructor
-  CategoryRoute({
+  const CategoryRoute({
     Key key,
   })
       : super(key: key);
