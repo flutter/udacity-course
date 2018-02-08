@@ -16,11 +16,13 @@ class Category extends StatelessWidget {
 
   /// Constructor
   Category({
+    Key key,
     this.name,
     this.units,
     this.color,
     this.iconLocation,
-  });
+  })
+      : super(key: key);
 
   /// Navigates to the unit converter page
   void _navigateToConverter(BuildContext context) {
