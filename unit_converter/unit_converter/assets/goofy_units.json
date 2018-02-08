@@ -7,6 +7,11 @@
       "base_unit": true
     },
     {
+      "name": "Mile (disguised as an Inch)",
+      "conversion": 0.000621371,
+      "description": "Give me an inch and I'll take it a mile!"
+    },
+    {
       "name": "Hand",
       "conversion": 9.8425197,
       "description": "Used to measure the height of horses. Equal to a third of a foot."
@@ -159,6 +164,11 @@
       "description": "The number of toasts that would be contaminated assuming that a new piece of toast is consecutively dropped and not picked up within five seconds, thus violating the five-second rule."
     },
     {
+      "name": "Fortnight",
+      "conversion": 0.0000033068,
+      "description": "The unambiguous way to denote 2 weeks of time. No more 'bi-weekly' nonsense."
+    },
+    {
       "name": "New York minute",
       "conversion": 0.02,
       "description": "The amount of time between the traffic light turning green and the car behind you honking."
@@ -218,6 +228,11 @@
       "name": "Foot-pound",
       "conversion": 0.737562,
       "description": "The energy needed to raise one pound a distance of one foot. Useful to know when fishing up freshly-baked pound cakes from the windowsill below yours."
+    },
+    {
+      "name": "WHAT hour?!",
+      "conversion": 0.0000000125,
+      "description": "When you're late and every cell in your body expends as much energy as possible to get you to your destination."
     }
   ]
 }
