@@ -3,12 +3,13 @@
 // found in the LICENSE file.
 
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-import 'api.dart';
-import 'category_route.dart';
-import 'unit.dart';
+import 'package:unit_converter/api.dart';
+import 'package:unit_converter/category_route.dart';
+import 'package:unit_converter/unit.dart';
 
 const _padding = const EdgeInsets.all(16.0);
 
