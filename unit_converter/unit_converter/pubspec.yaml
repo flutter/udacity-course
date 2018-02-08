@@ -23,7 +23,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - assets/units.json
+   - assets/regular_units.json
    - assets/icons/area.png
    - assets/icons/currency.png
    - assets/icons/digital_storage.png

@@ -3,13 +3,13 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:core';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-import 'category.dart';
-import 'unit.dart';
-import 'api.dart';
+import 'package:unit_converter/api.dart';
+import 'package:unit_converter/category.dart';
+import 'package:unit_converter/unit.dart';
 
 /// For this app, the only category (endpoint) we retrieve from an API is Currency.
 /// If we had more, we could keep a List of categories here.
@@ -101,7 +101,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Future<Null> didChangeDependencies() async {
     super.didChangeDependencies();
-    // We have static unit conversions located in our assets/units.json
+    // We have static unit conversions located in our assets/regular_units.json
     // and we want to also grab up-to-date Currency conversions from the web
     // We only want to load our data in once
     if (_categories.isEmpty) {
@@ -112,7 +112,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
-    var json = DefaultAssetBundle.of(context).loadString('assets/units.json');
+    var json =
+        DefaultAssetBundle.of(context).loadString('assets/regular_units.json');
     final decoder = const JsonDecoder();
     Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
     var ci = 0;
@@ -122,7 +123,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         units.add(new Unit(
           name: data[key][i]['name'],
           conversion: data[key][i]['conversion'],
-          description: data[key][i]['description'],
+          description: 'Placeholder', // TODO - remove descriptions
         ));
       }
       setState(() {

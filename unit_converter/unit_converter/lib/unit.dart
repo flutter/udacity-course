@@ -12,9 +12,10 @@ class Unit {
 
   Unit({
     @required this.name,
-    this.conversion,
+    @required this.conversion,
     @required this.description,
   })
       : assert(name != null),
+        assert(conversion != null),
         assert(description != null);
 }
