@@ -4,11 +4,12 @@
 
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
-import 'api.dart';
-import 'category.dart';
-import 'unit.dart';
+import 'package:unit_converter/api.dart';
+import 'package:unit_converter/category.dart';
+import 'package:unit_converter/unit.dart';
 
 /// For this app, the only category (endpoint) we retrieve from an API is Currency.
 /// If we had more, we could keep a List of categories here.

@@ -5,8 +5,7 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// We can also import files from relative paths
-import 'category_route.dart';
+import 'package:unit_converter/category_route.dart';
 
 void main() {
   runApp(new UnitConverter());

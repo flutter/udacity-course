@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'unit.dart';
-import 'converter_route.dart';
+import 'package:unit_converter/converter_route.dart';
+import 'package:unit_converter/unit.dart';
 
 /// A Category for a list of units.
 class Category extends StatelessWidget {
