@@ -18,10 +18,7 @@ const apiCategory = const {
   'route': 'currency',
 };
 
-const _rightPadding =
-    const Padding(padding: const EdgeInsets.only(right: 16.0));
-const _bottomPadding =
-    const Padding(padding: const EdgeInsets.only(bottom: 16.0));
+const _appBarColor = const Color(0xFF013487);
 
 /// Category Route (page)
 ///
@@ -170,54 +167,29 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
-  /// Makes the correct number of rows for the Grid View, based on whether the
+  /// Makes the correct number of rows for the List View, based on whether the
   /// device is portrait or landscape.
-  /// For portrait, we will make a column of four rows, each with two items
-  /// For landscape, we will make a column of two rows, each with four items
-  List<Widget> _makeGridRows(bool portrait) {
+  /// For portrait, we use a ListView
+  /// For landscape, we use a GridView
+  Widget _buildCategoryWidgets(bool portrait) {
     // Why do we pass in `_categories.toList()` instead of just `_categories`?
     // Widgets are supposed to be deeply immutable objects. We're passing in
     // _categories to this GridView, which changes as we load in each
     // [Category]. So, each time _categories changes, we need to pass in a new
     // list. The .toList() function does this.
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
-    final rows = <Widget>[];
     if (portrait) {
-      for (var i = 0; i < _categories.length; i += 2) {
-        rows.add(new Expanded(
-          child: new Row(
-            children: <Widget>[
-              new Expanded(child: _categories[i]),
-              _rightPadding,
-              new Expanded(child: _categories[i + 1]),
-            ],
-          ),
-        ));
-        if (i + 2 < _categories.length) {
-          rows.add(_bottomPadding);
-        }
-      }
+      return new ListView.builder(
+        itemBuilder: (BuildContext context, int index) => _categories[index],
+        itemCount: _categories.length,
+      );
     } else {
-      for (var i = 0; i < _categories.length; i += 4) {
-        rows.add(new Expanded(
-          child: new Row(
-            children: <Widget>[
-              new Expanded(child: _categories[i]),
-              _rightPadding,
-              new Expanded(child: _categories[i + 1]),
-              _rightPadding,
-              new Expanded(child: _categories[i + 2]),
-              _rightPadding,
-              new Expanded(child: _categories[i + 3]),
-            ],
-          ),
-        ));
-        if (i + 4 < _categories.length) {
-          rows.add(_bottomPadding);
-        }
-      }
+      return new GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: 3.0,
+        children: _categories,
+      );
     }
-    return rows;
   }
 
   @override
@@ -232,10 +204,9 @@ class _CategoryRouteState extends State<CategoryRoute> {
       );
     }
 
-    // Based on the device size, figure out how to best lay out the list of
-    // tiles into a 2x4 or 4x2 grid.
+    // Based on the device size, figure out how to best lay out the list
     final deviceSize = MediaQuery.of(context).size;
-    final grid = new Container(
+    final listView = new Container(
       color: Colors.white,
       padding: widget.footer
           ? const EdgeInsets.only(
@@ -245,18 +216,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
               top: 4.0,
             )
           : const EdgeInsets.all(16.0),
-      child: new Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: _makeGridRows(deviceSize.height > deviceSize.width),
-      ),
+      child: _buildCategoryWidgets(deviceSize.height > deviceSize.width),
     );
 
     if (widget.footer) {
-      return new Container(
-        height: deviceSize.height - 100.0,
-        child: grid,
-      );
+      return listView;
     }
 
     final headerBar = new AppBar(
@@ -268,12 +232,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
             ),
       ),
       centerTitle: true,
-      backgroundColor: const Color(0xFF013487),
+      backgroundColor: _appBarColor,
     );
 
     return new Scaffold(
       appBar: headerBar,
-      body: grid,
+      body: listView,
     );
   }
 }
