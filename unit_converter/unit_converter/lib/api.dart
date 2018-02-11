@@ -13,15 +13,15 @@ import 'package:flutter/services.dart';
 /// tides change often.
 /// We have set up a API that retrieves a list of currencies and their current
 /// exchange rate.
-///   GET /currency: get a list of currencies and their description
+///   GET /currency: get a list of currencies
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
   // We use the `http` package. More details: https://flutter.io/networking/
-  var httpClient = createHttpClient();
+  final httpClient = createHttpClient();
 
   /// The API endpoint we want to hit. This API doesn't have a key but
   /// often, APIs do require authentication
-  var url = 'flutter.udacity.com';
+  final url = 'flutter.udacity.com';
 
   /// Gets all the units and conversion rates for a given category.
   ///
@@ -30,13 +30,13 @@ class Api {
   Future<List> getUnits(String category) async {
     // You can directly call httpClient.get() with a String as input,
     // but to make things cleaner, we can pass in a Uri.
-    var uri = new Uri.https(url, '/$category');
+    final uri = new Uri.https(url, '/$category');
     try {
-      var response = await httpClient.get(uri);
+      final response = await httpClient.get(uri);
       if (response.statusCode != 200) {
         return null;
       }
-      var jsonResponse = JSON.decode(response.body);
+      final jsonResponse = JSON.decode(response.body);
       try {
         return jsonResponse['units'];
       } on Exception catch (e) {
@@ -56,14 +56,14 @@ class Api {
       String category, String amount, String fromUnit, String toUnit) async {
     // You can directly call httpClient.get() with a String as input,
     // but to make things cleaner, we can pass in a Uri.
-    var uri = new Uri.https(url, '/$category/convert',
+    final uri = new Uri.https(url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
-      var response = await httpClient.get(uri);
+      final response = await httpClient.get(uri);
       if (response.statusCode != 200) {
         return null;
       }
-      var jsonResponse = JSON.decode(response.body);
+      final jsonResponse = JSON.decode(response.body);
       try {
         return jsonResponse['conversion'].toDouble();
       } on Exception catch (e) {

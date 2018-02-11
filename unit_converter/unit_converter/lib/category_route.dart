@@ -30,7 +30,7 @@ const _bottomPadding =
 class CategoryRoute extends StatefulWidget {
   final bool footer;
 
-  CategoryRoute({
+  const CategoryRoute({
     Key key,
     this.footer,
   })
@@ -43,7 +43,7 @@ class CategoryRoute extends StatefulWidget {
 class _CategoryRouteState extends State<CategoryRoute> {
   // Consider omitting the types for local variables. For more details on Effective
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
-  var _categories = <Category>[];
+  final _categories = <Category>[];
   static const _baseColors = const <ColorSwatch>[
     const ColorSwatch(200, const {
       50: const Color(0xFF579186),
@@ -112,18 +112,17 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
-    var json =
+    final json =
         DefaultAssetBundle.of(context).loadString('assets/regular_units.json');
     final decoder = const JsonDecoder();
     Map<String, List<Map<String, dynamic>>> data = decoder.convert(await json);
     var ci = 0;
     for (var key in data.keys) {
-      var units = <Unit>[];
+      final units = <Unit>[];
       for (var i = 0; i < data[key].length; i++) {
         units.add(new Unit(
           name: data[key][i]['name'],
           conversion: data[key][i]['conversion'],
-          description: 'Placeholder', // TODO - remove descriptions
         ));
       }
       setState(() {
@@ -147,17 +146,16 @@ class _CategoryRouteState extends State<CategoryRoute> {
         color: _baseColors.last,
       ));
     });
-    var api = new Api();
-    var jsonUnits = await api.getUnits(apiCategory['route']);
+    final api = new Api();
+    final jsonUnits = await api.getUnits(apiCategory['route']);
     // If the API errors out or we have no internet connection, this category
     // remains in placeholder mode (disabled)
     if (jsonUnits != null) {
-      var units = <Unit>[];
+      final units = <Unit>[];
       for (var unit in jsonUnits) {
         units.add(new Unit(
           name: unit['name'],
           conversion: unit['conversion'].toDouble(),
-          description: unit['description'],
         ));
       }
       setState(() {
@@ -183,7 +181,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // [Category]. So, each time _categories changes, we need to pass in a new
     // list. The .toList() function does this.
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
-    var rows = <Widget>[];
+    final rows = <Widget>[];
     if (portrait) {
       for (var i = 0; i < _categories.length; i += 2) {
         rows.add(new Expanded(
@@ -236,8 +234,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
     // Based on the device size, figure out how to best lay out the list of
     // tiles into a 2x4 or 4x2 grid.
-    var deviceSize = MediaQuery.of(context).size;
-    var grid = new Container(
+    final deviceSize = MediaQuery.of(context).size;
+    final grid = new Container(
       color: Colors.white,
       padding: widget.footer
           ? const EdgeInsets.only(
@@ -261,7 +259,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       );
     }
 
-    var headerBar = new AppBar(
+    final headerBar = new AppBar(
       elevation: 1.0,
       title: new Text(
         'Unit Converter'.toUpperCase(),

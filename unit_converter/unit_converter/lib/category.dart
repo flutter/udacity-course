@@ -15,7 +15,7 @@ class Category extends StatelessWidget {
   final String iconLocation;
 
   /// Constructor
-  Category({
+  const Category({
     Key key,
     this.name,
     this.units,

@@ -8,14 +8,11 @@ import 'package:meta/meta.dart';
 class Unit {
   final String name;
   final double conversion;
-  final String description;
 
-  Unit({
+  const Unit({
     @required this.name,
     @required this.conversion,
-    @required this.description,
   })
       : assert(name != null),
-        assert(conversion != null),
-        assert(description != null);
+        assert(conversion != null);
 }

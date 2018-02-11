@@ -28,7 +28,7 @@ class ConverterRoute extends StatefulWidget {
   final List<Unit> units;
 
   /// Constructor
-  ConverterRoute({
+  const ConverterRoute({
     Key key,
     this.name,
     this.color,
@@ -52,8 +52,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // Our API has a handy convert function, so we can use that for
     // the Currency category
     if (widget.name == apiCategory['name']) {
-      var api = new Api();
-      var conversion = await api.convert(apiCategory['route'],
+      final api = new Api();
+      final conversion = await api.convert(apiCategory['route'],
           _inputValue.toString(), _fromValue.name, _toValue.name);
       // API error or not connected to the internet
       if (conversion == null) {
@@ -98,7 +98,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         // Even though we are using the numerical keyboard, we still have to check
         // for non-numerical input such as '5..0' or '6 -3'
         try {
-          var inputDouble = double.parse(input);
+          final inputDouble = double.parse(input);
           _showValidationError = false;
           _inputValue = inputDouble;
           _updateConversion();
@@ -158,7 +158,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       );
     }
-    var units = <DropdownMenuItem>[];
+    final units = <DropdownMenuItem>[];
     for (var unit in widget.units) {
       units.add(new DropdownMenuItem(
         value: unit.name,
@@ -199,7 +199,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    var input = new Container(
+    final input = new Container(
       color: Colors.white,
       margin: _bottomMargin,
       padding: _horizontalPadding,
@@ -271,7 +271,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    var output = new Container(
+    final output = new Container(
       color: Colors.white,
       alignment: FractionalOffset.centerLeft,
       padding: _padding,
@@ -285,58 +285,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    var didYouKnow = new Container(
-      margin: const EdgeInsets.only(
-        bottom: 4.0,
-      ),
-      child: new Text(
-        'Did you know...',
-        style: Theme.of(context).textTheme.title.copyWith(
-              color: Colors.white,
-            ),
-      ),
-    );
-
-    var description = new Container(
-      padding: _padding,
-      color: widget.color[50],
-      margin: _bottomMargin,
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          new Container(
-            child: new Text(
-              _fromValue.name,
-              style: Theme.of(context).textTheme.headline,
-            ),
-          ),
-          new Container(
-            child: new Text(
-              _fromValue.description,
-              style: Theme.of(context).textTheme.title,
-            ),
-            margin: _bottomMargin,
-          ),
-          new Container(
-            child: new Text(
-              _toValue.name,
-              style: Theme.of(context).textTheme.headline,
-            ),
-          ),
-          new Container(
-            child: new Text(
-              _toValue.description,
-              style: Theme.of(context).textTheme.title,
-            ),
-            margin: _bottomMargin * 1.5,
-          ),
-        ],
-      ),
-    );
-
     // Based on the box constraints of our device, figure out how to best
     // lay out our conversion screen
-    var conversionScreen = new LayoutBuilder(
+    final conversionScreen = new LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         if (constraints.maxHeight > constraints.maxWidth) {
           return new SingleChildScrollView(
@@ -347,8 +298,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
                 children: <Widget>[
                   input,
                   output,
-                  didYouKnow,
-                  description,
                 ],
               ),
             ),
@@ -379,16 +328,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
                   new Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                   ),
-                  new Expanded(
-                    flex: 5,
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        didYouKnow,
-                        description,
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -397,7 +336,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       },
     );
 
-    var selectCategoryHeader = new Container(
+    final selectCategoryHeader = new Container(
       alignment: FractionalOffset.bottomLeft,
       padding: const EdgeInsets.symmetric(
         vertical: 16.0,
@@ -419,7 +358,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    var selectCategoryScreen = new Column(
+    final selectCategoryScreen = new Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         new GestureDetector(
