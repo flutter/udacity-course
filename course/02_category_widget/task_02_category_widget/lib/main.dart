@@ -24,10 +24,10 @@ class UnitConverter extends StatelessWidget {
     return new MaterialApp(
       title: 'Unit Converter',
       home: new Scaffold(
+        backgroundColor: Colors.green[100],
         body: new Center(
           child: new Container(
-            height: 200.0,
-            width: 200.0,
+            height: 100.0,
             // TODO: Determine what properties we'll need to pass into our widget
             child: const Category(),
           ),
