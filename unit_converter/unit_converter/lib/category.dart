@@ -2,11 +2,17 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// To keep your imports tidy, follow the ordering guidelines at
+// https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
 
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
+// Dart enforces strict typing, so you have to specify a double for the
+// BorderRadius here. See https://www.dartlang.org/guides/language/sound-dart
+// We also use an underscore to indicates that the border radius is private.
+// See https://www.dartlang.org/guides/language/effective-dart/design#libraries
 final _borderRadius = new BorderRadius.circular(4.0);
 
 /// A Category for a list of units.
@@ -18,6 +24,8 @@ class Category extends StatelessWidget {
 
   /// Constructor
   const Category({
+    // You can read about Keys here https://flutter.io/widgets-intro/#keys
+    // We don't use the key for anything in our app
     Key key,
     this.name,
     this.units,
@@ -63,10 +71,17 @@ class Category extends StatelessWidget {
   // This `context` parameter describes the location of this widget in the
   // widget tree. It can be used for grabbing Theme data from the nearest
   // Theme ancestor in the tree. Below, we grab the display1 text theme.
+  // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
       child: new Stack(
+        // There are two ways to denote a list: `[]` and `new List()`.
+        // Prefer to use the literal syntax, i.e. `[]`, instead of `new List()`.
+        // You can add the type argument if you'd like. We do that here,
+        // denoting that the Stack takes in a List of Widget objects,
+        // with <Widget>[...]
+        // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
         children: <Widget>[
           new Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -99,6 +114,9 @@ class Category extends StatelessWidget {
           // Adds inkwell animation when tapped
           new Material(
             child: new InkWell(
+              // We can use either the () => function or the () { function(); }
+              // syntax. Don't create a lambda when a tear-off will do.
+              // See https://www.dartlang.org/guides/language/effective-dart/usage#dont-create-a-lambda-when-a-tear-off-will-do
               onTap: () => _navigateToConverter(context),
               borderRadius: _borderRadius,
             ),
