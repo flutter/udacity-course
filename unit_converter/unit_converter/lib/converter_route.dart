@@ -125,14 +125,18 @@ class _ConverterRouteState extends State<ConverterRoute> {
     setState(() {
       _fromValue = _getUnit(unitName);
     });
-    _updateConversion();
+    if (_inputValue != null) {
+      _updateConversion();
+    }
   }
 
   void _updateToConversion(dynamic unitName) {
     setState(() {
       _toValue = _getUnit(unitName);
     });
-    _updateConversion();
+    if (_inputValue != null) {
+      _updateConversion();
+    }
   }
 
   @override
