@@ -60,9 +60,9 @@ class Category extends StatelessWidget {
   /// Builds a custom widget that shows unit [Category] information.
   /// This information includes the icon, name, and color for the [Category].
   @override
-  // This `context` param describes the part of the user interface represented
-  // by this widget. It can be used for grabbing Theme data from the top of the
-  // tree, shown below when we grab the display1 text theme.
+  // This `context` parameter describes the location of this widget in the
+  // widget tree. It can be used for grabbing Theme data from the nearest
+  // Theme ancestor in the tree. Below, we grab the display1 text theme.
   Widget build(BuildContext context) {
     return new Container(
       height: 100.0,
