@@ -77,6 +77,7 @@ class CategoryRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = <Category>[];
+
     for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(new Category(
         name: _categoryNames[i],
