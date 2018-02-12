@@ -34,7 +34,7 @@ class Rectangle extends StatelessWidget {
             child: new Padding(
               padding: _padding,
               child: const Text(
-                'Hello0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0o0overflow :)',
+                'Hello',
                 textAlign: TextAlign.center,
               ),
             ),
