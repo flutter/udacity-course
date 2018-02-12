@@ -7,18 +7,18 @@ import 'package:meta/meta.dart';
 
 import 'package:solution_04_navigation/unit.dart';
 
-/// Converter route (page) where users can input amounts to convert
+/// Converter route (page) where users can input amounts to convert.
 class ConverterRoute extends StatelessWidget {
-  /// Color for this Category
+  /// Color for this [Category].
   final Color color;
 
-  /// This Category's name
+  /// This [Category]'s name.
   final String name;
 
-  /// Units for this Category
+  /// Units for this [Category].
   final List<Unit> units;
 
-  /// Constructor
+  /// Constructor.
   const ConverterRoute({
     Key key,
     @required this.name,
@@ -49,10 +49,9 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
-    return new ListView.builder(
+    return new ListView(
       itemBuilder: (BuildContext context, int index) => unitWidgets[index],
       itemCount: unitWidgets.length,
     );
   }
 }
-

@@ -9,13 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
-// Dart enforces strict typing, so you have to specify a double for the
-// BorderRadius here. See https://www.dartlang.org/guides/language/sound-dart
 // We also use an underscore to indicates that the border radius is private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
 final _borderRadius = new BorderRadius.circular(4.0);
 
-/// A Category for a list of units.
+/// A [Category] for a list of [Unit]s.
 class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
@@ -34,7 +32,7 @@ class Category extends StatelessWidget {
   })
       : super(key: key);
 
-  /// Navigates to the unit converter page.
+  /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
@@ -116,8 +114,7 @@ class Category extends StatelessWidget {
             // Adds inkwell animation when tapped
             child: new InkWell(
               // We can use either the () => function or the () { function(); }
-              // syntax. Don't create a lambda when a tear-off will do.
-              // See https://www.dartlang.org/guides/language/effective-dart/usage#dont-create-a-lambda-when-a-tear-off-will-do
+              // syntax.
               onTap: () => _navigateToConverter(context),
               borderRadius: _borderRadius,
             ),

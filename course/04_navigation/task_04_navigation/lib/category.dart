@@ -9,14 +9,14 @@ import 'package:task_04_navigation/unit.dart';
 
 final _borderRadius = new BorderRadius.circular(4.0);
 
-/// A Category widget for a list of units.
+/// A Category widget for a list of [Unit]s.
 class Category extends StatelessWidget {
   final ColorSwatch color;
   final IconData iconLocation;
   final String name;
   final List<Unit> units;
 
-  /// Constructor
+  /// Constructor.
   const Category({
     Key key,
     this.color,
@@ -26,7 +26,7 @@ class Category extends StatelessWidget {
   })
       : super(key: key);
 
-  /// Navigates to the unit converter page
+  /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
     // TODO: Using the Navigator, navigate to the Converter Route
     // Specs:

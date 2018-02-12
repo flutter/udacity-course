@@ -168,11 +168,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
-  /// Makes the correct number of rows for the List View, based on whether the
+  /// Makes the correct number of rows for the list view, based on whether the
   /// device is portrait or landscape.
   ///
-  /// For portrait, we use a ListView
-  /// For landscape, we use a GridView
+  /// For portrait, we use a [ListView]
+  /// For landscape, we use a [GridView]
   Widget _buildCategoryWidgets(bool portrait) {
     // Why do we pass in `_categories.toList()` instead of just `_categories`?
     // Widgets are supposed to be deeply immutable objects. We're passing in
