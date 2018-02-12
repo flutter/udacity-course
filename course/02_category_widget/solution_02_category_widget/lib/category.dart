@@ -22,6 +22,7 @@ class Category extends StatelessWidget {
       : super(key: key);
 
   /// Builds a custom widget that shows unit [Category] information.
+  ///
   /// This information includes the icon, name, and color for the [Category].
   @override
   Widget build(BuildContext context) {
@@ -63,8 +64,8 @@ class Category extends StatelessWidget {
               ),
             ],
           ),
-          // Adds inkwell animation when tapped
           new Material(
+            // Adds inkwell animation when tapped
             child: new InkWell(
               onTap: () {
                 print('I was tapped!');

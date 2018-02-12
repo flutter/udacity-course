@@ -12,6 +12,7 @@ import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 
 /// For this app, the only category (endpoint) we retrieve from an API is Currency.
+///
 /// If we had more, we could keep a List of categories here.
 const apiCategory = const {
   'name': 'Currency',
@@ -20,7 +21,7 @@ const apiCategory = const {
 
 const _appBarColor = const Color(0xFF013487);
 
-/// Category Route (page)
+/// Category Route (page).
 ///
 /// This is the "home" page of the Unit Converter. It shows a header bar and
 /// a grid of [Categories].

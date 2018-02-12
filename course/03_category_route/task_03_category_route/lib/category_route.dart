@@ -51,20 +51,16 @@ class CategoryRoute extends StatelessWidget {
     // TODO: Create a list of the eight Categories, using the names and colors
     // from above. Use a placeholder icon, such as `Icons.cake` for each
     // Category. We'll add custom icons later.
-    var categories = [];
+    final categories = [];
 
-    // TODO: Create a grid of the Categories
-    // Specs:
-    //  - Each row has 2 Category Widgets
-    //  - There are 4 rows
-    //  - All 8 widgets fit on the screen without scrolling
-    var grid = new Container();
+    // TODO: Create a list view of the Categories
+    final grid = new Container();
 
     // TODO: Create an App Bar
     // Specs:
     //  - it is colored _appBarColor
     //  - the text is centered
-    var appBar = new AppBar();
+    final appBar = new AppBar();
 
     return new Scaffold(
       appBar: appBar,

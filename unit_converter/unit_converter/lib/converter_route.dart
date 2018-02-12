@@ -22,13 +22,13 @@ const _bottomMargin = const EdgeInsets.only(
 
 const _bottomSheetBorderRadius = const Radius.circular(32.0);
 
-/// Converter Route (page) where users can input amounts to convert
+/// Converter Route (page) where users can input amounts to convert.
 class ConverterRoute extends StatefulWidget {
   final String name;
   final ColorSwatch color;
   final List<Unit> units;
 
-  /// Constructor
+  /// Constructor.
   const ConverterRoute({
     Key key,
     this.name,

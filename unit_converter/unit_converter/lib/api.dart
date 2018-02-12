@@ -19,8 +19,9 @@ class Api {
   // We use the `http` package. More details: https://flutter.io/networking/
   final httpClient = createHttpClient();
 
-  /// The API endpoint we want to hit. This API doesn't have a key but
-  /// often, APIs do require authentication
+  /// The API endpoint we want to hit.
+  ///
+  /// This API doesn't have a key but often, APIs do require authentication
   final url = 'flutter.udacity.com';
 
   /// Gets all the units and conversion rates for a given category.

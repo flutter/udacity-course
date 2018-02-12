@@ -16,8 +16,9 @@ class Category extends StatelessWidget {
   final ColorSwatch color;
   final String iconLocation;
 
-  /// Constructor
+  /// Constructor.
   const Category({
+
     Key key,
     this.name,
     this.units,
@@ -26,7 +27,7 @@ class Category extends StatelessWidget {
   })
       : super(key: key);
 
-  /// Navigates to the unit converter page
+  /// Navigates to the unit converter page.
   void _navigateToConverter(BuildContext context) {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
@@ -58,6 +59,7 @@ class Category extends StatelessWidget {
   }
 
   /// Builds a custom widget that shows unit [Category] information.
+  ///
   /// This information includes the icon, name, and color for the [Category].
   @override
   // This `context` parameter describes the location of this widget in the
@@ -96,8 +98,8 @@ class Category extends StatelessWidget {
               ),
             ],
           ),
-          // Adds inkwell animation when tapped
           new Material(
+            // Adds inkwell animation when tapped
             child: new InkWell(
               onTap: () => _navigateToConverter(context),
               borderRadius: _borderRadius,

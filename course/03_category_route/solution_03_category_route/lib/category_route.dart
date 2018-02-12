@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'category.dart';
+import 'package:solution_03_category_route/category.dart';
 
 const _rightPadding =
     const Padding(padding: const EdgeInsets.only(right: 16.0));
@@ -76,7 +76,7 @@ class CategoryRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var categories = <Category>[];
+    final categories = <Category>[];
     for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(new Category(
         name: _categoryNames[i],
@@ -85,7 +85,7 @@ class CategoryRoute extends StatelessWidget {
       ));
     }
 
-    var grid = new Container(
+    final grid = new Container(
       color: Colors.white,
       padding: const EdgeInsets.all(16.0),
       child: new Column(
@@ -95,7 +95,7 @@ class CategoryRoute extends StatelessWidget {
       ),
     );
 
-    var headerBar = new AppBar(
+    final headerBar = new AppBar(
       elevation: 1.0,
       title: new Text(
         'Unit Converter'.toUpperCase(),
