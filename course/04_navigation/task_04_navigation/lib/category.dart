@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 import 'package:task_04_navigation/converter_route.dart';
 
+final _borderRadius = new BorderRadius.circular(4.0);
+
 /// A Category widget for a list of units.
 class Category extends StatelessWidget {
   final String name;
@@ -33,17 +35,25 @@ class Category extends StatelessWidget {
   }
 
   /// Builds a custom widget that shows unit [Category] information.
+  ///
   /// This information includes the icon, name, and color for the [Category].
   @override
   Widget build(BuildContext context) {
-    return new Stack(
-      children: <Widget>[
-        new Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            new Expanded(
-              child: new Container(
-                color: color,
+    return new Container(
+      color: Colors.white,
+      height: 100.0,
+      child: new Stack(
+        children: <Widget>[
+          new Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              new Container(
+                width: 70.0,
+                margin: const EdgeInsets.all(16.0),
+                decoration: new BoxDecoration(
+                  borderRadius: _borderRadius,
+                  color: color,
+                ),
                 child: iconLocation != null
                     ? new Icon(
                         iconLocation,
@@ -51,36 +61,34 @@ class Category extends StatelessWidget {
                       )
                     : null,
               ),
-            ),
-            new Container(
-              height: 40.0,
-              color: Colors.grey[200],
-              child: new Center(
-                child: new Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w700,
+              new Container(
+                padding: const EdgeInsets.all(16.0),
+                child: new Center(
+                  child: new Text(
+                    name.toUpperCase(),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.display1.copyWith(
+                          color: Colors.grey[700],
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        // Adds inkwell animation when tapped
-        new Material(
-          child: new InkWell(
-            // TODO: The onTap property should call _navigateToConverter,
-            // which takes in a BuildContext as an argument.
-            onTap: () {
-              print('I was tapped!');
-            },
+            ],
           ),
-          color: Colors.transparent,
-        ),
-      ],
+          new Material(
+            // Adds inkwell animation when tapped
+            child: new InkWell(
+              onTap: () {
+                print('I was tapped!');
+              },
+              borderRadius: _borderRadius,
+            ),
+            color: Colors.transparent,
+          ),
+        ],
+      ),
     );
   }
 }

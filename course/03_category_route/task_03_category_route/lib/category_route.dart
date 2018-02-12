@@ -54,7 +54,7 @@ class CategoryRoute extends StatelessWidget {
     final categories = [];
 
     // TODO: Create a list view of the Categories
-    final grid = new Container();
+    final listView = new Container();
 
     // TODO: Create an App Bar
     // Specs:
@@ -64,7 +64,7 @@ class CategoryRoute extends StatelessWidget {
 
     return new Scaffold(
       appBar: appBar,
-      body: grid,
+      body: listView,
     );
   }
 }

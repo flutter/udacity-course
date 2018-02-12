@@ -170,6 +170,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Makes the correct number of rows for the List View, based on whether the
   /// device is portrait or landscape.
+  ///
   /// For portrait, we use a ListView
   /// For landscape, we use a GridView
   Widget _buildCategoryWidgets(bool portrait) {
