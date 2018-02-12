@@ -5,7 +5,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category_route.dart';
