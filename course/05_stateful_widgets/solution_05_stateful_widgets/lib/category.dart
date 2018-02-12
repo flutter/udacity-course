@@ -7,22 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:solution_05_stateful_widgets/converter_route.dart';
 import 'package:solution_05_stateful_widgets/unit.dart';
 
-/// A Category widget for a list of [Units].
+final _borderRadius = new BorderRadius.circular(4.0);
+
+/// A Category widget for a list of [Unit]s.
 class Category extends StatelessWidget {
-  final String name;
-  final List<Unit> units;
   final ColorSwatch color;
   final IconData iconLocation;
+  final String name;
+  final List<Unit> units;
 
   /// Constructor
   const Category({
-    Key key,
-    this.name,
-    this.units,
     this.color,
     this.iconLocation,
-  })
-      : super(key: key);
+    this.name,
+    this.units,
+  });
 
   /// Navigates to the unit converter page
   void _navigateToConverter(BuildContext context) {
@@ -39,9 +39,9 @@ class Category extends StatelessWidget {
             backgroundColor: color,
           ),
           body: new ConverterRoute(
+            color: color,
             name: name,
             units: units,
-            color: color,
           ),
         );
       },
@@ -49,17 +49,25 @@ class Category extends StatelessWidget {
   }
 
   /// Builds a custom widget that shows unit [Category] information.
+  ///
   /// This information includes the icon, name, and color for the [Category].
   @override
   Widget build(BuildContext context) {
-    return new Stack(
-      children: <Widget>[
-        new Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            new Expanded(
-              child: new Container(
-                color: color,
+    return new Container(
+      color: Colors.white,
+      height: 100.0,
+      child: new Stack(
+        children: <Widget>[
+          new Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              new Container(
+                width: 70.0,
+                margin: const EdgeInsets.all(16.0),
+                decoration: new BoxDecoration(
+                  borderRadius: _borderRadius,
+                  color: color,
+                ),
                 child: iconLocation != null
                     ? new Icon(
                         iconLocation,
@@ -67,32 +75,32 @@ class Category extends StatelessWidget {
                       )
                     : null,
               ),
-            ),
-            new Container(
-              height: 40.0,
-              color: Colors.grey[200],
-              child: new Center(
-                child: new Text(
-                  name,
-                  textAlign: TextAlign.center,
-                  style: new TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w700,
+              new Container(
+                padding: const EdgeInsets.all(16.0),
+                child: new Center(
+                  child: new Text(
+                    name.toUpperCase(),
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.display1.copyWith(
+                          color: Colors.grey[700],
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        // Adds inkwell animation when tapped
-        new Material(
-          child: new InkWell(
-            onTap: () => _navigateToConverter(context),
+            ],
           ),
-          color: Colors.transparent,
-        ),
-      ],
+          new Material(
+            // Adds inkwell animation when tapped
+            child: new InkWell(
+              onTap: () => _navigateToConverter(context),
+              borderRadius: _borderRadius,
+            ),
+            color: Colors.transparent,
+          ),
+        ],
+      ),
     );
   }
 }

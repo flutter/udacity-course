@@ -3,24 +3,29 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 import 'package:solution_05_stateful_widgets/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert
 class ConverterRoute extends StatefulWidget {
-  final String name;
+  /// Color for this Category
   final Color color;
+
+  /// This Category's name
+  final String name;
+
+  /// Units for this Category
   final List<Unit> units;
 
   /// Constructor
-  ConverterRoute({
+  const ConverterRoute({
     Key key,
-    this.name,
-    this.color,
-    this.units,
+    @required this.name,
+    @required this.color,
+    @required this.units,
   })
       : super(key: key);
-
   @override
   _ConverterRouteState createState() => new _ConverterRouteState();
 }
@@ -31,9 +36,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // Here is just a placeholder for a list of mock units
     final unitWidgets = widget.units.map((Unit unit) {
       return new Container(
+        color: widget.color,
         margin: const EdgeInsets.all(8.0),
         padding: const EdgeInsets.all(16.0),
-        color: widget.color,
         child: new Column(
           children: <Widget>[
             new Text(
