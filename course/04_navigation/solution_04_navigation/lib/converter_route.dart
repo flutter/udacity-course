@@ -3,23 +3,56 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+
+import 'package:solution_04_navigation/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert
 class ConverterRoute extends StatelessWidget {
-  final String name;
+  /// Color for this Category
   final Color color;
+
+  /// This Category's name
+  final String name;
+
+  /// Units for this Category
+  final List<Unit> units;
 
   /// Constructor
   const ConverterRoute({
     Key key,
-    this.name,
-    this.color,
+    @required this.name,
+    @required this.color,
+    @required this.units,
   })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // We'll build the contents of the Converter Route later.
-    return new Container();
+    // Here is just a placeholder for a list of mock units
+    final unitWidgets = units.map((Unit unit) {
+      return new Container(
+        color: color,
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
+        child: new Column(
+          children: <Widget>[
+            new Text(
+              unit.name,
+              style: Theme.of(context).textTheme.headline,
+            ),
+            new Text(
+              'Conversion: ${unit.conversion}',
+              style: Theme.of(context).textTheme.subhead,
+            ),
+          ],
+        ),
+      );
+    }).toList();
+    return new ListView.builder(
+      itemBuilder: (BuildContext context, int index) => unitWidgets[index],
+      itemCount: unitWidgets.length,
+    );
   }
 }
+

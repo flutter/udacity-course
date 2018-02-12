@@ -5,20 +5,23 @@
 import 'package:flutter/material.dart';
 
 import 'package:solution_04_navigation/converter_route.dart';
+import 'package:solution_04_navigation/unit.dart';
 
 final _borderRadius = new BorderRadius.circular(4.0);
 
 /// A Category widget for a list of units.
 class Category extends StatelessWidget {
-  final String name;
   final ColorSwatch color;
   final IconData iconLocation;
+  final String name;
+  final List<Unit> units;
 
   /// Constructor
   const Category({
-    this.name,
     this.color,
     this.iconLocation,
+    this.name,
+    this.units,
   });
 
   /// Navigates to the unit converter page
@@ -36,8 +39,9 @@ class Category extends StatelessWidget {
             backgroundColor: color,
           ),
           body: new ConverterRoute(
-            name: name,
             color: color,
+            name: name,
+            units: units,
           ),
         );
       },
@@ -66,9 +70,9 @@ class Category extends StatelessWidget {
                 ),
                 child: iconLocation != null
                     ? new Icon(
-                  iconLocation,
-                  size: 60.0,
-                )
+                        iconLocation,
+                        size: 60.0,
+                      )
                     : null,
               ),
               new Container(
@@ -78,10 +82,10 @@ class Category extends StatelessWidget {
                     name.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
-                      color: Colors.grey[700],
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w700,
-                    ),
+                          color: Colors.grey[700],
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ),

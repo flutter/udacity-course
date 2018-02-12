@@ -43,11 +43,9 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
-  /// Makes the correct number of rows for the List View, based on whether the
-  /// device is portrait or landscape.
+  /// Makes the correct number of rows for the List View.
   ///
   /// For portrait, we use a ListView
-  /// For landscape, we use a GridView
   Widget _buildCategoryWidgets(List<Widget> categories) {
     return new ListView.builder(
       itemBuilder: (BuildContext context, int index) => categories[index],
