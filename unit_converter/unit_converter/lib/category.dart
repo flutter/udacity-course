@@ -11,7 +11,7 @@ import 'package:unit_converter/unit.dart';
 
 // Dart enforces strict typing, so you have to specify a double for the
 // BorderRadius here. See https://www.dartlang.org/guides/language/sound-dart
-// We also use an underscore to indicates that the border radius is private.
+// We also use an underscore to indicate that the border radius is private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
 final _borderRadius = new BorderRadius.circular(4.0);
 
