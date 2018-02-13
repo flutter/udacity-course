@@ -16,7 +16,7 @@ class Category extends StatelessWidget {
   final String name;
   final List<Unit> units;
 
-  /// Constructor
+  /// Constructor.
   const Category({
     this.color,
     this.iconLocation,
@@ -24,7 +24,7 @@ class Category extends StatelessWidget {
     this.units,
   });
 
-  /// Navigates to the unit converter page
+  /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
     Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {

@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:solution_05_stateful_widgets/category.dart';
 import 'package:solution_05_stateful_widgets/unit.dart';
 
-/// Category Route (page)
+/// Category Route (page).
 ///
 /// This is the "home" page of the Unit Converter. It shows a header bar and
 /// a grid of [Categories].
 class CategoryRoute extends StatefulWidget {
-  /// Constructor
+  /// Constructor.
   const CategoryRoute({
     Key key,
   })
@@ -51,7 +51,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     Colors.red,
   ];
 
-  /// Returns a list of mock [Unit]s
+  /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
     var units = <Unit>[];
     for (var i = 0; i < 10; i++) {
@@ -65,7 +65,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Makes the correct number of rows for the List View.
   ///
-  /// For portrait, we use a ListView
+  /// For portrait, we use a ListView.
   Widget _buildCategoryWidgets() {
     return new ListView.builder(
       itemBuilder: (BuildContext context, int index) => _categories[index],

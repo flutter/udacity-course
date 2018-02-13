@@ -10,10 +10,10 @@ import 'package:task_05_stateful_widgets/unit.dart';
 /// Converter route (page) where users can input amounts to convert.
 // TODO: Make ConverterRoute a StatefulWidget
 class ConverterRoute extends StatelessWidget {
-  /// Color for this [Category]
+  /// Color for this [Category].
   final Color color;
 
-  /// This [Category]'s name
+  /// This [Category]'s name.
   final String name;
 
   /// [Unit]s for this [Category].
