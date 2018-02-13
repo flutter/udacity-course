@@ -7,19 +7,19 @@ import 'package:meta/meta.dart';
 
 import 'package:task_05_stateful_widgets/unit.dart';
 
-/// Converter route (page) where users can input amounts to convert
+/// Converter route (page) where users can input amounts to convert.
 // TODO: Make ConverterRoute a StatefulWidget
 class ConverterRoute extends StatelessWidget {
-  /// Color for this Category
+  /// Color for this [Category]
   final Color color;
 
-  /// This Category's name
+  /// This [Category]'s name
   final String name;
 
-  /// Units for this Category
+  /// [Unit]s for this [Category].
   final List<Unit> units;
 
-  /// Constructor
+  /// Constructor.
   const ConverterRoute({
     Key key,
     @required this.name,
@@ -52,10 +52,8 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
-    return new ListView.builder(
-      itemBuilder: (BuildContext context, int index) => unitWidgets[index],
-      itemCount: unitWidgets.length,
+    return new ListView(
+      children: unitWidgets,
     );
   }
 }
-
