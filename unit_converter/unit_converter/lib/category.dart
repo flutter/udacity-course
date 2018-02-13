@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
-// We also use an underscore to indicates that the border radius is private.
+// We also use an underscore to indicate that the border radius is private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
 final _borderRadius = new BorderRadius.circular(4.0);
 

@@ -43,9 +43,8 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
-    return new ListView.builder(
-      itemBuilder: (BuildContext context, int index) => unitWidgets[index],
-      itemCount: unitWidgets.length,
+    return new ListView(
+      children: unitWidgets,
     );
   }
 }
