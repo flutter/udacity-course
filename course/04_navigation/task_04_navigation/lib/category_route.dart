@@ -43,16 +43,15 @@ class CategoryRoute extends StatelessWidget {
     Colors.purpleAccent,
     Colors.red,
   ];
+
   /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
-    var units = <Unit>[];
-    for (var i = 0; i < 10; i++) {
-      units.add(new Unit(
+    return new List.generate(10, (int i) {
+      return new Unit(
         name: 'Test $categoryName Unit $i',
         conversion: i.toDouble(),
-      ));
-    }
-    return units;
+      );
+    });
   }
 
   /// Makes the correct number of rows for the list view.
