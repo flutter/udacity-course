@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
-// We use an underscore to indicate that the border radius is private.
+// We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-final _borderRadius = BorderRadius.circular(4.0);
+const _rowHeight = 100.0;
+final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 /// A [Category] for a list of [Unit]s.
 class Category extends StatelessWidget {
@@ -71,45 +72,46 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
     return Material(
+      color: Colors.transparent,
       child: Container(
-        height: 100.0,
+        height: _rowHeight,
         child: InkWell(
+          borderRadius: _borderRadius,
+          highlightColor: color[50],
+          splashColor: color[100],
           // We can use either the () => function or the () { function(); }
           // syntax.
+          // TODO we are switching to a Backdrop
+          //onTap: () => _showConversionLayer(context),
           onTap: () => _navigateToConverter(context),
-          borderRadius: _borderRadius,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // There are two ways to denote a list: `[]` and `List()`.
-            // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
-            // You can add the type argument if you'd like. We do that here,
-            // denoting that the Stack takes in a List of Widget objects,
-            // with <Widget>[...]
-            // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  borderRadius: _borderRadius,
-                  color: color[100],
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // There are two ways to denote a list: `[]` and `List()`.
+              // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
+              // You can add the type argument if you'd like. We do that here,
+              // denoting that the Stack takes in a List of Widget objects,
+              // with <Widget>[...]
+              // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child:
+                  iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
-                child: iconLocation != null ? Image.asset(iconLocation) : null,
-              ),
-              Container(
-                padding: EdgeInsets.all(16.0),
-                child: Center(
+                Center(
                   child: Text(
-                    name.toUpperCase(),
+                    name,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
-                          color: Colors.grey[700],
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: Colors.black,
+                      fontSize: 24.0,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
