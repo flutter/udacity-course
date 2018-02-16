@@ -112,6 +112,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         DefaultAssetBundle.of(context).loadString('assets/regular_units.json');
     final decoder = JsonDecoder();
     final data = decoder.convert(await json);
+
     var ci = 0;
     for (var key in data.keys) {
       final units = <Unit>[];
