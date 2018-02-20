@@ -22,15 +22,11 @@ class Category extends StatelessWidget {
 
   /// Constructor.
   const Category({
-    // You can read about Keys here https://flutter.io/widgets-intro/#keys
-    // We don't use the key for anything in our app
-    Key key,
     this.name,
     this.units,
     this.color,
     this.iconLocation,
-  })
-      : super(key: key);
+  });
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
@@ -72,18 +68,23 @@ class Category extends StatelessWidget {
   // Theme ancestor in the tree. Below, we grab the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      child: Stack(
-        // There are two ways to denote a list: `[]` and `List()`.
-        // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
-        // You can add the type argument if you'd like. We do that here,
-        // denoting that the Stack takes in a List of Widget objects,
-        // with <Widget>[...]
-        // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
-        children: <Widget>[
-          Row(
+    assert(debugCheckHasMaterial(context));
+    return Material(
+      child: Container(
+        height: 100.0,
+        child: InkWell(
+          // We can use either the () => function or the () { function(); }
+          // syntax.
+          onTap: () => _navigateToConverter(context),
+          borderRadius: _borderRadius,
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            // There are two ways to denote a list: `[]` and `List()`.
+            // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
+            // You can add the type argument if you'd like. We do that here,
+            // denoting that the Stack takes in a List of Widget objects,
+            // with <Widget>[...]
+            // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
             children: <Widget>[
               Container(
                 margin: EdgeInsets.all(16.0),
@@ -91,13 +92,12 @@ class Category extends StatelessWidget {
                   borderRadius: _borderRadius,
                   color: color[100],
                 ),
-                child:
-                    iconLocation != null ? Image.asset(iconLocation) : null,
+                child: iconLocation != null ? Image.asset(iconLocation) : null,
               ),
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
-                  child: Text(
+                  child: Text(  
                     name.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
@@ -110,17 +110,7 @@ class Category extends StatelessWidget {
               ),
             ],
           ),
-          Material(
-            // Adds inkwell animation when tapped
-            child: InkWell(
-              // We can use either the () => function or the () { function(); }
-              // syntax.
-              onTap: () => _navigateToConverter(context),
-              borderRadius: _borderRadius,
-            ),
-            color: Colors.transparent,
-          ),
-        ],
+        ),
       ),
     );
   }

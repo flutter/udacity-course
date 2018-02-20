@@ -30,12 +30,10 @@ class ConverterRoute extends StatefulWidget {
 
   /// Constructor.
   const ConverterRoute({
-    Key key,
     this.name,
     this.color,
     this.units,
-  })
-      : super(key: key);
+  });
 
   @override
   _ConverterRouteState createState() => _ConverterRouteState();
