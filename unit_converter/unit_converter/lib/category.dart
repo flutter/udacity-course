@@ -98,16 +98,16 @@ class Category extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   child:
-                  iconLocation != null ? Image.asset(iconLocation) : null,
+                      iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
                 Center(
                   child: Text(
                     name,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
-                      color: Colors.black,
-                      fontSize: 24.0,
-                    ),
+                          color: Colors.black,
+                          fontSize: 24.0,
+                        ),
                   ),
                 ),
               ],
