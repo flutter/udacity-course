@@ -10,14 +10,10 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category_route.dart';
 import 'package:unit_converter/unit.dart';
 
-const _padding = EdgeInsets.all(16.0);
+final _padding = EdgeInsets.all(16.0);
 
-const _horizontalPadding = EdgeInsets.symmetric(
-  horizontal: 16.0,
-);
-
-const _bottomMargin = EdgeInsets.only(
-  bottom: 16.0,
+final _margin = EdgeInsets.symmetric(
+  vertical: 16.0,
 );
 
 const _bottomSheetBorderRadius = Radius.circular(32.0);
@@ -43,7 +39,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
-  String _convertedValue = 'Output';
+  String _convertedValue = '';
   bool _showErrorUI = false;
   bool _showValidationError = false;
 
@@ -92,7 +88,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   void _updateInputValue(String input) {
     setState(() {
       if (input == null || input.isEmpty) {
-        _convertedValue = 'Output';
+        _convertedValue = '';
       } else {
         // Even though we are using the numerical keyboard, we still have to check
         // for non-numerical input such as '5..0' or '6 -3'
@@ -185,158 +181,87 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
 
     Widget _createDropdown(String name, ValueChanged<dynamic> onChanged) {
-      return Theme(
-        // This only sets the color of the dropdown menu item, not the dropdown
-        // itself
-        data: Theme.of(context).copyWith(
-              canvasColor: Colors.white,
+      return Container(
+        margin: _margin,
+        decoration: BoxDecoration(
+          // This sets the color of the [DropdownButton] itself
+          color: Colors.green[50],
+          borderRadius: BorderRadius.circular(4.0),
+          border: Border.all(
+            color: Colors.grey[400],
+            width: 1.0,
+          ),
+        ),
+        padding: EdgeInsets.all(8.0),
+        child: Theme(
+          // This sets the color of the [DropdownMenuItem]
+          data: Theme.of(context).copyWith(
+                canvasColor: Colors.green[50],
+              ),
+          child: Padding(
+            padding: _margin,
+          child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                value: name,
+                items: units,
+                onChanged: onChanged,
+                style: Theme.of(context).textTheme.display1,
+              ),
             ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton(
-            value: name,
-            items: units,
-            onChanged: onChanged,
-            style: Theme.of(context).textTheme.title,
           ),
         ),
       );
     }
 
-    final input = Container(
-      color: Colors.white,
-      margin: _bottomMargin,
-      padding: _horizontalPadding,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+    final input = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           // This is the widget that accepts text input. In this case, it
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: TextField(
-                  style: Theme.of(context).textTheme.display1.copyWith(
-                        color: _showValidationError
-                            ? Colors.red[500]
-                            : Colors.black,
-                      ),
-                  decoration: InputDecoration(
-                    hintText: 'Enter value',
-                    hintStyle: Theme.of(context).textTheme.display1.copyWith(
-                          color: Colors.grey[500],
-                        ),
-                  ),
-                  // Since we only want numerical input, we use a number keyboard. There
-                  // are also other keyboards for dates, emails, phone numbers, etc.
-                  keyboardType: TextInputType.number,
-                  onChanged: _updateInputValue,
-                ),
-              ),
-              _showValidationError
-                  ? Icon(
-                      Icons.error,
-                      color: Colors.red[500],
-                    )
-                  : Container(),
-            ],
-          ),
-          Container(
-            // You set the color of the dropdown here, not in _createDropdown()
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              horizontal: 8.0,
-              vertical: 8.0,
+          TextField(
+            style: Theme.of(context).textTheme.display1,
+            decoration: InputDecoration(
+              errorText: _showValidationError ? 'Invalid number entered' : null,
+              labelText: 'Input',
+              border: OutlineInputBorder(),
             ),
-            child: _createDropdown(_fromValue.name, _updateFromConversion),
+            // Since we only want numerical input, we use a number keyboard. There
+            // are also other keyboards for dates, emails, phone numbers, etc.
+            keyboardType: TextInputType.number,
+            onChanged: _updateInputValue,
           ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
+          _createDropdown(_fromValue.name, _updateFromConversion),
+        ],
+    );
+
+    final arrows = RotatedBox(
+      quarterTurns: 1,
+      child: Icon(
+        Icons.compare_arrows,
+        size: 40.0,
+      ),
+    );
+
+    final output = Padding(
+      padding: _margin,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          InputDecorator(
             child: Text(
-              'to',
-              textAlign: TextAlign.left,
+              _convertedValue,
+              style: Theme.of(context).textTheme.display1,
+            ),
+            decoration: InputDecoration(
+              labelText: 'Output',
+              labelStyle: Theme.of(context).textTheme.display1,
+              border: OutlineInputBorder(),
             ),
           ),
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(
-              horizontal: 8.0,
-              vertical: 8.0,
-            ),
-            child: _createDropdown(_toValue.name, _updateToConversion),
-          ),
+          _createDropdown(_toValue.name, _updateToConversion),
         ],
       ),
-    );
-
-    final output = Container(
-      color: Colors.white,
-      alignment: FractionalOffset.centerLeft,
-      padding: _padding,
-      margin: _bottomMargin,
-      child: Text(
-        _convertedValue,
-        style: Theme.of(context).textTheme.display1.copyWith(
-              color:
-                  _convertedValue == 'Output' ? Colors.grey[500] : Colors.black,
-            ),
-      ),
-    );
-
-    // Based on the box constraints of our device, figure out how to best
-    // lay out our conversion screen
-    final conversionScreen = LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxHeight > constraints.maxWidth) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  input,
-                  output,
-                ],
-              ),
-            ),
-          );
-        } else {
-          return SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 16.0,
-                right: 16.0,
-                top: 16.0,
-                bottom: 60.0,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    flex: 7,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        input,
-                        output,
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16.0),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
-      },
     );
 
     final selectCategoryHeader = Container(
@@ -346,8 +271,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
         horizontal: 32.0,
       ),
       child: Text(
-        'Select category'.toUpperCase(),
-        style: Theme.of(context).textTheme.subhead.copyWith(
+        widget.name,
+        style: Theme.of(context).textTheme.headline.copyWith(
               fontWeight: FontWeight.w600,
               color: Colors.grey[700],
             ),
@@ -360,6 +285,73 @@ class _ConverterRouteState extends State<ConverterRoute> {
         color: Colors.white,
       ),
     );
+
+    // Based on the box constraints of our device, figure out how to best
+    // lay out our conversion screen
+    // TODO
+    final conversionScreen = SingleChildScrollView(
+      child: Padding(
+        padding: _padding,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            selectCategoryHeader,
+            input,
+            arrows,
+            output,
+          ],
+        ),
+      ),
+    );
+//    final conversionScreen = LayoutBuilder(
+//      builder: (BuildContext context, BoxConstraints  constraints) {
+//        if (constraints.maxHeight > constraints.maxWidth) {
+//          return SingleChildScrollView(
+//            child: Padding(
+//              padding: EdgeInsets.all(16.0),
+//              child: Column(
+//                crossAxisAlignment: CrossAxisAlignment.start,
+//                children: <Widget>[
+//                  input,
+//                  arrows,
+//                  output,
+//                ],
+//              ),
+//            ),
+//          );
+//        } else {
+//          return SingleChildScrollView(
+//            scrollDirection: Axis.vertical,
+//            child: Padding(
+//              padding: EdgeInsets.only(
+//                left: 16.0,
+//                right: 16.0,
+//                top: 16.0,
+//                bottom: 60.0,
+//              ),
+//              child: Row(
+//                crossAxisAlignment: CrossAxisAlignment.start,
+//                children: <Widget>[
+//                  Expanded(
+//                    flex: 7,
+//                    child: Column(
+//                      crossAxisAlignment: CrossAxisAlignment.start,
+//                      children: <Widget>[
+//                        input,
+//                        output,
+//                      ],
+//                    ),
+//                  ),
+//                  Padding(
+//                    padding: EdgeInsets.only(left: 16.0),
+//                  ),
+//                ],
+//              ),
+//            ),
+//          );
+//        }
+//      },
+//    );
 
     final selectCategoryScreen = Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -386,6 +378,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       ],
     );
+
+    return conversionScreen;
 
     return Container(
       color: widget.color[200],

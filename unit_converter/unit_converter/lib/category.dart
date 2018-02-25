@@ -11,7 +11,7 @@ import 'package:unit_converter/unit.dart';
 
 // We use an underscore to indicate that the border radius is private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-final _borderRadius = BorderRadius.circular(4.0);
+final _borderRadius = BorderRadius.circular(36.0);
 
 /// A [Category] for a list of [Unit]s.
 class Category extends StatelessWidget {
@@ -59,6 +59,49 @@ class Category extends StatelessWidget {
     ));
   }
 
+  void _showBottomSheet(BuildContext context) {
+    final selectCategoryScreen = ConverterRoute(
+      name: name,
+      units: units,
+      color: color,
+    );
+
+    final selectCategoryHeader = Container(
+      alignment: FractionalOffset.bottomLeft,
+      padding: EdgeInsets.symmetric(
+        vertical: 16.0,
+        horizontal: 32.0,
+      ),
+      child: Text(
+        'Select category'.toUpperCase(),
+        style: Theme.of(context).textTheme.subhead.copyWith(
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[700],
+            ),
+      ),
+      decoration: BoxDecoration(
+//        borderRadius: BorderRadius.only(
+//          topLeft: _bottomSheetBorderRadius,
+//          topRight: _bottomSheetBorderRadius,
+//        ),
+        color: Colors.white,
+      ),
+    );
+
+    showModalBottomSheet<Null>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: _borderRadius,
+          ),
+          height: 1000.0,
+          child: selectCategoryScreen,
+        );
+      },
+    );
+  }
+
   /// Builds a custom widget that shows unit [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
@@ -69,14 +112,15 @@ class Category extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
+
     return Material(
+      color: Colors.transparent,
       child: Container(
         height: 100.0,
         child: InkWell(
           // We can use either the () => function or the () { function(); }
           // syntax.
-          onTap: () => _navigateToConverter(context),
-          borderRadius: _borderRadius,
+          onTap: () => _showBottomSheet(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             // There are two ways to denote a list: `[]` and `List()`.
@@ -90,14 +134,13 @@ class Category extends StatelessWidget {
                 margin: EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   borderRadius: _borderRadius,
-                  color: color[100],
                 ),
                 child: iconLocation != null ? Image.asset(iconLocation) : null,
               ),
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
-                  child: Text(  
+                  child: Text(
                     name.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(

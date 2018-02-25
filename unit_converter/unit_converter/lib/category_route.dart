@@ -19,7 +19,7 @@ const apiCategory = {
   'route': 'currency',
 };
 
-const _appBarColor = Color(0xFF013487);
+const _appBarColor = Colors.greenAccent;//Color(0xFF013487);
 
 /// Category Route (page).
 ///
@@ -205,7 +205,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // Based on the device size, figure out how to best lay out the list
     final deviceSize = MediaQuery.of(context).size;
     final listView = Container(
-      color: Colors.white,
+      color: Colors.greenAccent,
       padding: widget.footer
           ? EdgeInsets.only(
               bottom: 16.0,
@@ -221,8 +221,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
       return listView;
     }
 
-    final headerBar = AppBar(
-      elevation: 1.0,
+    final appBar = AppBar(
+      elevation: 0.0,
       title: Text(
         'Unit Converter'.toUpperCase(),
         style: Theme.of(context).textTheme.display1.copyWith(
@@ -234,7 +234,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     );
 
     return Scaffold(
-      appBar: headerBar,
+      appBar: appBar,
       body: listView,
     );
   }
