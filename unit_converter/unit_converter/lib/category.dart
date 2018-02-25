@@ -66,38 +66,10 @@ class Category extends StatelessWidget {
       color: color,
     );
 
-//    final selectCategoryHeader = Container(
-//      alignment: FractionalOffset.bottomLeft,
-//      padding: EdgeInsets.symmetric(
-//        vertical: 16.0,
-//        horizontal: 32.0,
-//      ),
-//      child: Text(
-//        'Select category'.toUpperCase(),
-//        style: Theme.of(context).textTheme.subhead.copyWith(
-//              fontWeight: FontWeight.w600,
-//              color: Colors.grey[700],
-//            ),
-//      ),
-//      decoration: BoxDecoration(
-////        borderRadius: BorderRadius.only(
-////          topLeft: _bottomSheetBorderRadius,
-////          topRight: _bottomSheetBorderRadius,
-////        ),
-//        color: Colors.white,
-//      ),
-//    );
-
     showModalBottomSheet<Null>(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: _borderRadius,
-          ),
-          height: 1000.0,
-          child: selectCategoryScreen,
-        );
+        return selectCategoryScreen;
       },
     );
   }
@@ -112,47 +84,49 @@ class Category extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));
-
     return Material(
       color: Colors.transparent,
       child: Container(
         height: 100.0,
         child: InkWell(
+          borderRadius: _borderRadius,
+          highlightColor: color[50],
+          splashColor: color[100],
           // We can use either the () => function or the () { function(); }
           // syntax.
           //onTap: () => _showBottomSheet(context),
           onTap: () => _navigateToConverter(context),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // There are two ways to denote a list: `[]` and `List()`.
-            // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
-            // You can add the type argument if you'd like. We do that here,
-            // denoting that the Stack takes in a List of Widget objects,
-            // with <Widget>[...]
-            // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
-                  borderRadius: _borderRadius,
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // There are two ways to denote a list: `[]` and `List()`.
+              // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
+              // You can add the type argument if you'd like. We do that here,
+              // denoting that the Stack takes in a List of Widget objects,
+              // with <Widget>[...]
+              // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 16.0),
+                  child:
+                      iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
-                child: iconLocation != null ? Image.asset(iconLocation) : null,
-              ),
-              Container(
-                padding: EdgeInsets.all(16.0),
-                child: Center(
-                  child: Text(
-                    name.toUpperCase(),
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.display1.copyWith(
-                          color: Colors.grey[700],
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w700,
-                        ),
+                Container(
+                  child: Center(
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.display1.copyWith(
+                            color: Colors.grey[700],
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

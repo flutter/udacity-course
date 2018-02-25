@@ -225,9 +225,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       elevation: 0.0,
       title: Text(
         'Unit Converter'.toUpperCase(),
-        style: Theme.of(context).textTheme.display1.copyWith(
-              color: Colors.white,
-            ),
+        style: Theme.of(context).textTheme.display1,
       ),
       centerTitle: true,
       backgroundColor: _appBarColor,
