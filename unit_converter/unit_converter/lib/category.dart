@@ -66,27 +66,27 @@ class Category extends StatelessWidget {
       color: color,
     );
 
-    final selectCategoryHeader = Container(
-      alignment: FractionalOffset.bottomLeft,
-      padding: EdgeInsets.symmetric(
-        vertical: 16.0,
-        horizontal: 32.0,
-      ),
-      child: Text(
-        'Select category'.toUpperCase(),
-        style: Theme.of(context).textTheme.subhead.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Colors.grey[700],
-            ),
-      ),
-      decoration: BoxDecoration(
-//        borderRadius: BorderRadius.only(
-//          topLeft: _bottomSheetBorderRadius,
-//          topRight: _bottomSheetBorderRadius,
-//        ),
-        color: Colors.white,
-      ),
-    );
+//    final selectCategoryHeader = Container(
+//      alignment: FractionalOffset.bottomLeft,
+//      padding: EdgeInsets.symmetric(
+//        vertical: 16.0,
+//        horizontal: 32.0,
+//      ),
+//      child: Text(
+//        'Select category'.toUpperCase(),
+//        style: Theme.of(context).textTheme.subhead.copyWith(
+//              fontWeight: FontWeight.w600,
+//              color: Colors.grey[700],
+//            ),
+//      ),
+//      decoration: BoxDecoration(
+////        borderRadius: BorderRadius.only(
+////          topLeft: _bottomSheetBorderRadius,
+////          topRight: _bottomSheetBorderRadius,
+////        ),
+//        color: Colors.white,
+//      ),
+//    );
 
     showModalBottomSheet<Null>(
       context: context,
@@ -120,7 +120,8 @@ class Category extends StatelessWidget {
         child: InkWell(
           // We can use either the () => function or the () { function(); }
           // syntax.
-          onTap: () => _showBottomSheet(context),
+          //onTap: () => _showBottomSheet(context),
+          onTap: () => _navigateToConverter(context),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             // There are two ways to denote a list: `[]` and `List()`.
