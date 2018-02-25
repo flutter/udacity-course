@@ -185,7 +185,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         margin: _margin,
         decoration: BoxDecoration(
           // This sets the color of the [DropdownButton] itself
-          color: Colors.green[50],
+          color: Colors.grey[50],
           borderRadius: BorderRadius.circular(4.0),
           border: Border.all(
             color: Colors.grey[400],
@@ -196,17 +196,14 @@ class _ConverterRouteState extends State<ConverterRoute> {
         child: Theme(
           // This sets the color of the [DropdownMenuItem]
           data: Theme.of(context).copyWith(
-                canvasColor: Colors.green[50],
+                canvasColor: Colors.grey[50],
               ),
-          child: Padding(
-            padding: _margin,
           child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                value: name,
-                items: units,
-                onChanged: onChanged,
-                style: Theme.of(context).textTheme.display1,
-              ),
+            child: DropdownButton(
+              value: name,
+              items: units,
+              onChanged: onChanged,
+              style: Theme.of(context).textTheme.title,
             ),
           ),
         ),
@@ -214,25 +211,25 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
 
     final input = Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          // This is the widget that accepts text input. In this case, it
-          // accepts numbers and calls the onChanged property on update.
-          // You can read more about it here: https://flutter.io/text-input
-          TextField(
-            style: Theme.of(context).textTheme.display1,
-            decoration: InputDecoration(
-              errorText: _showValidationError ? 'Invalid number entered' : null,
-              labelText: 'Input',
-              border: OutlineInputBorder(),
-            ),
-            // Since we only want numerical input, we use a number keyboard. There
-            // are also other keyboards for dates, emails, phone numbers, etc.
-            keyboardType: TextInputType.number,
-            onChanged: _updateInputValue,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        // This is the widget that accepts text input. In this case, it
+        // accepts numbers and calls the onChanged property on update.
+        // You can read more about it here: https://flutter.io/text-input
+        TextField(
+          style: Theme.of(context).textTheme.display1,
+          decoration: InputDecoration(
+            errorText: _showValidationError ? 'Invalid number entered' : null,
+            labelText: 'Input',
+            border: OutlineInputBorder(),
           ),
-          _createDropdown(_fromValue.name, _updateFromConversion),
-        ],
+          // Since we only want numerical input, we use a number keyboard. There
+          // are also other keyboards for dates, emails, phone numbers, etc.
+          keyboardType: TextInputType.number,
+          onChanged: _updateInputValue,
+        ),
+        _createDropdown(_fromValue.name, _updateFromConversion),
+      ],
     );
 
     final arrows = RotatedBox(
@@ -266,10 +263,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     final selectCategoryHeader = Container(
       alignment: FractionalOffset.bottomLeft,
-      padding: EdgeInsets.symmetric(
-        vertical: 16.0,
-        horizontal: 32.0,
-      ),
+      padding: _padding,
       child: Text(
         widget.name,
         style: Theme.of(context).textTheme.headline.copyWith(
@@ -282,7 +276,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           topLeft: _bottomSheetBorderRadius,
           topRight: _bottomSheetBorderRadius,
         ),
-        color: Colors.white,
+        color: Colors.grey[50],
       ),
     );
 
@@ -295,7 +289,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            selectCategoryHeader,
+            //selectCategoryHeader,
             input,
             arrows,
             output,
@@ -380,15 +374,5 @@ class _ConverterRouteState extends State<ConverterRoute> {
     );
 
     return conversionScreen;
-
-    return Container(
-      color: widget.color[200],
-      child: Stack(
-        children: <Widget>[
-          conversionScreen,
-          selectCategoryScreen,
-        ],
-      ),
-    );
   }
 }
