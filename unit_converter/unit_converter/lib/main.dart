@@ -21,7 +21,7 @@ class UnitConverter extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
       theme: ThemeData(
-        fontFamily: 'Source Sans Pro',
+        fontFamily: 'Raleway',
       ),
       home: CategoryRoute(
         footer: false,

@@ -12,8 +12,8 @@ import 'package:unit_converter/unit.dart';
 
 final _padding = EdgeInsets.all(16.0);
 
-final _margin = EdgeInsets.symmetric(
-  vertical: 16.0,
+final _margin = EdgeInsets.only(
+  top: 16.0,
 );
 
 const _bottomSheetBorderRadius = Radius.circular(32.0);
@@ -210,33 +210,48 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    final input = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        // This is the widget that accepts text input. In this case, it
-        // accepts numbers and calls the onChanged property on update.
-        // You can read more about it here: https://flutter.io/text-input
-        TextField(
-          style: Theme.of(context).textTheme.display1,
-          decoration: InputDecoration(
-            errorText: _showValidationError ? 'Invalid number entered' : null,
-            labelText: 'Input',
-            border: OutlineInputBorder(),
-          ),
-          // Since we only want numerical input, we use a number keyboard. There
-          // are also other keyboards for dates, emails, phone numbers, etc.
-          keyboardType: TextInputType.number,
-          onChanged: _updateInputValue,
+    final input = Container(
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: _bottomSheetBorderRadius,
+          topRight: _bottomSheetBorderRadius,
+          bottomRight: _bottomSheetBorderRadius,
+          bottomLeft: _bottomSheetBorderRadius,
         ),
-        _createDropdown(_fromValue.name, _updateFromConversion),
-      ],
+        color: widget.color[50],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          // This is the widget that accepts text input. In this case, it
+          // accepts numbers and calls the onChanged property on update.
+          // You can read more about it here: https://flutter.io/text-input
+          TextField(
+            style: Theme.of(context).textTheme.display1,
+            decoration: InputDecoration(
+              errorText: _showValidationError ? 'Invalid number entered' : null,
+              labelText: 'Input',
+              border: OutlineInputBorder(),
+            ),
+            // Since we only want numerical input, we use a number keyboard. There
+            // are also other keyboards for dates, emails, phone numbers, etc.
+            keyboardType: TextInputType.number,
+            onChanged: _updateInputValue,
+          ),
+          _createDropdown(_fromValue.name, _updateFromConversion),
+        ],
+      ),
     );
 
-    final arrows = RotatedBox(
-      quarterTurns: 1,
-      child: Icon(
-        Icons.compare_arrows,
-        size: 40.0,
+    Widget arrows = Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: Icon(
+          Icons.compare_arrows,
+          size: 40.0,
+        ),
       ),
     );
 
@@ -283,23 +298,37 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // Based on the box constraints of our device, figure out how to best
     // lay out our conversion screen
     // TODO
-    final conversionScreen = SingleChildScrollView(
-      child: Padding(
-        padding: _padding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //selectCategoryHeader,
-            input,
-            arrows,
-            output,
-          ],
-        ),
-      ),
-    );
-//    final conversionScreen = LayoutBuilder(
-//      builder: (BuildContext context, BoxConstraints  constraints) {
-//        if (constraints.maxHeight > constraints.maxWidth) {
+//    final conversionScreen = SingleChildScrollView(
+//      child: Padding(
+//        padding: _padding,
+//        child: Column(
+//          crossAxisAlignment: CrossAxisAlignment.stretch,
+//          children: <Widget>[
+//            //selectCategoryHeader,
+//            input,
+//            arrows,
+//            output,
+//          ],
+//        ),
+//      ),
+//    );
+    final conversionScreen = new LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxHeight > constraints.maxWidth) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: _padding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  //selectCategoryHeader,
+                  input,
+                  arrows,
+                  output,
+                ],
+              ),
+            ),
+          );
 //          return SingleChildScrollView(
 //            child: Padding(
 //              padding: EdgeInsets.all(16.0),
@@ -313,7 +342,36 @@ class _ConverterRouteState extends State<ConverterRoute> {
 //              ),
 //            ),
 //          );
-//        } else {
+        } else {
+          arrows = Center(
+            child: Icon(
+              Icons.compare_arrows,
+              size: 40.0,
+            ),
+          );
+          return Center(
+            child: Padding(
+              padding: _padding,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  //selectCategoryHeader,
+                  Expanded(
+                      child: Center(
+                          child: Padding(
+                              padding: EdgeInsets.only(top: 16.0),
+                              child: input))),
+                  Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                      ),
+                      child: arrows),
+                  Expanded(child: Center(child: output)),
+                ],
+              ),
+            ),
+          );
 //          return SingleChildScrollView(
 //            scrollDirection: Axis.vertical,
 //            child: Padding(
@@ -343,9 +401,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
 //              ),
 //            ),
 //          );
-//        }
-//      },
-//    );
+        }
+      },
+    );
 
     final selectCategoryScreen = Column(
       mainAxisAlignment: MainAxisAlignment.end,

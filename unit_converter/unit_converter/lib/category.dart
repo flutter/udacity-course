@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
-// We use an underscore to indicate that the border radius is private.
+// We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-final _borderRadius = BorderRadius.circular(36.0);
+final _rowHeight = 100.0;
+final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 /// A [Category] for a list of [Unit]s.
 class Category extends StatelessWidget {
@@ -33,7 +34,7 @@ class Category extends StatelessWidget {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     }
-    Navigator.of(context).push(MaterialPageRoute<Null>(
+    Navigator.of(context).push(new MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         return Scaffold(
           appBar: AppBar(
@@ -87,7 +88,7 @@ class Category extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: Container(
-        height: 100.0,
+        height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
           highlightColor: color[50],
@@ -96,7 +97,7 @@ class Category extends StatelessWidget {
           // syntax.
           //onTap: () => _showBottomSheet(context),
           onTap: () => _navigateToConverter(context),
-          child: Container(
+          child: Padding(
             padding: EdgeInsets.all(16.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -112,17 +113,15 @@ class Category extends StatelessWidget {
                   child:
                       iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
-                Container(
-                  child: Center(
-                    child: Text(
-                      name,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.display1.copyWith(
-                            color: Colors.grey[700],
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w700,
-                          ),
-                    ),
+                Center(
+                  child: Text(
+                    name,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.display1.copyWith(
+                          color: Colors.grey[700],
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w700,
+                        ),
                   ),
                 ),
               ],
