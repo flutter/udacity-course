@@ -22,11 +22,12 @@ class Category extends StatelessWidget {
 
   /// Constructor.
   const Category({
+    Key key,
     this.name,
     this.units,
     this.color,
     this.iconLocation,
-  });
+  }) : super(key: key);
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
@@ -97,7 +98,7 @@ class Category extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
-                  child: Text(  
+                  child: Text(
                     name.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
