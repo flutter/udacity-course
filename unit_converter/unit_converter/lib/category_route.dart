@@ -29,10 +29,8 @@ class CategoryRoute extends StatefulWidget {
   final bool footer;
 
   const CategoryRoute({
-    Key key,
     this.footer,
-  })
-      : super(key: key);
+  });
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
