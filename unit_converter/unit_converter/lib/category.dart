@@ -23,11 +23,12 @@ class Category extends StatelessWidget {
 
   /// Constructor.
   const Category({
+    Key key,
     this.name,
     this.units,
     this.color,
     this.iconLocation,
-  });
+  }) : super(key: key);
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
@@ -98,7 +99,7 @@ class Category extends StatelessWidget {
           //onTap: () => _showBottomSheet(context),
           onTap: () => _navigateToConverter(context),
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               // There are two ways to denote a list: `[]` and `List()`.
@@ -109,7 +110,7 @@ class Category extends StatelessWidget {
               // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(right: 16.0),
+                  padding: EdgeInsets.all(16.0),
                   child:
                       iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
