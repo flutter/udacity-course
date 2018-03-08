@@ -35,7 +35,7 @@ class Category extends StatelessWidget {
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     }
-    Navigator.of(context).push(new MaterialPageRoute<Null>(
+    Navigator.of(context).push(MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         return Scaffold(
           appBar: AppBar(

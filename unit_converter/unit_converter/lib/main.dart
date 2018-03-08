@@ -22,6 +22,9 @@ class UnitConverter extends StatelessWidget {
       title: 'Unit Converter',
       theme: ThemeData(
         fontFamily: 'Raleway',
+        // This colors the [InputOutlineBorder] when it is selected
+        primaryColor: Colors.grey[500],
+        textSelectionHandleColor: Colors.green[500],
       ),
       home: CategoryRoute(
         footer: false,
