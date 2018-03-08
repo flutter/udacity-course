@@ -19,7 +19,8 @@ const apiCategory = {
   'route': 'currency',
 };
 
-const _appBarColor = Colors.greenAccent;//Color(0xFF013487);
+// TODO change this color
+const _appBarColor = Colors.greenAccent;
 
 /// Category Route (page).
 ///

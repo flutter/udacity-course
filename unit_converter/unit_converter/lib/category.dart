@@ -61,7 +61,7 @@ class Category extends StatelessWidget {
     ));
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showConversionLayer(BuildContext context) {
     final selectCategoryScreen = ConverterRoute(
       name: name,
       units: units,
@@ -96,7 +96,8 @@ class Category extends StatelessWidget {
           splashColor: color[100],
           // We can use either the () => function or the () { function(); }
           // syntax.
-          //onTap: () => _showBottomSheet(context),
+          // TODO we are switching to a Backdrop
+          //onTap: () => _showConversionLayer(context),
           onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(8.0),
