@@ -186,62 +186,68 @@ class _ConverterRouteState extends State<ConverterRoute> {
         decoration: BoxDecoration(
           // This sets the color of the [DropdownButton] itself
           color: Colors.grey[50],
-          borderRadius: BorderRadius.circular(4.0),
           border: Border.all(
             color: Colors.grey[400],
             width: 1.0,
           ),
         ),
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(vertical: 8.0),
         child: Theme(
           // This sets the color of the [DropdownMenuItem]
           data: Theme.of(context).copyWith(
                 canvasColor: Colors.grey[50],
               ),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton(
-              value: name,
-              items: units,
-              onChanged: onChanged,
-              style: Theme.of(context).textTheme.title,
+            child: ButtonTheme(
+              alignedDropdown: true,
+              child: DropdownButton(
+                value: name,
+                items: units,
+                onChanged: onChanged,
+                style: Theme.of(context).textTheme.title,
+              ),
             ),
           ),
         ),
       );
     }
-
-    final input = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        // This is the widget that accepts text input. In this case, it
-        // accepts numbers and calls the onChanged property on update.
-        // You can read more about it here: https://flutter.io/text-input
-        TextField(
-          style: Theme.of(context).textTheme.display1,
-          decoration: InputDecoration(
-            errorText: _showValidationError ? 'Invalid number entered' : null,
-            labelText: 'Input',
-            border: OutlineInputBorder(),
+    final input = Padding(
+      padding: _padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          // This is the widget that accepts text input. In this case, it
+          // accepts numbers and calls the onChanged property on update.
+          // You can read more about it here: https://flutter.io/text-input
+          TextField(
+            style: Theme.of(context).textTheme.display1,
+            decoration: InputDecoration(
+              labelStyle: Theme.of(context).textTheme.display1.apply(
+                color: Colors.grey[600],
+              ),
+              errorText: _showValidationError ? 'Invalid number entered' : null,
+              labelText: 'Input',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(0.0),
+              ),
+            ),
+            // Since we only want numerical input, we use a number keyboard. There
+            // are also other keyboards for dates, emails, phone numbers, etc.
+            keyboardType: TextInputType.number,
+            onChanged: _updateInputValue,
           ),
-          // Since we only want numerical input, we use a number keyboard. There
-          // are also other keyboards for dates, emails, phone numbers, etc.
-          keyboardType: TextInputType.number,
-          onChanged: _updateInputValue,
-        ),
-        _createDropdown(_fromValue.name, _updateFromConversion),
-      ],
-    );
-
-    final arrows = RotatedBox(
-      quarterTurns: 1,
-      child: Icon(
-        Icons.compare_arrows,
-        size: 40.0,
+          _createDropdown(_fromValue.name, _updateFromConversion),
+        ],
       ),
     );
 
+    final arrows = Icon(
+      Icons.compare_arrows,
+      size: 40.0,
+    );
+
     final output = Padding(
-      padding: _margin,
+      padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -253,7 +259,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
             decoration: InputDecoration(
               labelText: 'Output',
               labelStyle: Theme.of(context).textTheme.display1,
-              border: OutlineInputBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(0.0),
+              ),
             ),
           ),
           _createDropdown(_toValue.name, _updateToConversion),
@@ -261,6 +269,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    // TODO: use this in backdrop in later PR
     final selectCategoryHeader = Container(
       alignment: FractionalOffset.bottomLeft,
       padding: _padding,
@@ -282,97 +291,67 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     // Based on the box constraints of our device, figure out how to best
     // lay out our conversion screen
-    // TODO
-    final conversionScreen = SingleChildScrollView(
-      child: Padding(
-        padding: _padding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //selectCategoryHeader,
-            input,
-            arrows,
-            output,
-          ],
-        ),
-      ),
+    final conversionScreen = LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        if (constraints.maxHeight > constraints.maxWidth) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              input,
+              RotatedBox(
+                quarterTurns: 1,
+                child: arrows,
+              ),
+              output,
+            ],
+          );
+        } else {
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: input,
+              ),
+              arrows,
+              Expanded(
+                child: output,
+              ),
+            ],
+          );
+        }
+      },
     );
-//    final conversionScreen = LayoutBuilder(
-//      builder: (BuildContext context, BoxConstraints  constraints) {
-//        if (constraints.maxHeight > constraints.maxWidth) {
-//          return SingleChildScrollView(
-//            child: Padding(
-//              padding: EdgeInsets.all(16.0),
-//              child: Column(
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: <Widget>[
-//                  input,
-//                  arrows,
-//                  output,
-//                ],
-//              ),
-//            ),
-//          );
-//        } else {
-//          return SingleChildScrollView(
-//            scrollDirection: Axis.vertical,
-//            child: Padding(
-//              padding: EdgeInsets.only(
-//                left: 16.0,
-//                right: 16.0,
-//                top: 16.0,
-//                bottom: 60.0,
-//              ),
-//              child: Row(
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: <Widget>[
-//                  Expanded(
-//                    flex: 7,
-//                    child: Column(
-//                      crossAxisAlignment: CrossAxisAlignment.start,
-//                      children: <Widget>[
-//                        input,
-//                        output,
-//                      ],
-//                    ),
-//                  ),
-//                  Padding(
-//                    padding: EdgeInsets.only(left: 16.0),
-//                  ),
-//                ],
-//              ),
-//            ),
-//          );
-//        }
-//      },
+
+// TODO: use this in backdrop in later PR
+//    final selectCategoryScreen = Column(
+//      mainAxisAlignment: MainAxisAlignment.end,
+//      children: <Widget>[
+//        GestureDetector(
+//          onTap: () {
+//            showModalBottomSheet<Null>(
+//                context: context,
+//                builder: (BuildContext context) {
+//                  return Column(
+//                    mainAxisAlignment: MainAxisAlignment.start,
+//                    children: <Widget>[
+//                      selectCategoryHeader,
+//                      Expanded(
+//                        child: CategoryRoute(
+//                          footer: true,
+//                        ),
+//                      ),
+//                    ],
+//                  );
+//                });
+//          },
+//          child: selectCategoryHeader,
+//        ),
+//      ],
 //    );
 
-    final selectCategoryScreen = Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        GestureDetector(
-          onTap: () {
-            showModalBottomSheet<Null>(
-                context: context,
-                builder: (BuildContext context) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      selectCategoryHeader,
-                      Expanded(
-                        child: CategoryRoute(
-                          footer: true,
-                        ),
-                      ),
-                    ],
-                  );
-                });
-          },
-          child: selectCategoryHeader,
-        ),
-      ],
+    return Padding(
+      padding: _padding,
+      child: conversionScreen,
     );
-
-    return conversionScreen;
   }
 }

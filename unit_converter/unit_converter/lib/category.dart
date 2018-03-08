@@ -11,12 +11,8 @@ import 'package:unit_converter/unit.dart';
 
 // We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-<<<<<<< HEAD
 const _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
-=======
-final _borderRadius = BorderRadius.circular(36.0);
->>>>>>> redo converter page
 
 /// A [Category] for a list of [Unit]s.
 class Category extends StatelessWidget {
