@@ -61,7 +61,7 @@ class Category extends StatelessWidget {
     ));
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void _showConversionLayer(BuildContext context) {
     final selectCategoryScreen = ConverterRoute(
       name: name,
       units: units,
