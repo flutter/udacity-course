@@ -10,12 +10,8 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category_route.dart';
 import 'package:unit_converter/unit.dart';
 
-final _padding = EdgeInsets.all(16.0);
-
-final _margin = EdgeInsets.symmetric(
-  vertical: 16.0,
-);
-
+const _padding = EdgeInsets.all(16.0);
+const _margin = EdgeInsets.symmetric(vertical: 16.0);
 const _bottomSheetBorderRadius = Radius.circular(32.0);
 
 /// Converter Route (page) where users can input amounts to convert.
@@ -211,6 +207,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       );
     }
+
     final input = Padding(
       padding: _padding,
       child: Column(
@@ -223,8 +220,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
             style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
               labelStyle: Theme.of(context).textTheme.display1.apply(
-                color: Colors.grey[600],
-              ),
+                    color: Colors.grey[600],
+                  ),
               errorText: _showValidationError ? 'Invalid number entered' : null,
               labelText: 'Input',
               border: OutlineInputBorder(

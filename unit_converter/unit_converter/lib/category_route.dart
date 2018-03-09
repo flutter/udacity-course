@@ -20,7 +20,7 @@ const apiCategory = {
 };
 
 // TODO change this color
-const _appBarColor = Colors.greenAccent;
+const _appBarColor = Colors.green;
 
 /// Category Route (page).
 ///
@@ -205,15 +205,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // Based on the device size, figure out how to best lay out the list
     final deviceSize = MediaQuery.of(context).size;
     final listView = Container(
-      color: Colors.greenAccent,
-      padding: widget.footer
-          ? EdgeInsets.only(
-              bottom: 16.0,
-              left: 16.0,
-              right: 16.0,
-              top: 4.0,
-            )
-          : EdgeInsets.all(16.0),
+      color: Colors.green[100],
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(deviceSize.height > deviceSize.width),
     );
 
@@ -225,12 +218,15 @@ class _CategoryRouteState extends State<CategoryRoute> {
       elevation: 0.0,
       title: Text(
         'Unit Converter'.toUpperCase(),
-        style: Theme.of(context).textTheme.display1.copyWith(
-              color: Colors.white,
+        style: Theme.of(context).textTheme.title.apply(
+              color: Colors.grey[800],
             ),
       ),
-      centerTitle: true,
-      backgroundColor: _appBarColor,
+      backgroundColor: _appBarColor[100],
+      leading: Icon(
+        Icons.clear,
+        color: Colors.grey[800],
+      ),
     );
 
     return Scaffold(
