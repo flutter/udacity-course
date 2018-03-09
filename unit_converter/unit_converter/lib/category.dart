@@ -11,7 +11,7 @@ import 'package:unit_converter/unit.dart';
 
 // We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-final _rowHeight = 100.0;
+const _rowHeight = 100.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 /// A [Category] for a list of [Unit]s.
@@ -120,9 +120,8 @@ class Category extends StatelessWidget {
                     name,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.display1.copyWith(
-                          color: Colors.grey[700],
+                          color: Colors.black,
                           fontSize: 24.0,
-                          fontWeight: FontWeight.w700,
                         ),
                   ),
                 ),

@@ -10,9 +10,9 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category_route.dart';
 import 'package:unit_converter/unit.dart';
 
-final _padding = EdgeInsets.all(16.0);
+const _padding = EdgeInsets.all(16.0);
 
-final _margin = EdgeInsets.only(
+const _margin = EdgeInsets.only(
   top: 16.0,
 );
 
