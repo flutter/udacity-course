@@ -21,8 +21,12 @@ class HelloRectangle extends StatelessWidget {
       color: Colors.purple,
     );
     return Container(
-      padding:
-          EdgeInsets.only(top: 63.0, left: 33.0, bottom: 33.0, right: 33.0),
+      padding: EdgeInsets.only(
+        top: 64.0,
+        left: 32.0,
+        bottom: 32.0,
+        right: 32.0,
+      ),
       child: container,
     );
   }
@@ -30,10 +34,10 @@ class HelloRectangle extends StatelessWidget {
 
 /// Example of a widget with the `children` property
 var container = Column(
- children: <Widget>[
-   Text('Hello!'),
-   Text('Hello!'),
-   Text('Hello!'),
-   Text('Hello!'),
- ],
+  children: <Widget>[
+    Text('Hello!'),
+    Text('Hello!'),
+    Text('Hello!'),
+    Text('Hello!'),
+  ],
 );
