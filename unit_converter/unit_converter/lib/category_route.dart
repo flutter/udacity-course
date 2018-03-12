@@ -19,8 +19,7 @@ const apiCategory = {
   'route': 'currency',
 };
 
-// TODO change this color
-const _appBarColor = Colors.green;
+final _backgroundColor = Colors.green[100];
 
 /// Category Route (page).
 ///
@@ -205,7 +204,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // Based on the device size, figure out how to best lay out the list
     final deviceSize = MediaQuery.of(context).size;
     final listView = Container(
-      color: Colors.green[100],
+      color: _backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(deviceSize.height > deviceSize.width),
     );
@@ -222,7 +221,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
               color: Colors.grey[800],
             ),
       ),
-      backgroundColor: _appBarColor[100],
+      backgroundColor: _backgroundColor,
       leading: Icon(
         Icons.clear,
         color: Colors.grey[800],
