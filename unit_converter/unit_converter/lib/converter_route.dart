@@ -183,8 +183,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // This sets the color of the [DropdownButton] itself
           color: Colors.grey[50],
           border: Border.all(
-            color: Colors.grey[400],
-            width: 1.0,
+            color: widget.color['border'],
+            width: 3.0,
           ),
         ),
         padding: EdgeInsets.symmetric(vertical: 8.0),
@@ -208,7 +208,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    final input = Padding(
+    final input = Container(
+      color: widget.color[50],
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -241,9 +242,11 @@ class _ConverterRouteState extends State<ConverterRoute> {
     final arrows = Icon(
       Icons.compare_arrows,
       size: 40.0,
+      color: widget.color['arrows'],
     );
 
-    final output = Padding(
+    final output = Container(
+      color: widget.color[50],
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
