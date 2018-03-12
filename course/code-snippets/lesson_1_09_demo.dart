@@ -32,7 +32,7 @@ class HelloRectangle extends StatelessWidget {
   }
 }
 
-/// Example of a widget with the `children` property
+/// Example of a widget with the `children` property.
 var container = Column(
   children: <Widget>[
     Text('Hello!'),
