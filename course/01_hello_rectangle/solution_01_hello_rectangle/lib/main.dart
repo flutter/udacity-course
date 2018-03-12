@@ -26,7 +26,6 @@ class HelloRectangle extends StatelessWidget {
            'Hello!',
            style: TextStyle(fontSize: 40.0),
            textAlign: TextAlign.center,
-
          ),
        ),
      ),
