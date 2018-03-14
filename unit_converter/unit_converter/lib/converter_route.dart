@@ -136,7 +136,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
+          children: [
             Icon(
               Icons.error_outline,
               size: 180.0,
@@ -212,7 +212,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           // This is the widget that accepts text input. In this case, it
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
@@ -250,7 +250,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
+        children: [
           InputDecorator(
             child: Text(
               _convertedValue,
@@ -291,7 +291,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     var converter = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
+      children: [
         input,
         arrows,
         output,
@@ -301,7 +301,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 // TODO: use this in backdrop in later PR
 //    final selectCategoryScreen = Column(
 //      mainAxisAlignment: MainAxisAlignment.end,
-//      children: <Widget>[
+//      children: [
 //        GestureDetector(
 //          onTap: () {
 //            showModalBottomSheet<Null>(
@@ -309,7 +309,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 //                builder: (BuildContext context) {
 //                  return Column(
 //                    mainAxisAlignment: MainAxisAlignment.start,
-//                    children: <Widget>[
+//                    children: [
 //                      selectCategoryHeader,
 //                      Expanded(
 //                        child: CategoryRoute(
@@ -325,13 +325,13 @@ class _ConverterRouteState extends State<ConverterRoute> {
 //      ],
 //    );
 
-    // Based on the box constraints of our device, figure out how to best
-    // lay out our conversion screen
+    // Based on the orientation of the parent widget, figure out how to best
+    // lay out our converter.
     return Padding(
       padding: _padding,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxHeight > constraints.maxWidth) {
+      child: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (orientation == Orientation.portrait) {
             return converter;
           } else {
             return SingleChildScrollView(

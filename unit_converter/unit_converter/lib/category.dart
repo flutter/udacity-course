@@ -106,10 +106,9 @@ class Category extends StatelessWidget {
               // There are two ways to denote a list: `[]` and `List()`.
               // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
               // You can add the type argument if you'd like. We do that here,
-              // denoting that the Stack takes in a List of Widget objects,
-              // with <Widget>[...]
+              // denoting that the Stack takes in a List of Widget objects.
               // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
-              children: <Widget>[
+              children: [
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   child:
