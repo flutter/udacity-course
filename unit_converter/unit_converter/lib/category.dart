@@ -42,7 +42,7 @@ class Category extends StatelessWidget {
             elevation: 1.0,
             title: Text(
               name,
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline,
             ),
             centerTitle: true,
             backgroundColor: color[100],
@@ -112,16 +112,13 @@ class Category extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   child:
-                  iconLocation != null ? Image.asset(iconLocation) : null,
+                      iconLocation != null ? Image.asset(iconLocation) : null,
                 ),
                 Center(
                   child: Text(
                     name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.display1.copyWith(
-                      color: Colors.black,
-                      fontSize: 24.0,
-                    ),
+                    style: Theme.of(context).textTheme.headline,
                   ),
                 ),
               ],

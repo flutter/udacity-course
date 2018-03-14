@@ -219,9 +219,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           TextField(
             style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
-              labelStyle: Theme.of(context).textTheme.display1.apply(
-                    color: Colors.grey[600],
-                  ),
+              labelStyle: Theme.of(context).textTheme.display1,
               errorText: _showValidationError ? 'Invalid number entered' : null,
               labelText: 'Input',
               border: OutlineInputBorder(
@@ -275,10 +273,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       padding: _padding,
       child: Text(
         widget.name,
-        style: Theme.of(context).textTheme.headline.copyWith(
-              fontWeight: FontWeight.w600,
-              color: Colors.grey[700],
-            ),
+        style: Theme.of(context).textTheme.headline,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(

@@ -109,8 +109,9 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
-    final json =
-        DefaultAssetBundle.of(context).loadString('assets/data/regular_units.json');
+    final json = DefaultAssetBundle
+        .of(context)
+        .loadString('assets/data/regular_units.json');
     final decoder = JsonDecoder();
     final data = decoder.convert(await json);
     var ci = 0;
@@ -219,9 +220,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       elevation: 0.0,
       title: Text(
         'Unit Converter'.toUpperCase(),
-        style: Theme.of(context).textTheme.title.apply(
-              color: Colors.grey[800],
-            ),
+        style: Theme.of(context).textTheme.title,
       ),
       backgroundColor: _backgroundColor,
       leading: Icon(
