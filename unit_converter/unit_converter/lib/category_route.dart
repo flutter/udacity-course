@@ -41,45 +41,49 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
-    ColorSwatch(200, {
-      50: Color(0xFF579186),
-      100: Color(0xFF0abc9b),
-      200: Color(0xFF1f685a),
+    ColorSwatch(0x33579186, {
+      50: Color(0x33579186),
+      100: Color(0xFF0ABC9B),
+      // 1. Delete these two below, and then type these lines in as part of screencast
+      'arrows': Color(0xBB20877E),
+      'border': Color(0xFF20877E),
     }),
-    ColorSwatch(200, {
-      50: Color(0xFFffd28e),
-      100: Color(0xFFffa41c),
-      200: Color(0xFFbc6e0b),
+    ColorSwatch(0xFFFFD28E, {
+      50: Color(0xFFFFD28E),
+      100: Color(0xFFFFA41C),
+      // 1. Add these lines
+      'arrows': Color(0x55BC6E0B),
+      'border': Color(0xFFBC6E0B),
     }),
-    ColorSwatch(200, {
-      50: Color(0xFFffb7de),
-      100: Color(0xFFf94cbf),
-      200: Color(0xFF822a63),
+    ColorSwatch(0xFFFFB7DE, {
+      50: Color(0xFFFFB7DE),
+      100: Color(0xFFF94CBF),
+      'border': Color(0xFF822A63),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFF8899a8, {
       50: Color(0xFF8899a8),
       100: Color(0xFFa9cae8),
-      200: Color(0xFF395f82),
+      'border': Color(0xFF395f82),
     }),
     ColorSwatch(200, {
-      50: Color(0xFFead37e),
-      100: Color(0xFFffe070),
-      200: Color(0xFFd6ad1b),
+      50: Color(0xFFEAD37E),
+      100: Color(0xFFFFE070),
+      'border': Color(0xFFD6AD1B),
     }),
     ColorSwatch(200, {
-      50: Color(0xFF81a56f),
-      100: Color(0xFF7cc159),
-      200: Color(0xFF345125),
+      50: Color(0xFF81A56F),
+      100: Color(0xFF7CC159),
+      'border': Color(0xFF345125),
     }),
     ColorSwatch(200, {
-      50: Color(0xFFd7c0e2),
-      100: Color(0xFFca90e5),
-      200: Color(0xFF6e3f84),
+      50: Color(0xFFd7C0E2),
+      100: Color(0xFFCA90E5),
+      'border': Color(0xFF6E3F84),
     }),
     ColorSwatch(200, {
-      50: Color(0xFFce9a9a),
-      100: Color(0xFFf94d56),
-      200: Color(0xFF912d2d),
+      50: Color(0xFFCE9A9A),
+      100: Color(0xFFF94D56),
+      'border': Color(0xFF912D2D),
     }),
   ];
 
