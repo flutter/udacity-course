@@ -3,9 +3,8 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:convert' show JSON;
-
-import 'package:flutter/services.dart';
+import 'dart:convert' show JSON, UTF8;
+import 'dart:io';
 
 /// The REST API retrieves unit conversions for [Categories] that change.
 ///
@@ -16,8 +15,8 @@ import 'package:flutter/services.dart';
 ///   GET /currency: get a list of currencies
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
-  // We use the `http` package. More details: https://flutter.io/networking/
-  final httpClient = createHttpClient();
+  // We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
+  final httpClient = new HttpClient();
 
   /// The API endpoint we want to hit.
   ///
@@ -33,11 +32,13 @@ class Api {
     // but to make things cleaner, we can pass in a Uri.
     final uri = Uri.https(url, '/$category');
     try {
-      final response = await httpClient.get(uri);
+      final request = await httpClient.getUrl(uri);
+      final response = await request.close();
       if (response.statusCode != 200) {
         return null;
       }
-      final jsonResponse = JSON.decode(response.body);
+      final responseBody = await response.transform(UTF8.decoder).join();
+      final jsonResponse = JSON.decode(responseBody);
       try {
         return jsonResponse['units'];
       } on Exception catch (e) {
@@ -60,11 +61,13 @@ class Api {
     final uri = Uri.https(url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
-      final response = await httpClient.get(uri);
+      final request = await httpClient.getUrl(uri);
+      final response = await request.close();
       if (response.statusCode != 200) {
         return null;
       }
-      final jsonResponse = JSON.decode(response.body);
+      final responseBody = await response.transform(UTF8.decoder).join();
+      final jsonResponse = JSON.decode(responseBody);
       try {
         return jsonResponse['conversion'].toDouble();
       } on Exception catch (e) {
