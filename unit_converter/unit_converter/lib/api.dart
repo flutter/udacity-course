@@ -30,13 +30,7 @@ class Api {
   Future<List> getUnits(String category) async {
     final uri = Uri.https(url, '/$category');
     try {
-      final request = await httpClient.getUrl(uri);
-      final response = await request.close();
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final responseBody = await response.transform(utf8.decoder).join();
-      final jsonResponse = json.decode(responseBody);
+      final jsonResponse = await getJson(uri);
       try {
         return jsonResponse['units'];
       } on Exception catch (e) {
@@ -57,13 +51,7 @@ class Api {
     final uri = Uri.https(url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
-      final request = await httpClient.getUrl(uri);
-      final response = await request.close();
-      if (response.statusCode != 200) {
-        return null;
-      }
-      final responseBody = await response.transform(utf8.decoder).join();
-      final jsonResponse = json.decode(responseBody);
+      final jsonResponse = await getJson(uri);
       try {
         return jsonResponse['conversion'].toDouble();
       } on Exception catch (e) {
@@ -74,5 +62,19 @@ class Api {
       print('Error: $e');
       return null;
     }
+  }
+
+  /// Fetches and decodes a Json object represented as a dart `Map`.
+  Future<Map<String, dynamic>> getJson(Uri uri) async {
+    final httpRequest = await httpClient.getUrl(uri);
+    final httpResponse = await httpRequest.close();
+    if (httpResponse.statusCode != HttpStatus.OK) {
+      return null;
+    }
+    // The response is sent as a Stream of bytes that we need to convert to a
+    // `String`.
+    final responseBody = await httpResponse.transform(utf8.decoder).join();
+    // Finally, the string is parsed into a Json object.
+    return json.decode(responseBody);
   }
 }
