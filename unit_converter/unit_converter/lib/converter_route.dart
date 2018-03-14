@@ -238,9 +238,12 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    final arrows = Icon(
-      Icons.compare_arrows,
-      size: 40.0,
+    final arrows = RotatedBox(
+      quarterTurns: 1,
+      child: Icon(
+        Icons.compare_arrows,
+        size: 40.0,
+      ),
     );
 
     final output = Padding(
