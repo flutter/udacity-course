@@ -286,37 +286,13 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // Based on the box constraints of our device, figure out how to best
-    // lay out our conversion screen
-    final conversionScreen = LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxHeight > constraints.maxWidth) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              input,
-              RotatedBox(
-                quarterTurns: 1,
-                child: arrows,
-              ),
-              output,
-            ],
-          );
-        } else {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: input,
-              ),
-              arrows,
-              Expanded(
-                child: output,
-              ),
-            ],
-          );
-        }
-      },
+    var converter = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        input,
+        arrows,
+        output,
+      ],
     );
 
 // TODO: use this in backdrop in later PR
@@ -346,9 +322,26 @@ class _ConverterRouteState extends State<ConverterRoute> {
 //      ],
 //    );
 
+    // Based on the box constraints of our device, figure out how to best
+    // lay out our conversion screen
     return Padding(
       padding: _padding,
-      child: conversionScreen,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxHeight > constraints.maxWidth) {
+            return converter;
+          } else {
+            return SingleChildScrollView(
+              child: Center(
+                child: Container(
+                  width: 450.0,
+                  child: converter,
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
