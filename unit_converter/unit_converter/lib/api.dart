@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:async';
-import 'dart:convert' show JSON, UTF8;
+import 'dart:convert' show json, utf8;
 import 'dart:io';
 
 /// The REST API retrieves unit conversions for [Categories] that change.
@@ -16,7 +16,7 @@ import 'dart:io';
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
   // We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
-  final httpClient = new HttpClient();
+  final httpClient = HttpClient();
 
   /// The API endpoint we want to hit.
   ///
@@ -28,8 +28,6 @@ class Api {
   /// [category] is the category from which to retrieve units.
   /// Returns a list. Prints exception silently.
   Future<List> getUnits(String category) async {
-    // You can directly call httpClient.get() with a String as input,
-    // but to make things cleaner, we can pass in a Uri.
     final uri = Uri.https(url, '/$category');
     try {
       final request = await httpClient.getUrl(uri);
@@ -37,8 +35,8 @@ class Api {
       if (response.statusCode != 200) {
         return null;
       }
-      final responseBody = await response.transform(UTF8.decoder).join();
-      final jsonResponse = JSON.decode(responseBody);
+      final responseBody = await response.transform(utf8.decoder).join();
+      final jsonResponse = json.decode(responseBody);
       try {
         return jsonResponse['units'];
       } on Exception catch (e) {
@@ -56,8 +54,6 @@ class Api {
   /// Returns a double, which is the converted amount.
   Future<double> convert(
       String category, String amount, String fromUnit, String toUnit) async {
-    // You can directly call httpClient.get() with a String as input,
-    // but to make things cleaner, we can pass in a Uri.
     final uri = Uri.https(url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
@@ -66,8 +62,8 @@ class Api {
       if (response.statusCode != 200) {
         return null;
       }
-      final responseBody = await response.transform(UTF8.decoder).join();
-      final jsonResponse = JSON.decode(responseBody);
+      final responseBody = await response.transform(utf8.decoder).join();
+      final jsonResponse = json.decode(responseBody);
       try {
         return jsonResponse['conversion'].toDouble();
       } on Exception catch (e) {
