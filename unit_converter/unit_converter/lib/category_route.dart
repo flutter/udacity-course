@@ -41,42 +41,42 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
-    ColorSwatch(200, {
+    ColorSwatch(0xFF579186, {
       50: Color(0xFF579186),
       100: Color(0xFF0abc9b),
       200: Color(0xFF1f685a),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFFffd28e, {
       50: Color(0xFFffd28e),
       100: Color(0xFFffa41c),
       200: Color(0xFFbc6e0b),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFFffb7de, {
       50: Color(0xFFffb7de),
       100: Color(0xFFf94cbf),
       200: Color(0xFF822a63),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFF8899a8, {
       50: Color(0xFF8899a8),
       100: Color(0xFFa9cae8),
       200: Color(0xFF395f82),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFFead37e, {
       50: Color(0xFFead37e),
       100: Color(0xFFffe070),
       200: Color(0xFFd6ad1b),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFF81a56f, {
       50: Color(0xFF81a56f),
       100: Color(0xFF7cc159),
       200: Color(0xFF345125),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFFd7c0e2, {
       50: Color(0xFFd7c0e2),
       100: Color(0xFFca90e5),
       200: Color(0xFF6e3f84),
     }),
-    ColorSwatch(200, {
+    ColorSwatch(0xFFce9a9a, {
       50: Color(0xFFce9a9a),
       100: Color(0xFFf94d56),
       200: Color(0xFF912d2d),

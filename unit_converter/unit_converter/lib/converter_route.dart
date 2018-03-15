@@ -267,24 +267,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // TODO: use this in backdrop in later PR
-    final selectCategoryHeader = Container(
-      alignment: FractionalOffset.bottomLeft,
-      padding: _padding,
-      child: Text(
-        widget.name,
-        style: Theme.of(context).textTheme.headline,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: _bottomSheetBorderRadius,
-          topRight: _bottomSheetBorderRadius,
-        ),
-        color: Colors.grey[50],
-      ),
-    );
-
-    var converter = Column(
+    final converter = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         input,
@@ -292,33 +275,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
         output,
       ],
     );
-
-// TODO: use this in backdrop in later PR
-//    final selectCategoryScreen = Column(
-//      mainAxisAlignment: MainAxisAlignment.end,
-//      children: [
-//        GestureDetector(
-//          onTap: () {
-//            showModalBottomSheet<Null>(
-//                context: context,
-//                builder: (BuildContext context) {
-//                  return Column(
-//                    mainAxisAlignment: MainAxisAlignment.start,
-//                    children: [
-//                      selectCategoryHeader,
-//                      Expanded(
-//                        child: CategoryRoute(
-//                          footer: true,
-//                        ),
-//                      ),
-//                    ],
-//                  );
-//                });
-//          },
-//          child: selectCategoryHeader,
-//        ),
-//      ],
-//    );
 
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.

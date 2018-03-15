@@ -61,21 +61,6 @@ class Category extends StatelessWidget {
     ));
   }
 
-  void _showConversionLayer(BuildContext context) {
-    final selectCategoryScreen = ConverterRoute(
-      name: name,
-      units: units,
-      color: color,
-    );
-
-    showModalBottomSheet<Null>(
-      context: context,
-      builder: (BuildContext context) {
-        return selectCategoryScreen;
-      },
-    );
-  }
-
   /// Builds a custom widget that shows unit [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
@@ -96,8 +81,6 @@ class Category extends StatelessWidget {
           splashColor: color[100],
           // We can use either the () => function or the () { function(); }
           // syntax.
-          // TODO we are switching to a Backdrop
-          //onTap: () => _showConversionLayer(context),
           onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(8.0),
