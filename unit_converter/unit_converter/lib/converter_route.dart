@@ -175,35 +175,36 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
 
     Widget _createDropdown(String name, ValueChanged<dynamic> onChanged) {
-      return Container(
-        margin: _margin,
-        decoration: BoxDecoration(
-          // This sets the color of the [DropdownButton] itself
-          color: Colors.grey[50],
-          border: Border.all(
-            color: Colors.grey[400],
-            width: 1.0,
-          ),
-        ),
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        child: Theme(
-          // This sets the color of the [DropdownMenuItem]
-          data: Theme.of(context).copyWith(
-                canvasColor: Colors.grey[50],
-              ),
-          child: DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              child: DropdownButton(
-                value: name,
-                items: units,
-                onChanged: onChanged,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-          ),
-        ),
-      );
+      return Container();
+//      return Container(
+//        margin: _margin,
+//        decoration: BoxDecoration(
+//          // This sets the color of the [DropdownButton] itself
+//          color: Colors.grey[50],
+//          border: Border.all(
+//            color: Colors.grey[400],
+//            width: 1.0,
+//          ),
+//        ),
+//        padding: EdgeInsets.symmetric(vertical: 8.0),
+//        child: Theme(
+//          // This sets the color of the [DropdownMenuItem]
+//          data: Theme.of(context).copyWith(
+//                canvasColor: Colors.grey[50],
+//              ),
+//          child: DropdownButtonHideUnderline(
+//            child: ButtonTheme(
+//              alignedDropdown: true,
+//              child: DropdownButton(
+//                value: name,
+//                items: units,
+//                onChanged: onChanged,
+//                style: Theme.of(context).textTheme.title,
+//              ),
+//            ),
+//          ),
+//        ),
+//      );
     }
 
     final input = Padding(

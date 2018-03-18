@@ -57,9 +57,14 @@ class BackdropPanel extends StatelessWidget {
 }
 
 class BackdropTitle extends AnimatedWidget {
+  final frontTitle;
+  final backTitle;
+
   BackdropTitle({
     Key key,
     Listenable listenable,
+    this.frontTitle,
+    this.backTitle,
   }) : super(key: key, listenable: listenable);
 
   @override
@@ -76,14 +81,14 @@ class BackdropTitle extends AnimatedWidget {
               parent: new ReverseAnimation(animation),
               curve: new Interval(0.5, 1.0),
             ).value,
-            child: const Text('Select a Category'),
+            child: Text(backTitle),
           ),
           new Opacity(
             opacity: new CurvedAnimation(
               parent: animation,
               curve: new Interval(0.5, 1.0),
             ).value,
-            child: const Text('Unit Converter'),
+            child: Text(frontTitle),
           ),
         ],
       ),
@@ -94,13 +99,17 @@ class BackdropTitle extends AnimatedWidget {
 class Backdrop extends StatefulWidget {
   static const String routeName = '/material/backdrop';
   final currentCategory;
-  final backPanel;
   final frontPanel;
+  final backPanel;
+  final frontTitle;
+  final backTitle;
 
   const Backdrop({
     this.currentCategory,
-    this.backPanel,
     this.frontPanel,
+    this.backPanel,
+    this.frontTitle,
+    this.backTitle,
   });
 
   @override
@@ -123,16 +132,19 @@ class _BackdropState extends State<Backdrop>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _changeCategory() {
-    print('animate');
+  void didUpdateWidget(Widget old) {
+    super.didUpdateWidget(old);
+    // Formerly known as _changeCategory. This allows the front panel to
+    // open automatically, and updates the title.
     setState(() {
       _controller.forward();
     });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   bool get _backdropPanelVisible {
@@ -191,17 +203,12 @@ class _BackdropState extends State<Backdrop>
       ),
     );
 
-    final ThemeData theme = Theme.of(context);
-
     return new Container(
       key: _backdropKey,
-      color: theme.primaryColor,
+      color: widget.currentCategory.color,
       child: new Stack(
         children: <Widget>[
           widget.backPanel,
-//          CategoryRoute(changeCategory: () {
-//            _changeCategory();
-//          }),
           new PositionedTransition(
             rect: panelAnimation,
             child: new BackdropPanel(
@@ -221,6 +228,7 @@ class _BackdropState extends State<Backdrop>
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: widget.currentCategory.color,
         elevation: 0.0,
         leading: new IconButton(
           onPressed: _toggleBackdropPanelVisibility,
@@ -231,6 +239,8 @@ class _BackdropState extends State<Backdrop>
         ),
         title: new BackdropTitle(
           listenable: _controller.view,
+          frontTitle: widget.frontTitle,
+          backTitle: widget.backTitle,
         ),
       ),
       body: new LayoutBuilder(

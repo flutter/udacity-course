@@ -15,8 +15,6 @@ import 'package:unit_converter/converter_route.dart';
 
 typedef void CategoryCallback(Category category);
 
-final _backgroundColor = Colors.green[100];
-
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
@@ -29,8 +27,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
-    ColorSwatch(0xFF579186, {
-      50: Color(0xFF579186),
+    ColorSwatch(0xFF6ab7a8, {
+      50: Color(0xFF6ab7a8),
       100: Color(0xFF0abc9b),
       200: Color(0xFF1f685a),
     }),
@@ -221,7 +219,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // You can also use MediaQuery.of(context).size to check orientation
     assert(debugCheckHasMediaQuery(context));
     final listView = Container(
-      color: _backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
@@ -242,6 +239,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
               units: _currentCategory.units,
               color: _currentCategory.color,
             ),
+      frontTitle: 'Unit Converter',
+      backTitle: 'Select a Category',
     );
   }
 }
