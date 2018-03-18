@@ -206,7 +206,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    final input = Container(
+    final input = Padding(
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
