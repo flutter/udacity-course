@@ -5,7 +5,9 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
+import 'package:unit_converter/backdrop.dart';
 import 'package:unit_converter/category_route.dart';
+
 
 void main() {
   runApp(UnitConverter());
@@ -30,8 +32,8 @@ class UnitConverter extends StatelessWidget {
         primaryColor: Colors.grey[500],
         textSelectionHandleColor: Colors.green[500],
       ),
-      home: CategoryRoute(
-        footer: false,
+      home: Backdrop(
+        backPanel: CategoryRoute(),
       ),
     );
   }

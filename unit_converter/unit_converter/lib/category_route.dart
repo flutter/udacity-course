@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
+import 'package:unit_converter/backdrop.dart';
+
+typedef void CategoryCallback(Category category);
 
 /// For this app, the only category (endpoint) we retrieve from an API is Currency.
 ///
@@ -26,11 +29,9 @@ final _backgroundColor = Colors.green[100];
 /// This is the "home" page of the Unit Converter. It shows a header bar and
 /// a grid of [Categories].
 class CategoryRoute extends StatefulWidget {
-  final bool footer;
+  final CategoryCallback changeCategory;
 
-  const CategoryRoute({
-    this.footer,
-  });
+  const CategoryRoute({this.changeCategory});
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
@@ -126,6 +127,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
           units: units,
           color: _baseColors[ci],
           iconLocation: _icons[ci],
+          onTap: widget.changeCategory,
         ));
       });
       ci += 1;
@@ -212,26 +214,23 @@ class _CategoryRouteState extends State<CategoryRoute> {
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
 
-    if (widget.footer) {
-      return listView;
-    }
+//    final appBar = AppBar(
+//      elevation: 0.0,
+//      title: Text(
+//        'Unit Converter'.toUpperCase(),
+//        style: Theme.of(context).textTheme.title,
+//      ),
+//      backgroundColor: _backgroundColor,
+//      leading: Icon(
+//        Icons.clear,
+//        color: Colors.grey[800],
+//      ),
+//    );
 
-    final appBar = AppBar(
-      elevation: 0.0,
-      title: Text(
-        'Unit Converter'.toUpperCase(),
-        style: Theme.of(context).textTheme.title,
-      ),
-      backgroundColor: _backgroundColor,
-      leading: Icon(
-        Icons.clear,
-        color: Colors.grey[800],
-      ),
-    );
-
-    return Scaffold(
-      appBar: appBar,
-      body: listView,
-    );
+    return listView;
+//    return Scaffold(
+//      appBar: appBar,
+//      body: listView,
+//    );
   }
 }
