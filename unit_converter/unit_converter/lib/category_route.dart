@@ -27,8 +27,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
-    ColorSwatch(0xFF6ab7a8, {
-      50: Color(0xFF6ab7a8),
+    ColorSwatch(0xFF6AB7A8, {
+      50: Color(0xFF6AB7A8),
       100: Color(0xFF0abc9b),
       200: Color(0xFF1f685a),
     }),
