@@ -8,10 +8,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:unit_converter/api.dart';
-import 'package:unit_converter/category.dart';
-import 'package:unit_converter/unit.dart';
 import 'package:unit_converter/backdrop.dart';
+import 'package:unit_converter/category.dart';
 import 'package:unit_converter/converter_route.dart';
+import 'package:unit_converter/unit.dart';
 
 typedef void CategoryCallback(Category category);
 
