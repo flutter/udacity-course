@@ -211,12 +211,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
     final appBar = AppBar(
       elevation: 0.0,
       title: Text(
-        'Unit Converter'.toUpperCase(),
+        'Unit Converter',
         style: Theme.of(context).textTheme.title,
       ),
       backgroundColor: _backgroundColor,
       leading: Icon(
-        Icons.clear,
+        Icons.menu,
         color: Colors.grey[800],
       ),
     );

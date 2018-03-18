@@ -10,7 +10,7 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
-const _margin = EdgeInsets.symmetric(vertical: 16.0);
+const _margin = EdgeInsets.only(top: 16.0);
 
 /// Converter Route (page) where users can input amounts to convert.
 class ConverterRoute extends StatefulWidget {
@@ -206,7 +206,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
 
-    final input = Padding(
+    final input = Container(
       padding: _padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
