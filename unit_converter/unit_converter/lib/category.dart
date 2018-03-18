@@ -6,7 +6,6 @@
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
 
-import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
 
 typedef void CategoryCallback(Category category);
@@ -34,43 +33,6 @@ class Category extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  /// Navigates to the [ConverterRoute].
-  void _navigateToConverter(BuildContext context) {
-    print('hey');
-    onTap(Category(
-      name: name,
-      units: units,
-      color: color,
-    ));
-//    if (Navigator.of(context).canPop()) {
-//      Navigator.of(context).pop();
-//    }
-//    Navigator.of(context).push(MaterialPageRoute<Null>(
-//      builder: (BuildContext context) {
-//        return Scaffold(
-//          appBar: AppBar(
-//            elevation: 1.0,
-//            title: Text(
-//              name,
-//              style: Theme.of(context).textTheme.headline,
-//            ),
-//            centerTitle: true,
-//            backgroundColor: color[100],
-//          ),
-//          body: ConverterRoute(
-//            name: name,
-//            units: units,
-//            color: color,
-//          ),
-//          // This prevents the onscreen keyboard from affecting the size of the
-//          // screen, and the space given to widgets.
-//          // See https://docs.flutter.io/flutter/material/Scaffold/resizeToAvoidBottomPadding.html
-//          resizeToAvoidBottomPadding: false,
-//        );
-//      },
-//    ));
-  }
-
   /// Builds a custom widget that shows unit [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
@@ -91,7 +53,11 @@ class Category extends StatelessWidget {
           splashColor: color[100],
           // We can use either the () => function or the () { function(); }
           // syntax.
-          onTap: () => _navigateToConverter(context),
+          onTap: () => onTap(Category(
+            name: name,
+            units: units,
+            color: color,
+          )),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(

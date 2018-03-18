@@ -164,6 +164,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ));
     }
     if (_fromValue == null) {
+      print(widget.units);
       setState(() {
         _fromValue = widget.units[0];
       });
@@ -175,36 +176,35 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
 
     Widget _createDropdown(String name, ValueChanged<dynamic> onChanged) {
-      return Container();
-//      return Container(
-//        margin: _margin,
-//        decoration: BoxDecoration(
-//          // This sets the color of the [DropdownButton] itself
-//          color: Colors.grey[50],
-//          border: Border.all(
-//            color: Colors.grey[400],
-//            width: 1.0,
-//          ),
-//        ),
-//        padding: EdgeInsets.symmetric(vertical: 8.0),
-//        child: Theme(
-//          // This sets the color of the [DropdownMenuItem]
-//          data: Theme.of(context).copyWith(
-//                canvasColor: Colors.grey[50],
-//              ),
-//          child: DropdownButtonHideUnderline(
-//            child: ButtonTheme(
-//              alignedDropdown: true,
-//              child: DropdownButton(
-//                value: name,
-//                items: units,
-//                onChanged: onChanged,
-//                style: Theme.of(context).textTheme.title,
-//              ),
-//            ),
-//          ),
-//        ),
-//      );
+      return Container(
+        margin: _margin,
+        decoration: BoxDecoration(
+          // This sets the color of the [DropdownButton] itself
+          color: Colors.grey[50],
+          border: Border.all(
+            color: Colors.grey[400],
+            width: 1.0,
+          ),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        child: Theme(
+          // This sets the color of the [DropdownMenuItem]
+          data: Theme.of(context).copyWith(
+                canvasColor: Colors.grey[50],
+              ),
+          child: DropdownButtonHideUnderline(
+            child: ButtonTheme(
+              alignedDropdown: true,
+              child: DropdownButton(
+                value: name,
+                items: units,
+                onChanged: onChanged,
+                style: Theme.of(context).textTheme.title,
+              ),
+            ),
+          ),
+        ),
+      );
     }
 
     final input = Padding(
@@ -230,7 +230,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(_fromValue.name, _updateFromConversion),
+          _createDropdown(widget.units[0].name, _updateFromConversion),
         ],
       ),
     );
@@ -261,7 +261,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
               ),
             ),
           ),
-          _createDropdown(_toValue.name, _updateToConversion),
+          _createDropdown(widget.units[1].name, _updateToConversion),
         ],
       ),
     );
@@ -277,8 +277,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.
-    return SingleChildScrollView(
-      child: Padding(
+    // TODO OrientationBuilder doesn't work with Backdrop's SingleChildScrollView
+    return Padding(
         padding: _padding,
         child: OrientationBuilder(
           builder: (BuildContext context, Orientation orientation) {
@@ -294,7 +294,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
             }
           },
         ),
-      ),
     );
   }
 }

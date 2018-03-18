@@ -219,10 +219,13 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // You can also use MediaQuery.of(context).size to check orientation
     assert(debugCheckHasMediaQuery(context));
     final listView = Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
+      padding: EdgeInsets.only(
+        left: 8.0,
+        right: 8.0,
+        bottom: 48.0,
+      ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-    print(listView);
 
     return Backdrop(
       currentCategory:

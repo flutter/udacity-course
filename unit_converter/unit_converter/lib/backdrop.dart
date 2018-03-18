@@ -216,7 +216,7 @@ class _BackdropState extends State<Backdrop>
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
               title: new Text(widget.currentCategory.name),
-              child: widget.frontPanel,
+              child: SingleChildScrollView(child: widget.frontPanel),
             ),
           ),
         ],
