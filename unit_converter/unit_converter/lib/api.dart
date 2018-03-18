@@ -6,6 +6,15 @@ import 'dart:async';
 import 'dart:convert' show json, utf8;
 import 'dart:io';
 
+
+/// For this app, the only category (endpoint) we retrieve from an API is Currency.
+///
+/// If we had more, we could keep a List of categories here.
+const apiCategory = {
+  'name': 'Currency',
+  'route': 'currency',
+};
+
 /// The REST API retrieves unit conversions for [Categories] that change.
 ///
 /// For example, the currency exchange rate, stock prices, the height of the

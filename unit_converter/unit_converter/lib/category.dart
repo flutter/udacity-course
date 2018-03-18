@@ -37,7 +37,11 @@ class Category extends StatelessWidget {
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
     print('hey');
-    onTap(Category(name: name, units: units, color: color,));
+    onTap(Category(
+      name: name,
+      units: units,
+      color: color,
+    ));
 //    if (Navigator.of(context).canPop()) {
 //      Navigator.of(context).pop();
 //    }

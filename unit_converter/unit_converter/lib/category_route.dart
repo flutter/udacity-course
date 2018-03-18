@@ -11,27 +11,14 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 import 'package:unit_converter/backdrop.dart';
+import 'package:unit_converter/converter_route.dart';
 
 typedef void CategoryCallback(Category category);
 
-/// For this app, the only category (endpoint) we retrieve from an API is Currency.
-///
-/// If we had more, we could keep a List of categories here.
-const apiCategory = {
-  'name': 'Currency',
-  'route': 'currency',
-};
-
 final _backgroundColor = Colors.green[100];
 
-/// Category Route (page).
-///
-/// This is the "home" page of the Unit Converter. It shows a header bar and
-/// a grid of [Categories].
 class CategoryRoute extends StatefulWidget {
-  final CategoryCallback changeCategory;
-
-  const CategoryRoute({this.changeCategory});
+  const CategoryRoute();
 
   @override
   _CategoryRouteState createState() => _CategoryRouteState();
@@ -95,6 +82,9 @@ class _CategoryRouteState extends State<CategoryRoute> {
     'assets/icons/currency.png',
   ];
 
+  Category _defaultCategory;
+  Category _currentCategory;
+
   @override
   Future<Null> didChangeDependencies() async {
     super.didChangeDependencies();
@@ -122,12 +112,29 @@ class _CategoryRouteState extends State<CategoryRoute> {
         units.add(Unit.fromJson(data[key][i]));
       }
       setState(() {
+        if (ci == 0) {
+          _defaultCategory = Category(
+            name: key,
+            units: units,
+            color: _baseColors[ci],
+            iconLocation: _icons[ci],
+            onTap: (Category category) {
+              setState(() {
+                _currentCategory = category;
+              });
+            },
+          );
+        }
         _categories.add(Category(
           name: key,
           units: units,
           color: _baseColors[ci],
           iconLocation: _icons[ci],
-          onTap: widget.changeCategory,
+          onTap: (Category category) {
+            setState(() {
+              _currentCategory = category;
+            });
+          },
         ));
       });
       ci += 1;
@@ -162,6 +169,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
           units: units,
           color: _baseColors.last,
           iconLocation: _icons.last,
+          onTap: (Category category) {
+            setState(() {
+              _currentCategory = category;
+            });
+          },
         ));
       });
     }
@@ -213,24 +225,23 @@ class _CategoryRouteState extends State<CategoryRoute> {
       padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
+    print(listView);
 
-//    final appBar = AppBar(
-//      elevation: 0.0,
-//      title: Text(
-//        'Unit Converter'.toUpperCase(),
-//        style: Theme.of(context).textTheme.title,
-//      ),
-//      backgroundColor: _backgroundColor,
-//      leading: Icon(
-//        Icons.clear,
-//        color: Colors.grey[800],
-//      ),
-//    );
-
-    return listView;
-//    return Scaffold(
-//      appBar: appBar,
-//      body: listView,
-//    );
+    return Backdrop(
+      currentCategory:
+          _currentCategory == null ? _defaultCategory : _currentCategory,
+      backPanel: listView,
+      frontPanel: _currentCategory == null
+          ? ConverterRoute(
+              name: _defaultCategory.name,
+              units: _defaultCategory.units,
+              color: _defaultCategory.color,
+            )
+          : ConverterRoute(
+              name: _currentCategory.name,
+              units: _currentCategory.units,
+              color: _currentCategory.color,
+            ),
+    );
   }
 }

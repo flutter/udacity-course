@@ -7,12 +7,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:unit_converter/api.dart';
-import 'package:unit_converter/category_route.dart';
 import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
 const _margin = EdgeInsets.symmetric(vertical: 16.0);
-const _bottomSheetBorderRadius = Radius.circular(32.0);
 
 /// Converter Route (page) where users can input amounts to convert.
 class ConverterRoute extends StatefulWidget {
@@ -278,23 +276,23 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.
-    return Padding(
-      padding: _padding,
-      child: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          if (orientation == Orientation.portrait) {
-            return converter;
-          } else {
-            return SingleChildScrollView(
-              child: Center(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: _padding,
+        child: OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+            if (orientation == Orientation.portrait) {
+              return converter;
+            } else {
+              return Center(
                 child: Container(
                   width: 450.0,
                   child: converter,
                 ),
-              ),
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }

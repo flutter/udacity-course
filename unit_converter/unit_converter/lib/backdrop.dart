@@ -1,48 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:unit_converter/category.dart';
-import 'package:unit_converter/category_route.dart';
-import 'package:unit_converter/converter_route.dart';
-
-//
-//class Category {
-//  const Category({this.title});
-//  final String title;
-//}
-//
-//const List<Category> allCategories = const <Category>[
-//  const Category(title: 'Length'),
-//  const Category(title: 'Mass'),
-//  const Category(title: 'Volume'),
-//  const Category(title: 'Currency'),
-//  const Category(title: 'Area'),
-//  const Category(title: 'Digital Storage'),
-//];
-
-//class CategoryView extends StatelessWidget {
-//  const CategoryView({ Key key, this.category }) : super(key: key);
-//
-//  final Category category;
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    final ThemeData theme = Theme.of(context);
-//    return new ListView(
-//      children: new List<Widget>.generate(26, (int index) {
-//        return new Container(
-//          height: 48.0,
-//          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//          alignment: AlignmentDirectional.centerStart,
-//          child: new Text(
-//            'Item $index',
-//            style: theme.textTheme.subhead,
-//          ),
-//        );
-//      }).toList(),
-//    );
-//  }
-//}
 
 class BackdropPanel extends StatelessWidget {
   BackdropPanel({
@@ -62,7 +20,6 @@ class BackdropPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return new Material(
       elevation: 2.0,
       borderRadius: const BorderRadius.only(
@@ -136,12 +93,14 @@ class BackdropTitle extends AnimatedWidget {
 
 class Backdrop extends StatefulWidget {
   static const String routeName = '/material/backdrop';
+  final currentCategory;
   final backPanel;
-//  final contents;
-//  final List<Category> categories;
+  final frontPanel;
 
   const Backdrop({
+    this.currentCategory,
     this.backPanel,
+    this.frontPanel,
   });
 
   @override
@@ -152,7 +111,6 @@ class _BackdropState extends State<Backdrop>
     with SingleTickerProviderStateMixin {
   final GlobalKey _backdropKey = new GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
-  Category _category;
 
   @override
   void initState() {
@@ -170,11 +128,9 @@ class _BackdropState extends State<Backdrop>
     super.dispose();
   }
 
-  void changeCategory(Category category) {
-    print('hey man');
-    print(category);
+  void _changeCategory() {
+    print('animate');
     setState(() {
-      _category = category;
       _controller.forward();
     });
   }
@@ -242,23 +198,18 @@ class _BackdropState extends State<Backdrop>
       color: theme.primaryColor,
       child: new Stack(
         children: <Widget>[
-          CategoryRoute(changeCategory: (Category category) {
-            changeCategory(category);
-          }),
+          widget.backPanel,
+//          CategoryRoute(changeCategory: () {
+//            _changeCategory();
+//          }),
           new PositionedTransition(
             rect: panelAnimation,
             child: new BackdropPanel(
               onTap: _toggleBackdropPanelVisibility,
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
-              title: new Text(_category != null ? _category.name : 'Length'),
-              child: SingleChildScrollView(
-                child: _category != null ? new ConverterRoute(
-                  name: _category.name,
-                  units: _category.units,
-                  color: _category.color,
-                ) : Container(),
-              ),
+              title: new Text(widget.currentCategory.name),
+              child: widget.frontPanel,
             ),
           ),
         ],
@@ -288,16 +239,3 @@ class _BackdropState extends State<Backdrop>
     );
   }
 }
-//
-//class BackdropDemo extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return new MaterialApp(
-//      home: new Backdrop(),
-//    );
-//  }
-//}
-//
-//void main() {
-//  runApp(new BackdropDemo());
-//}
