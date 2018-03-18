@@ -80,8 +80,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     'assets/icons/currency.png',
   ];
 
-  Category _defaultCategory;
-  Category _currentCategory;
+  var _defaultCategory;
+  var _currentCategory;
 
   @override
   Future<Null> didChangeDependencies() async {
@@ -94,6 +94,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
       await _retrieveLocalCategories();
       await _retrieveApiCategory();
     }
+  }
+
+  void onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
@@ -116,11 +122,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
             units: units,
             color: _baseColors[ci],
             iconLocation: _icons[ci],
-            onTap: (Category category) {
-              setState(() {
-                _currentCategory = category;
-              });
-            },
+            onTap: onCategoryTap,
           );
         }
         _categories.add(Category(
@@ -128,11 +130,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
           units: units,
           color: _baseColors[ci],
           iconLocation: _icons[ci],
-          onTap: (Category category) {
-            setState(() {
-              _currentCategory = category;
-            });
-          },
+          onTap: onCategoryTap,
         ));
       });
       ci += 1;
@@ -167,11 +165,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
           units: units,
           color: _baseColors.last,
           iconLocation: _icons.last,
-          onTap: (Category category) {
-            setState(() {
-              _currentCategory = category;
-            });
-          },
+          onTap: onCategoryTap,
         ));
       });
     }
@@ -230,7 +224,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
-      backPanel: listView,
       frontPanel: _currentCategory == null
           ? ConverterRoute(
               name: _defaultCategory.name,
@@ -242,6 +235,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
               units: _currentCategory.units,
               color: _currentCategory.color,
             ),
+      backPanel: listView,
       frontTitle: 'Unit Converter',
       backTitle: 'Select a Category',
     );

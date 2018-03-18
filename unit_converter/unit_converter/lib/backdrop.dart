@@ -1,9 +1,13 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
 class BackdropPanel extends StatelessWidget {
-  BackdropPanel({
+  const BackdropPanel({
     Key key,
     this.onTap,
     this.onVerticalDragUpdate,
@@ -20,34 +24,34 @@ class BackdropPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
+    return Material(
       elevation: 2.0,
-      borderRadius: const BorderRadius.only(
-        topLeft: const Radius.circular(16.0),
-        topRight: const Radius.circular(16.0),
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
       ),
-      child: new Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          new GestureDetector(
+          GestureDetector(
             behavior: HitTestBehavior.opaque,
             onVerticalDragUpdate: onVerticalDragUpdate,
             onVerticalDragEnd: onVerticalDragEnd,
             onTap: onTap,
-            child: new Container(
+            child: Container(
               height: 48.0,
-              padding: const EdgeInsetsDirectional.only(start: 16.0),
+              padding: EdgeInsetsDirectional.only(start: 16.0),
               alignment: AlignmentDirectional.centerStart,
-              child: new DefaultTextStyle(
+              child: DefaultTextStyle(
                 style: Theme.of(context).textTheme.subhead,
                 child: title,
               ),
             ),
           ),
-          const Divider(
+          Divider(
             height: 1.0,
           ),
-          new Expanded(
+          Expanded(
             child: child,
           ),
         ],
@@ -60,7 +64,7 @@ class BackdropTitle extends AnimatedWidget {
   final frontTitle;
   final backTitle;
 
-  BackdropTitle({
+  const BackdropTitle({
     Key key,
     Listenable listenable,
     this.frontTitle,
@@ -70,23 +74,23 @@ class BackdropTitle extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     final Animation<double> animation = this.listenable;
-    return new DefaultTextStyle(
+    return DefaultTextStyle(
       style: Theme.of(context).primaryTextTheme.title,
       softWrap: false,
       overflow: TextOverflow.ellipsis,
-      child: new Stack(
+      child: Stack(
         children: <Widget>[
-          new Opacity(
-            opacity: new CurvedAnimation(
-              parent: new ReverseAnimation(animation),
-              curve: new Interval(0.5, 1.0),
+          Opacity(
+            opacity: CurvedAnimation(
+              parent: ReverseAnimation(animation),
+              curve: Interval(0.5, 1.0),
             ).value,
             child: Text(backTitle),
           ),
-          new Opacity(
-            opacity: new CurvedAnimation(
+          Opacity(
+            opacity: CurvedAnimation(
               parent: animation,
-              curve: new Interval(0.5, 1.0),
+              curve: Interval(0.5, 1.0),
             ).value,
             child: Text(frontTitle),
           ),
@@ -97,7 +101,7 @@ class BackdropTitle extends AnimatedWidget {
 }
 
 class Backdrop extends StatefulWidget {
-  static const String routeName = '/material/backdrop';
+  static String routeName = '/material/backdrop';
   final currentCategory;
   final frontPanel;
   final backPanel;
@@ -113,19 +117,19 @@ class Backdrop extends StatefulWidget {
   });
 
   @override
-  _BackdropState createState() => new _BackdropState();
+  _BackdropState createState() => _BackdropState();
 }
 
 class _BackdropState extends State<Backdrop>
     with SingleTickerProviderStateMixin {
-  final GlobalKey _backdropKey = new GlobalKey(debugLabel: 'Backdrop');
+  final GlobalKey _backdropKey = GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = new AnimationController(
-      duration: const Duration(milliseconds: 300),
+    _controller = AnimationController(
+      duration: Duration(milliseconds: 300),
       value: 1.0,
       vsync: this,
     );
@@ -188,34 +192,34 @@ class _BackdropState extends State<Backdrop>
   }
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
-    const double panelTitleHeight = 48.0;
+    double panelTitleHeight = 48.0;
     final Size panelSize = constraints.biggest;
     final double panelTop = panelSize.height - panelTitleHeight;
 
-    Animation<RelativeRect> panelAnimation = new RelativeRectTween(
-      begin: new RelativeRect.fromLTRB(
+    Animation<RelativeRect> panelAnimation = RelativeRectTween(
+      begin: RelativeRect.fromLTRB(
           0.0, panelTop, 0.0, panelTop - panelSize.height),
-      end: new RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     ).animate(
-      new CurvedAnimation(
+      CurvedAnimation(
         parent: _controller,
         curve: Curves.linear,
       ),
     );
 
-    return new Container(
+    return Container(
       key: _backdropKey,
       color: widget.currentCategory.color,
-      child: new Stack(
+      child: Stack(
         children: <Widget>[
           widget.backPanel,
-          new PositionedTransition(
+          PositionedTransition(
             rect: panelAnimation,
-            child: new BackdropPanel(
+            child: BackdropPanel(
               onTap: _toggleBackdropPanelVisibility,
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
-              title: new Text(widget.currentCategory.name),
+              title: Text(widget.currentCategory.name),
               child: SingleChildScrollView(child: widget.frontPanel),
             ),
           ),
@@ -226,24 +230,24 @@ class _BackdropState extends State<Backdrop>
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: widget.currentCategory.color,
         elevation: 0.0,
-        leading: new IconButton(
+        leading: IconButton(
           onPressed: _toggleBackdropPanelVisibility,
-          icon: new AnimatedIcon(
+          icon: AnimatedIcon(
             icon: AnimatedIcons.close_menu,
             progress: _controller.view,
           ),
         ),
-        title: new BackdropTitle(
+        title: BackdropTitle(
           listenable: _controller.view,
           frontTitle: widget.frontTitle,
           backTitle: widget.backTitle,
         ),
       ),
-      body: new LayoutBuilder(
+      body: LayoutBuilder(
         builder: _buildStack,
       ),
     );

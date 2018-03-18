@@ -163,13 +163,20 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       ));
     }
-    if (_fromValue == null) {
-      print(widget.units);
+
+    if (_fromValue == null ||
+        !(units.any((unit) {
+          return unit.value == _fromValue.name;
+        }))) {
       setState(() {
         _fromValue = widget.units[0];
       });
     }
-    if (_toValue == null) {
+
+    if (_toValue == null ||
+        !(units.any((unit) {
+          return unit.value == _toValue.name;
+        }))) {
       setState(() {
         _toValue = widget.units[1];
       });
@@ -230,7 +237,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(widget.units[0].name, _updateFromConversion),
+          _createDropdown(_fromValue.name, _updateFromConversion),
         ],
       ),
     );
@@ -261,7 +268,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
               ),
             ),
           ),
-          _createDropdown(widget.units[1].name, _updateToConversion),
+          _createDropdown(_toValue.name, _updateToConversion),
         ],
       ),
     );
@@ -279,21 +286,21 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // lay out our converter.
     // TODO OrientationBuilder doesn't work with Backdrop's SingleChildScrollView
     return Padding(
-        padding: _padding,
-        child: OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
-            if (orientation == Orientation.portrait) {
-              return converter;
-            } else {
-              return Center(
-                child: Container(
-                  width: 450.0,
-                  child: converter,
-                ),
-              );
-            }
-          },
-        ),
+      padding: _padding,
+      child: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (orientation == Orientation.portrait) {
+            return converter;
+          } else {
+            return Center(
+              child: Container(
+                width: 450.0,
+                child: converter,
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
