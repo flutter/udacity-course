@@ -10,10 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/api.dart';
 import 'package:unit_converter/backdrop.dart';
 import 'package:unit_converter/category.dart';
+import 'package:unit_converter/category_tile.dart';
 import 'package:unit_converter/converter_route.dart';
 import 'package:unit_converter/unit.dart';
-
-typedef void CategoryCallback(Category category);
 
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
@@ -109,31 +108,25 @@ class _CategoryRouteState extends State<CategoryRoute> {
         .loadString('assets/data/regular_units.json');
     final decoder = JsonDecoder();
     final data = decoder.convert(await json);
-    var ci = 0;
+    var categoryIndex = 0;
     for (var key in data.keys) {
       final units = <Unit>[];
       for (var i = 0; i < data[key].length; i++) {
         units.add(Unit.fromJson(data[key][i]));
       }
+      var category = Category(
+        name: key,
+        units: units,
+        color: _baseColors[categoryIndex],
+        iconLocation: _icons[categoryIndex],
+      );
       setState(() {
-        if (ci == 0) {
-          _defaultCategory = Category(
-            name: key,
-            units: units,
-            color: _baseColors[ci],
-            iconLocation: _icons[ci],
-            onTap: onCategoryTap,
-          );
+        if (categoryIndex == 0) {
+          _defaultCategory = category;
         }
-        _categories.add(Category(
-          name: key,
-          units: units,
-          color: _baseColors[ci],
-          iconLocation: _icons[ci],
-          onTap: onCategoryTap,
-        ));
+        _categories.add(category);
       });
-      ci += 1;
+      categoryIndex += 1;
     }
   }
 
@@ -165,7 +158,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
           units: units,
           color: _baseColors.last,
           iconLocation: _icons.last,
-          onTap: onCategoryTap,
         ));
       });
     }
@@ -185,14 +177,25 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
     if (deviceOrientation == Orientation.portrait) {
       return ListView.builder(
-        itemBuilder: (BuildContext context, int index) => _categories[index],
+        itemBuilder: (BuildContext context, int index) =>
+            _categories.map((Category c) {
+              return CategoryTile(
+                category: c,
+                onTap: onCategoryTap,
+              );
+            }).toList()[index],
         itemCount: _categories.length,
       );
     } else {
       return GridView.count(
         crossAxisCount: 2,
         childAspectRatio: 3.0,
-        children: _categories,
+        children: _categories.map((Category c) {
+          return CategoryTile(
+            category: c,
+            onTap: onCategoryTap,
+          );
+        }).toList(),
       );
     }
   }
@@ -225,16 +228,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
       frontPanel: _currentCategory == null
-          ? ConverterRoute(
-              name: _defaultCategory.name,
-              units: _defaultCategory.units,
-              color: _defaultCategory.color,
-            )
-          : ConverterRoute(
-              name: _currentCategory.name,
-              units: _currentCategory.units,
-              color: _currentCategory.color,
-            ),
+          ? ConverterRoute(category: _defaultCategory)
+          : ConverterRoute(category: _currentCategory),
       backPanel: listView,
       frontTitle: 'Unit Converter',
       backTitle: 'Select a Category',

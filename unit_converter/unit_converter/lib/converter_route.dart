@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:unit_converter/api.dart';
+import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
@@ -14,15 +15,11 @@ const _margin = EdgeInsets.only(top: 16.0);
 
 /// Converter Route (page) where users can input amounts to convert.
 class ConverterRoute extends StatefulWidget {
-  final String name;
-  final ColorSwatch color;
-  final List<Unit> units;
+  final Category category;
 
   /// Constructor.
   const ConverterRoute({
-    this.name,
-    this.color,
-    this.units,
+    this.category,
   });
 
   @override
@@ -40,7 +37,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
     // the Currency category
-    if (widget.name == apiCategory['name']) {
+    if (widget.category.name == apiCategory['name']) {
       final api = Api();
       final conversion = await api.convert(apiCategory['route'],
           _inputValue.toString(), _fromValue.name, _toValue.name);
@@ -100,7 +97,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
   }
 
   Unit _getUnit(String unitName) {
-    for (var unit in widget.units) {
+    for (var unit in widget.category.units) {
       if (unit.name == unitName) {
         return unit;
       }
@@ -128,12 +125,12 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.units == null ||
-        (widget.name == apiCategory['name'] && _showErrorUI)) {
+    if (widget.category.units == null ||
+        (widget.category.name == apiCategory['name'] && _showErrorUI)) {
       return Container(
         margin: _padding,
         padding: _padding,
-        color: widget.color[200],
+        color: widget.category.color[200],
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,7 +152,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }
     final units = <DropdownMenuItem>[];
-    for (var unit in widget.units) {
+    for (var unit in widget.category.units) {
       units.add(DropdownMenuItem(
         value: unit.name,
         child: Container(
@@ -172,7 +169,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           return unit.value == _fromValue.name;
         }))) {
       setState(() {
-        _fromValue = widget.units[0];
+        _fromValue = widget.category.units[0];
       });
     }
 
@@ -181,7 +178,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
           return unit.value == _toValue.name;
         }))) {
       setState(() {
-        _toValue = widget.units[1];
+        _toValue = widget.category.units[1];
       });
     }
 
@@ -293,7 +290,9 @@ class _ConverterRouteState extends State<ConverterRoute> {
       child: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
           if (orientation == Orientation.portrait) {
-            return converter;
+            return SingleChildScrollView(
+              child: converter,
+            );
           } else {
             return SingleChildScrollView(
               child: Center(

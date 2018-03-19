@@ -6,6 +6,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import 'package:unit_converter/category.dart';
+
+const double _kFlingVelocity = 2.0;
+
 class BackdropPanel extends StatelessWidget {
   const BackdropPanel({
     Key key,
@@ -61,8 +65,8 @@ class BackdropPanel extends StatelessWidget {
 }
 
 class BackdropTitle extends AnimatedWidget {
-  final frontTitle;
-  final backTitle;
+  final String frontTitle;
+  final String backTitle;
 
   const BackdropTitle({
     Key key,
@@ -78,6 +82,8 @@ class BackdropTitle extends AnimatedWidget {
       style: Theme.of(context).primaryTextTheme.title,
       softWrap: false,
       overflow: TextOverflow.ellipsis,
+      // Here, we do a custom cross fade between backTitle and frontTitle.
+      // This makes a smooth animation between the two texts.
       child: Stack(
         children: <Widget>[
           Opacity(
@@ -101,12 +107,11 @@ class BackdropTitle extends AnimatedWidget {
 }
 
 class Backdrop extends StatefulWidget {
-  static String routeName = '/material/backdrop';
-  final currentCategory;
-  final frontPanel;
-  final backPanel;
-  final frontTitle;
-  final backTitle;
+  final Category currentCategory;
+  final Widget frontPanel;
+  final Widget backPanel;
+  final String frontTitle;
+  final String backTitle;
 
   const Backdrop({
     this.currentCategory,
@@ -128,6 +133,9 @@ class _BackdropState extends State<Backdrop>
   @override
   void initState() {
     super.initState();
+    // This creates an [AnimationController] that can allows for animation for
+    // the BackdropPanel. 0.00 means that the front panel is in "tab" (hidden)
+    // mode, while 1.0 means that the front panel is open.
     _controller = AnimationController(
       duration: Duration(milliseconds: 300),
       value: 1.0,
@@ -136,13 +144,17 @@ class _BackdropState extends State<Backdrop>
   }
 
   @override
-  void didUpdateWidget(Widget old) {
+  void didUpdateWidget(Backdrop old) {
     super.didUpdateWidget(old);
     // Formerly known as _changeCategory. This allows the front panel to
     // open automatically, and updates the title.
-    setState(() {
-      _controller.forward();
-    });
+    if (widget.currentCategory != old.currentCategory) {
+      setState(() {
+        _controller.fling(
+            velocity:
+                _backdropPanelVisible ? -_kFlingVelocity : _kFlingVelocity);
+      });
+    }
   }
 
   @override
@@ -158,7 +170,8 @@ class _BackdropState extends State<Backdrop>
   }
 
   void _toggleBackdropPanelVisibility() {
-    _controller.fling(velocity: _backdropPanelVisible ? -2.0 : 2.0);
+    _controller.fling(
+        velocity: _backdropPanelVisible ? -_kFlingVelocity : _kFlingVelocity);
   }
 
   double get _backdropHeight {
@@ -173,8 +186,7 @@ class _BackdropState extends State<Backdrop>
     if (_controller.isAnimating ||
         _controller.status == AnimationStatus.completed) return;
 
-    _controller.value -=
-        details.primaryDelta / (_backdropHeight ?? details.primaryDelta);
+    _controller.value -= details.primaryDelta / _backdropHeight;
   }
 
   void _handleDragEnd(DragEndDetails details) {
@@ -184,15 +196,17 @@ class _BackdropState extends State<Backdrop>
     final double flingVelocity =
         details.velocity.pixelsPerSecond.dy / _backdropHeight;
     if (flingVelocity < 0.0)
-      _controller.fling(velocity: math.max(2.0, -flingVelocity));
+      _controller.fling(velocity: math.max(_kFlingVelocity, -flingVelocity));
     else if (flingVelocity > 0.0)
-      _controller.fling(velocity: math.min(-2.0, -flingVelocity));
+      _controller.fling(velocity: math.min(-_kFlingVelocity, -flingVelocity));
     else
-      _controller.fling(velocity: _controller.value < 0.5 ? -2.0 : 2.0);
+      _controller.fling(
+          velocity:
+              _controller.value < 0.5 ? -_kFlingVelocity : _kFlingVelocity);
   }
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
-    double panelTitleHeight = 48.0;
+    const double panelTitleHeight = 48.0;
     final Size panelSize = constraints.biggest;
     final double panelTop = panelSize.height - panelTitleHeight;
 
@@ -200,12 +214,7 @@ class _BackdropState extends State<Backdrop>
       begin: RelativeRect.fromLTRB(
           0.0, panelTop, 0.0, panelTop - panelSize.height),
       end: RelativeRect.fromLTRB(0.0, 0.0, 0.0, 0.0),
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.linear,
-      ),
-    );
+    ).animate(_controller.view);
 
     return Container(
       key: _backdropKey,
@@ -220,7 +229,7 @@ class _BackdropState extends State<Backdrop>
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
               title: Text(widget.currentCategory.name),
-              child: SingleChildScrollView(child: widget.frontPanel),
+              child: widget.frontPanel,
             ),
           ),
         ],
