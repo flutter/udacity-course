@@ -128,12 +128,15 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.units == null || _showErrorUI) {
+    if (widget.units == null ||
+        (widget.name == apiCategory['name'] && _showErrorUI)) {
       return Container(
+        margin: _padding,
+        padding: _padding,
         color: widget.color[200],
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
               Icons.error_outline,
@@ -292,10 +295,12 @@ class _ConverterRouteState extends State<ConverterRoute> {
           if (orientation == Orientation.portrait) {
             return converter;
           } else {
-            return Center(
-              child: Container(
-                width: 450.0,
-                child: converter,
+            return SingleChildScrollView(
+              child: Center(
+                child: Container(
+                  width: 450.0,
+                  child: converter,
+                ),
               ),
             );
           }
