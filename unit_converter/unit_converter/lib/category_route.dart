@@ -11,7 +11,7 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/backdrop.dart';
 import 'package:unit_converter/category.dart';
 import 'package:unit_converter/category_tile.dart';
-import 'package:unit_converter/converter_route.dart';
+import 'package:unit_converter/unit_converter.dart';
 import 'package:unit_converter/unit.dart';
 
 class CategoryRoute extends StatefulWidget {
@@ -228,8 +228,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
       frontPanel: _currentCategory == null
-          ? ConverterRoute(category: _defaultCategory)
-          : ConverterRoute(category: _currentCategory),
+          ? UnitConverter(category: _defaultCategory)
+          : UnitConverter(category: _currentCategory),
       backPanel: listView,
       frontTitle: Text('Unit Converter'),
       backTitle: Text('Select a Category'),

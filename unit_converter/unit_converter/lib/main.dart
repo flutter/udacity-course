@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:unit_converter/category_route.dart';
 
 void main() {
-  runApp(UnitConverter());
+  runApp(UnitConverterApp());
 }
 
 /// This widget is the root of our application.
 ///
 /// The first route (page) we see is a grid of unit categories.
-class UnitConverter extends StatelessWidget {
+class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

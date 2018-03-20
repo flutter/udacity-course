@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:unit_converter/unit.dart';
 
-/// A [Category] for a list of [Unit]s.
+/// A [Category] keeps track of a list of [Unit]s.
 class Category {
   final String name;
   final List<Unit> units;

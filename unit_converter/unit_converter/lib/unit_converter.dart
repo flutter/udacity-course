@@ -13,20 +13,20 @@ import 'package:unit_converter/unit.dart';
 const _padding = EdgeInsets.all(16.0);
 const _margin = EdgeInsets.only(top: 16.0);
 
-/// Converter Route (page) where users can input amounts to convert.
-class ConverterRoute extends StatefulWidget {
+/// Unit Converter where users can input amounts to convert.
+class UnitConverter extends StatefulWidget {
   final Category category;
 
-  /// Constructor.
-  const ConverterRoute({
+  /// This unit converter handles units for a specific [Category].
+  const UnitConverter({
     this.category,
   });
 
   @override
-  _ConverterRouteState createState() => _ConverterRouteState();
+  _UnitConverterState createState() => _UnitConverterState();
 }
 
-class _ConverterRouteState extends State<ConverterRoute> {
+class _UnitConverterState extends State<UnitConverter> {
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
