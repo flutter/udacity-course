@@ -10,8 +10,8 @@ import 'package:unit_converter/category.dart';
 
 const double _kFlingVelocity = 2.0;
 
-class BackdropPanel extends StatelessWidget {
-  const BackdropPanel({
+class _BackdropPanel extends StatelessWidget {
+  const _BackdropPanel({
     Key key,
     this.onTap,
     this.onVerticalDragUpdate,
@@ -64,11 +64,11 @@ class BackdropPanel extends StatelessWidget {
   }
 }
 
-class BackdropTitle extends AnimatedWidget {
-  final String frontTitle;
-  final String backTitle;
+class _BackdropTitle extends AnimatedWidget {
+  final Widget frontTitle;
+  final Widget backTitle;
 
-  const BackdropTitle({
+  const _BackdropTitle({
     Key key,
     Listenable listenable,
     this.frontTitle,
@@ -91,14 +91,14 @@ class BackdropTitle extends AnimatedWidget {
               parent: ReverseAnimation(animation),
               curve: Interval(0.5, 1.0),
             ).value,
-            child: Text(backTitle),
+            child: backTitle,
           ),
           Opacity(
             opacity: CurvedAnimation(
               parent: animation,
               curve: Interval(0.5, 1.0),
             ).value,
-            child: Text(frontTitle),
+            child: frontTitle,
           ),
         ],
       ),
@@ -110,8 +110,8 @@ class Backdrop extends StatefulWidget {
   final Category currentCategory;
   final Widget frontPanel;
   final Widget backPanel;
-  final String frontTitle;
-  final String backTitle;
+  final Widget frontTitle;
+  final Widget backTitle;
 
   const Backdrop({
     this.currentCategory,
@@ -224,7 +224,7 @@ class _BackdropState extends State<Backdrop>
           widget.backPanel,
           PositionedTransition(
             rect: panelAnimation,
-            child: BackdropPanel(
+            child: _BackdropPanel(
               onTap: _toggleBackdropPanelVisibility,
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
@@ -250,7 +250,7 @@ class _BackdropState extends State<Backdrop>
             progress: _controller.view,
           ),
         ),
-        title: BackdropTitle(
+        title: _BackdropTitle(
           listenable: _controller.view,
           frontTitle: widget.frontTitle,
           backTitle: widget.backTitle,

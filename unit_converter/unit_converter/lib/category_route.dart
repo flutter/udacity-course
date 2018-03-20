@@ -231,8 +231,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
           ? ConverterRoute(category: _defaultCategory)
           : ConverterRoute(category: _currentCategory),
       backPanel: listView,
-      frontTitle: 'Unit Converter',
-      backTitle: 'Select a Category',
+      frontTitle: Text('Unit Converter'),
+      backTitle: Text('Select a Category'),
     );
   }
 }
