@@ -111,10 +111,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
     final data = decoder.convert(await json);
     var categoryIndex = 0;
     for (var key in data.keys) {
-      final List<Unit> units = [];
-      for (Map data in data[key]) {
-        units.add(Unit.fromJson(data));
+      if (data is! Map) {
+        throw('Data retrieved from API is not a Map');
       }
+      final List<Unit> units =
+          data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
       var category = Category(
         name: key,
