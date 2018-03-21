@@ -15,7 +15,9 @@ class Category {
   final ColorSwatch color;
   final String iconLocation;
 
-  /// Constructor.
+  /// A [Category] saves the name of the Category (e.g. Length), a list of its
+  /// units for conversions (e.g. millimeter, meter), its color for the UI,
+  /// and the icon that is associated with it (e.g. ruler).
   const Category({
     Key key,
     this.name,

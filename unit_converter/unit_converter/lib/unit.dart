@@ -9,6 +9,7 @@ class Unit {
   final String name;
   final double conversion;
 
+  /// A [Unit] stores its name and conversion factor (compared to a base unit).
   const Unit({
     @required this.name,
     @required this.conversion,
@@ -18,7 +19,7 @@ class Unit {
 
   Unit.fromJson(Map jsonMap) :
     name = jsonMap['name'],
-    conversion = jsonMap['conversion'],
+    conversion = jsonMap['conversion'].toDouble(),
     assert(name != null),
     assert(conversion != null);
 }

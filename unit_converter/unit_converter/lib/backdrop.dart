@@ -146,8 +146,6 @@ class _BackdropState extends State<Backdrop>
   @override
   void didUpdateWidget(Backdrop old) {
     super.didUpdateWidget(old);
-    // Formerly known as _changeCategory. This allows the front panel to
-    // open automatically, and updates the title.
     if (widget.currentCategory != old.currentCategory) {
       setState(() {
         _controller.fling(

@@ -17,7 +17,7 @@ const _margin = EdgeInsets.only(top: 16.0);
 class UnitConverter extends StatefulWidget {
   final Category category;
 
-  /// This unit converter handles units for a specific [Category].
+  /// This [UnitConverter] handles [Unit]s for a specific [Category].
   const UnitConverter({
     this.category,
   });
@@ -97,12 +97,12 @@ class _UnitConverterState extends State<UnitConverter> {
   }
 
   Unit _getUnit(String unitName) {
-    for (var unit in widget.category.units) {
-      if (unit.name == unitName) {
-        return unit;
-      }
-    }
-    return null;
+    return widget.category.units.firstWhere(
+      (Unit unit) {
+        return unit.name == unitName;
+      },
+      orElse: null,
+    );
   }
 
   void _updateFromConversion(dynamic unitName) {
@@ -127,27 +127,29 @@ class _UnitConverterState extends State<UnitConverter> {
   Widget build(BuildContext context) {
     if (widget.category.units == null ||
         (widget.category.name == apiCategory['name'] && _showErrorUI)) {
-      return Container(
-        margin: _padding,
-        padding: _padding,
-        color: widget.category.color[200],
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.error_outline,
-              size: 180.0,
-              color: Colors.white,
-            ),
-            Text(
-              "Oh no! We can't connect right now!",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline.copyWith(
-                    color: Colors.white,
-                  ),
-            ),
-          ],
+      return SingleChildScrollView(
+        child: Container(
+          margin: _padding,
+          padding: _padding,
+          color: widget.category.color[200],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline,
+                size: 180.0,
+                color: Colors.white,
+              ),
+              Text(
+                "Oh no! We can't connect right now!",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline.copyWith(
+                      color: Colors.white,
+                    ),
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -285,25 +287,27 @@ class _UnitConverterState extends State<UnitConverter> {
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.
     // TODO OrientationBuilder doesn't work with Backdrop's SingleChildScrollView
-    return Padding(
-      padding: _padding,
-      child: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          if (orientation == Orientation.portrait) {
-            return SingleChildScrollView(
-              child: converter,
-            );
-          } else {
-            return SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  width: 450.0,
-                  child: converter,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: _padding,
+        child: OrientationBuilder(
+          builder: (BuildContext context, Orientation orientation) {
+            if (orientation == Orientation.portrait) {
+              return SingleChildScrollView(
+                child: converter,
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Center(
+                  child: Container(
+                    width: 450.0,
+                    child: converter,
+                  ),
                 ),
-              ),
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }

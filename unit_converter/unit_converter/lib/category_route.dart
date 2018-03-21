@@ -14,6 +14,7 @@ import 'package:unit_converter/category_tile.dart';
 import 'package:unit_converter/unit_converter.dart';
 import 'package:unit_converter/unit.dart';
 
+/// Loads in unit conversion data and displays the data
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
@@ -110,10 +111,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
     final data = decoder.convert(await json);
     var categoryIndex = 0;
     for (var key in data.keys) {
-      final units = <Unit>[];
-      for (var i = 0; i < data[key].length; i++) {
-        units.add(Unit.fromJson(data[key][i]));
+      final List<Unit> units = [];
+      for (Map data in data[key]) {
+        units.add(Unit.fromJson(data));
       }
+
       var category = Category(
         name: key,
         units: units,
@@ -146,10 +148,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     if (jsonUnits != null) {
       final units = <Unit>[];
       for (var unit in jsonUnits) {
-        units.add(Unit(
-          name: unit['name'],
-          conversion: unit['conversion'].toDouble(),
-        ));
+        units.add(Unit.fromJson(unit));
       }
       setState(() {
         _categories.removeLast();
@@ -177,13 +176,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // For more details, see https://github.com/dart-lang/sdk/issues/27755
     if (deviceOrientation == Orientation.portrait) {
       return ListView.builder(
-        itemBuilder: (BuildContext context, int index) =>
-            _categories.map((Category c) {
-              return CategoryTile(
-                category: c,
-                onTap: onCategoryTap,
-              );
-            }).toList()[index],
+        itemBuilder: (BuildContext context, int index) {
+          return CategoryTile(
+            category: _categories[index],
+            onTap: onCategoryTap,
+          );
+        },
         itemCount: _categories.length,
       );
     } else {
