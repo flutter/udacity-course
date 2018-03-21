@@ -286,28 +286,25 @@ class _UnitConverterState extends State<UnitConverter> {
 
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.
-    // TODO OrientationBuilder doesn't work with Backdrop's SingleChildScrollView
-    return SingleChildScrollView(
-      child: Padding(
-        padding: _padding,
-        child: OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
-            if (orientation == Orientation.portrait) {
-              return SingleChildScrollView(
-                child: converter,
-              );
-            } else {
-              return SingleChildScrollView(
-                child: Center(
-                  child: Container(
-                    width: 450.0,
-                    child: converter,
-                  ),
+    return Padding(
+      padding: _padding,
+      child: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (orientation == Orientation.portrait) {
+            return SingleChildScrollView(
+              child: converter,
+            );
+          } else {
+            return SingleChildScrollView(
+              child: Center(
+                child: Container(
+                  width: 450.0,
+                  child: converter,
                 ),
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
       ),
     );
   }
