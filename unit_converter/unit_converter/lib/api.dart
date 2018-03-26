@@ -33,7 +33,7 @@ class Api {
 
   /// Gets all the units and conversion rates for a given category.
   ///
-  /// [category] is the category from which to retrieve units.
+  /// `category` is the [Category] from which to retrieve units.
   /// Returns a list. Prints exception silently.
   Future<List> getUnits(String category) async {
     final uri = Uri.https(url, '/$category');
