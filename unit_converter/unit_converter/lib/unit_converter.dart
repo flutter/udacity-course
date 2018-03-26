@@ -35,7 +35,6 @@ class _UnitConverterState extends State<UnitConverter> {
   bool _showErrorUI = false;
   bool _showValidationError = false;
 
-
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
     // the Currency category
