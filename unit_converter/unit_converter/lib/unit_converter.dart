@@ -27,13 +27,13 @@ class UnitConverter extends StatefulWidget {
 }
 
 class _UnitConverterState extends State<UnitConverter> {
+  final _inputKey = new GlobalKey(debugLabel: 'inputText');
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
   bool _showErrorUI = false;
   bool _showValidationError = false;
-  Key _inputKey = new GlobalKey(debugLabel: 'inputText');
 
 
   Future<Null> _updateConversion() async {
