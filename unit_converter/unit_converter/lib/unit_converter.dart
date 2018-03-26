@@ -33,6 +33,8 @@ class _UnitConverterState extends State<UnitConverter> {
   String _convertedValue = '';
   bool _showErrorUI = false;
   bool _showValidationError = false;
+  Key _inputKey = new GlobalKey(debugLabel: 'inputText');
+
 
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
@@ -225,6 +227,7 @@ class _UnitConverterState extends State<UnitConverter> {
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
           TextField(
+            key: _inputKey,
             style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
               labelStyle: Theme.of(context).textTheme.display1,
