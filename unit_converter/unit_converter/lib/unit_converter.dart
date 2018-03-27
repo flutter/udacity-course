@@ -132,7 +132,10 @@ class _UnitConverterState extends State<UnitConverter> {
         child: Container(
           margin: _padding,
           padding: _padding,
-          color: widget.category.color[200],
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: widget.category.color['error'],
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

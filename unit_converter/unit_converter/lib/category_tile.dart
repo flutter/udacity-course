@@ -19,14 +19,16 @@ class CategoryTile extends StatelessWidget {
   final ValueChanged<Category> onTap;
 
   /// The [CategoryTile] shows the name and color of a [Category] for unit
-  /// conversions. Tapping on it brings you to the unit converter.
+  /// conversions.
+  ///
+  /// Tapping on it brings you to the unit converter.
   const CategoryTile({
     Key key,
     this.category,
     this.onTap,
   }) : super(key: key);
 
-  /// Builds a custom widget that shows unit [Category] information.
+  /// Builds a custom widget that shows [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
   @override
@@ -41,8 +43,8 @@ class CategoryTile extends StatelessWidget {
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
-          highlightColor: category.color[50],
-          splashColor: category.color[100],
+          highlightColor: category.color['highlight'],
+          splashColor: category.color['splash'],
           // We can use either the () => function or the () { function(); }
           // syntax.
           onTap: () => onTap(category),

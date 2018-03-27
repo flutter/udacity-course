@@ -14,7 +14,11 @@ import 'package:unit_converter/category_tile.dart';
 import 'package:unit_converter/unit_converter.dart';
 import 'package:unit_converter/unit.dart';
 
-/// Loads in unit conversion data and displays the data
+/// Loads in unit conversion data, and displays the data.
+///
+/// This is the main route to our app. It retrieves conversion data from a
+/// JSON asset and from an API. It displays the [Categories] in the back panel
+/// of a [Backdrop] widget and shows the [UnitConverter] in the front panel.
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 
@@ -23,49 +27,40 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  // Consider omitting the types for local variables. For more details on Effective
-  // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
-      50: Color(0xFF6AB7A8),
-      100: Color(0xFF0abc9b),
-      200: Color(0xFF1f685a),
+      'highlight': Color(0xFF6AB7A8),
+      'splash': Color(0xFF0ABC9B),
     }),
-    ColorSwatch(0xFFffd28e, {
-      50: Color(0xFFffd28e),
-      100: Color(0xFFffa41c),
-      200: Color(0xFFbc6e0b),
+    ColorSwatch(0xFFFFD28E, {
+      'highlight': Color(0xFFFFD28E),
+      'splash': Color(0xFFFFA41C),
     }),
-    ColorSwatch(0xFFffb7de, {
-      50: Color(0xFFffb7de),
-      100: Color(0xFFf94cbf),
-      200: Color(0xFF822a63),
+    ColorSwatch(0xFFFFB7DE, {
+      'highlight': Color(0xFFFFB7DE),
+      'splash': Color(0xFFF94CBF),
     }),
-    ColorSwatch(0xFF8899a8, {
-      50: Color(0xFF8899a8),
-      100: Color(0xFFa9cae8),
-      200: Color(0xFF395f82),
+    ColorSwatch(0xFF8899A8, {
+      'highlight': Color(0xFF8899A8),
+      'splash': Color(0xFFA9CAE8),
     }),
-    ColorSwatch(0xFFead37e, {
-      50: Color(0xFFead37e),
-      100: Color(0xFFffe070),
-      200: Color(0xFFd6ad1b),
+    ColorSwatch(0xFFEAD37E, {
+      'highlight': Color(0xFFEAD37E),
+      'splash': Color(0xFFFFE070),
     }),
-    ColorSwatch(0xFF81a56f, {
-      50: Color(0xFF81a56f),
-      100: Color(0xFF7cc159),
-      200: Color(0xFF345125),
+    ColorSwatch(0xFF81A56F, {
+      'highlight': Color(0xFF81A56F),
+      'splash': Color(0xFF7CC159),
     }),
-    ColorSwatch(0xFFd7c0e2, {
-      50: Color(0xFFd7c0e2),
-      100: Color(0xFFca90e5),
-      200: Color(0xFF6e3f84),
+    ColorSwatch(0xFFD7C0E2, {
+      'highlight': Color(0xFFD7C0E2),
+      'splash': Color(0xFFCA90E5),
     }),
-    ColorSwatch(0xFFce9a9a, {
-      50: Color(0xFFce9a9a),
-      100: Color(0xFFf94d56),
-      200: Color(0xFF912d2d),
+    ColorSwatch(0xFFCE9A9A, {
+      'highlight': Color(0xFFCE9A9A),
+      'splash': Color(0xFFF94D56),
+      'error': Color(0xFF912D2D),
     }),
   ];
 
@@ -96,7 +91,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
-  void onCategoryTap(Category category) {
+  /// Function to call when a [Category] is tapped.
+  void _onCategoryTap(Category category) {
     setState(() {
       _currentCategory = category;
     });
@@ -104,6 +100,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
+    // Consider omitting the types for local variables. For more details on Effective
+    // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
     final json = DefaultAssetBundle
         .of(context)
         .loadString('assets/data/regular_units.json');
@@ -112,7 +110,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     var categoryIndex = 0;
     for (var key in data.keys) {
       if (data is! Map) {
-        throw('Data retrieved from API is not a Map');
+        throw ('Data retrieved from API is not a Map');
       }
       final List<Unit> units =
           data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
@@ -168,6 +166,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   ///
   /// For portrait, we use a [ListView]
   /// For landscape, we use a [GridView]
+  /// TODO
   Widget _buildCategoryWidgets(Orientation deviceOrientation) {
     // Why do we pass in `_categories.toList()` instead of just `_categories`?
     // Widgets are supposed to be deeply immutable objects. We're passing in
@@ -180,7 +179,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         itemBuilder: (BuildContext context, int index) {
           return CategoryTile(
             category: _categories[index],
-            onTap: onCategoryTap,
+            onTap: _onCategoryTap,
           );
         },
         itemCount: _categories.length,
@@ -192,7 +191,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         children: _categories.map((Category c) {
           return CategoryTile(
             category: c,
-            onTap: onCategoryTap,
+            onTap: _onCategoryTap,
           );
         }).toList(),
       );
