@@ -36,15 +36,6 @@ class _UnitConverterState extends State<UnitConverter> {
   bool _showErrorUI = false;
   bool _showValidationError = false;
 
-  @override
-  void initState() {
-    super.initState();
-    print(widget.category.name);
-    if (_inputValue != null) {
-      _updateConversion();
-    }
-  }
-
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
     // the Currency [Category]
