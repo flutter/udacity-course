@@ -5,6 +5,7 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 import 'package:unit_converter/category.dart';
 
@@ -24,8 +25,8 @@ class CategoryTile extends StatelessWidget {
   /// Tapping on it brings you to the unit converter.
   const CategoryTile({
     Key key,
-    this.category,
-    this.onTap,
+    @required this.category,
+    @required this.onTap,
   }) : super(key: key);
 
   /// Builds a custom widget that shows [Category] information.
