@@ -24,6 +24,8 @@ const apiCategory = {
 ///   GET /currency/convert: get conversion from one currency amount to another
 class Api {
   /// We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
+  // We specify the type here for readability. Since we're defining a final
+  // field, the type is determined at initialization.
   final HttpClient httpClient = HttpClient();
 
   /// The API endpoint we want to hit.
@@ -33,7 +35,8 @@ class Api {
 
   /// Gets all the units and conversion rates for a given category.
   ///
-  /// `category` is the [Category] from which to retrieve units.
+  /// The [Category] query parameter is the [Category] from which to retrieve
+  /// units.
   /// Returns a list. Prints exception silently.
   Future<List> getUnits(String category) async {
     final uri = Uri.https(url, '/$category');
