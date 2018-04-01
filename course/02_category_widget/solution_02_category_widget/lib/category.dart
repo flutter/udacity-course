@@ -29,7 +29,6 @@ class Category extends StatelessWidget {
   // While the @required checks for whether a named parameter is passed in,
   // it doesn't check whether the object passed in is null. We check that
   // in the assert statement.
-  // TODO: You'll need the name, color, and iconLocation from main.dart
   const Category({
     Key key,
     @required this.name,
@@ -48,7 +47,6 @@ class Category extends StatelessWidget {
   // Theme ancestor in the tree. Below, we grab the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
-    // TODO: Build the custom widget here, referring to the Specs.
     return Material(
       color: Colors.transparent,
       child: Container(
