@@ -1,4 +1,4 @@
-# Hello Rectangle Solution
+# Build a Hello Rectangle App
 
 ## Goals
  - Verify you've set up Android Studio
