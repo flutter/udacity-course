@@ -11,7 +11,7 @@
  3. Paste in the code from [lib/main.dart](lib/main.dart) into your app's lib/main.dart
  4. Open your device or emulator, and build and launch the app. You can do all this using the green Play button in Android Studio. From the command line, you can also do `flutter run` inside your app's project directory.
 
-## Features
+## Specs
  - App has a title
  - App Bar has a title
  - Colored rectangle is centered in the app
