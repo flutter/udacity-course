@@ -204,12 +204,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ));
     }
 
-    if (_inputValue != null) {
-      setState(() {
-        _updateConversion();
-      });
-    }
-
+    // Update the `from` [DropdownMenuItem] when we switch [Categories]
     if (_fromValue == null ||
         !(units.any((unit) {
           return unit.value == _fromValue.name;
@@ -219,6 +214,7 @@ class _UnitConverterState extends State<UnitConverter> {
       });
     }
 
+    // Update the `to` [DropdownMenuItem] when we switch [Categories]
     if (_toValue == null ||
         !(units.any((unit) {
           return unit.value == _toValue.name;
@@ -226,6 +222,13 @@ class _UnitConverterState extends State<UnitConverter> {
       setState(() {
         _toValue = widget.category.units[1];
       });
+
+      // Likewise, update the Output when we switch [Categories]
+      if (_inputValue != null) {
+        setState(() {
+          _updateConversion();
+        });
+      }
     }
 
     final input = Padding(

@@ -5,6 +5,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 import 'package:unit_converter/category.dart';
 
@@ -120,12 +121,16 @@ class Backdrop extends StatefulWidget {
   final Widget backTitle;
 
   const Backdrop({
-    this.currentCategory,
-    this.frontPanel,
-    this.backPanel,
-    this.frontTitle,
-    this.backTitle,
-  });
+    @required this.currentCategory,
+    @required this.frontPanel,
+    @required this.backPanel,
+    @required this.frontTitle,
+    @required this.backTitle,
+  })  : assert(currentCategory != null),
+        assert(frontPanel != null),
+        assert(backPanel != null),
+        assert(frontTitle != null),
+        assert(backTitle != null);
 
   @override
   _BackdropState createState() => _BackdropState();
