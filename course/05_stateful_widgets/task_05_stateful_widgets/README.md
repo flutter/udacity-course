@@ -1,7 +1,17 @@
-# task_05_stateful_widgets
+# Add Stateful Widgets!
 
-Make CategoryRoute and ConverterRoute StatefulWidgets. You won't notice any visual changes.
+## Goals
+ - Make the CategoryRoute and ConverterRoute StatefulWidgets. Visually, nothing has changed.
 
-We added some code to generate some mock units. The Converter Route will look like this:
+## Steps
+ 1. Fill out the TODOs in `category_route.dart` and `converter_route.dart` using the specs below.
 
-<img src='../../screenshots/05_stateful_widgets.png' width='350'>
+## Specs
+ - CategoryRoute is a StatefulWidget.
+ - ConverterRoute is a StatefulWidget.
+ - Inside the CategoryRoute, the list of Categories is saved as part of the State.
+
+## Screenshots
+
+### Start and Solution (visually the same)
+<img src='../../screenshots/05_stateful_widgets.png' width='350'><img src='../../screenshots/05_stateful_widgets_2.png' width='350'>
