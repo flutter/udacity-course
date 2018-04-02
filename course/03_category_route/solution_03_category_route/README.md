@@ -25,7 +25,7 @@
 ## Start
 <img src='../../screenshots/03_category_route.png' width='350'>
 
-After the main.dart TODOs are complete:
+After the `main.dart` TODOs are complete:
 
 <img src='../../screenshots/03_category_route_2.png' width='350'>
 
