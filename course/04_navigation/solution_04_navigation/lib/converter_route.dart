@@ -21,7 +21,6 @@ class ConverterRoute extends StatelessWidget {
   final List<Unit> units;
 
   /// This [ConverterRoute] handles [Unit]s for a specific [Category].
-  // TODO: Pass in the [Category]'s name, color, and units
   const ConverterRoute({
     @required this.name,
     @required this.color,
@@ -34,7 +33,6 @@ class ConverterRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     // Here is just a placeholder for a list of mock units
     final unitWidgets = units.map((Unit unit) {
-      // TODO: Add the color for this Container
       return Container(
         color: color,
         margin: EdgeInsets.all(8.0),
@@ -53,6 +51,7 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
+
     return ListView(
       children: unitWidgets,
     );
