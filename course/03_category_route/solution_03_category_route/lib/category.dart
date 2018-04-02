@@ -22,10 +22,10 @@ class Category extends StatelessWidget {
   final ColorSwatch color;
   final IconData iconLocation;
 
-  /// Stores information about a [Category].
+  /// Creates a [Category].
   ///
-  /// A [Category] saves the name of the Category (e.g. Length), its color for
-  /// the UI, and the icon that represents it (e.g. ruler).
+  /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
+  /// the UI, and the icon that represents it (e.g. a ruler).
   // While the @required checks for whether a named parameter is passed in,
   // it doesn't check whether the object passed in is null. We check that
   // in the assert statement.
@@ -43,8 +43,8 @@ class Category extends StatelessWidget {
   /// This information includes the icon, name, and color for the [Category].
   @override
   // This `context` parameter describes the location of this widget in the
-  // widget tree. It can be used for grabbing Theme data from the nearest
-  // Theme ancestor in the tree. Below, we grab the display1 text theme.
+  // widget tree. It can be used for obtaining Theme data from the nearest
+  // Theme ancestor in the tree. Below, we obtain the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     return Material(
@@ -55,7 +55,7 @@ class Category extends StatelessWidget {
           borderRadius: _borderRadius,
           highlightColor: color,
           splashColor: color,
-          // We can use either the () => function or the () { function(); }
+          // We can use either the () => function() or the () { function(); }
           // syntax.
           onTap: () {
             print('I was tapped!');

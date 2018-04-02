@@ -15,10 +15,10 @@
  - The AppBar and app body should be the same color. In our example, we use `Colors.green[100]`.
 
 ## Customizations
- - Whether to center the AppBar title
- - App's background color
- - InkWell color for each Category
- - Padding size
+ - Whether to center the AppBar title.
+ - App's background color.
+ - InkWell color for each Category.
+ - Padding size.
  
 ## Screenshots
 

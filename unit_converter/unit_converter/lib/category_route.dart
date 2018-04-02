@@ -83,7 +83,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     super.didChangeDependencies();
     // We have static unit conversions located in our
     // assets/data/regular_units.json
-    // and we want to also grab up-to-date Currency conversions from the web
+    // and we want to also obtain up-to-date Currency conversions from the web
     // We only want to load our data in once
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();

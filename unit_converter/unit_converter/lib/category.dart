@@ -16,11 +16,11 @@ class Category {
   final ColorSwatch color;
   final String iconLocation;
 
-  /// Stores information about a [Category].
+  /// Information about a [Category].
   ///
-  /// A [Category] saves the name of the Category (e.g. Length), a list of its
-  /// units for conversions (e.g. millimeter, meter), its color for the UI,
-  /// and the icon that represents it (e.g. ruler).
+  /// A [Category] saves the name of the Category (e.g. 'Length'), a list of its
+  /// units for conversions (e.g. 'Millimeter', 'Meter'), its color for the UI,
+  /// and the icon that represents it (e.g. a ruler).
   const Category({
     @required this.name,
     @required this.units,
