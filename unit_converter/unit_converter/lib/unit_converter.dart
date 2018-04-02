@@ -5,29 +5,30 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 import 'package:unit_converter/api.dart';
 import 'package:unit_converter/category.dart';
 import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
-const _margin = EdgeInsets.only(top: 16.0);
 
-/// Unit Converter where users can input amounts to convert.
+/// [UnitConverter] where users can input amounts to convert in one unit
+/// and retrieve the conversion in another unit
 class UnitConverter extends StatefulWidget {
   final Category category;
 
   /// This [UnitConverter] handles [Unit]s for a specific [Category].
   const UnitConverter({
-    this.category,
-  });
+    @required this.category,
+  }) : assert(category != null);
 
   @override
   _UnitConverterState createState() => _UnitConverterState();
 }
 
 class _UnitConverterState extends State<UnitConverter> {
-  final _inputKey = new GlobalKey(debugLabel: 'inputText');
+  final _inputKey = GlobalKey(debugLabel: 'inputText');
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
@@ -37,7 +38,7 @@ class _UnitConverterState extends State<UnitConverter> {
 
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
-    // the Currency category
+    // the Currency [Category]
     if (widget.category.name == apiCategory['name']) {
       final api = Api();
       final conversion = await api.convert(apiCategory['route'],
@@ -124,6 +125,39 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
+  Widget _createDropdown(String name, List<DropdownMenuItem> units,
+      ValueChanged<dynamic> onChanged) {
+    return Container(
+      margin: EdgeInsets.only(top: 16.0),
+      decoration: BoxDecoration(
+        // This sets the color of the [DropdownButton] itself
+        color: Colors.grey[50],
+        border: Border.all(
+          color: Colors.grey[400],
+          width: 1.0,
+        ),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Theme(
+        // This sets the color of the [DropdownMenuItem]
+        data: Theme.of(context).copyWith(
+              canvasColor: Colors.grey[50],
+            ),
+        child: DropdownButtonHideUnderline(
+          child: ButtonTheme(
+            alignedDropdown: true,
+            child: DropdownButton(
+              value: name,
+              items: units,
+              onChanged: onChanged,
+              style: Theme.of(context).textTheme.title,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.category.units == null ||
@@ -132,7 +166,10 @@ class _UnitConverterState extends State<UnitConverter> {
         child: Container(
           margin: _padding,
           padding: _padding,
-          color: widget.category.color[200],
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            color: widget.category.color['error'],
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,6 +204,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ));
     }
 
+    // Update the `from` [DropdownMenuItem] when we switch [Categories]
     if (_fromValue == null ||
         !(units.any((unit) {
           return unit.value == _fromValue.name;
@@ -176,6 +214,7 @@ class _UnitConverterState extends State<UnitConverter> {
       });
     }
 
+    // Update the `to` [DropdownMenuItem] when we switch [Categories]
     if (_toValue == null ||
         !(units.any((unit) {
           return unit.value == _toValue.name;
@@ -183,38 +222,13 @@ class _UnitConverterState extends State<UnitConverter> {
       setState(() {
         _toValue = widget.category.units[1];
       });
-    }
 
-    Widget _createDropdown(String name, ValueChanged<dynamic> onChanged) {
-      return Container(
-        margin: _margin,
-        decoration: BoxDecoration(
-          // This sets the color of the [DropdownButton] itself
-          color: Colors.grey[50],
-          border: Border.all(
-            color: Colors.grey[400],
-            width: 1.0,
-          ),
-        ),
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        child: Theme(
-          // This sets the color of the [DropdownMenuItem]
-          data: Theme.of(context).copyWith(
-                canvasColor: Colors.grey[50],
-              ),
-          child: DropdownButtonHideUnderline(
-            child: ButtonTheme(
-              alignedDropdown: true,
-              child: DropdownButton(
-                value: name,
-                items: units,
-                onChanged: onChanged,
-                style: Theme.of(context).textTheme.title,
-              ),
-            ),
-          ),
-        ),
-      );
+      // Likewise, update the Output when we switch [Categories]
+      if (_inputValue != null) {
+        setState(() {
+          _updateConversion();
+        });
+      }
     }
 
     final input = Padding(
@@ -241,7 +255,7 @@ class _UnitConverterState extends State<UnitConverter> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(_fromValue.name, _updateFromConversion),
+          _createDropdown(_fromValue.name, units, _updateFromConversion),
         ],
       ),
     );
@@ -272,7 +286,7 @@ class _UnitConverterState extends State<UnitConverter> {
               ),
             ),
           ),
-          _createDropdown(_toValue.name, _updateToConversion),
+          _createDropdown(_toValue.name, units, _updateToConversion),
         ],
       ),
     );

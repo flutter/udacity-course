@@ -8,34 +8,33 @@ import 'package:meta/meta.dart';
 import 'package:task_04_navigation/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert.
+///
+/// Currently, it just displays a list of mock units.
 class ConverterRoute extends StatelessWidget {
-  /// Units for this Category
+  /// Units for this [Category].
   final List<Unit> units;
 
-  /// Constructor.
-  // TODO: pass in the Category's name and color
-  // We'll be using them later
+  /// This [ConverterRoute] handles [Unit]s for a specific [Category].
+  // TODO: Pass in the [Category]'s name and color
   const ConverterRoute({
-    Key key,
     @required this.units,
-  })
-      : super(key: key);
+  }) : assert(units != null);
 
   @override
   Widget build(BuildContext context) {
     // Here is just a placeholder for a list of mock units
     final unitWidgets = units.map((Unit unit) {
-      // TODO add the color for this Container
-      return new Container(
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
+      // TODO: Set the color for this Container
+      return Container(
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           children: <Widget>[
-            new Text(
+            Text(
               unit.name,
               style: Theme.of(context).textTheme.headline,
             ),
-            new Text(
+            Text(
               'Conversion: ${unit.conversion}',
               style: Theme.of(context).textTheme.subhead,
             ),
@@ -43,7 +42,8 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
-    return new ListView(
+
+    return ListView(
       children: unitWidgets,
     );
   }

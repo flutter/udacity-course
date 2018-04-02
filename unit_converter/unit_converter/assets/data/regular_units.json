@@ -147,23 +147,23 @@
     },
     {
       "name": "Minute",
-      "conversion": 0.0166667
+      "conversion": 0.0166666666666667
     },
     {
       "name": "Hour",
-      "conversion": 0.000277778
+      "conversion": 0.0002777777777778
     },
     {
       "name": "Day",
-      "conversion": 0.000011574
+      "conversion": 0.00001157407407
     },
     {
       "name": "Week",
-      "conversion": 0.0000016534
+      "conversion": 0.000001653439153
     },
     {
       "name": "Fortnight",
-      "conversion": 0.0000033068
+      "conversion": 0.000000826719576
     }
   ],
   "Digital Storage": [

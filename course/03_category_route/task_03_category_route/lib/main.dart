@@ -5,22 +5,25 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// TODO: import the CategoryRoute widget
+// TODO: Import the CategoryRoute widget
 
+/// The function that is called when main.dart is run.
 void main() {
-  runApp(new UnitConverter());
+  runApp(UnitConverterApp());
 }
 
-/// This widget is the root of your application. The first page we see
-/// is a grid of unit categories.
-class UnitConverter extends StatelessWidget {
+/// This widget is the root of our application.
+///
+/// The first route (page) we see is a list [Categories].
+class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
-      // TODO: instead of pointing to exactly 1 Category widget,
+      // TODO: Instead of pointing to exactly 1 Category widget,
       // our home should now point to an instance of the CategoryRoute widget.
-      home: new Container(),
+      home: Container(),
     );
   }
 }

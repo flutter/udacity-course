@@ -2,96 +2,106 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// To keep your imports tidy, follow the ordering guidelines at
+// https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+// @required is defined in the meta.dart package
+import 'package:meta/meta.dart';
 
 import 'package:task_04_navigation/converter_route.dart';
 import 'package:task_04_navigation/unit.dart';
 
-final _borderRadius = new BorderRadius.circular(4.0);
+// We use an underscore to indicate that these variables are private.
+// See https://www.dartlang.org/guides/language/effective-dart/design#libraries
+final _rowHeight = 100.0;
+final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
-/// A Category widget for a list of [Unit]s.
+/// A custom [Category] widget.
+///
+/// The widget is composed on an [Icon] and [Text]. Tapping on the widget shows
+/// a colored [InkWell] animation.
 class Category extends StatelessWidget {
+  final String name;
   final ColorSwatch color;
   final IconData iconLocation;
-  final String name;
   final List<Unit> units;
 
-  /// Constructor.
+  /// Creates a [Category].
+  ///
+  /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
+  /// the UI, and the icon that represents it (e.g. a ruler).
+  // While the @required checks for whether a named parameter is passed in,
+  // it doesn't check whether the object passed in is null. We check that
+  // in the assert statement.
   const Category({
     Key key,
-    this.color,
-    this.iconLocation,
-    this.name,
-    this.units,
-  })
-      : super(key: key);
+    @required this.name,
+    @required this.color,
+    @required this.iconLocation,
+    @required this.units,
+  })  : assert(name != null),
+        assert(color != null),
+        assert(iconLocation != null),
+        assert(units != null),
+        super(key: key);
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
-    // TODO: Using the Navigator, navigate to the Converter Route
-    // Specs:
-    //  - The Converter Route also has an AppBar, the same color
-    //    as the Category widget
-    //  - The Title of the AppBar should be the name of the Category and centered
-    //  - The Title text style should be the Text Theme's `display1`
-    //  - Pass the name, color, and units to the ConverterRoute
+    // TODO: Using the Navigator, navigate to the [ConverterRoute]
   }
 
-  /// Builds a custom widget that shows unit [Category] information.
+  /// Builds a custom widget that shows [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
   @override
+  // This `context` parameter describes the location of this widget in the
+  // widget tree. It can be used for obtaining Theme data from the nearest
+  // Theme ancestor in the tree. Below, we obtain the display1 text theme.
+  // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
-    return new Container(
-      color: Colors.white,
-      height: 100.0,
-      child: new Stack(
-        children: <Widget>[
-          new Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              new Container(
-                width: 70.0,
-                margin: const EdgeInsets.all(16.0),
-                decoration: new BoxDecoration(
-                  borderRadius: _borderRadius,
-                  color: color,
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        height: _rowHeight,
+        child: InkWell(
+          borderRadius: _borderRadius,
+          highlightColor: color,
+          splashColor: color,
+          // We can use either the () => function() or the () { function(); }
+          // syntax.
+          // TODO: Update this onTap property to call _navigateToConverter()
+          onTap: () {
+            print('I was tapped!');
+          },
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              // There are two ways to denote a list: `[]` and `List()`.
+              // Prefer to use the literal syntax, i.e. `[]`, instead of `List()`.
+              // You can add the type argument if you'd like, i.e. <Widget>[].
+              // See https://www.dartlang.org/guides/language/effective-dart/usage#do-use-collection-literals-when-possible
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: iconLocation != null
+                      ? Icon(
+                          iconLocation,
+                          size: 60.0,
+                        )
+                      : null,
                 ),
-                child: iconLocation != null
-                    ? new Icon(
-                        iconLocation,
-                        size: 60.0,
-                      )
-                    : null,
-              ),
-              new Container(
-                padding: const EdgeInsets.all(16.0),
-                child: new Center(
-                  child: new Text(
-                    name.toUpperCase(),
+                Center(
+                  child: Text(
+                    name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.display1.copyWith(
-                          color: Colors.grey[700],
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    style: Theme.of(context).textTheme.headline,
                   ),
                 ),
-              ),
-            ],
-          ),
-          new Material(
-            // Adds inkwell animation when tapped
-            child: new InkWell(
-              // TODO update this onTap property to call _navigateToConverter
-              onTap: () {
-                print('I was tapped!');
-              },
-              borderRadius: _borderRadius,
+              ],
             ),
-            color: Colors.transparent,
           ),
-        ],
+        ),
       ),
     );
   }

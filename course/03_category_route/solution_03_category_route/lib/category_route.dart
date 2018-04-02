@@ -6,22 +6,16 @@ import 'package:flutter/material.dart';
 
 import 'package:solution_03_category_route/category.dart';
 
+final _backgroundColor = Colors.green[100];
+
 /// Category Route (page).
 ///
-/// This is the "home" page of the Unit Converter. It shows a header bar and
-/// a grid of [Categories].
+/// This is the 'home' page of the Unit Converter. It shows a header and
+/// a list of [Categories].
 class CategoryRoute extends StatelessWidget {
-  /// Constructor.
-  const CategoryRoute({
-    Key key,
-  })
-      : super(key: key);
+  const CategoryRoute();
 
-  // Consider omitting the types for local variables. For more details on Effective
-  // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
-  static const _appBarColor = const Color(0xFF013487);
-
-  static const _categoryNames = const <String>[
+  static const _categoryNames = <String>[
     'Length',
     'Area',
     'Volume',
@@ -32,7 +26,7 @@ class CategoryRoute extends StatelessWidget {
     'Currency',
   ];
 
-  static const _baseColors = const <Color>[
+  static const _baseColors = <Color>[
     Colors.teal,
     Colors.orange,
     Colors.pinkAccent,
@@ -47,7 +41,7 @@ class CategoryRoute extends StatelessWidget {
   ///
   /// For portrait, we use a [ListView].
   Widget _buildCategoryWidgets(List<Widget> categories) {
-    return new ListView.builder(
+    return ListView.builder(
       itemBuilder: (BuildContext context, int index) => categories[index],
       itemCount: categories.length,
     );
@@ -58,33 +52,34 @@ class CategoryRoute extends StatelessWidget {
     final categories = <Category>[];
 
     for (var i = 0; i < _categoryNames.length; i++) {
-      categories.add(new Category(
+      categories.add(Category(
         name: _categoryNames[i],
         color: _baseColors[i],
         iconLocation: Icons.cake,
       ));
     }
 
-    final listView = new Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(16.0),
+    final listView = Container(
+      color: _backgroundColor,
+      padding: EdgeInsets.all(16.0),
       child: _buildCategoryWidgets(categories),
     );
 
-    final headerBar = new AppBar(
-      elevation: 1.0,
-      title: new Text(
-        'Unit Converter'.toUpperCase(),
-        style: Theme.of(context).textTheme.display1.copyWith(
-              color: Colors.white,
-            ),
+    final appBar = AppBar(
+      elevation: 0.0,
+      title: Text(
+        'Unit Converter',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+        ),
       ),
       centerTitle: true,
-      backgroundColor: _appBarColor,
+      backgroundColor: _backgroundColor,
     );
 
-    return new Scaffold(
-      appBar: headerBar,
+    return Scaffold(
+      appBar: appBar,
       body: listView,
     );
   }

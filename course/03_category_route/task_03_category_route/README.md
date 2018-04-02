@@ -1,15 +1,33 @@
-# task_03_category_route
+# Create the Category Route!
 
-Code the AppBar
-Specs:
-    - Color should be _appBarColor
-    - Title should say 'Unit Converter' in uppercase
+## Goals
+ - Create the homepage (route) of the app.
+ - Create a ListView for the Categories.
 
-Code the Category Route
-Specs:
-    - A route that display 8 Category widgets, which fit on the screen without scrolling
-    - Use the predefined list of Category names (Length, Mass, etc.) and colors
+## Steps
+ 1. Fill out the TODOs in `main.dart` and `category_route.dart` using the specs below.
+ 2. If you had customized your `category.dart`, you can replace our `category.dart` with yours.
+ 2. Customize your app if desired. Some ideas are listed below.
 
-It should look like this:
+## Specs
+ - The AppBar text should say 'Unit Converter' with a font size of 30.0, and an elevation of 0.0.
+ - A list of 8 Categories should be shown on the Category Route. You should be able to scroll down the list. There should be 16.0 padding around this list.
+ - The AppBar and app body should be the same color. In our example, we use `Colors.green[100]`.
 
+## Customizations
+ - Whether to center the AppBar title
+ - App's background color
+ - InkWell color for each Category
+ - Padding size
+ 
+## Screenshots
+
+### Start
 <img src='../../screenshots/03_category_route.png' width='350'>
+
+After the `main.dart` TODOs are complete:
+
+<img src='../../screenshots/03_category_route_2.png' width='350'>
+
+### Solution
+<img src='../../screenshots/03_category_route_3.png' width='350'><img src='../../screenshots/03_category_route_4.gif' width='350'>

@@ -5,6 +5,7 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 import 'package:unit_converter/category.dart';
 
@@ -19,20 +20,24 @@ class CategoryTile extends StatelessWidget {
   final ValueChanged<Category> onTap;
 
   /// The [CategoryTile] shows the name and color of a [Category] for unit
-  /// conversions. Tapping on it brings you to the unit converter.
+  /// conversions.
+  ///
+  /// Tapping on it brings you to the unit converter.
   const CategoryTile({
     Key key,
-    this.category,
-    this.onTap,
-  }) : super(key: key);
+    @required this.category,
+    @required this.onTap,
+  })  : assert(category != null),
+        assert(onTap != null),
+        super(key: key);
 
-  /// Builds a custom widget that shows unit [Category] information.
+  /// Builds a custom widget that shows [Category] information.
   ///
   /// This information includes the icon, name, and color for the [Category].
   @override
   // This `context` parameter describes the location of this widget in the
-  // widget tree. It can be used for grabbing Theme data from the nearest
-  // Theme ancestor in the tree. Below, we grab the display1 text theme.
+  // widget tree. It can be used for obtaining Theme data from the nearest
+  // Theme ancestor in the tree. Below, we obtain the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     return Material(
@@ -41,9 +46,9 @@ class CategoryTile extends StatelessWidget {
         height: _rowHeight,
         child: InkWell(
           borderRadius: _borderRadius,
-          highlightColor: category.color[50],
-          splashColor: category.color[100],
-          // We can use either the () => function or the () { function(); }
+          highlightColor: category.color['highlight'],
+          splashColor: category.color['splash'],
+          // We can use either the () => function() or the () { function(); }
           // syntax.
           onTap: () => onTap(category),
           child: Padding(
