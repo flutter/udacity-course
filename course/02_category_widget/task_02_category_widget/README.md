@@ -20,7 +20,7 @@
 ## Customizations
  - You can choose what icon, text, and color(s) to use.
  - You can customize the border radius.
- 
+
 ## Screenshots
 
 ## Start
