@@ -23,8 +23,8 @@
 
 ## Screenshots
 
-## Start
+### Start
 <img src='../../screenshots/02_category_widget.png' width='350'>
 
-## Solution
+### Solution
 <img src='../../screenshots/02_category_widget_2.png' width='350'><img src='../../screenshots/02_category_widget_3.gif' width='350'>
