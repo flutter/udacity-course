@@ -5,7 +5,6 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
-// TODO: Import the CategoryRoute widget
 // You can use a relative import, i.e. `import 'category_route.dart;'` or
 // a package import, as shown below.
 // More details at http://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html
@@ -25,8 +24,6 @@ class UnitConverter extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
-      // TODO: Instead of pointing to exactly 1 Category widget,
-      // our home should now point to an instance of the CategoryRoute widget.
       home: CategoryRoute(),
     );
   }
