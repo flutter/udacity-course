@@ -12,7 +12,8 @@
  - The ConverterRoute should also have an AppBar, the same color as the Category widget that was tapped.
  - The Title of the AppBar should be the name of the Category.
  - Pass the name, color, and units to the ConverterRoute.
- 
+ - The background color of each unit should be the same as the ConverterRoute's AppBar color.
+
 ## Screenshots
 
 ### Start

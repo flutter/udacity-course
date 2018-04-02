@@ -5,20 +5,25 @@
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
+// You can use a relative import, i.e. `import 'category_route.dart'` or
+// a package import, as shown below.
+// More details at http://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html
 import 'package:task_04_navigation/category_route.dart';
 
+/// The function that is called when main.dart is run.
 void main() {
-  runApp(new UnitConverter());
+  runApp(UnitConverterApp());
 }
 
 /// This widget is the root of your application. The first page we see
 /// is a grid of unit categories.
-class UnitConverter extends StatelessWidget {
+class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
-      home: new CategoryRoute(),
+      home: CategoryRoute(),
     );
   }
 }

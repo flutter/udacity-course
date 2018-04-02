@@ -11,23 +11,24 @@ import 'package:solution_04_navigation/unit.dart';
 ///
 /// Currently, it just displays a list of mock units.
 class ConverterRoute extends StatelessWidget {
-  /// Color for this [Category].
-  final Color color;
-
   /// This [Category]'s name.
   final String name;
+
+  /// Color for this [Category].
+  final Color color;
 
   /// Units for this [Category].
   final List<Unit> units;
 
   /// This [ConverterRoute] handles [Unit]s for a specific [Category].
-  // TODO: Pass in the [Category]'s name and color; we'll use them later
+  // TODO: Pass in the [Category]'s name, color, and units
   const ConverterRoute({
-    Key key,
     @required this.name,
     @required this.color,
     @required this.units,
-  }) : super(key: key);
+  })  : assert(name != null),
+        assert(color != null),
+        assert(units != null);
 
   @override
   Widget build(BuildContext context) {
