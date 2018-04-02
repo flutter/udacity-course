@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 /// Category Route (page).
 ///
-/// This is the "home" page of the Unit Converter. It shows a header and
+/// This is the 'home' page of the Unit Converter. It shows a header and
 /// a list of [Categories].
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute();
