@@ -1,8 +1,17 @@
-# solution_05_stateful_widgets
+# Add Stateful Widgets!
 
-A new Flutter project.
+## Goals
+ - Make the CategoryRoute and ConverterRoute StatefulWidgets. Visually, nothing has changed.
 
-## Getting Started
+## Steps
+ 1. Fill out the TODOs in `category_route.dart` and `converter_route.dart` using the specs below.
 
-For help getting started with Flutter, view our online
-[documentation](http://flutter.io/).
+## Specs
+ - CategoryRoute is a StatefulWidget.
+ - ConverterRoute is a StatefulWidget.
+ - Inside the CategoryRoute, the list of Categories is saved as part of the State.
+
+## Screenshots
+
+### Start and Solution (visually the same)
+<img src='../../screenshots/05_stateful_widgets.png' width='350'><img src='../../screenshots/05_stateful_widgets_2.png' width='350'>

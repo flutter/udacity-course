@@ -8,26 +8,29 @@ import 'package:meta/meta.dart';
 import 'package:solution_05_stateful_widgets/unit.dart';
 
 /// Converter route (page) where users can input amounts to convert.
+///
+/// Currently, it just displays a list of mock units.
 class ConverterRoute extends StatefulWidget {
-  /// Color for this [Category].
-  final Color color;
-
   /// This [Category]'s name.
   final String name;
 
-  /// [Unit]s for this [Category].
+  /// Color for this [Category].
+  final Color color;
+
+  /// Units for this [Category].
   final List<Unit> units;
 
-  /// Constructor.
+  /// This [ConverterRoute] handles [Unit]s for a specific [Category].
   const ConverterRoute({
-    Key key,
     @required this.name,
     @required this.color,
     @required this.units,
-  })
-      : super(key: key);
+  })  : assert(name != null),
+        assert(color != null),
+        assert(units != null);
+
   @override
-  _ConverterRouteState createState() => new _ConverterRouteState();
+  _ConverterRouteState createState() => _ConverterRouteState();
 }
 
 class _ConverterRouteState extends State<ConverterRoute> {
@@ -35,17 +38,17 @@ class _ConverterRouteState extends State<ConverterRoute> {
   Widget build(BuildContext context) {
     // Here is just a placeholder for a list of mock units
     final unitWidgets = widget.units.map((Unit unit) {
-      return new Container(
+      return Container(
         color: widget.color,
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           children: <Widget>[
-            new Text(
+            Text(
               unit.name,
               style: Theme.of(context).textTheme.headline,
             ),
-            new Text(
+            Text(
               'Conversion: ${unit.conversion}',
               style: Theme.of(context).textTheme.subhead,
             ),
@@ -53,7 +56,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
         ),
       );
     }).toList();
-    return new ListView(
+
+    return ListView(
       children: unitWidgets,
     );
   }

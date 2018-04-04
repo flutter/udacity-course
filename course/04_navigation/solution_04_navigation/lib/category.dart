@@ -47,19 +47,19 @@ class Category extends StatelessWidget {
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
-    Navigator.of(context).push(new MaterialPageRoute<Null>(
+    Navigator.of(context).push(MaterialPageRoute<Null>(
       builder: (BuildContext context) {
-        return new Scaffold(
-          appBar: new AppBar(
+        return Scaffold(
+          appBar: AppBar(
             elevation: 1.0,
-            title: new Text(
+            title: Text(
               name,
               style: Theme.of(context).textTheme.display1,
             ),
             centerTitle: true,
             backgroundColor: color,
           ),
-          body: new ConverterRoute(
+          body: ConverterRoute(
             color: color,
             name: name,
             units: units,
