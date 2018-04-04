@@ -4,8 +4,8 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:solution_05_stateful_widgets/category.dart';
-import 'package:solution_05_stateful_widgets/unit.dart';
+import 'package:solution_06_input/category.dart';
+import 'package:solution_06_input/unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
