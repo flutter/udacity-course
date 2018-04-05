@@ -27,6 +27,8 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
+  Category _defaultCategory;
+  Category _currentCategory;
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
@@ -63,7 +65,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       'error': Color(0xFF912D2D),
     }),
   ];
-
   static const _icons = <String>[
     'assets/icons/length.png',
     'assets/icons/area.png',
@@ -74,9 +75,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     'assets/icons/power.png',
     'assets/icons/currency.png',
   ];
-
-  var _defaultCategory;
-  var _currentCategory;
 
   @override
   Future<Null> didChangeDependencies() async {
