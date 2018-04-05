@@ -40,6 +40,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   // TODO: Determine whether you need to override anything, such as initState()
 
+  // TODO: Add other helper functions. We've given you one, _format()
+
   /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
   String _format(double conversion) {
     var outputNum = conversion.toStringAsPrecision(7);
@@ -55,8 +57,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
     return outputNum;
   }
-
-  // TODO: Add any helper functions. We've given you one, _format().
 
   @override
   Widget build(BuildContext context) {
