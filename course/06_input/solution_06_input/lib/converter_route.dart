@@ -35,16 +35,24 @@ class ConverterRoute extends StatefulWidget {
 }
 
 class _ConverterRouteState extends State<ConverterRoute> {
+  final units = <DropdownMenuItem>[];
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
   bool _showValidationError = false;
-  final units = <DropdownMenuItem>[];
 
+  // TODO: Determine whether you need to override anything, such as initState()
   @override
   void initState() {
     super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
+  }
+
+  /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
+  void _createDropdownMenuItems() {
+    units.clear();
     for (var unit in widget.units) {
       units.add(DropdownMenuItem(
         value: unit.name,
@@ -58,11 +66,13 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
   }
 
-  void _updateConversion() {
-    // For the static units, we do the conversion ourselves
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
+  /// output value if a user had previously entered an input in a different
+  /// [Category].
+  void _setDefaults() {
     setState(() {
-      _convertedValue =
-          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
+      _fromValue = widget.units[0];
+      _toValue = widget.units[1];
     });
   }
 
@@ -80,6 +90,15 @@ class _ConverterRouteState extends State<ConverterRoute> {
       return outputNum.substring(0, outputNum.length - 1);
     }
     return outputNum;
+  }
+
+  // TODO: Add any helper functions
+
+  void _updateConversion() {
+    setState(() {
+      _convertedValue =
+          _format(_inputValue * (_toValue.conversion / _fromValue.conversion));
+    });
   }
 
   void _updateInputValue(String input) {
@@ -164,33 +183,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // Update the `from` [DropdownMenuItem] when we switch [Categories]
-    if (_fromValue == null ||
-        !(units.any((unit) {
-          return unit.value == _fromValue.name;
-        }))) {
-      setState(() {
-        _fromValue = widget.units[0];
-      });
-    }
-
-    // Update the `to` [DropdownMenuItem] when we switch [Categories]
-    if (_toValue == null ||
-        !(units.any((unit) {
-          return unit.value == _toValue.name;
-        }))) {
-      setState(() {
-        _toValue = widget.units[1];
-      });
-
-      // Likewise, update the Output when we switch [Categories]
-      if (_inputValue != null) {
-        setState(() {
-          _updateConversion();
-        });
-      }
-    }
-
     // TODO: Create the 'input' group of widgets. This is a Column that includes
     // the input [TextField] and 'to' unit [Dropdown].
     final input = Padding(
