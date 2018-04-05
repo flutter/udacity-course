@@ -85,6 +85,22 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
+  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
+  String _format(double conversion) {
+    var outputNum = conversion.toStringAsPrecision(7);
+    if (outputNum.contains('.') && outputNum.endsWith('0')) {
+      var i = outputNum.length - 1;
+      while (outputNum[i] == '0') {
+        i -= 1;
+      }
+      outputNum = outputNum.substring(0, i + 1);
+    }
+    if (outputNum.endsWith('.')) {
+      return outputNum.substring(0, outputNum.length - 1);
+    }
+    return outputNum;
+  }
+
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
     // the Currency [Category]
@@ -109,22 +125,6 @@ class _UnitConverterState extends State<UnitConverter> {
             _inputValue * (_toValue.conversion / _fromValue.conversion));
       });
     }
-  }
-
-  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
-  String _format(double conversion) {
-    var outputNum = conversion.toStringAsPrecision(7);
-    if (outputNum.contains('.') && outputNum.endsWith('0')) {
-      var i = outputNum.length - 1;
-      while (outputNum[i] == '0') {
-        i -= 1;
-      }
-      outputNum = outputNum.substring(0, i + 1);
-    }
-    if (outputNum.endsWith('.')) {
-      return outputNum.substring(0, outputNum.length - 1);
-    }
-    return outputNum;
   }
 
   void _updateInputValue(String input) {
