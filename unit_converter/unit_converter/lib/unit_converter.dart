@@ -29,12 +29,61 @@ class UnitConverter extends StatefulWidget {
 
 class _UnitConverterState extends State<UnitConverter> {
   final _inputKey = GlobalKey(debugLabel: 'inputText');
+  final units = <DropdownMenuItem>[];
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
   bool _showErrorUI = false;
   bool _showValidationError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
+  }
+
+  @override
+  void didUpdateWidget(UnitConverter old) {
+    super.didUpdateWidget(old);
+    // We update our [DropdownMenuItem] units when we switch [Categories].
+    if (old.category != widget.category) {
+      _createDropdownMenuItems();
+      _setDefaults();
+    }
+  }
+
+  /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
+  void _createDropdownMenuItems() {
+    units.clear();
+    for (var unit in widget.category.units) {
+      units.add(DropdownMenuItem(
+        value: unit.name,
+        child: Container(
+          child: Text(
+            unit.name,
+            softWrap: true,
+          ),
+        ),
+      ));
+    }
+  }
+
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
+  /// output value if a user had previously entered an input in a different
+  /// [Category].
+  void _setDefaults() {
+    setState(() {
+      _fromValue = widget.category.units[0];
+      _toValue = widget.category.units[1];
+    });
+    if (_inputValue != null) {
+      setState(() {
+        _updateConversion();
+      });
+    }
+  }
 
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
@@ -190,45 +239,6 @@ class _UnitConverterState extends State<UnitConverter> {
           ),
         ),
       );
-    }
-    final units = <DropdownMenuItem>[];
-    for (var unit in widget.category.units) {
-      units.add(DropdownMenuItem(
-        value: unit.name,
-        child: Container(
-          child: Text(
-            unit.name,
-            softWrap: true,
-          ),
-        ),
-      ));
-    }
-
-    // Update the `from` [DropdownMenuItem] when we switch [Categories]
-    if (_fromValue == null ||
-        !(units.any((unit) {
-          return unit.value == _fromValue.name;
-        }))) {
-      setState(() {
-        _fromValue = widget.category.units[0];
-      });
-    }
-
-    // Update the `to` [DropdownMenuItem] when we switch [Categories]
-    if (_toValue == null ||
-        !(units.any((unit) {
-          return unit.value == _toValue.name;
-        }))) {
-      setState(() {
-        _toValue = widget.category.units[1];
-      });
-
-      // Likewise, update the Output when we switch [Categories]
-      if (_inputValue != null) {
-        setState(() {
-          _updateConversion();
-        });
-      }
     }
 
     final input = Padding(
