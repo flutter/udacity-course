@@ -68,9 +68,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
     });
   }
 
-  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
-  /// output value if a user had previously entered an input in a different
-  /// [Category].
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s.
   void _setDefaults() {
     setState(() {
       _fromValue = widget.units[0];

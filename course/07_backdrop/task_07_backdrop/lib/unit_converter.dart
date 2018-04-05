@@ -59,9 +59,8 @@ class _UnitConverterState extends State<UnitConverter> {
     });
   }
 
-  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
-  /// output value if a user had previously entered an input in a different
-  /// [Category].
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the
+  /// updated output value if a user had previously entered an input.
   void _setDefaults() {
     setState(() {
       _fromValue = widget.category.units[0];
