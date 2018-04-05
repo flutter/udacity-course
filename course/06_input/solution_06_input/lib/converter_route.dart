@@ -42,7 +42,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
   String _convertedValue = '';
   bool _showValidationError = false;
 
-  // TODO: Determine whether you need to override anything, such as initState()
   @override
   void initState() {
     super.initState();
@@ -91,8 +90,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
     }
     return outputNum;
   }
-
-  // TODO: Add any helper functions
 
   void _updateConversion() {
     setState(() {
@@ -183,8 +180,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Create the 'input' group of widgets. This is a Column that includes
-    // the input [TextField] and 'to' unit [Dropdown].
     final input = Padding(
       padding: _padding,
       child: Column(
@@ -213,7 +208,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // TODO: Create a compare arrows icon.
     final arrows = RotatedBox(
       quarterTurns: 1,
       child: Icon(
@@ -222,8 +216,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // TODO: Create the 'output' group of widgets. This is a Column that
-    // includes the output value, and 'from' unit [Dropdown].
     final output = Padding(
       padding: _padding,
       child: Column(
@@ -247,8 +239,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
-    // TODO: Return the input, arrows, and output widgets, wrapped in
-    // Padding and SingleChildScrollView
     final converter = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
