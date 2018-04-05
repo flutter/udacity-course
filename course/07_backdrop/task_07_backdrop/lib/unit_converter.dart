@@ -19,7 +19,7 @@ class UnitConverter extends StatefulWidget {
   /// This [ConverterRoute] handles [Unit]s for a specific [Category].
   const UnitConverter({
     @required this.category,
-  })  : assert(category != null);
+  }) : assert(category != null);
 
   @override
   _UnitConverterState createState() => _UnitConverterState();
@@ -243,9 +243,7 @@ class _UnitConverterState extends State<UnitConverter> {
 
     return Padding(
       padding: _padding,
-      child: SingleChildScrollView(
-        child: converter,
-      ),
+      child: converter,
     );
   }
 }

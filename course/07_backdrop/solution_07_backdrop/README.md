@@ -8,6 +8,7 @@
  2. Fill out the TODOs in `category_route.dart`. Specifically, you'll be using the provided Backdrop widget.
  3. Fill out the TODOs in `category_tile.dart` using the specs below. You'll remove the Navigator code since the Backdrop is now responsible for showing and hiding the unit conversion view. The CategoryTile widget takes in an onTap function, and you should use it to bring up the unit conversion view.
  4. Update the Theme in `main.dart`.
+ 5. You may see some black and yellow overflow lines, accompanied by a message regarding RenderFlex. This is fine, as we'll resolve this in the next coding exercise.
 
 ## Specs
  - The default Category is 'Length'; when you open the app, the unit converter for 'Length' will already be showing.

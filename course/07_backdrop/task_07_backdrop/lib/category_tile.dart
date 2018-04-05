@@ -47,6 +47,9 @@ class CategoryTile extends StatelessWidget {
             backgroundColor: category.color,
           ),
           body: UnitConverter(category: category),
+          // This prevents the attempt to resize the screen when the keyboard
+          // is opened
+          resizeToAvoidBottomPadding: false,
         );
       },
     ));

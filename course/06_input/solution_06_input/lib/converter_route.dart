@@ -252,9 +252,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
     return Padding(
       padding: _padding,
-      child: SingleChildScrollView(
-        child: converter,
-      ),
+      child: converter,
     );
   }
 }
