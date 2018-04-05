@@ -29,11 +29,11 @@ class UnitConverter extends StatefulWidget {
 
 class _UnitConverterState extends State<UnitConverter> {
   final _inputKey = GlobalKey(debugLabel: 'inputText');
-  final units = <DropdownMenuItem>[];
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
+  List<DropdownMenuItem> _unitMenuItems;
   bool _showErrorUI = false;
   bool _showValidationError = false;
 
@@ -56,9 +56,9 @@ class _UnitConverterState extends State<UnitConverter> {
 
   /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
   void _createDropdownMenuItems() {
-    units.clear();
+    var newItems = <DropdownMenuItem>[];
     for (var unit in widget.category.units) {
-      units.add(DropdownMenuItem(
+      newItems.add(DropdownMenuItem(
         value: unit.name,
         child: Container(
           child: Text(
@@ -68,6 +68,9 @@ class _UnitConverterState extends State<UnitConverter> {
         ),
       ));
     }
+    setState(() {
+      _unitMenuItems = newItems;
+    });
   }
 
   /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
@@ -174,8 +177,7 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
-  Widget _createDropdown(String name, List<DropdownMenuItem> units,
-      ValueChanged<dynamic> onChanged) {
+  Widget _createDropdown(String currentValue, ValueChanged<dynamic> onChanged) {
     return Container(
       margin: EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
@@ -196,8 +198,8 @@ class _UnitConverterState extends State<UnitConverter> {
           child: ButtonTheme(
             alignedDropdown: true,
             child: DropdownButton(
-              value: name,
-              items: units,
+              value: currentValue,
+              items: _unitMenuItems,
               onChanged: onChanged,
               style: Theme.of(context).textTheme.title,
             ),
@@ -265,7 +267,7 @@ class _UnitConverterState extends State<UnitConverter> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(_fromValue.name, units, _updateFromConversion),
+          _createDropdown(_fromValue.name, _updateFromConversion),
         ],
       ),
     );
@@ -296,7 +298,7 @@ class _UnitConverterState extends State<UnitConverter> {
               ),
             ),
           ),
-          _createDropdown(_toValue.name, units, _updateToConversion),
+          _createDropdown(_toValue.name, _updateToConversion),
         ],
       ),
     );
