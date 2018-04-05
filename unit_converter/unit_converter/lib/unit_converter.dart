@@ -33,8 +33,76 @@ class _UnitConverterState extends State<UnitConverter> {
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
+  List<DropdownMenuItem> _unitMenuItems;
   bool _showErrorUI = false;
   bool _showValidationError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _createDropdownMenuItems();
+    _setDefaults();
+  }
+
+  @override
+  void didUpdateWidget(UnitConverter old) {
+    super.didUpdateWidget(old);
+    // We update our [DropdownMenuItem] units when we switch [Categories].
+    if (old.category != widget.category) {
+      _createDropdownMenuItems();
+      _setDefaults();
+    }
+  }
+
+  /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
+  void _createDropdownMenuItems() {
+    var newItems = <DropdownMenuItem>[];
+    for (var unit in widget.category.units) {
+      newItems.add(DropdownMenuItem(
+        value: unit.name,
+        child: Container(
+          child: Text(
+            unit.name,
+            softWrap: true,
+          ),
+        ),
+      ));
+    }
+    setState(() {
+      _unitMenuItems = newItems;
+    });
+  }
+
+  /// Sets the default values for the 'from' and 'to' [Dropdown]s, and the new
+  /// output value if a user had previously entered an input in a different
+  /// [Category].
+  void _setDefaults() {
+    setState(() {
+      _fromValue = widget.category.units[0];
+      _toValue = widget.category.units[1];
+    });
+    if (_inputValue != null) {
+      setState(() {
+        _updateConversion();
+      });
+    }
+  }
+
+  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
+  String _format(double conversion) {
+    var outputNum = conversion.toStringAsPrecision(7);
+    if (outputNum.contains('.') && outputNum.endsWith('0')) {
+      var i = outputNum.length - 1;
+      while (outputNum[i] == '0') {
+        i -= 1;
+      }
+      outputNum = outputNum.substring(0, i + 1);
+    }
+    if (outputNum.endsWith('.')) {
+      return outputNum.substring(0, outputNum.length - 1);
+    }
+    return outputNum;
+  }
 
   Future<Null> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
@@ -60,22 +128,6 @@ class _UnitConverterState extends State<UnitConverter> {
             _inputValue * (_toValue.conversion / _fromValue.conversion));
       });
     }
-  }
-
-  /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
-  String _format(double conversion) {
-    var outputNum = conversion.toStringAsPrecision(7);
-    if (outputNum.contains('.') && outputNum.endsWith('0')) {
-      var i = outputNum.length - 1;
-      while (outputNum[i] == '0') {
-        i -= 1;
-      }
-      outputNum = outputNum.substring(0, i + 1);
-    }
-    if (outputNum.endsWith('.')) {
-      return outputNum.substring(0, outputNum.length - 1);
-    }
-    return outputNum;
   }
 
   void _updateInputValue(String input) {
@@ -125,8 +177,7 @@ class _UnitConverterState extends State<UnitConverter> {
     }
   }
 
-  Widget _createDropdown(String name, List<DropdownMenuItem> units,
-      ValueChanged<dynamic> onChanged) {
+  Widget _createDropdown(String currentValue, ValueChanged<dynamic> onChanged) {
     return Container(
       margin: EdgeInsets.only(top: 16.0),
       decoration: BoxDecoration(
@@ -147,8 +198,8 @@ class _UnitConverterState extends State<UnitConverter> {
           child: ButtonTheme(
             alignedDropdown: true,
             child: DropdownButton(
-              value: name,
-              items: units,
+              value: currentValue,
+              items: _unitMenuItems,
               onChanged: onChanged,
               style: Theme.of(context).textTheme.title,
             ),
@@ -191,45 +242,6 @@ class _UnitConverterState extends State<UnitConverter> {
         ),
       );
     }
-    final units = <DropdownMenuItem>[];
-    for (var unit in widget.category.units) {
-      units.add(DropdownMenuItem(
-        value: unit.name,
-        child: Container(
-          child: Text(
-            unit.name,
-            softWrap: true,
-          ),
-        ),
-      ));
-    }
-
-    // Update the `from` [DropdownMenuItem] when we switch [Categories]
-    if (_fromValue == null ||
-        !(units.any((unit) {
-          return unit.value == _fromValue.name;
-        }))) {
-      setState(() {
-        _fromValue = widget.category.units[0];
-      });
-    }
-
-    // Update the `to` [DropdownMenuItem] when we switch [Categories]
-    if (_toValue == null ||
-        !(units.any((unit) {
-          return unit.value == _toValue.name;
-        }))) {
-      setState(() {
-        _toValue = widget.category.units[1];
-      });
-
-      // Likewise, update the Output when we switch [Categories]
-      if (_inputValue != null) {
-        setState(() {
-          _updateConversion();
-        });
-      }
-    }
 
     final input = Padding(
       padding: _padding,
@@ -255,7 +267,7 @@ class _UnitConverterState extends State<UnitConverter> {
             keyboardType: TextInputType.number,
             onChanged: _updateInputValue,
           ),
-          _createDropdown(_fromValue.name, units, _updateFromConversion),
+          _createDropdown(_fromValue.name, _updateFromConversion),
         ],
       ),
     );
@@ -286,7 +298,7 @@ class _UnitConverterState extends State<UnitConverter> {
               ),
             ),
           ),
-          _createDropdown(_toValue.name, units, _updateToConversion),
+          _createDropdown(_toValue.name, _updateToConversion),
         ],
       ),
     );

@@ -163,6 +163,10 @@ class _BackdropState extends State<Backdrop>
             velocity:
                 _backdropPanelVisible ? -_kFlingVelocity : _kFlingVelocity);
       });
+    } else if (!_backdropPanelVisible) {
+      setState(() {
+        _controller.fling(velocity: _kFlingVelocity);
+      });
     }
   }
 
