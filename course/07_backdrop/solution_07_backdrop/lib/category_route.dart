@@ -22,8 +22,6 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
-  // TODO: Keep track of a default [Category], and the currently-selected
-  // [Category]
   Category _defaultCategory;
   Category _currentCategory;
   final _categories = <Category>[];
@@ -76,7 +74,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   void initState() {
     super.initState();
-    // TODO: Set the default [Category] for the unit converter that opens
     for (var i = 0; i < _categoryNames.length; i++) {
       var category = Category(
         name: _categoryNames[i],
@@ -91,7 +88,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
-  // TODO: Fill out this function
   /// Function to call when a [Category] is tapped.
   void _onCategoryTap(Category category) {
     setState(() {
@@ -128,7 +124,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Import and use the Backdrop widget
     final listView = Padding(
       padding: EdgeInsets.only(
         left: 8.0,

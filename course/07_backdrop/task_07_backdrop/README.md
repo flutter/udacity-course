@@ -27,7 +27,7 @@
 ## Screenshots
 
 ### Start
-<img src='../../screenshots/07_backdrop.png' width='350'><img src='../../screenshots/07_backdrop_2.png' width='350'><img src='../../screenshots/07_backdrop_3.png' width='350'>
+<img src='../../screenshots/07_backdrop.png' width='350'><img src='../../screenshots/07_backdrop_2.png' width='350'><img src='../../screenshots/07_backdrop_3.gif' width='350'>
 
 ### Solution
-<img src='../../screenshots/07_backdrop_4.png' width='350'><img src='../../screenshots/07_backdrop_5.png' width='350'><img src='../../screenshots/07_backdrop_6.png' width='350'>
+<img src='../../screenshots/07_backdrop_4.png' width='350'><img src='../../screenshots/07_backdrop_5.png' width='350'><img src='../../screenshots/07_backdrop_6.gif' width='350'>
