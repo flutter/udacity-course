@@ -35,12 +35,28 @@ class ConverterRoute extends StatefulWidget {
 }
 
 class _ConverterRouteState extends State<ConverterRoute> {
-  final _inputKey = GlobalKey(debugLabel: 'inputText');
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
   bool _showValidationError = false;
+  final units = <DropdownMenuItem>[];
+
+  @override
+  void initState() {
+    super.initState();
+    for (var unit in widget.units) {
+      units.add(DropdownMenuItem(
+        value: unit.name,
+        child: Container(
+          child: Text(
+            unit.name,
+            softWrap: true,
+          ),
+        ),
+      ));
+    }
+  }
 
   void _updateConversion() {
     // For the static units, we do the conversion ourselves
@@ -148,19 +164,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    final units = <DropdownMenuItem>[];
-    for (var unit in widget.units) {
-      units.add(DropdownMenuItem(
-        value: unit.name,
-        child: Container(
-          child: Text(
-            unit.name,
-            softWrap: true,
-          ),
-        ),
-      ));
-    }
-
     // Update the `from` [DropdownMenuItem] when we switch [Categories]
     if (_fromValue == null ||
         !(units.any((unit) {
@@ -188,6 +191,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       }
     }
 
+    // TODO: Create the 'input' group of widgets. This is a Column that includes
+    // the input [TextField] and 'to' unit [Dropdown].
     final input = Padding(
       padding: _padding,
       child: Column(
@@ -197,7 +202,6 @@ class _ConverterRouteState extends State<ConverterRoute> {
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
           TextField(
-            key: _inputKey,
             style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
               labelStyle: Theme.of(context).textTheme.display1,
@@ -217,6 +221,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    // TODO: Create a compare arrows icon.
     final arrows = RotatedBox(
       quarterTurns: 1,
       child: Icon(
@@ -225,6 +230,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    // TODO: Create the 'output' group of widgets. This is a Column that
+    // includes the output value, and 'from' unit [Dropdown].
     final output = Padding(
       padding: _padding,
       child: Column(
@@ -248,6 +255,8 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ),
     );
 
+    // TODO: Return the input, arrows, and output widgets, wrapped in
+    // Padding and SingleChildScrollView
     final converter = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -257,27 +266,10 @@ class _ConverterRouteState extends State<ConverterRoute> {
       ],
     );
 
-    // Based on the orientation of the parent widget, figure out how to best
-    // lay out our converter.
     return Padding(
       padding: _padding,
-      child: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          if (orientation == Orientation.portrait) {
-            return SingleChildScrollView(
-              child: converter,
-            );
-          } else {
-            return SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  width: 450.0,
-                  child: converter,
-                ),
-              ),
-            );
-          }
-        },
+      child: SingleChildScrollView(
+        child: converter,
       ),
     );
   }
