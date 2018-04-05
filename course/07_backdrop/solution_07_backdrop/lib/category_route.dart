@@ -10,8 +10,6 @@ import 'category_tile.dart';
 import 'unit.dart';
 import 'unit_converter.dart';
 
-final _backgroundColor = Colors.green[100];
-
 /// Category Route (page).
 ///
 /// This is the 'home' page of the Unit Converter. It shows a header and
@@ -131,30 +129,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
   @override
   Widget build(BuildContext context) {
     // TODO: Import and use the Backdrop widget
-//    final listView = Container(
-//      color: _backgroundColor,
-//      padding: EdgeInsets.symmetric(horizontal: 8.0),
-//      child: _buildCategoryWidgets(),
-//    );
-//
-//    final appBar = AppBar(
-//      elevation: 0.0,
-//      title: Text(
-//        'Unit Converter',
-//        style: TextStyle(
-//          color: Colors.black,
-//          fontSize: 30.0,
-//        ),
-//      ),
-//      centerTitle: true,
-//      backgroundColor: _backgroundColor,
-//    );
-//
-//    return Scaffold(
-//      appBar: appBar,
-//      body: listView,
-//    );
-
     final listView = Padding(
       padding: EdgeInsets.only(
         left: 8.0,

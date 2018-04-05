@@ -4,11 +4,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'backdrop.dart';
 import 'category.dart';
 import 'category_tile.dart';
 import 'unit.dart';
-import 'unit_converter.dart';
 
 final _backgroundColor = Colors.green[100];
 
@@ -24,8 +22,9 @@ class CategoryRoute extends StatefulWidget {
 }
 
 class _CategoryRouteState extends State<CategoryRoute> {
+  // TODO: Keep track of a default [Category], and the currently-selected
+  // [Category]
   final _categories = <Category>[];
-
   static const _categoryNames = <String>[
     'Length',
     'Area',
@@ -36,7 +35,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     'Energy',
     'Currency',
   ];
-
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
       'highlight': Color(0xFF6AB7A8),
@@ -73,14 +71,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }),
   ];
 
-  // TODO: Keep track of a default [Category], and the currently-selected
-  // [Category]
-  Category _defaultCategory;
-  Category _currentCategory;
-
   @override
   void initState() {
     super.initState();
+    // TODO: Set the default [Category] for the unit converter that opens
     for (var i = 0; i < _categoryNames.length; i++) {
       _categories.add(Category(
         name: _categoryNames[i],
@@ -93,11 +87,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   // TODO: Fill out this function
   /// Function to call when a [Category] is tapped.
-  void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
-  }
+  void _onCategoryTap(Category category) {}
 
   /// Makes the correct number of rows for the list view.
   ///
@@ -151,22 +141,5 @@ class _CategoryRouteState extends State<CategoryRoute> {
       appBar: appBar,
       body: listView,
     );
-
-//    final listView = Padding(
-//        padding: EdgeInsets.symmetric(horizontal: 8.0),
-//      child: _buildCategoryWidgets(),
-//    );
-//
-//    return Backdrop(
-//      currentCategory:
-//      _currentCategory == null ? _defaultCategory : _currentCategory,
-//      frontPanel: _currentCategory == null
-//          ? UnitConverter(category: _defaultCategory)
-//          : UnitConverter(category: _currentCategory),
-//      backPanel: listView,
-//      frontTitle: Text('Unit Converter'),
-//      backTitle: Text('Select a Category'),
-//    );
-//  }
   }
 }

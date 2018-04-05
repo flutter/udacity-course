@@ -68,12 +68,12 @@ class CategoryTile extends StatelessWidget {
         child: InkWell(
           borderRadius: _borderRadius,
           // TODO: Use the highlight and splash colors from the ColorSwatch
-          highlightColor: category.color['highlight'],
-          splashColor: category.color['splash'],
+          highlightColor: category.color,
+          splashColor: category.color,
           // We can use either the () => function() or the () { function(); }
           // syntax.
           // TODO: This should call the onTap() passed into the constructor
-          onTap: () => _navigateToConverter(context), //onTap(category),
+          onTap: () => _navigateToConverter(context),
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(

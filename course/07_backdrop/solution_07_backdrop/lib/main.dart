@@ -15,8 +15,10 @@ void main() {
   runApp(UnitConverterApp());
 }
 
-/// This widget is the root of your application. The first page we see
-/// is a grid of unit categories.
+/// This widget is the root of our application.
+///
+/// The first route (page) we see is a list [Categories], each of which
+/// has a list of [Unit]s.
 class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,9 @@ class UnitConverterApp extends StatelessWidget {
       title: 'Unit Converter',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.black,
-          displayColor: Colors.grey[600],
-        ),
+              bodyColor: Colors.black,
+              displayColor: Colors.grey[600],
+            ),
         // This colors the [InputOutlineBorder] when it is selected
         primaryColor: Colors.grey[500],
         textSelectionHandleColor: Colors.green[500],

@@ -7,8 +7,7 @@
  1. Take a look at the provided Backdrop widget. You should pass in the objects and widgets needed in its constructor. Note that we've renamed the ConverterRoute to UnitConverter, since it is no longer a route, when using a Backdrop. For Category, we've also separated the logic between the data and the UI widget itself, into Category, and CategoryTile. The UnitConverter now takes in a Category in its constructor rather than a name, color, and icon.
  2. Fill out the TODOs in `category_route.dart`. Specifically, you'll be using the provided Backdrop widget.
  3. Fill out the TODOs in `category_tile.dart` using the specs below. You'll remove the Navigator code since the Backdrop is now responsible for showing and hiding the unit conversion view. The CategoryTile widget takes in an onTap function, and you should use it to bring up the unit conversion view.
- 4. You'll need to make some small changes in `unit_converter.dart`.
- 5. Update the Theme in `main.dart`.
+ 4. Update the Theme in `main.dart`.
 
 ## Specs
  - The default Category is 'Length'; when you open the app, the unit converter for 'Length' will already be showing.
@@ -28,7 +27,7 @@
 ## Screenshots
 
 ### Start
-<img src='../../screenshots/07_backdrop.png' width='350'><img src='../../screenshots/07_backdrop_2.png' width='350'>
+<img src='../../screenshots/07_backdrop.png' width='350'><img src='../../screenshots/07_backdrop_2.png' width='350'><img src='../../screenshots/07_backdrop_3.png' width='350'>
 
 ### Solution
-<img src='../../screenshots/07_backdrop_3.png' width='350'><img src='../../screenshots/07_backdrop_4.png' width='350'>
+<img src='../../screenshots/07_backdrop_4.png' width='350'><img src='../../screenshots/07_backdrop_5.png' width='350'><img src='../../screenshots/07_backdrop_6.png' width='350'>
