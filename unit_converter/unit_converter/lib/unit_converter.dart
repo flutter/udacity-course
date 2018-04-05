@@ -303,8 +303,7 @@ class _UnitConverterState extends State<UnitConverter> {
       ),
     );
 
-    final converter = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final converter = ListView(
       children: [
         input,
         arrows,
@@ -319,16 +318,12 @@ class _UnitConverterState extends State<UnitConverter> {
       child: OrientationBuilder(
         builder: (BuildContext context, Orientation orientation) {
           if (orientation == Orientation.portrait) {
-            return SingleChildScrollView(
-              child: converter,
-            );
+            return converter;
           } else {
-            return SingleChildScrollView(
-              child: Center(
-                child: Container(
-                  width: 450.0,
-                  child: converter,
-                ),
+            return Center(
+              child: Container(
+                width: 450.0,
+                child: converter,
               ),
             );
           }
