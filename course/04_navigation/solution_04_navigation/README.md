@@ -17,7 +17,7 @@
 ## Screenshots
 
 ### Start
-<img src='../../screenshots/04_navigation.png' width='350'><img src='../../screenshots/04_navigation_2.png' width='350'>
+<img src='../../screenshots/04_navigation.png' width='350'>
 
 ### Solution
-<img src='../../screenshots/04_navigation_3.png' width='350'><img src='../../screenshots/04_navigation_4.gif' width='350'>
+<img src='../../screenshots/04_navigation_2.png' width='350'><img src='../../screenshots/04_navigation_3.gif' width='350'>
