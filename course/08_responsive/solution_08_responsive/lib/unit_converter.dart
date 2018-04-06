@@ -13,10 +13,10 @@ const _padding = EdgeInsets.all(16.0);
 /// [UnitConverter] where users can input amounts to convert in one unit
 /// and retrieve the conversion in another unit
 class UnitConverter extends StatefulWidget {
-  /// The current [Category] for unit conversion
+  /// The current [Category] for unit conversion.
   final Category category;
 
-  /// This [ConverterRoute] handles [Unit]s for a specific [Category].
+  /// This [UnitConverter] handles [Unit]s for a specific [Category].
   const UnitConverter({
     @required this.category,
   }) : assert(category != null);
@@ -32,6 +32,8 @@ class _UnitConverterState extends State<UnitConverter> {
   String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
+  // TODO: Pass this into the TextField so that the input value persists
+  final _inputKey = GlobalKey(debugLabel: 'inputText');
 
   @override
   void initState() {
@@ -186,6 +188,7 @@ class _UnitConverterState extends State<UnitConverter> {
           // accepts numbers and calls the onChanged property on update.
           // You can read more about it here: https://flutter.io/text-input
           TextField(
+            key: _inputKey,
             style: Theme.of(context).textTheme.display1,
             decoration: InputDecoration(
               labelStyle: Theme.of(context).textTheme.display1,

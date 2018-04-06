@@ -32,7 +32,7 @@ class CategoryTile extends StatelessWidget {
         assert(onTap != null),
         super(key: key);
 
-  /// Navigates to the [ConverterRoute].
+  /// Navigates to the [UnitConverter].
   void _navigateToConverter(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute<Null>(
       builder: (BuildContext context) {

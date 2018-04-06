@@ -13,10 +13,10 @@ const _padding = EdgeInsets.all(16.0);
 /// [UnitConverter] where users can input amounts to convert in one unit
 /// and retrieve the conversion in another unit
 class UnitConverter extends StatefulWidget {
-  /// The current [Category] for unit conversion
+  /// The current [Category] for unit conversion.
   final Category category;
 
-  /// This [ConverterRoute] handles [Unit]s for a specific [Category].
+  /// This [UnitConverter] handles [Unit]s for a specific [Category].
   const UnitConverter({
     @required this.category,
   }) : assert(category != null);

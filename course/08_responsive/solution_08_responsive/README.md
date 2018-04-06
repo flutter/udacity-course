@@ -19,8 +19,11 @@
 ## Screenshots
 
 ### Start
-<img src='../../screenshots/08_responsive.png' width='350'><img src='../../screenshots/08_responsive_2.png' width='350'>
+<img src='../../screenshots/08_responsive.png' width='350'><img src='../../screenshots/08_responsive_2.png' width='700'>
+<img src='../../screenshots/08_responsive_3.png' width='350'><img src='../../screenshots/08_responsive_4.png' width='700'>
 
 ### Solution
-<img src='../../screenshots/08_responsive_3.png' width='350'><img src='../../screenshots/08_responsive_4.png' width='350'>
+<img src='../../screenshots/08_responsive_5.png' width='350'><img src='../../screenshots/08_responsive_6.png' width='700'>
+<img src='../../screenshots/08_responsive_7.png' width='350'><img src='../../screenshots/08_responsive_8.png' width='700'>
+
 
