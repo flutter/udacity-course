@@ -101,35 +101,16 @@ class _CategoryRouteState extends State<CategoryRoute> {
   ///
   /// For portrait, we use a [ListView]
   /// For landscape, we use a [GridView]
-  Widget _buildCategoryWidgets(Orientation deviceOrientation) {
-    if (deviceOrientation == Orientation.portrait) {
-      return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return CategoryTile(
-            category: _categories[index],
-            onTap: _onCategoryTap,
-          );
-        },
-        itemCount: _categories.length,
-      );
-    } else {
-      // Why do we pass in `_categories.toList()` instead of just `_categories`?
-      // Widgets are supposed to be deeply immutable objects. We're passing in
-      // _categories to this GridView, which changes as we load in each
-      // [Category]. So, each time _categories changes, we need to pass in a new
-      // list. The .toList() function does this.
-      // For more details, see https://github.com/dart-lang/sdk/issues/27755
-      return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 3.0,
-        children: _categories.map((Category c) {
-          return CategoryTile(
-            category: c,
-            onTap: _onCategoryTap,
-          );
-        }).toList(),
-      );
-    }
+  Widget _buildCategoryWidgets() {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return CategoryTile(
+          category: _categories[index],
+          onTap: _onCategoryTap,
+        );
+      },
+      itemCount: _categories.length,
+    );
   }
 
   /// Returns a list of mock [Unit]s.
@@ -146,16 +127,13 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // Based on the device size, figure out how to best lay out the list
-    // You can also use MediaQuery.of(context).size to calculate the orientation
-    assert(debugCheckHasMediaQuery(context));
     final listView = Padding(
       padding: EdgeInsets.only(
         left: 8.0,
         right: 8.0,
         bottom: 48.0,
       ),
-      child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
+      child: _buildCategoryWidgets(),
     );
 
     return Backdrop(
