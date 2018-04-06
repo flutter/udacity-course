@@ -100,16 +100,16 @@ class _CategoryRouteState extends State<CategoryRoute> {
   Future<Null> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
+
     final json = DefaultAssetBundle
         .of(context)
         .loadString('assets/data/regular_units.json');
-    final decoder = JsonDecoder();
-    final data = decoder.convert(await json);
+    final data = JsonDecoder().convert(await json);
+    if (data is! Map) {
+      throw ('Data retrieved from API is not a Map');
+    }
     var categoryIndex = 0;
-    for (var key in data.keys) {
-      if (data is! Map) {
-        throw ('Data retrieved from API is not a Map');
-      }
+    (data as Map).keys.forEach((key) {
       final List<Unit> units =
           data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
@@ -126,7 +126,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         _categories.add(category);
       });
       categoryIndex += 1;
-    }
+    });
   }
 
   /// Retrieves a [Category] and its [Unit]s from an API on the web
