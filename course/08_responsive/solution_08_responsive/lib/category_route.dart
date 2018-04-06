@@ -95,7 +95,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     });
   }
 
-  // TODO: Use a GridView for landscape mode, passing in the device orientation
   /// Makes the correct number of rows for the list view, based on whether the
   /// device is portrait or landscape.
   ///

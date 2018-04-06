@@ -32,7 +32,6 @@ class _UnitConverterState extends State<UnitConverter> {
   String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
   bool _showValidationError = false;
-  // TODO: Pass this into the TextField so that the input value persists
   final _inputKey = GlobalKey(debugLabel: 'inputText');
 
   @override
@@ -239,7 +238,6 @@ class _UnitConverterState extends State<UnitConverter> {
       ),
     );
 
-    // TODO: Use a ListView instead of a Column
     final converter = ListView(
       children: [
         input,
@@ -248,8 +246,6 @@ class _UnitConverterState extends State<UnitConverter> {
       ],
     );
 
-    // TODO: Use an OrientationBuilder to add a width to the unit converter
-    // in landscape mode
     // Based on the orientation of the parent widget, figure out how to best
     // lay out our converter.
     return Padding(
