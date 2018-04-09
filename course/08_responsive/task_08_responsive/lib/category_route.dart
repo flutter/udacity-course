@@ -115,7 +115,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
-    // when the app first starts up
     return List.generate(10, (int i) {
       i += 1;
       return Unit(

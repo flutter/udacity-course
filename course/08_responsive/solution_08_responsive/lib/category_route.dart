@@ -95,7 +95,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     });
   }
 
-  // TODO: Use a GridView for landscape mode, passing in the device orientation
   /// Makes the correct number of rows for the list view, based on whether the
   /// device is portrait or landscape.
   ///
@@ -134,7 +133,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
-    // when the app first starts up
     return List.generate(10, (int i) {
       i += 1;
       return Unit(

@@ -9,8 +9,8 @@ import 'unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
 
-/// [ConverterRoute] where users can input amounts to convert in one unit
-/// and retrieve the conversion in another unit
+/// [ConverterRoute] where users can input amounts to convert in one [Unit]
+/// and retrieve the conversion in another [Unit] for a specific [Category].
 class ConverterRoute extends StatefulWidget {
   /// This [Category]'s name.
   final String name;
@@ -21,7 +21,7 @@ class ConverterRoute extends StatefulWidget {
   /// Units for this [Category].
   final List<Unit> units;
 
-  /// This [ConverterRoute] handles [Unit]s for a specific [Category].
+  /// This [ConverterRoute] requires the name, color, and units to not be null.
   const ConverterRoute({
     @required this.name,
     @required this.color,
