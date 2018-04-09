@@ -61,7 +61,7 @@ class CategoryRoute extends StatelessWidget {
 
     final listView = Container(
       color: _backgroundColor,
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0),
       child: _buildCategoryWidgets(categories),
     );
 
