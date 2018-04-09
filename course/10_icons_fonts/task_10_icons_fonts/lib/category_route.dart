@@ -88,7 +88,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       throw ('Data retrieved from API is not a Map');
     }
     var categoryIndex = 0;
-    (data as Map).keys.forEach((key) {
+    data.keys.forEach((key) {
       final List<Unit> units =
           data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
@@ -119,8 +119,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   /// Makes the correct number of rows for the list view, based on whether the
   /// device is portrait or landscape.
   ///
-  /// For portrait, we use a [ListView]
-  /// For landscape, we use a [GridView]
+  /// For portrait, we use a [ListView]. For landscape, we use a [GridView].
   Widget _buildCategoryWidgets(Orientation deviceOrientation) {
     if (deviceOrientation == Orientation.portrait) {
       return ListView.builder(
