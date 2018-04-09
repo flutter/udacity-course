@@ -6,6 +6,7 @@
 ## Steps
  1. Fill out the TODOs in `converter_route.dart` using the specs below.
  2. Use the helper function provided to aid in the conversions. You'll likely have to add more. Remember to set the state!
+ 3. Update the Theme in `main.dart`, and the colors in `category.dart`.
 
 ## Specs
  - The 'input' group is composed of a TextField and a Dropdown for the 'From' unit. This group has a Padding of 16.0.
@@ -17,6 +18,9 @@
  - Dropdowns have a vertical 8.0 Padding.
  - Add a 'Compare Arrows' icon between the dropdowns. This is the Material Icon named 'compare arrows'. The arrows are sized 40.0.
  - The entire user input section is wrapped in 16.0 Padding.
+ - A Category's highlight and splash colors should be retrieved from its ColorSwatch.
+ - Set the ThemeData's textTheme to have a body color of black, and a display color of Colors.grey[600].
+ - The ThemeData's primaryColor should be Colors.grey[500].
 
 ## Customizations
  - Style the input/output boxes and dropdowns. Consider colors, border radius, padding, text themes, etc.
