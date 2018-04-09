@@ -40,6 +40,16 @@ class _UnitConverterState extends State<UnitConverter> {
     _setDefaults();
   }
 
+  @override
+  void didUpdateWidget(UnitConverter old) {
+    super.didUpdateWidget(old);
+    // We update our [DropdownMenuItem] units when we switch [Categories].
+    if (old.category != widget.category) {
+      _createDropdownMenuItems();
+      _setDefaults();
+    }
+  }
+
   /// Creates fresh list of [DropdownMenuItem] widgets, given a list of [Unit]s.
   void _createDropdownMenuItems() {
     var newItems = <DropdownMenuItem>[];

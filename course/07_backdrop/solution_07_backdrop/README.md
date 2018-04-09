@@ -7,8 +7,9 @@
  1. Take a look at the provided Backdrop widget. You should pass in the objects and widgets needed in its constructor. Note that we've renamed the ConverterRoute to UnitConverter, since it is no longer a route, when using a Backdrop. For Category, we've also separated the logic between the data and the UI widget itself, into Category, and CategoryTile. The UnitConverter now takes in a Category in its constructor rather than a name, color, and icon.
  2. Fill out the TODOs in `category_route.dart`. Specifically, you'll be using the provided Backdrop widget.
  3. Fill out the TODOs in `category_tile.dart` using the specs below. You'll remove the Navigator code since the Backdrop is now responsible for showing and hiding the unit conversion view. The CategoryTile widget takes in an onTap function, and you should use it to bring up the unit conversion view.
- 4. Update the Theme in `main.dart`.
- 5. You may see some black and yellow overflow lines, accompanied by a message regarding RenderFlex. This is fine, as we'll resolve this in the next coding exercise.
+ 4. Note that with the Backdrop, the units never change in the Dropdowns, when you switch Categories. This is because the DropdownMenuItems are only being set in initState(), which is only being called once per app start. You'll want to also set the dropdown items, and the defaults, each time the user switches Categories. Resolve this within `unit_converter.dart`.
+ 5. Update the Theme in `main.dart`.
+ 6. You may see some black and yellow overflow lines, accompanied by a message regarding RenderFlex. This is fine, as we'll resolve this in the next coding exercise.
 
 ## Specs
  - The default Category is 'Length'; when you open the app, the unit converter for 'Length' will already be showing.

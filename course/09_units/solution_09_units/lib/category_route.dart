@@ -16,7 +16,7 @@ import 'unit_converter.dart';
 /// Loads in unit conversion data, and displays the data.
 ///
 /// This is the main route to our app. It retrieves conversion data from a
-/// JSON asset. It displays the [Categories] in the back panel
+/// JSON asset and from an API. It displays the [Categories] in the back panel
 /// of a [Backdrop] widget and shows the [UnitConverter] in the front panel.
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
@@ -76,24 +76,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }),
   ];
 
-
-  @override
-  Future<Null> didChangeDependencies() async {
-    print('did change dep');
-    super.didChangeDependencies();
-    // We have static unit conversions located in our
-    // assets/data/regular_units.json
-    // and we want to also obtain up-to-date Currency conversions from the web
-    // We only want to load our data in once
-    if (_categories.isEmpty) {
-      await _retrieveLocalCategories();
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _retrieveLocalCategories();
+  // TODO: Remove the overriding of initState(). Instead, we use
+  // didChangeDependencies()
+//  @override
+//  void initState() {
+//    super.initState();
 //    for (var i = 0; i < _categoryNames.length; i++) {
 //      var category = Category(
 //        name: _categoryNames[i],
@@ -106,16 +93,28 @@ class _CategoryRouteState extends State<CategoryRoute> {
 //      }
 //      _categories.add(category);
 //    }
+//  }
+
+  // TODO: Uncomment this out. We use didChangeDependencies() so that we can
+  // wait for our JSON asset to be loaded in (async).
+  @override
+  Future<Null> didChangeDependencies() async {
+    super.didChangeDependencies();
+    // We have static unit conversions located in our
+    // assets/data/regular_units.json
+    if (_categories.isEmpty) {
+      await _retrieveLocalCategories();
+    }
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
-  void _retrieveLocalCategories()  {
+  Future<Null> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
     final json = DefaultAssetBundle
         .of(context)
         .loadString('assets/data/regular_units.json');
-    final data = JsonDecoder().convert(json);
+    final data = JsonDecoder().convert(await json);
     if (data is! Map) {
       throw ('Data retrieved from API is not a Map');
     }
@@ -123,7 +122,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     var categoryIndex = 0;
     (data as Map).keys.forEach((key) {
       final List<Unit> units =
-      data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
+          data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
       var category = Category(
         name: key,
@@ -132,8 +131,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
         iconLocation: Icons.cake,
       );
       setState(() {
-        print('category index');
-        print(categoryIndex);
         if (categoryIndex == 0) {
           _defaultCategory = category;
         }
@@ -187,6 +184,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   }
 
   // TODO: Delete this function; instead, read in the units from the JSON asset
+  // inside _retrieveLocalCategories()
   /// Returns a list of mock [Unit]s.
   List<Unit> _retrieveUnitList(String categoryName) {
     // when the app first starts up
@@ -201,6 +199,16 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
   @override
   Widget build(BuildContext context) {
+    if (_categories.isEmpty) {
+      return Center(
+        child: Container(
+          height: 180.0,
+          width: 180.0,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     // Based on the device size, figure out how to best lay out the list
     // You can also use MediaQuery.of(context).size to calculate the orientation
     assert(debugCheckHasMediaQuery(context));
@@ -212,10 +220,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-
-    print(_currentCategory);
-    print(_defaultCategory);
-
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
