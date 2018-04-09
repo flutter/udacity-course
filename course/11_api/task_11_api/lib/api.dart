@@ -4,14 +4,6 @@
 
 // TODO: Import relevant packages
 
-/// For this app, the only [Category] endpoint we retrieve from an API is Currency.
-///
-/// If we had more, we could keep a list of [Categories] here.
-const apiCategory = {
-  'name': 'Currency',
-  'route': 'currency',
-};
-
 /// The REST API retrieves unit conversions for [Categories] that change.
 ///
 /// For example, the currency exchange rate, stock prices, the height of the
