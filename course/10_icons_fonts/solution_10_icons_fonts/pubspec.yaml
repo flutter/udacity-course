@@ -1,5 +1,5 @@
 name: solution_10_icons_fonts
-description: A new Flutter project.
+description: Work in progress for a Unit Converter app.
 
 dependencies:
   flutter:
@@ -38,7 +38,7 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.io/assets-and-images/#from-packages
-  
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -48,5 +48,5 @@ flutter:
      fonts:
       - asset: assets/fonts/Raleway-Regular.ttf
 
-  # For details regarding fonts from package dependencies, 
+  # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages

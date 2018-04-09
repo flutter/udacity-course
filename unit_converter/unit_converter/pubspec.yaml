@@ -1,5 +1,5 @@
 name: unit_converter
-description: A unit converter that takes input
+description: Unit Converter App that takes in a value and unit and outputs a conversion in another unit.
 
 dependencies:
   flutter:

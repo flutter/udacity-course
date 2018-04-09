@@ -77,7 +77,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   ];
 
   @override
-  Future<Null> didChangeDependencies() async {
+  Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
     // We have static unit conversions located in our
     // assets/data/regular_units.json
@@ -85,12 +85,12 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // We only want to load our data in once
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
-      //await _retrieveApiCategory();
+      await _retrieveApiCategory();
     }
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
-  Future<Null> _retrieveLocalCategories() async {
+  Future<void> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
     final json = DefaultAssetBundle
@@ -122,7 +122,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   }
 
   /// Retrieves a [Category] and its [Unit]s from an API on the web
-  Future<Null> _retrieveApiCategory() async {
+  Future<void> _retrieveApiCategory() async {
     // Add a placeholder while we fetch the Currency category using the API
     setState(() {
       _categories.add(Category(
@@ -217,8 +217,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-    print(_defaultCategory);
-    print(_currentCategory);
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,

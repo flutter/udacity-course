@@ -1,5 +1,5 @@
 name: task_07_backdrop
-description: A new Flutter project.
+description: Work in progress for a Unit Converter app.
 
 dependencies:
   flutter:
@@ -53,5 +53,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies, 
+  # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages

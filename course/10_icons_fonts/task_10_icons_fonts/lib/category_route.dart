@@ -67,7 +67,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   // TODO: Add image asset paths here
 
   @override
-  Future<Null> didChangeDependencies() async {
+  Future<void> didChangeDependencies() async {
     super.didChangeDependencies();
     // We have static unit conversions located in our
     // assets/data/regular_units.json
@@ -77,7 +77,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
-  Future<Null> _retrieveLocalCategories() async {
+  Future<void> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
     final json = DefaultAssetBundle
