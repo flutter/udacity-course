@@ -29,17 +29,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
   Category _defaultCategory;
   Category _currentCategory;
   final _categories = <Category>[];
-  // TODO: Remove _categoryNames as they will be retrieved from the JSON asset
-  static const _categoryNames = <String>[
-    'Length',
-    'Area',
-    'Volume',
-    'Mass',
-    'Time',
-    'Digital Storage',
-    'Energy',
-    'Currency',
-  ];
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
       'highlight': Color(0xFF6AB7A8),
@@ -76,27 +65,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }),
   ];
 
-  // TODO: Remove the overriding of initState(). Instead, we use
-  // didChangeDependencies()
-//  @override
-//  void initState() {
-//    super.initState();
-//    for (var i = 0; i < _categoryNames.length; i++) {
-//      var category = Category(
-//        name: _categoryNames[i],
-//        color: _baseColors[i],
-//        iconLocation: Icons.cake,
-//        units: _retrieveUnitList(_categoryNames[i]),
-//      );
-//      if (i == 0) {
-//        _defaultCategory = category;
-//      }
-//      _categories.add(category);
-//    }
-//  }
-
-  // TODO: Uncomment this out. We use didChangeDependencies() so that we can
-  // wait for our JSON asset to be loaded in (async).
   @override
   Future<Null> didChangeDependencies() async {
     super.didChangeDependencies();
@@ -118,7 +86,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     if (data is! Map) {
       throw ('Data retrieved from API is not a Map');
     }
-    // TODO: Create Categories and their list of Units, from the JSON asset
     var categoryIndex = 0;
     (data as Map).keys.forEach((key) {
       final List<Unit> units =
@@ -181,20 +148,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
         }).toList(),
       );
     }
-  }
-
-  // TODO: Delete this function; instead, read in the units from the JSON asset
-  // inside _retrieveLocalCategories()
-  /// Returns a list of mock [Unit]s.
-  List<Unit> _retrieveUnitList(String categoryName) {
-    // when the app first starts up
-    return List.generate(10, (int i) {
-      i += 1;
-      return Unit(
-        name: '$categoryName Unit $i',
-        conversion: i.toDouble(),
-      );
-    });
   }
 
   @override

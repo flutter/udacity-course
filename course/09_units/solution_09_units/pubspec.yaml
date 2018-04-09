@@ -25,7 +25,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # TODO: Add an asset. You can choose to use the regular or goofy units
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/data/regular_units.json
