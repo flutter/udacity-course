@@ -1,4 +1,4 @@
-// Copyright 2017 The Chromium Authors. All rights reserved.
+// Copyright 2018 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -7,17 +7,16 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import 'package:unit_converter/api.dart';
-import 'package:unit_converter/backdrop.dart';
-import 'package:unit_converter/category.dart';
-import 'package:unit_converter/category_tile.dart';
-import 'package:unit_converter/unit.dart';
-import 'package:unit_converter/unit_converter.dart';
+import 'backdrop.dart';
+import 'category.dart';
+import 'category_tile.dart';
+import 'unit.dart';
+import 'unit_converter.dart';
 
 /// Loads in unit conversion data, and displays the data.
 ///
 /// This is the main route to our app. It retrieves conversion data from a
-/// JSON asset and from an API. It displays the [Categories] in the back panel
+/// JSON asset. It displays the [Categories] in the back panel
 /// of a [Backdrop] widget and shows the [UnitConverter] in the front panel.
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
@@ -30,6 +29,17 @@ class _CategoryRouteState extends State<CategoryRoute> {
   Category _defaultCategory;
   Category _currentCategory;
   final _categories = <Category>[];
+  // TODO: Remove _categoryNames as they will be retrieved from the JSON asset
+  static const _categoryNames = <String>[
+    'Length',
+    'Area',
+    'Volume',
+    'Mass',
+    'Time',
+    'Digital Storage',
+    'Energy',
+    'Currency',
+  ];
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
       'highlight': Color(0xFF6AB7A8),
@@ -65,19 +75,11 @@ class _CategoryRouteState extends State<CategoryRoute> {
       'error': Color(0xFF912D2D),
     }),
   ];
-  static const _icons = <String>[
-    'assets/icons/length.png',
-    'assets/icons/area.png',
-    'assets/icons/volume.png',
-    'assets/icons/mass.png',
-    'assets/icons/time.png',
-    'assets/icons/digital_storage.png',
-    'assets/icons/power.png',
-    'assets/icons/currency.png',
-  ];
+
 
   @override
   Future<Null> didChangeDependencies() async {
+    print('did change dep');
     super.didChangeDependencies();
     // We have static unit conversions located in our
     // assets/data/regular_units.json
@@ -85,33 +87,53 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // We only want to load our data in once
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
-      //await _retrieveApiCategory();
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _retrieveLocalCategories();
+//    for (var i = 0; i < _categoryNames.length; i++) {
+//      var category = Category(
+//        name: _categoryNames[i],
+//        color: _baseColors[i],
+//        iconLocation: Icons.cake,
+//        units: _retrieveUnitList(_categoryNames[i]),
+//      );
+//      if (i == 0) {
+//        _defaultCategory = category;
+//      }
+//      _categories.add(category);
+//    }
+  }
+
   /// Retrieves a list of [Categories] and their [Unit]s
-  Future<Null> _retrieveLocalCategories() async {
+  void _retrieveLocalCategories()  {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
     final json = DefaultAssetBundle
         .of(context)
         .loadString('assets/data/regular_units.json');
-    final data = JsonDecoder().convert(await json);
+    final data = JsonDecoder().convert(json);
     if (data is! Map) {
       throw ('Data retrieved from API is not a Map');
     }
+    // TODO: Create Categories and their list of Units, from the JSON asset
     var categoryIndex = 0;
     (data as Map).keys.forEach((key) {
       final List<Unit> units =
-          data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
+      data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
       var category = Category(
         name: key,
         units: units,
         color: _baseColors[categoryIndex],
-        iconLocation: _icons[categoryIndex],
+        iconLocation: Icons.cake,
       );
       setState(() {
+        print('category index');
+        print(categoryIndex);
         if (categoryIndex == 0) {
           _defaultCategory = category;
         }
@@ -119,37 +141,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       });
       categoryIndex += 1;
     });
-  }
-
-  /// Retrieves a [Category] and its [Unit]s from an API on the web
-  Future<Null> _retrieveApiCategory() async {
-    // Add a placeholder while we fetch the Currency category using the API
-    setState(() {
-      _categories.add(Category(
-        name: apiCategory['name'],
-        units: [],
-        color: _baseColors.last,
-      ));
-    });
-    final api = Api();
-    final jsonUnits = await api.getUnits(apiCategory['route']);
-    // If the API errors out or we have no internet connection, this category
-    // remains in placeholder mode (disabled)
-    if (jsonUnits != null) {
-      final units = <Unit>[];
-      for (var unit in jsonUnits) {
-        units.add(Unit.fromJson(unit));
-      }
-      setState(() {
-        _categories.removeLast();
-        _categories.add(Category(
-          name: apiCategory['name'],
-          units: units,
-          color: _baseColors.last,
-          iconLocation: _icons.last,
-        ));
-      });
-    }
   }
 
   /// Function to call when a [Category] is tapped.
@@ -195,18 +186,21 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
+  // TODO: Delete this function; instead, read in the units from the JSON asset
+  /// Returns a list of mock [Unit]s.
+  List<Unit> _retrieveUnitList(String categoryName) {
+    // when the app first starts up
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    if (_categories.isEmpty) {
-      return Center(
-        child: Container(
-          height: 180.0,
-          width: 180.0,
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     // Based on the device size, figure out how to best lay out the list
     // You can also use MediaQuery.of(context).size to calculate the orientation
     assert(debugCheckHasMediaQuery(context));
@@ -218,8 +212,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-    print(_defaultCategory);
+
     print(_currentCategory);
+    print(_defaultCategory);
+
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
