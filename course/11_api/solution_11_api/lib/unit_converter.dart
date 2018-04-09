@@ -103,7 +103,7 @@ class _UnitConverterState extends State<UnitConverter> {
     return outputNum;
   }
 
-  Future<Null> _updateConversion() async {
+  Future<void> _updateConversion() async {
     // Our API has a handy convert function, so we can use that for
     // the Currency [Category]
     if (widget.category.name == apiCategory['name']) {
