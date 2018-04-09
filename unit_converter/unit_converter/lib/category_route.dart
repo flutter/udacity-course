@@ -85,7 +85,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // We only want to load our data in once
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
-      //await _retrieveApiCategory();
+      await _retrieveApiCategory();
     }
   }
 
@@ -217,8 +217,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-    print(_defaultCategory);
-    print(_currentCategory);
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
