@@ -41,7 +41,7 @@ class Api {
   Future<List> getUnits(String category) async {
     final uri = Uri.https(url, '/$category');
     try {
-      final jsonResponse = await getJson(uri);
+      final jsonResponse = await _getJson(uri);
       try {
         return jsonResponse['units'];
       } on Exception catch (e) {
@@ -62,7 +62,7 @@ class Api {
     final uri = Uri.https(url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
     try {
-      final jsonResponse = await getJson(uri);
+      final jsonResponse = await _getJson(uri);
       try {
         return jsonResponse['conversion'].toDouble();
       } on Exception catch (e) {
@@ -76,7 +76,7 @@ class Api {
   }
 
   /// Fetches and decodes a JSON object represented as a Dart `Map`.
-  Future<Map<String, dynamic>> getJson(Uri uri) async {
+  Future<Map<String, dynamic>> _getJson(Uri uri) async {
     final httpRequest = await httpClient.getUrl(uri);
     final httpResponse = await httpRequest.close();
     if (httpResponse.statusCode != HttpStatus.OK) {
