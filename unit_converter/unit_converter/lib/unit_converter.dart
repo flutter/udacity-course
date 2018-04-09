@@ -13,13 +13,13 @@ import 'package:unit_converter/unit.dart';
 
 const _padding = EdgeInsets.all(16.0);
 
-/// [UnitConverter] where users can input amounts to convert in one unit
-/// and retrieve the conversion in another unit
+/// [UnitConverter] where users can input amounts to convert in one [Unit]
+/// and retrieve the conversion in another [Unit] for a specific [Category].
 class UnitConverter extends StatefulWidget {
   /// The current [Category] for unit conversion.
   final Category category;
 
-  /// This [UnitConverter] handles [Unit]s for a specific [Category].
+  /// This [UnitConverter] takes in a [Category] with [Units]. It can't be null.
   const UnitConverter({
     @required this.category,
   }) : assert(category != null);

@@ -11,8 +11,8 @@ import 'package:unit_converter/api.dart';
 import 'package:unit_converter/backdrop.dart';
 import 'package:unit_converter/category.dart';
 import 'package:unit_converter/category_tile.dart';
-import 'package:unit_converter/unit_converter.dart';
 import 'package:unit_converter/unit.dart';
+import 'package:unit_converter/unit_converter.dart';
 
 /// Loads in unit conversion data, and displays the data.
 ///
@@ -85,22 +85,14 @@ class _CategoryRouteState extends State<CategoryRoute> {
     // We only want to load our data in once
     if (_categories.isEmpty) {
       await _retrieveLocalCategories();
-      await _retrieveApiCategory();
+      //await _retrieveApiCategory();
     }
-  }
-
-  /// Function to call when a [Category] is tapped.
-  void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
   }
 
   /// Retrieves a list of [Categories] and their [Unit]s
   Future<Null> _retrieveLocalCategories() async {
     // Consider omitting the types for local variables. For more details on Effective
     // Dart Usage, see https://www.dartlang.org/guides/language/effective-dart/usage
-
     final json = DefaultAssetBundle
         .of(context)
         .loadString('assets/data/regular_units.json');
@@ -109,7 +101,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
       throw ('Data retrieved from API is not a Map');
     }
     var categoryIndex = 0;
-    (data as Map).keys.forEach((key) {
+    data.keys.forEach((key) {
       final List<Unit> units =
           data[key].map<Unit>((dynamic data) => Unit.fromJson(data)).toList();
 
@@ -160,11 +152,17 @@ class _CategoryRouteState extends State<CategoryRoute> {
     }
   }
 
+  /// Function to call when a [Category] is tapped.
+  void _onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
+  }
+
   /// Makes the correct number of rows for the list view, based on whether the
   /// device is portrait or landscape.
   ///
-  /// For portrait, we use a [ListView]
-  /// For landscape, we use a [GridView]
+  /// For portrait, we use a [ListView]. For landscape, we use a [GridView].
   Widget _buildCategoryWidgets(Orientation deviceOrientation) {
     if (deviceOrientation == Orientation.portrait) {
       return ListView.builder(
@@ -219,7 +217,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
       ),
       child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
     );
-
+    print(_defaultCategory);
+    print(_currentCategory);
     return Backdrop(
       currentCategory:
           _currentCategory == null ? _defaultCategory : _currentCategory,
