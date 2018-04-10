@@ -63,9 +63,7 @@ class CategoryTile extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.all(16.0),
                   // TODO: Use an Image instead of an Icon
-                  child: category.iconLocation != null
-                      ? Image.asset(category.iconLocation)
-                      : null,
+                  child: Image.asset(category.iconLocation),
                 ),
                 Center(
                   child: Text(

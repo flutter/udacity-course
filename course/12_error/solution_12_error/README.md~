@@ -1,0 +1,23 @@
+# Add Error Handling UI!
+
+## Goals
+- Show error UI when the API can't be reached.
+
+## Steps
+ 1. Fill out the TODOs in `converter_route.dart` using the specs below.
+ 2. It's time to celebrate, because you're done.
+
+## Specs
+
+
+## Customizations
+ - Customize the error UI.
+ - Add error UI for other error cases.
+
+## Screenshots
+
+### Start
+<img src='../../screenshots/12_error.png' width='350'>
+
+### Solution
+<img src='../../screenshots/12_error.png' width='350'><img src='../../screenshots/12_error_3.gif' width='350'>
