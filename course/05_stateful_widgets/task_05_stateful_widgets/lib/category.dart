@@ -100,12 +100,10 @@ class Category extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(16.0),
-                  child: iconLocation != null
-                      ? Icon(
-                          iconLocation,
-                          size: 60.0,
-                        )
-                      : null,
+                  child: Icon(
+                    iconLocation,
+                    size: 60.0,
+                  ),
                 ),
                 Center(
                   child: Text(
