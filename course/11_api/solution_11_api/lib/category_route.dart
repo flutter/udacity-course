@@ -129,6 +129,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         name: apiCategory['name'],
         units: [],
         color: _baseColors.last,
+        iconLocation: _icons.last,
       ));
     });
     final api = Api();
