@@ -28,5 +28,6 @@ class Category {
     @required this.iconLocation,
   })  : assert(name != null),
         assert(color != null),
-        assert(units != null);
+        assert(units != null),
+        assert(iconLocation != null);
 }

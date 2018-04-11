@@ -1,4 +1,4 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
+// Copyright 2017 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -26,66 +26,65 @@ class Api {
   /// We use the `dart:io` HttpClient. More details: https://flutter.io/networking/
   // We specify the type here for readability. Since we're defining a final
   // field, the type is determined at initialization.
-  final HttpClient httpClient = HttpClient();
+  final HttpClient _httpClient = HttpClient();
 
   /// The API endpoint we want to hit.
   ///
   /// This API doesn't have a key but often, APIs do require authentication
-  final String url = 'flutter.udacity.com';
+  final String _url = 'flutter.udacity.com';
 
   /// Gets all the units and conversion rates for a given category.
   ///
-  /// The [Category] query parameter is the [Category] from which to retrieve
-  /// units.
-  /// Returns a list. Prints exception silently.
+  /// The `category` parameter is the name of the [Category] from which to
+  /// retrieve units. We pass this into the query parameter in the API call.
+  ///
+  /// Returns a list. Returns null on error.
   Future<List> getUnits(String category) async {
-    final uri = Uri.https(url, '/$category');
-    try {
-      final jsonResponse = await _getJson(uri);
-      try {
-        return jsonResponse['units'];
-      } on Exception catch (e) {
-        print('Error: $e');
-        return null;
-      }
-    } on Exception catch (e) {
-      print('Error: $e');
+    final uri = Uri.https(_url, '/$category');
+    final jsonResponse = await _getJson(uri);
+    if (jsonResponse == null || jsonResponse['units'] == null) {
+      print('Error retrieving units.');
       return null;
     }
+    return jsonResponse['units'];
   }
 
   /// Given two units, converts from one to another.
   ///
-  /// Returns a double, which is the converted amount.
+  /// Returns a double, which is the converted amount. Returns null on error.
   Future<double> convert(
       String category, String amount, String fromUnit, String toUnit) async {
-    final uri = Uri.https(url, '/$category/convert',
+    final uri = Uri.https(_url, '/$category/convert',
         {'amount': amount, 'from': fromUnit, 'to': toUnit});
-    try {
-      final jsonResponse = await _getJson(uri);
-      try {
-        return jsonResponse['conversion'].toDouble();
-      } on Exception catch (e) {
-        print('Error: $e $jsonResponse["message"]');
-        return null;
-      }
-    } on Exception catch (e) {
-      print('Error: $e');
+    final jsonResponse = await _getJson(uri);
+    if (jsonResponse == null || jsonResponse['status'] == null) {
+      print('Error retrieving conversion.');
+      return null;
+    } else if (jsonResponse['status'] == 'error') {
+      print(jsonResponse['message']);
       return null;
     }
+    return jsonResponse['conversion'].toDouble();
   }
 
-  /// Fetches and decodes a JSON object represented as a Dart `Map`.
+  /// Fetches and decodes a JSON object represented as a Dart [Map].
+  ///
+  /// Returns null if the API server is down, or the response is not JSON.
   Future<Map<String, dynamic>> _getJson(Uri uri) async {
-    final httpRequest = await httpClient.getUrl(uri);
-    final httpResponse = await httpRequest.close();
-    if (httpResponse.statusCode != HttpStatus.OK) {
+    try {
+      final httpRequest = await _httpClient.getUrl(uri);
+      final httpResponse = await httpRequest.close();
+      if (httpResponse.statusCode != HttpStatus.OK) {
+        return null;
+      }
+      // The response is sent as a Stream of bytes that we need to convert to a
+      // `String`.
+      final responseBody = await httpResponse.transform(utf8.decoder).join();
+      // Finally, the string is parsed into a JSON object.
+      return json.decode(responseBody);
+    } on Exception catch (e) {
+      print('$e');
       return null;
     }
-    // The response is sent as a Stream of bytes that we need to convert to a
-    // `String`.
-    final responseBody = await httpResponse.transform(utf8.decoder).join();
-    // Finally, the string is parsed into a JSON object.
-    return json.decode(responseBody);
   }
 }
