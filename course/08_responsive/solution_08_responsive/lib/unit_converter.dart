@@ -40,7 +40,7 @@ class _UnitConverterState extends State<UnitConverter> {
     _createDropdownMenuItems();
     _setDefaults();
   }
-  
+
   @override
   void didUpdateWidget(UnitConverter old) {
     super.didUpdateWidget(old);
@@ -78,9 +78,7 @@ class _UnitConverterState extends State<UnitConverter> {
       _toValue = widget.category.units[1];
     });
     if (_inputValue != null) {
-      setState(() {
-        _updateConversion();
-      });
+      _updateConversion();
     }
   }
 

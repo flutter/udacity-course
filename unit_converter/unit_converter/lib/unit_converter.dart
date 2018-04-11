@@ -29,14 +29,14 @@ class UnitConverter extends StatefulWidget {
 }
 
 class _UnitConverterState extends State<UnitConverter> {
-  final _inputKey = GlobalKey(debugLabel: 'inputText');
   Unit _fromValue;
   Unit _toValue;
   double _inputValue;
   String _convertedValue = '';
   List<DropdownMenuItem> _unitMenuItems;
-  bool _showErrorUI = false;
   bool _showValidationError = false;
+  final _inputKey = GlobalKey(debugLabel: 'inputText');
+  bool _showErrorUI = false;
 
   @override
   void initState() {
@@ -82,9 +82,7 @@ class _UnitConverterState extends State<UnitConverter> {
       _toValue = widget.category.units[1];
     });
     if (_inputValue != null) {
-      setState(() {
-        _updateConversion();
-      });
+      _updateConversion();
     }
   }
 

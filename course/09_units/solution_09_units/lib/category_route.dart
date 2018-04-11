@@ -28,6 +28,10 @@ class CategoryRoute extends StatefulWidget {
 class _CategoryRouteState extends State<CategoryRoute> {
   Category _defaultCategory;
   Category _currentCategory;
+  // Widgets are supposed to be deeply immutable objects. We can update and edit
+  // _categories as we build our app, and when we pass it into a widget's
+  // `children` property, we call .toList() on it.
+  // For more details, see https://github.com/dart-lang/sdk/issues/27755
   final _categories = <Category>[];
   static const _baseColors = <ColorSwatch>[
     ColorSwatch(0xFF6AB7A8, {
@@ -130,12 +134,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
         itemCount: _categories.length,
       );
     } else {
-      // Why do we pass in `_categories.toList()` instead of just `_categories`?
-      // Widgets are supposed to be deeply immutable objects. We're passing in
-      // _categories to this GridView, which changes as we load in each
-      // [Category]. So, each time _categories changes, we need to pass in a new
-      // list. The .toList() function does this.
-      // For more details, see https://github.com/dart-lang/sdk/issues/27755
       return GridView.count(
         crossAxisCount: 2,
         childAspectRatio: 3.0,
