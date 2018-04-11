@@ -19,13 +19,14 @@ class Api {
   // TODO: Create getUnits()
   /// Gets all the units and conversion rates for a given category.
   ///
-  /// The [Category] query parameter is the [Category] from which to retrieve
-  /// units.
-  /// Returns a list. Prints exception silently.
+  /// The `category` parameter is the name of the [Category] from which to
+  /// retrieve units. We pass this into the query parameter in the API call.
+  ///
+  /// Returns a list. Returns null on error.
 
   // TODO: Create convert()
   /// Given two units, converts from one to another.
   ///
-  /// Returns a double, which is the converted amount.
+  /// Returns a double, which is the converted amount. Returns null on error.
 
 }
