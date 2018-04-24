@@ -21,4 +21,4 @@ flutter:
   fonts:
     - family: Raleway
       fonts:
-        - asset: fonts/Raleway-Regular.ttf
+        - asset: third_party/Raleway-Regular.ttf
