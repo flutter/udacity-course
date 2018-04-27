@@ -16,9 +16,12 @@ import 'package:unit_converter/unit_converter.dart';
 
 /// Loads in unit conversion data, and displays the data.
 ///
-/// This is the main route to our app. It retrieves conversion data from a
+/// This is the main screen for our app. It retrieves conversion data from a
 /// JSON asset and from an API. It displays the [Categories] in the back panel
 /// of a [Backdrop] widget and shows the [UnitConverter] in the front panel.
+///
+/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
+/// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatefulWidget {
   const CategoryRoute();
 

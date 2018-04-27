@@ -4,7 +4,7 @@
 - Use a Backdrop widget to make navigation feel smoother.
 
 ## Steps
- 1. Take a look at the provided Backdrop widget. You should pass in the objects and widgets needed in its constructor. Note that we've renamed the ConverterRoute to UnitConverter, since it is no longer a route, when using a Backdrop. For Category, we've also separated the logic between the data and the UI widget itself, into Category, and CategoryTile. The UnitConverter now takes in a Category in its constructor rather than a name, color, and icon.
+ 1. Take a look at the provided Backdrop widget. You should pass in the objects and widgets needed in its constructor. Note that we've renamed the ConverterRoute to UnitConverter, since we do not use a Navigator and routes, when using a Backdrop. For Category, we've also separated the logic between the data and the UI widget itself, into Category, and CategoryTile. The UnitConverter now takes in a Category in its constructor rather than a name, color, and icon.
  2. Fill out the TODOs in `category_route.dart`. Specifically, you'll be using the provided Backdrop widget.
  3. Fill out the TODO in `category_tile.dart`. You'll remove the Navigator code since the Backdrop is now responsible for showing and hiding the unit conversion view. The CategoryTile widget takes in an onTap function, and you should use it to bring up the unit conversion view.
  4. Note that with the Backdrop, the units never change in the Dropdowns, when you switch Categories. This is because the DropdownMenuItems are only being set in initState(), which is only being called once per app start. You'll want to also set the DropdownMenuItems, and the defaults, each time the user switches Categories. Resolve this within `unit_converter.dart`.

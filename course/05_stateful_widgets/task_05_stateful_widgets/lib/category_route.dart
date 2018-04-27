@@ -9,10 +9,13 @@ import 'package:task_05_stateful_widgets/unit.dart';
 
 final _backgroundColor = Colors.green[100];
 
-/// Category Route (page).
+/// Category Route (screen).
 ///
-/// This is the 'home' page of the Unit Converter. It shows a header and
+/// This is the 'home' screen of the Unit Converter. It shows a header and
 /// a list of [Categories].
+///
+/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
+/// because it is responsible for the UI at the route's destination.
 // TODO: Make CategoryRoute a StatefulWidget
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute();

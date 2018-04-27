@@ -8,10 +8,13 @@ import 'package:flutter/material.dart';
 
 // TODO: Define any constants
 
-/// Category Route (page).
+/// Category Route (screen).
 ///
-/// This is the 'home' page of the Unit Converter. It shows a header and
+/// This is the 'home' screen of the Unit Converter. It shows a header and
 /// a list of [Categories].
+///
+/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
+/// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
   const CategoryRoute();
 

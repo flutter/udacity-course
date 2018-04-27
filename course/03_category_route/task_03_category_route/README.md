@@ -1,7 +1,7 @@
-# Create the Category Route!
+# Create the Category Screen!
 
 ## Goals
- - Create the homepage (route) of the app.
+ - Create the home screen of the app.
  - Create a ListView for the Categories.
 
 ## Steps
@@ -11,7 +11,7 @@
 
 ## Specs
  - The AppBar text should say 'Unit Converter' with a font size of 30.0, and an elevation of 0.0.
- - A list of 8 Categories should be shown on the Category Route. You should be able to scroll down the list. There should be 8.0 horizontal padding around this list.
+ - A list of 8 Categories should be shown on the screen. You should be able to scroll down the list. There should be 8.0 horizontal padding around this list.
  - The AppBar and app body should be the same color. In our example, we use `Colors.green[100]`.
 
 ## Customizations

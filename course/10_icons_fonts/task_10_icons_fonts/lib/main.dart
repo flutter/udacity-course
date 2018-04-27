@@ -17,7 +17,7 @@ void main() {
 
 /// This widget is the root of our application.
 ///
-/// The first route (page) we see is a list [Categories], each of which
+/// The first screen we see is a list [Categories], each of which
 /// has a list of [Unit]s.
 class UnitConverterApp extends StatelessWidget {
   @override

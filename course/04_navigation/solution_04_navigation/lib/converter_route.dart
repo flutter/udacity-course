@@ -7,9 +7,12 @@ import 'package:meta/meta.dart';
 
 import 'package:solution_04_navigation/unit.dart';
 
-/// Converter route (page) where users can input amounts to convert.
+/// Converter screen where users can input amounts to convert.
 ///
 /// Currently, it just displays a list of mock units.
+///
+/// While it is named ConverterRoute, a more apt name would be ConverterScreen,
+/// because it is responsible for the UI at the route's destination.
 class ConverterRoute extends StatelessWidget {
   /// This [Category]'s name.
   final String name;

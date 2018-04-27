@@ -1,8 +1,8 @@
 # Add Navigation!
 
 ## Goals
- - Create a unit converter route. Currently, this route just displays some mock units (which we've generated for you in `category_route.dart`, using the Unit class in `unit.dart`).
- - Navigate to a specific converter route for a Category, when you tap on the Category.
+ - Create a unit converter screen. Currently, this screen just displays some mock units (which we've generated for you in `category_route.dart`, using the Unit class in `unit.dart`).
+ - Navigate to a Category-specific route, when you tap on a Category. This route takes you to the unit converter screen.
 
 ## Steps
  1. Fill out the TODOs in `category.dart` and `converter_route.dart` using the specs below.
