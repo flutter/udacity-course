@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Hello Rectangle',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hello Rectangle'),
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Hello Rectangle'),
         ),
-        body: HelloRectangle(),
+        body: new HelloRectangle(),
       ),
     ),
   );
@@ -22,15 +22,15 @@ void main() {
 class HelloRectangle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
+    return new Center(
+      child: new Container(
         color: Colors.greenAccent,
         height: 400.0,
         width: 300.0,
-        child: Center(
-          child: Text(
+        child: new Center(
+          child: new Text(
             'Hello!',
-            style: TextStyle(fontSize: 40.0),
+            style: new TextStyle(fontSize: 40.0),
             textAlign: TextAlign.center,
           ),
         ),
