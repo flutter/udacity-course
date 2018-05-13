@@ -6,17 +6,34 @@
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
 
+final _height = 100.0;
+final _borderRadius = BorderRadius.circular(_height / 2);
+
 /// A custom [Category] widget.
 ///
 /// The widget is composed on an [Icon] and [Text]. Tapping on the widget shows
 /// a colored [InkWell] animation.
 class Category extends StatelessWidget {
+  final String name;
+  final ColorSwatch color;
+  final IconData icon;
+  final Key key;
+
   /// Creates a [Category].
   ///
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
   // TODO: You'll need the name, color, and iconLocation from main.dart
-  const Category();
+  const Category({
+    this.key,
+    this.name,
+    this.color,
+    this.icon})
+      : assert(name != null),
+        assert(color != null),
+        assert(icon != null),
+        super(key: key);
+
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -28,6 +45,33 @@ class Category extends StatelessWidget {
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
     // TODO: Build the custom widget here, referring to the Specs.
-    return Container();
+    return Material(
+        color: Colors.transparent,
+        child: Container(
+
+          height: _height,
+          padding: EdgeInsets.all(8.0),
+          child: InkWell(
+              onTap: () {
+                print("Hello world");
+              },
+              highlightColor: color,
+              splashColor: color,
+              borderRadius: _borderRadius,
+              child: Padding(padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.all(16.0),
+                        child: Icon(icon, size: 60.0),
+                      ),
+                      Center(child: Text(name, style: Theme
+                          .of(context)
+                          .textTheme
+                          .headline,))
+                    ],
+                  )
+
+              )),
+        ));
   }
 }
