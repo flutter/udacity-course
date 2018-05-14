@@ -5,6 +5,7 @@
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+
 // @required is defined in the meta.dart package
 import 'package:meta/meta.dart';
 
@@ -34,7 +35,8 @@ class Category extends StatelessWidget {
     @required this.name,
     @required this.color,
     @required this.iconLocation,
-  })  : assert(name != null),
+  })
+      : assert(name != null),
         assert(color != null),
         assert(iconLocation != null),
         super(key: key);
@@ -58,9 +60,8 @@ class Category extends StatelessWidget {
           splashColor: color,
           // We can use either the () => function() or the () { function(); }
           // syntax.
-          onTap: () {
-            print('I was tapped!');
-          },
+          onTap: () => print('I was tapped!')
+          ,
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
@@ -81,7 +82,10 @@ class Category extends StatelessWidget {
                   child: Text(
                     name,
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headline,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .headline,
                   ),
                 ),
               ],
