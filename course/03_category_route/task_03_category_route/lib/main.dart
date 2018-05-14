@@ -4,7 +4,7 @@
 
 // You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
-
+import 'category_route.dart';
 // TODO: Import the CategoryRoute widget
 
 /// The function that is called when main.dart is run.
@@ -23,7 +23,10 @@ class UnitConverterApp extends StatelessWidget {
       title: 'Unit Converter',
       // TODO: Instead of pointing to exactly 1 Category widget,
       // our home should now point to an instance of the CategoryRoute widget.
-      home: Container(),
+      home: Container(
+        color: Colors.green[100],
+        child: CategoryRoute(),
+      ),
     );
   }
 }
