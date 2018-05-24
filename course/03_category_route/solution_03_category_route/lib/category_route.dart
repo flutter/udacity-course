@@ -42,8 +42,8 @@ class CategoryRoute extends StatelessWidget {
 
   /// Makes the correct number of rows for the list view.
   
-  ///For portrait,we construct a [ListView] from the list of category widgets.
-   Widget _buildCategoryWidgets(List<Widget> categories) {
+  /// For portrait, we construct a [ListView] from the list of category widgets.
+  Widget _buildCategoryWidgets(List<Widget> categories) {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) => categories[index],
       itemCount: categories.length,
