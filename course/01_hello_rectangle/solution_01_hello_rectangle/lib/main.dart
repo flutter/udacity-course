@@ -28,7 +28,7 @@ class HelloRectangle extends StatelessWidget {
         height: 400.0,
         width: 300.0,
         child: Center(
-          child: Text(
+          child: new Text(
             'Hello!',
             style: TextStyle(fontSize: 40.0),
             textAlign: TextAlign.center,
