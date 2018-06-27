@@ -48,3 +48,7 @@ Submitting changes:
 To send a pull request:
 1. `git pull-request` (if you are using [Hub](https://hub.github.com/)) or go to https://github.com/flutter/udacity-course and click the "Compare & pull request" button
 2. Tag the relevant people and GitHub issue (if any)
+
+# Resources
+
+For a list of Flutter resources to help you get started as well as continue learning after the course, check [here](https://github.com/flutter/udacity-course/tree/master/resources.md).
