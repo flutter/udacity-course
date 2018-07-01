@@ -13,7 +13,7 @@
 ## Specs
  - The default Category is 'Length'; when you open the app, the unit converter for 'Length' will already be showing.
  - The front panel should show the unit converter for the currently-selected Category. While the front panel is up, the text at the top of the app (title) should say 'Unit Converter'.
- - Tapping on the 'clear' icon in the top right corner should bring you to the list of Categories. When in this list, the text at the top of the app (title) should say 'Select a Category'.
+ - Tapping on the 'menu' icon in the top left corner should bring you to the list of Categories. When in this list, the text at the top of the app (title) should say 'Select a Category'.
  - The back panel color depends on the color from the Category.
  - The bottom padding for the back panel should be 48.0, to give it space for the bottom tab.
  - If a user types in an input value, the value should not be cleared when the user closes and re-opens the front panel.
