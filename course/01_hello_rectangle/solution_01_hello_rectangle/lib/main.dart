@@ -4,10 +4,12 @@
 
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
+void main() => runApp(MyApp()); //use short hand for one-line functions or methods
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: 'Hello Rectangle',
       home: Scaffold(
         appBar: AppBar(
@@ -15,13 +17,14 @@ void main() {
         ),
         body: HelloRectangle(),
       ),
-    ),
-  );
+    );
+  }
 }
 
-class HelloRectangle extends StatelessWidget {
+class HelloRectangle extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Center(
       child: Container(
         color: Colors.greenAccent,
@@ -33,7 +36,7 @@ class HelloRectangle extends StatelessWidget {
             style: TextStyle(fontSize: 40.0),
             textAlign: TextAlign.center,
           ),
-        ),
+        )
       ),
     );
   }
