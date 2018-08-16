@@ -63,7 +63,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Create the 'input' group of widgets. This is a Column that includes
+    // TODO: Create the 'input' group of widgets. This is a Column that
     // includes the output value, and 'from' unit [Dropdown].
 
     // TODO: Create a compare arrows icon.
