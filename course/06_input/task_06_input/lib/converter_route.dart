@@ -64,15 +64,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
   @override
   Widget build(BuildContext context) {
     // TODO: Create the 'input' group of widgets. This is a Column that
-    // includes the output value, and 'from' unit [Dropdown].
+    // includes the input value, and 'from' unit [Dropdown].
 
     // TODO: Create a compare arrows icon.
 
     // TODO: Create the 'output' group of widgets. This is a Column that
+    // includes the output value, and 'to' unit [Dropdown].
 
-    // TODO: Return the input, arrows, and output widgets, wrapped in
+    // TODO: Return the input, arrows, and output widgets, wrapped in a Column.
 
-    // TODO: Delete the below placeholder code
+    // TODO: Delete the below placeholder code.
     final unitWidgets = widget.units.map((Unit unit) {
       return Container(
         color: widget.color,
