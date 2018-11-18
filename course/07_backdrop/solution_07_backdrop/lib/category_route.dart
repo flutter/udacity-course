@@ -136,11 +136,8 @@ class _CategoryRouteState extends State<CategoryRoute> {
     );
 
     return Backdrop(
-      currentCategory:
-          _currentCategory == null ? _defaultCategory : _currentCategory,
-      frontPanel: _currentCategory == null
-          ? UnitConverter(category: _defaultCategory)
-          : UnitConverter(category: _currentCategory),
+      currentCategory: _currentCategory ?? _defaultCategory,
+      frontPanel: UnitConverter(category: _currentCategory ?? _defaultCategory),
       backPanel: listView,
       frontTitle: Text('Unit Converter'),
       backTitle: Text('Select a Category'),
