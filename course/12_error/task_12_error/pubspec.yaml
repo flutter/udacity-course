@@ -1,0 +1,52 @@
+name: task_12_error
+description: Work in progress for a Unit Converter app.
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+   - assets/data/regular_units.json
+   - assets/icons/area.png
+   - assets/icons/currency.png
+   - assets/icons/digital_storage.png
+   - assets/icons/length.png
+   - assets/icons/mass.png
+   - assets/icons/power.png
+   - assets/icons/time.png
+   - assets/icons/volume.png
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.io/assets-and-images/#resolution-aware.
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.io/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font.
+  fonts:
+   - family: Raleway
+     fonts:
+      - asset: third_party/Raleway-Regular.ttf
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.io/custom-fonts/#from-packages

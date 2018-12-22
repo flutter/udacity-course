@@ -7,26 +7,33 @@ import 'package:meta/meta.dart';
 
 import 'package:task_05_stateful_widgets/unit.dart';
 
-/// Converter route (page) where users can input amounts to convert.
+/// Converter screen where users can input amounts to convert.
+///
+/// Currently, it just displays a list of mock units.
+///
+/// While it is named ConverterRoute, a more apt name would be ConverterScreen,
+/// because it is responsible for the UI at the route's destination.
 // TODO: Make ConverterRoute a StatefulWidget
 class ConverterRoute extends StatelessWidget {
-  /// Color for this [Category].
-  final Color color;
-
   /// This [Category]'s name.
   final String name;
 
-  /// [Unit]s for this [Category].
+  /// Color for this [Category].
+  final Color color;
+
+  /// Units for this [Category].
   final List<Unit> units;
 
-  /// Constructor.
+  /// This [ConverterRoute] requires the name, color, and units to not be null.
   const ConverterRoute({
-    Key key,
     @required this.name,
     @required this.color,
     @required this.units,
-  })
-      : super(key: key);
+  })  : assert(name != null),
+        assert(color != null),
+        assert(units != null);
+
+  // TODO: Create State object for the ConverterRoute
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +41,17 @@ class ConverterRoute extends StatelessWidget {
     // TODO: Once the build() function is inside the State object,
     // you'll have to reference this using `widget.units`
     final unitWidgets = units.map((Unit unit) {
-      return new Container(
+      return Container(
         color: color,
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(16.0),
-        child: new Column(
+        margin: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(16.0),
+        child: Column(
           children: <Widget>[
-            new Text(
+            Text(
               unit.name,
               style: Theme.of(context).textTheme.headline,
             ),
-            new Text(
+            Text(
               'Conversion: ${unit.conversion}',
               style: Theme.of(context).textTheme.subhead,
             ),
@@ -52,7 +59,8 @@ class ConverterRoute extends StatelessWidget {
         ),
       );
     }).toList();
-    return new ListView(
+
+    return ListView(
       children: unitWidgets,
     );
   }

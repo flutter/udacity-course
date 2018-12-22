@@ -1,0 +1,238 @@
+{
+  "Length": [
+    {
+      "name": "Meter",
+      "conversion": 1.0,
+      "description": "The length of the path traveled by the light in vacuum during a time interval of 1/299,792,458 of a second.",
+      "base_unit": true
+    },
+    {
+      "name": "Mile (disguised as an Inch)",
+      "conversion": 0.000621371,
+      "description": "Give me an inch and I'll take it a mile!"
+    },
+    {
+      "name": "Hand",
+      "conversion": 9.8425197,
+      "description": "Used to measure the height of horses. Equal to a third of a foot."
+    },
+    {
+      "name": "Light-nanosecond",
+      "conversion": 3.333,
+      "description": "The speed of light is roughly one foot per nanosecond."
+    },
+    {
+      "name": "Manhattan block",
+      "conversion": 0.0125,
+      "description": "The length of a north-south block in downtown Manhattan."
+    },
+    {
+      "name": "Eiffel Tower",
+      "conversion": 0.0030864,
+      "description": "An iconic tower in Paris."
+    },
+    {
+      "name": "Smoot",
+      "conversion": 0.5882353,
+      "description": "This is the height of Oliver Smoot."
+    },
+    {
+      "name": "Sheppey",
+      "conversion": 0.0007143,
+      "description": "The closest distance at which sheep remain picturesque."
+    },
+    {
+      "name": "Potrzebie",
+      "conversion": 379.7949107,
+      "description": "The thickness of issue 26 of Mad magazine. This unit was created by Donald Knuth."
+    }
+  ],
+  "Area": [
+    {
+      "name": "Meter squared",
+      "conversion": 1.0,
+      "description": "1 meter length and 1 meter width.",
+      "base_unit": true
+    },
+    {
+      "name": "Bourbon biscuit",
+      "conversion": 546.4480874,
+      "description": "A British biscuit where all brands are apparently 61x30mm in size. Once suggested worthy to be an SI unit of measurement."
+    },
+    {
+      "name": "American football field",
+      "conversion": 0.0001869,
+      "description": "The area of an American football field, including the endzones."
+    },
+    {
+      "name": "Canadian football field",
+      "conversion": 0.0001227,
+      "description": "The area of a Canadian football field, including the endzones."
+    },
+    {
+      "name": "Morgen",
+      "conversion": 0.0001,
+      "description": "The amount of land that can be tilled by one person behind an ox in the morning hours of the day. This is quite vague, especially if you are chatting with the ox instead of working."
+    }
+  ],
+  "Volume": [
+    {
+      "name": "Cubic meter",
+      "conversion": 1.0,
+      "description": "A cube with each edge being one meter in length.",
+      "base_unit": true
+    },
+    {
+      "name": "Super foot",
+      "conversion": 423.7288136,
+      "description": "1 inch x 1 foot x 1 foot. Used to measure lumber, but you can use it to measure whatever you like - it's super!"
+    },
+    {
+      "name": "Cord",
+      "conversion": 0.2762431,
+      "description": "A nicely cut and neatly-arranged amount of fire wood."
+    },
+    {
+      "name": "Olympic-sized swimming pool",
+      "conversion": 0.0004,
+      "description": "A large pool!"
+    },
+    {
+      "name": "Avocado",
+      "conversion": 5000.0,
+      "description": "The volume of an average avocado, cursed seed included."
+    }
+  ],
+  "Mass": [
+    {
+      "name": "Kilogram",
+      "conversion": 1.0,
+      "description": "The mass of a giant block of metal named the International Prototype of the Kilogram.",
+      "base_unit": true
+    },
+    {
+      "name": "Smaller Mission burrito",
+      "conversion": 2.05,
+      "description": "The mass of a smaller super burrito from the Mission District in San Francisco, CA."
+    },
+    {
+      "name": "Larger Mission burrito",
+      "conversion": 1.25,
+      "description": "The mass of a larger super burrito from the Mission District in San Francisco, CA."
+    },
+    {
+      "name": "Bag of cement",
+      "conversion": 0.0234742,
+      "description": "The mass of a bag of cement in the concrete and petroleum industry. Not to be confused with a bag of cement from the olden days."
+    },
+    {
+      "name": "Short hundredweight",
+      "conversion": 0.0220463,
+      "description": "Also known as the central, this is equivalent to 100 pounds."
+    },
+    {
+      "name": "Long hundredweight",
+      "conversion": 0.0196843,
+      "description": "This unit is deprecated as of 1985 but we include it to be backwards compatible."
+    }
+  ],
+  "Time": [
+    {
+      "name": "Second",
+      "conversion": 1.0,
+      "description": "Give me a second while I look this up...",
+      "base_unit": true
+    },
+    {
+      "name": "Microcentury",
+      "conversion": 0.0003168,
+      "description": "The length of a lecture. Feel free to walk out if it goes over."
+    },
+    {
+      "name": "Nanocentury",
+      "conversion": 0.3169572,
+      "description": "Close enough to pi seconds, this was considered a good response time for user products back in the 60s."
+    },
+    {
+      "name": "Microfortnight",
+      "conversion": 0.8267196,
+      "description": "This is supposed to be an amusing unit of measurement."
+    },
+    {
+      "name": "Dirty toasts",
+      "conversion": 0.2,
+      "description": "The number of toasts that would be contaminated assuming that a new piece of toast is consecutively dropped and not picked up within five seconds, thus violating the five-second rule."
+    },
+    {
+      "name": "Fortnight",
+      "conversion": 0.0000033068,
+      "description": "The unambiguous way to denote 2 weeks of time. No more 'bi-weekly' nonsense."
+    },
+    {
+      "name": "New York minute",
+      "conversion": 0.02,
+      "description": "The amount of time between the traffic light turning green and the car behind you honking."
+    }
+  ],
+  "Digital Storage": [
+    {
+      "name": "Megabyte",
+      "conversion": 1.0,
+      "description": "This was considered a lot of space back in the day.",
+      "base_unit": true
+    },
+    {
+      "name": "CD-ROM",
+      "conversion": 0.0014285712,
+      "description": "Wow, two copies of the Encyclopedia Britannica can fit in this much space! Why you would want two copies remains to be ascertained."
+    },
+    {
+      "name": "Library of Congress",
+      "conversion": 0.00000001,
+      "description": "All the text from the Library of Congress takes up ten terabytes. You could carry it all in your pockets!"
+    },
+    {
+      "name": "Nibble",
+      "conversion": 2000000.0,
+      "description": "Half of a byte. Please laugh."
+    },
+    {
+      "name": "Byte",
+      "conversion": 1000000.0,
+      "description": "A byte consists of eight bits."
+    },
+    {
+      "name": "Bentobox",
+      "conversion": 83333.33,
+      "description": "A bentobox is worth 96 bits. In other contexts, it is worth one lunch, but we're talking data storage, not stomach storage."
+    }
+  ],
+  "Energy": [
+    {
+      "name": "Joule",
+      "conversion": 1.0,
+      "description": "This is the SI unit of measurement for energy.",
+      "base_unit": true
+    },
+    {
+      "name": "Gram Calorie",
+      "conversion": 0.239006,
+      "description": "The amount of energy needed to raise a gram of water by 1 degree Celcius."
+    },
+    {
+      "name": "Kilocalorie",
+      "conversion": 0.000239006,
+      "description": "Also known as Calorie with a capital C, this is what appears on many nutrition labels. Yep, you're eating kilocalories, not little calories."
+    },
+    {
+      "name": "Foot-pound",
+      "conversion": 0.737562,
+      "description": "The energy needed to raise one pound a distance of one foot. Useful to know when fishing up freshly-baked pound cakes from the windowsill below yours."
+    },
+    {
+      "name": "WHAT hour?!",
+      "conversion": 0.0000000125,
+      "description": "When you're late and every cell in your body expends as much energy as possible to get you to your destination."
+    }
+  ]
+}
