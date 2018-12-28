@@ -221,7 +221,34 @@ class _CategoryRouteState extends State<CategoryRoute> {
         right: 8.0,
         bottom: 48.0,
       ),
-      child: _buildCategoryWidgets(MediaQuery.of(context).orientation),
+      child: OrientationBuilder(builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          return ListView.builder(
+            itemBuilder: (BuildContext context, int index) {
+              var _category = _categories[index];
+              return CategoryTile(
+                category: _category,
+                onTap:
+                _category.name == apiCategory['name'] && _category.units.isEmpty
+                    ? null
+                    : _onCategoryTap,
+              );
+            },
+            itemCount: _categories.length,
+          );
+        } else {
+          return GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: 3.0,
+            children: _categories.map((Category c) {
+              return CategoryTile(
+                category: c,
+                onTap: _onCategoryTap,
+              );
+            }).toList(),
+          );
+        }
+      }),
     );
     return Backdrop(
       currentCategory:
