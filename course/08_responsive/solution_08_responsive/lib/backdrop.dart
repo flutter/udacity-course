@@ -183,6 +183,7 @@ class _BackdropState extends State<Backdrop>
   }
 
   void _toggleBackdropPanelVisibility() {
+    FocusScope.of(context).requestFocus(FocusNode());
     _controller.fling(
         velocity: _backdropPanelVisible ? -_kFlingVelocity : _kFlingVelocity);
   }
