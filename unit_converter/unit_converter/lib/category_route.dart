@@ -167,39 +167,6 @@ class _CategoryRouteState extends State<CategoryRoute> {
     });
   }
 
-  /// Makes the correct number of rows for the list view, based on whether the
-  /// device is portrait or landscape.
-  ///
-  /// For portrait, we use a [ListView]. For landscape, we use a [GridView].
-  Widget _buildCategoryWidgets(Orientation deviceOrientation) {
-    if (deviceOrientation == Orientation.portrait) {
-      return ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          var _category = _categories[index];
-          return CategoryTile(
-            category: _category,
-            onTap:
-                _category.name == apiCategory['name'] && _category.units.isEmpty
-                    ? null
-                    : _onCategoryTap,
-          );
-        },
-        itemCount: _categories.length,
-      );
-    } else {
-      return GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 3.0,
-        children: _categories.map((Category c) {
-          return CategoryTile(
-            category: c,
-            onTap: _onCategoryTap,
-          );
-        }).toList(),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_categories.isEmpty) {
