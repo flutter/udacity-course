@@ -183,7 +183,6 @@ class _BackdropState extends State<Backdrop>
   }
 
   void _toggleBackdropPanelVisibility() {
-    print("start animation");
     FocusScope.of(context).requestFocus(FocusNode());
     _controller.fling(
         velocity: _backdropPanelVisible ? -_kFlingVelocity : _kFlingVelocity);
@@ -240,10 +239,7 @@ class _BackdropState extends State<Backdrop>
           PositionedTransition(
             rect: panelAnimation,
             child: _BackdropPanel(
-              onTap: () {
-                print("On tap is called");
-                _toggleBackdropPanelVisibility();
-              },
+              onTap: _toggleBackdropPanelVisibility,
               onVerticalDragUpdate: _handleDragUpdate,
               onVerticalDragEnd: _handleDragEnd,
               title: Text(widget.currentCategory.name),
@@ -262,10 +258,7 @@ class _BackdropState extends State<Backdrop>
         backgroundColor: widget.currentCategory.color,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: () {
-            print("On pressed is called");
-            _toggleBackdropPanelVisibility();
-          },
+          onPressed: _toggleBackdropPanelVisibility,
           icon: AnimatedIcon(
             icon: AnimatedIcons.close_menu,
             progress: _controller.view,
