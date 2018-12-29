@@ -181,8 +181,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
 
     // Based on the device size, figure out how to best lay out the list
     // You can also use MediaQuery.of(context).size to calculate the orientation
-    assert(debugCheckHasMediaQuery(context));
-    final listView = Padding(
+    final listView = Padding (
       padding: EdgeInsets.only(
         left: 8.0,
         right: 8.0,
