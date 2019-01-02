@@ -222,7 +222,7 @@ class _CategoryRouteState extends State<CategoryRoute> {
         right: 8.0,
         bottom: 48.0,
       ),
-      child: _buildCategoryWidgets()
+      child: _buildCategoryWidgets(),
     );
     return Backdrop(
       currentCategory:
