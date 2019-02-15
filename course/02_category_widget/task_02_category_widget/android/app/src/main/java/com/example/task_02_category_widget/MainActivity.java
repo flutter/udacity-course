@@ -1,7 +1,6 @@
-package com.yourcompany.solution01hellorectangle;
+package com.example.task_02_category_widget;
 
 import android.os.Bundle;
-
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
