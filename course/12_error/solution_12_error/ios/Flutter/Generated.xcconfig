@@ -1,0 +1,7 @@
+// This is a generated file; do not edit or check into version control.
+FLUTTER_ROOT=/usr/local/google/home/maryxia/github-forks/flutter
+FLUTTER_APPLICATION_PATH=/usr/local/google/home/maryxia/github-forks/udacity-course/course/12_error/solution_12_error
+FLUTTER_TARGET=lib/main.dart
+FLUTTER_BUILD_DIR=build
+SYMROOT=${SOURCE_ROOT}/../build/ios
+FLUTTER_FRAMEWORK_DIR=/usr/local/google/home/maryxia/github-forks/flutter/bin/cache/artifacts/engine/ios

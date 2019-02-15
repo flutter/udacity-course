@@ -1,4 +1,4 @@
-package com.example.unitconverter;
+package com.example.solution_12_error;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
