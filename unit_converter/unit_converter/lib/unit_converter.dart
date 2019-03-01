@@ -116,6 +116,7 @@ class _UnitConverterState extends State<UnitConverter> {
         });
       } else {
         setState(() {
+          _showErrorUI = false;
           _convertedValue = _format(conversion);
         });
       }
