@@ -17,8 +17,8 @@ class ConverterRoute extends StatelessWidget {
   /// Units for this [Category].
   final List<Unit> units;
 
-  /// This [ConverterRoute] requires the name, color, and units to not be null.
-  // TODO: Pass in the [Category]'s name and color
+  /// This [ConverterRoute] requires the color and units to not be null.
+  // TODO: Pass in the [Category]'s color
   const ConverterRoute({
     @required this.units,
   }) : assert(units != null);

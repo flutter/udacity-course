@@ -15,22 +15,17 @@ import 'package:task_05_stateful_widgets/unit.dart';
 /// because it is responsible for the UI at the route's destination.
 // TODO: Make ConverterRoute a StatefulWidget
 class ConverterRoute extends StatelessWidget {
-  /// This [Category]'s name.
-  final String name;
-
   /// Color for this [Category].
   final Color color;
 
   /// Units for this [Category].
   final List<Unit> units;
 
-  /// This [ConverterRoute] requires the name, color, and units to not be null.
+  /// This [ConverterRoute] requires the color and units to not be null.
   const ConverterRoute({
-    @required this.name,
     @required this.color,
     @required this.units,
-  })  : assert(name != null),
-        assert(color != null),
+  })  : assert(color != null),
         assert(units != null);
 
   // TODO: Create State object for the ConverterRoute

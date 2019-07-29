@@ -61,7 +61,6 @@ class Category extends StatelessWidget {
           ),
           body: ConverterRoute(
             color: color,
-            name: name,
             units: units,
           ),
           // This prevents the attempt to resize the screen when the keyboard
