@@ -11,7 +11,7 @@ import 'package:unit_converter/category.dart';
 
 // We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
-const _rowHeight = 100.0;
+const _rowHeight = 50.0;
 final _borderRadius = BorderRadius.circular(_rowHeight / 2);
 
 /// A [CategoryTile] to display a [Category].
