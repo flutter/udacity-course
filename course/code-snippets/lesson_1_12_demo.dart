@@ -54,13 +54,13 @@ class Category extends StatelessWidget {
           ),
           // This prevents the onscreen keyboard from affecting the size of the
           // screen, and the space given to widgets.
-          // See https://docs.flutter.io/flutter/material/Scaffold/resizeToAvoidBottomPadding.html
-          resizeToAvoidBottomPadding: false,
+          // See https://api.flutter.dev/flutter/material/Scaffold/resizeToAvoidBottomInset.html
+          resizeToAvoidBottomInset: false,
         );
       },
     ));
   }
-  
+
   /// Builds a widget that shows [Category] information, using [ListTile]
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterial(context));

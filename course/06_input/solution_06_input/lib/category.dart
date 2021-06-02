@@ -65,7 +65,7 @@ class Category extends StatelessWidget {
           ),
           // This prevents the attempt to resize the screen when the keyboard
           // is opened
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomInset: false,
         );
       },
     ));
