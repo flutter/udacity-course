@@ -193,7 +193,10 @@ class _CategoryRouteState extends State<CategoryRoute> {
         children: _categories.map((Category c) {
           return CategoryTile(
             category: c,
-            onTap: _onCategoryTap,
+            onTap:
+            c.name == apiCategory['name'] && c.units.isEmpty
+                ? null
+                : _onCategoryTap,
           );
         }).toList(),
       );
